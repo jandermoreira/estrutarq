@@ -7,42 +7,23 @@ class CampoBasico:
     """
 
     def __init__(self, tipo):
-        self.__tipo = tipo
-        self.__valor = None
+        self.tipo = tipo
+        self.valor = None
 
     def atribua(self, valor):
         """
         Atribuição do valor do campo
         :param valor: valor a ser guardado
         """
-        self.__valor = valor
+        self.valor = valor
 
-    def tipo(self):
+    def escreva(self, arquivo):
         """
-        Indicação do tipo de dado armazenado
-        :return: o tipo
+        Gravação do conteúdo do campo em um arquivo
+        :param arquivo:
+        :return:
         """
-        return self.__tipo
-
-    def valor(self):
-        """
-        Indicação do valor armazenado no campo
-        :return: o valor armazenado
-        """
-        return self.__valor
-
-    # def grave(self, arquivo):
-    #     """
-    #     Gravação do conteúdo do campo em um arquivo
-    #     :param arquivo:
-    #     :return:
-    #     """
-    #     arquivo.write(bytearray(self.bytes()))
-    #
-    # def bytes(self):
-    #     """
-    #
-    #     """
+        arquivo.write(self.bytes())
 
 
 class CampoIntBasico(CampoBasico):
@@ -67,16 +48,23 @@ class CampoIntPrefixo(CampoIntBasico):
         self.atribua(0)
 
     def bytes(self):
-        """Representação do valor em uma sequência de bytes
+        """
+        Representação do valor em uma sequência de bytes
         2 bytes de prefixo em binário com o número de dígitos (little endian)
         sequência de dígitos que formam o valor numérico, com '-' se negativo
+        :return: sequência de bytes com o prefixo binário e os bytes do campo
         """
         numero_bytes = bytes(f'{self._CampoBasico__valor}', encoding = 'utf8')
         prefixo_binario = len(numero_bytes).to_bytes(2, 'little')
         return prefixo_binario + numero_bytes
 
     def leia(self, arquivo):
-        # leitura do comprimento
+        """
+        Recuperação do conteúdo do campo de um arquivo
+        :param self:
+        :param arquivo:
+        :return:
+        """
         arquivo.read(2)
 
 
@@ -144,13 +132,12 @@ class CampoRealPrefixo(CampoRealBasico):
         super().__init__('real prefixo')
 
 
-
 relacao_tipo_campos = {
     'int prefixo': CampoIntPrefixo,
     'int binário': CampoIntBinario,
     'int fixo': CampoIntFixo,
     'int terminador': CampoIntTerminador,
-    'real prefixo' : CampoRealPrefixo,
+    'real prefixo': CampoRealPrefixo,
 }
 
 
