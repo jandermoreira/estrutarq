@@ -46,7 +46,7 @@ class CampoTerminador:
 
     terminador = property(_obtenha_terminador, _atribua_terminador)
 
-    # code: leitura_terminador
+    # code::start leitura_terminador
     def leia_dado_de_arquivo(self, arquivo):
         """
         Leitura de um único campo com terminador
@@ -67,7 +67,7 @@ class CampoTerminador:
                 dado += byte_lido
 
         return dado
-    # endcode
+    # code::end
 
 
 ################################################################################
@@ -109,9 +109,9 @@ class CampoIntTerminador(CampoIntBasico, CampoTerminador):
         o valor numérico finalizado com o terminador
         """
         dado = bytes(f"{self.valor}", encoding = "utf-8")
-        return dado + bytes(f"{self.terminador}", "latin")
+        byte_terminador = bytes(f"{self.terminador}", "latin")
+        return dado + byte_terminador
 
-    # code::start teste
     def leia_de_arquivo(self, arquivo):
         """
         Conversão dos dados lidos para valor inteiro
@@ -119,7 +119,6 @@ class CampoIntTerminador(CampoIntBasico, CampoTerminador):
         """
         dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = int(dado)
-    # code::end
     # code::end
 
 
