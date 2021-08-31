@@ -32,7 +32,7 @@ class CampoBasico:
             raise TypeError(f"Tipo de campo desconhecido ({tipo})")
         self.__tipo = tipo
 
-    # code::start bruto
+    # code::start para_bytes_bruto
     def para_bytes(self):
         """
         Conversão para bytes feita para o conteúdo bruto com conjunto de
@@ -41,6 +41,17 @@ class CampoBasico:
         """
         return bytes(self.valor, "utf-8")
 
+    # code::end
+
+    def leia_dado_de_arquivo(self, arquivo):
+        """
+        Método para leitura de dados do arquivo a ser sobrescrito por
+        outras classes
+        """
+        # return bytes(self.valor + arquivo.name, "utf-8")
+        pass
+
+    # code::start escreva
     def escreva(self, arquivo):
         """
         Gravação do conteúdo do campo em um arquivo
@@ -170,7 +181,7 @@ class CampoIntTerminador(CampoIntBasico, CampoTerminador):
         byte_terminador = bytes(f"{self.terminador}", "latin")
         return dado + byte_terminador
 
-    def leia_de_arquivo(self, arquivo):
+    def leia(self, arquivo):
         """
         Conversão dos dados lidos para valor inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
@@ -280,6 +291,14 @@ class CampoCadeiaBasico(CampoBasico):
 
     valor = property(_obtenha_valor, _atribua_valor)
 
+    def leia(self, arquivo):
+        """
+        Conversão dos dados lidos para valor inteiro
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        """
+        dado = self.leia_dado_de_arquivo(arquivo)
+        self.valor = dado.decode("utf-8")
+
 
 # cadeia de caracteres com terminador
 class CampoCadeiaTerminador(CampoCadeiaBasico, CampoTerminador):
@@ -287,37 +306,32 @@ class CampoCadeiaTerminador(CampoCadeiaBasico, CampoTerminador):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, terminador: str = "\x00", valor: int = 0):
+    def __init__(self, terminador: str = "\x00", valor: str = ""):
         super().__init__("cadeia terminador")
         self.terminador = terminador
         self.valor = valor
 
-    # code::start inteiro_textual_terminador
+    # code::start para_bytes_cadeia_terminador
     def para_bytes(self):
         """
         Representação da cadeia de caracteres em uma sequência de
         bytes finalizada com terminador
-        :return '
+        :return a sequência de bytes seguida pelo byte do terminador
+
+        Na eventualidade do caractere terminador estar presente no
+        valor, ele é substituído por '_' (ou '*', se o terminador for '_').
         """
         dado = bytes(f"{self.valor}", encoding = "utf-8")
         byte_terminador = bytes(f"{self.terminador}", "latin")
 
         # Eliminação do byte terminador do conjunto de dados
-        if byte_terminador != b'_':
-            byte_substituicao = b'_'
+        if byte_terminador != b"_":
+            byte_substituicao = b"_"
         else:
-            byte_substituicao = b'*'
+            byte_substituicao = b"*"
         dado = dado.replace(byte_terminador, byte_substituicao)
 
         return dado + byte_terminador
-
-    def leia_de_arquivo(self, arquivo):
-        """
-        Conversão dos dados lidos para valor inteiro
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        """
-        dado = self.leia_dado_de_arquivo(arquivo)
-        self.valor = int(dado)
     # code::end
 
 
@@ -332,6 +346,7 @@ relacao_tipo_campos = {
     # "int binário": CampoIntBinario,
     # "int fixo": CampoIntFixo,
     # "real prefixo": CampoRealPrefixo,
+    "cadeia terminador": CampoCadeiaTerminador,
 }
 
 
