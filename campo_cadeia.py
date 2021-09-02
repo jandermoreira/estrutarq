@@ -2,10 +2,11 @@
 ################################################################################
 # Campos de cadeias de caracteres
 
-import campo
+from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo
+
 
 # cadeia de caracteres básica
-class CampoCadeiaBasico(campo.CampoBasico):
+class CampoCadeiaBasico(CampoBasico):
     """
     Classe básica para cadeias de caracteres
     """
@@ -34,12 +35,12 @@ class CampoCadeiaBasico(campo.CampoBasico):
 
 
 # cadeia de caracteres com terminador
-class CampoCadeiaTerminador(campo.CampoTerminador, CampoCadeiaBasico):
+class CampoCadeiaTerminador(CampoTerminador, CampoCadeiaBasico):
     """
     Classe para inteiro textual com terminador
     """
 
-    # code::start para_bytes_cadeia_terminador
+    # code::start terminador_para_bytes
     def para_bytes(self) -> bytes:
         """
         Representação da cadeia de caracteres em uma sequência de
@@ -60,9 +61,9 @@ class CampoCadeiaPrefixado(CampoPrefixado, CampoCadeiaBasico):
     """
 
     def __init__(self, *args, **kwargs):
-        super().__init__("cadeia prefixo", *args, **kwargs)
+        super().__init__("cadeia prefixado", *args, **kwargs)
 
-    # code::start para_bytes_prefixo
+    # code::start prefixado_para_bytes
     def para_bytes(self) -> bytes:
         """
         Representação da cadeia de caracteres em uma sequência de
@@ -71,22 +72,22 @@ class CampoCadeiaPrefixado(CampoPrefixado, CampoCadeiaBasico):
         do dado
         """
         dado = bytes(f"{self.valor}", encoding = "utf-8")
-        bytes_comprimento = len(dado).to_bytes(2, "big", signed = False)
+        bytes_comprimento = len(dado).to_bytes(2, "big")
         return bytes_comprimento + dado
     # code::end
 
 
 # cadeia de caracteres com prefixo de comprimento
-class CampoCadeiaFixo(campo.CampoFixo, CampoCadeiaBasico):
+class CampoCadeiaFixo(CampoFixo, CampoCadeiaBasico):
     """
     Classe para inteiro textual com terminador
     """
 
     def __init__(self, *args, **kwargs):
         CampoCadeiaBasico.__init__(self, "cadeia fixo", **kwargs)
-        campo.CampoFixo.__init__(self, *args, **kwargs)
+        CampoFixo.__init__(self, *args, **kwargs)
 
-    # code::start para_bytes_fixo
+    # code::start fixo_para_bytes
     def para_bytes(self) -> bytes:
         """
         Representação da cadeia de caracteres em uma sequência de
@@ -102,4 +103,3 @@ class CampoCadeiaFixo(campo.CampoFixo, CampoCadeiaBasico):
         dado = dado + byte_preenchimento * (self.comprimento - len(dado))
         return dado
     # code::end
-

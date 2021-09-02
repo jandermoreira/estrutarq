@@ -2,8 +2,6 @@
 ################################################################################
 #  Implementação de campos
 
-import campo_cadeia, campo_inteiro
-
 ################################################################################
 ################################################################################
 # Campo básico
@@ -39,7 +37,7 @@ class CampoBasico:
         """
         self.__valor = str(valor)
 
-    # code::start para_bytes_bruto
+    # code::start bruto_para_bytes
     def para_bytes(self) -> bytes:
         """
         Conversão para bytes feita para o conteúdo bruto com conjunto de
@@ -219,25 +217,29 @@ class CampoFixo:
     # code::end
 
 
-
 ################################################################################
 ################################################################################
 # Interface
 
-relacao_tipo_campos = {
-    "bruto": CampoBasico,
-    # "int terminador": CampoIntTerminador,
-    # "int prefixo": CampoIntPrefixo,
-    "int binário": campo_inteiro.CampoIntBinario,
-    # "int fixo": CampoIntFixo,
-    # "real prefixo": CampoRealPrefixo,
-    "cadeia terminador": campo_cadeia.CampoCadeiaTerminador,
-    "cadeia prefixo": campo_cadeia.CampoCadeiaPrefixado,
-    "cadeia fixo": campo_cadeia.CampoCadeiaFixo,
-}
+relacao_tipo_campos = {}
 
 
-def crie_campo(tipo, *args, **kwargs):
+def crie_campo(tipo: str, *args, **kwargs):
+    import estrutarq.campo_inteiro as campo_inteiro
+    import estrutarq.campo_cadeia as campo_cadeia
+    global relacao_tipo_campos
+    relacao_tipo_campos = {
+        "bruto": CampoBasico,
+        # "int terminador": CampoIntTerminador,
+        # "int prefixado": CampoIntPrefixado,
+        "int binário": campo_inteiro.CampoIntBinario,
+        # "int fixo": CampoIntFixo,
+        # "real prefixado": CampoRealPrefixado,
+        "cadeia terminador": campo_cadeia.CampoCadeiaTerminador,
+        "cadeia prefixado": campo_cadeia.CampoCadeiaPrefixado,
+        "cadeia fixo": campo_cadeia.CampoCadeiaFixo,
+    }
+
     if tipo not in relacao_tipo_campos.keys():
         raise TypeError(f"Tipo de campo desconhecido ({tipo})")
     else:

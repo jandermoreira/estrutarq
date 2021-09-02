@@ -2,13 +2,13 @@
 ################################################################################
 # Campos inteiros
 
-import campo
+from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo
 
 
 ################################################################################
 ################################################################################
 # inteiro básico
-class CampoIntBasico(campo.CampoBasico):
+class CampoIntBasico(CampoBasico):
     """
     Classe básica para campo inteiro
     """
@@ -45,7 +45,7 @@ class CampoIntBasico(campo.CampoBasico):
 #         self.terminador = terminador
 #         self.valor = valor
 #
-#     # code::start inteiro_textual_terminador
+#     # code::start terminador_para_bytes
 #     def para_bytes(self) -> bytes:
 #         """
 #         Representação do valor em uma sequência de dígitos que formam
@@ -58,13 +58,14 @@ class CampoIntBasico(campo.CampoBasico):
 #
 
 # # inteiro com prefixo de comprimento
-# class CampoIntPrefixo(CampoIntBasico):
+# class CampoIntPrefixado(CampoIntBasico):
 #     """Classe para inteiro textual com prefixo de comprimento"""
 #
 #     def __init__(self):
 #         """Construtor"""
-#         super().__init__("int prefixo")
+#         super().__init__("int prefixado")
 #
+#     # code::start prefixado_para_bytes
 #     def para_bytes(self):
 #         """
 #         Representação do valor em uma sequência de bytes
@@ -75,6 +76,7 @@ class CampoIntBasico(campo.CampoBasico):
 #         numero_bytes = bytes(f"{self._CampoBasico__valor}", encoding = "utf-8")
 #         prefixo_binario = len(numero_bytes).to_bytes(2, "big")
 #         return prefixo_binario + numero_bytes
+#     # code::end
 #
 #     def leia(self, arquivo):
 #         """
@@ -93,7 +95,8 @@ class CampoIntBasico(campo.CampoBasico):
 #         """Construtor"""
 #         super().__init__("int fixo")
 #         self.__comprimento = comprimento
-#
+
+#     # code::start fixo_para_bytes
 #     def para_bytes(self):
 #         # todo
 #         """Representação do valor em uma sequência de dígitos que formam
@@ -103,18 +106,27 @@ class CampoIntBasico(campo.CampoBasico):
 #             f"{self.valor:{self.__comprimento}d}",
 #             encoding = "utf-8")
 #         return numero_bytes
-#
+#     # code::end
 #
 # inteiro binário
+
 class CampoIntBinario(CampoIntBasico):
-    """Classe para inteiro em formato binário (little endian) com 8 bytes
-    e complemento para 2 para valores negativos; transbordo resulta em -1
+    """
+    Classe para inteiro em formato binário (big endian) com 8 bytes
+    e complemento para 2 para valores negativos
     """
 
     def __init__(self):
-        """Construtor"""
         super().__init__("int binário")
 
+    # code::start binario_para_bytes
     def para_bytes(self):
-        """Representação do valor em binário (little endian) de 8 bytes"""
-        return self.valor.to_bytes(8, "little", signed = True)
+        """
+        Conversão do inteiro para representação do valor em binário
+        (big endian) de 8 bytes com sinal
+        :return: o valor inteiro em 8 bytes
+        """
+        return self.valor.to_bytes(8, "big", signed = True)
+    # code::end
+
+
