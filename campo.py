@@ -14,9 +14,8 @@ class CampoBasico:
     """
 
     def __init__(self, tipo: str = "bruto"):
-        print(f"Iniciando Campo '{tipo}'")
-        if tipo not in relacao_tipo_campos.keys():
-            raise TypeError(f"Tipo de campo desconhecido ({tipo})")
+        # if tipo not in relacao_tipo_campos.keys():
+        #     raise TypeError(f"Tipo de campo desconhecido ({tipo})")
         self.__tipo = tipo
         self.__valor = None
 
@@ -217,30 +216,72 @@ class CampoFixo:
     # code::end
 
 
+class CampoBinario:
+    """
+    Classe para campos binários: escrita e leitura de bytes
+    """
+
+    def __init__(self, comprimento: int):
+        self.comprimento = comprimento
+
+    @property
+    def comprimento(self):
+        return self.__comprimento
+
+    @comprimento.setter
+    def comprimento(self, valor):
+        if not isinstance(valor, int):
+            raise AttributeError("O comprimento do campo deve ser inteiro")
+        if valor <= 0:
+            raise AttributeError("O comprimento deve ser maior ou igual a um")
+        self.__comprimento = valor
+
+    def leia_dado_de_arquivo(self, arquivo) -> bytes:
+        """
+        Recuperação dos bytes gravados no arquivo
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        :return: a sequência de bytes lidos
+        """
+        dado = arquivo.read(self.comprimento)
+        if len(dado) < self.comprimento:
+            raise EOFError
+        else:
+            return dado
+
+
+
 ################################################################################
 ################################################################################
 # Interface
 
-relacao_tipo_campos = {}
+# relacao_tipo_campos = [
+#     "bruto": CampoBasico,
+#     "cadeia terminador",
+#     "cadeia prefixado",
+#     "cadeia fixo",
+#     "inteiro binário",
+#     "real binário",
+#     "data binário": campo_tempo.CampoDataBinario,
+# ]
 
-
-def crie_campo(tipo: str, *args, **kwargs):
-    import estrutarq.campo_inteiro as campo_inteiro
-    import estrutarq.campo_cadeia as campo_cadeia
-    global relacao_tipo_campos
-    relacao_tipo_campos = {
-        "bruto": CampoBasico,
-        # "int terminador": CampoIntTerminador,
-        # "int prefixado": CampoIntPrefixado,
-        "int binário": campo_inteiro.CampoIntBinario,
-        # "int fixo": CampoIntFixo,
-        # "real prefixado": CampoRealPrefixado,
-        "cadeia terminador": campo_cadeia.CampoCadeiaTerminador,
-        "cadeia prefixado": campo_cadeia.CampoCadeiaPrefixado,
-        "cadeia fixo": campo_cadeia.CampoCadeiaFixo,
-    }
-
-    if tipo not in relacao_tipo_campos.keys():
-        raise TypeError(f"Tipo de campo desconhecido ({tipo})")
-    else:
-        return relacao_tipo_campos[tipo](*args, **kwargs)
+#
+# def crie_campo(tipo: str, *args, **kwargs):
+#     import estrutarq.campo_inteiro as campo_inteiro
+#     import estrutarq.campo_cadeia as campo_cadeia
+#     import estrutarq.campo_real as campo_real
+#     import estrutarq.campo_tempo as campo_tempo
+#     global relacao_tipo_campos
+#     relacao_tipo_campos = {
+#         "bruto": CampoBasico,
+#         "cadeia terminador": campo_cadeia.CampoCadeiaTerminador,
+#         "cadeia prefixado": campo_cadeia.CampoCadeiaPrefixado,
+#         "cadeia fixo": campo_cadeia.CampoCadeiaFixo,
+#         "inteiro binário": campo_inteiro.CampoIntBinario,
+#         "real binário": campo_real.CampoRealBinario,
+#         "data binário": campo_tempo.CampoDataBinario,
+#     }
+#
+#     if tipo not in relacao_tipo_campos.keys():
+#         raise TypeError(f"Tipo de campo desconhecido ({tipo})")
+#     else:
+#         return relacao_tipo_campos[tipo](*args, **kwargs)

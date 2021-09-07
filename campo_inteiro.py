@@ -2,7 +2,8 @@
 ################################################################################
 # Campos inteiros
 
-from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo
+from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
+    CampoBinario
 
 
 ################################################################################
@@ -12,6 +13,10 @@ class CampoIntBasico(CampoBasico):
     """
     Classe básica para campo inteiro
     """
+
+    def __init__(self, tipo: str, valor: int = 0, **kwargs):
+        super().__init__(tipo, **kwargs)
+        self.valor = valor
 
     @property
     def valor(self) -> int:
@@ -110,14 +115,17 @@ class CampoIntBasico(CampoBasico):
 #
 # inteiro binário
 
-class CampoIntBinario(CampoIntBasico):
+class CampoIntBinario(CampoBinario, CampoIntBasico):
     """
     Classe para inteiro em formato binário (big endian) com 8 bytes
     e complemento para 2 para valores negativos
     """
 
-    def __init__(self):
-        super().__init__("int binário")
+    numero_bytes = 8  # 8 bytes
+
+    def __init__(self, **kwargs):
+        CampoIntBasico.__init__(self, "inteiro binário", **kwargs)
+        CampoBinario.__init__(self, self.numero_bytes)
 
     # code::start binario_para_bytes
     def para_bytes(self):
@@ -126,7 +134,14 @@ class CampoIntBinario(CampoIntBasico):
         (big endian) de 8 bytes com sinal
         :return: o valor inteiro em 8 bytes
         """
-        return self.valor.to_bytes(8, "big", signed = True)
+        return self.valor.to_bytes(self.numero_bytes, "big", signed = True)
+
     # code::end
 
-
+    def leia(self, arquivo):
+        """
+        Conversão dos dados lidos de bytes para inteiro
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        """
+        dado = self.leia_dado_de_arquivo(arquivo)
+        self.valor = int.from_bytes(dado, "big", signed = True)
