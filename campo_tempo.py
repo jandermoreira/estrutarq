@@ -76,7 +76,7 @@ class CampoTempoBasico(CampoBasico):
     @hora.setter
     def hora(self, valor):
         tempo = strptime(self.data + " " + valor, self.formato_tempo)
-        self.atribua_tempo(int(mktime(tempo) + self._correcao_fuso()))
+        self.atribua_tempo(int(mktime(tempo)))
 
     @staticmethod
     def _correcao_fuso():
@@ -102,8 +102,9 @@ class CampoTempoBinario(CampoBinario, CampoTempoBasico):
 
     numero_bytes = 8
 
-    def __init__(self, valor: str = "1970-01-01 00:00:00"):
-        CampoTempoBasico.__init__(self, "tempo binário")
+    def __init__(self, tipo: str = "tempo binário",
+                 valor: str = "1970-01-01 00:00:00"):
+        CampoTempoBasico.__init__(self, tipo)
         CampoBinario.__init__(self, self.numero_bytes)
         self.tempo = valor
 
@@ -114,41 +115,80 @@ class CampoTempoBinario(CampoBinario, CampoTempoBasico):
     @valor.setter
     def valor(self, valor: str):
         if not isinstance(valor, str):
-            raise AttributeError("O tempo deve ser uma cadeia de caracteres")
+            raise AttributeError("O tempo deve ser no formato "
+                                 f"'{self.formato_tempo}'")
         self.tempo = valor
 
+    # code::start data_binario_para_bytes
     def para_bytes(self) -> bytes:
-        return self.obtenha_tempo().to_bytes(self.numero_bytes, "big",
-                                             signed = True)
-
-    def leia_dado_de_arquivo(self, arquivo) -> bytes:
-        dado = arquivo.read(self.numero_bytes)
-        if len(dado) != self.numero_bytes:
-            raise EOFError
-        else:
-            return dado
+        """
+        Conversão da representação interna (número inteiro de segundos)
+        para inteiro binário com sinal, big-endian, com comprimento
+        'numero_bytes'
+        :return: a sequência de bytes representando o valor inteiro
+        """
+        tempo = self.obtenha_tempo()
+        return tempo.to_bytes(self.numero_bytes, "big", signed = True)
+        # code::end
 
     def leia(self, arquivo):
         dado = self.leia_dado_de_arquivo(arquivo)
         self.atribua_tempo(int.from_bytes(dado, "big", signed = True))
 
-# class CampoDataBasico(CampoTempoBasico):
-#     """
-#     Classe para data em armazenamento binário: número de segundos desde
-#     1/1/1970 0h0min0s, armazenado em valor real
-#     """
-#
-#     def __init__(self, **kwargs):
-#         super().__init__(self, "data binário")
-#
-#     @property
-#     def valor(self) -> str:
-#         return strftime("%Y-%m-%d", self.__valor)
-#
-#     @valor.setter
-#     def valor(self, valor: str):
-#         self.__valor = strptime("%Y-%m-%d", valor)
-#
+
+class CampoDataBinario(CampoTempoBinario):
+    """
+    Classe para data em armazenamento binário: número de segundos desde
+    1/1/1970 0h0min0s, armazenado em valor inteiro com sinal
+    Interface somente para Data
+    """
+
+    numero_bytes = 8
+
+    def __init__(self, valor: str = "1970-01-01"):
+        CampoTempoBasico.__init__(self, tipo = "data binário")
+        CampoBinario.__init__(self, self.numero_bytes)
+        self.data = valor
+        self.hora = "00:00:00"  # hora local
+
+    @property
+    def valor(self) -> str:
+        return self.data
+
+    @valor.setter
+    def valor(self, valor: str):
+        if not isinstance(valor, str):
+            raise AttributeError("A data deve ser no formato "
+                                 f"'{self.formato_data}'")
+        self.data = valor
+
+
+class CampoHoraBinario(CampoTempoBinario):
+    """
+    Classe para data em armazenamento binário: número de segundos desde
+    1/1/1970 0h0min0s, armazenado em valor inteiro com sinal
+    Interface somente para Data
+    """
+
+    numero_bytes = 8
+
+    def __init__(self, valor: str = "00:00:00"):
+        CampoTempoBinario.__init__(self, tipo = "hora binário")
+        CampoBinario.__init__(self, self.numero_bytes)
+        self.data = "1970-01-01"  # data padrão
+        self.hora = valor
+
+    @property
+    def valor(self) -> str:
+        return self.hora
+
+    @valor.setter
+    def valor(self, valor: str):
+        if not isinstance(valor, str):
+            raise AttributeError("A data hora ser no formato "
+                                 f"'{self.formato_hora}'")
+        self.data = hora
+
 #
 # class CampoHoraBasico(CampoTempoBasico):
 #
