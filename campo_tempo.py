@@ -187,7 +187,7 @@ class CampoHoraBinario(CampoTempoBinario):
         if not isinstance(valor, str):
             raise AttributeError("A data hora ser no formato "
                                  f"'{self.formato_hora}'")
-        self.data = hora
+        self.data = valor
 
 #
 # class CampoHoraBasico(CampoTempoBasico):

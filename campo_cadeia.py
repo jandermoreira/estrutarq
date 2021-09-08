@@ -11,7 +11,7 @@ class CampoCadeiaBasico(CampoBasico):
     Classe básica para cadeias de caracteres
     """
 
-    def __init__(self, tipo: str, valor: str = ""):
+    def __init__(self, tipo: str = "bruto", valor: str = ""):
         super().__init__(tipo)
         self.valor = valor
 
@@ -49,7 +49,9 @@ class CampoCadeiaTerminador(CampoTerminador, CampoCadeiaBasico):
         """
         dado = bytes(f"{self.valor}", encoding = "utf-8")
         byte_terminador = bytes(f"{self.terminador}", "latin")
-        assert byte_terminador not in dado
+        if byte_terminador in dado:
+            raise ValueError(
+                "Byte terminador não pode estar presente nos dados")
         return dado + byte_terminador
     # code::end
 
@@ -98,7 +100,7 @@ class CampoCadeiaFixo(CampoFixo, CampoCadeiaBasico):
         os com comprimento menor têm as posições inválidas preenchidas com um
         byte de preenchimento.
         """
-        dado = bytes(f"{self.valor}", encoding = "utf-8")[:self.comprimento]
+        dado = bytes(self.valor, encoding = "utf-8")[:self.comprimento]
         byte_preenchimento = bytes(self.preenchimento, "latin")
         dado = dado + byte_preenchimento * (self.comprimento - len(dado))
         return dado
