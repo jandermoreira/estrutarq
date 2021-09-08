@@ -249,7 +249,6 @@ class CampoBinario:
             return dado
 
 
-
 ################################################################################
 ################################################################################
 # Interface
@@ -285,3 +284,4 @@ class CampoBinario:
 #         raise TypeError(f"Tipo de campo desconhecido ({tipo})")
 #     else:
 #         return relacao_tipo_campos[tipo](*args, **kwargs)
+

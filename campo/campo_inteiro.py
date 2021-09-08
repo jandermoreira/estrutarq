@@ -113,8 +113,6 @@ class CampoIntFixo(CampoIntBasico):
         return numero_bytes
     # code::end
 
-inteiro binário
-
 class CampoIntBinario(CampoBinario, CampoIntBasico):
     """
     Classe para inteiro em formato binário (big endian) com 8 bytes
