@@ -2,7 +2,7 @@
 ################################################################################
 # Campos inteiros
 
-from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
+from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
     CampoBinario
 
 
@@ -136,6 +136,7 @@ class CampoIntBinario(CampoBinario, CampoIntBasico):
 
     # code::end
 
+    # code::start binario_leia
     def leia(self, arquivo):
         """
         Conversão dos dados lidos de bytes para inteiro
@@ -143,3 +144,4 @@ class CampoIntBinario(CampoBinario, CampoIntBasico):
         """
         dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = int.from_bytes(dado, "big", signed = True)
+    # code::end

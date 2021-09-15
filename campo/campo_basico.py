@@ -236,6 +236,7 @@ class CampoBinario:
             raise AttributeError("O comprimento deve ser maior ou igual a um")
         self.__comprimento = valor
 
+    # code::start leitura_binario
     def leia_dado_de_arquivo(self, arquivo) -> bytes:
         """
         Recuperação dos bytes gravados no arquivo
@@ -247,7 +248,7 @@ class CampoBinario:
             raise EOFError
         else:
             return dado
-
+    # code::end
 
 ################################################################################
 ################################################################################

@@ -2,7 +2,7 @@
 ################################################################################
 # Campos tempo
 
-from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
+from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
     CampoBinario
 from time import mktime, gmtime, strptime, strftime, localtime
 from struct import pack, unpack

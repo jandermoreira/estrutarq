@@ -2,7 +2,7 @@
 ################################################################################
 # Campos de cadeias de caracteres
 
-from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo
+from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo
 
 
 # cadeia de caracteres básica

@@ -2,7 +2,7 @@
 ################################################################################
 # Campos reais
 
-from .campo import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
+from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
     CampoBinario
 from struct import pack, unpack
 
@@ -134,6 +134,7 @@ class CampoRealBinario(CampoBinario, CampoRealBasico):
         return pack("d", self.valor)
     # code::end
 
+    # code::start binario_leia
     def leia(self, arquivo):
         """
         Conversão dos dados lidos de bytes para IEEE 754 de precisão dupla
@@ -141,3 +142,4 @@ class CampoRealBinario(CampoBinario, CampoRealBasico):
         """
         dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = unpack("d", dado)[0]
+    # code::end
