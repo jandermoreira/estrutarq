@@ -21,8 +21,8 @@ class CampoTempoBasico(CampoBasico):
     formato_data = "%Y-%m-%d"
     formato_tempo = "%Y-%m-%d %H:%M:%S"
 
-    def __init__(self, tipo: str, valor: int = 0):
-        super().__init__(tipo)
+    def __init__(self, nome: str, tipo: str, valor: int = 0):
+        super().__init__(nome, tipo)
         self.atribua_tempo(valor)
 
     # todo: __str__ é sáida obseleta (pode ser removida)
@@ -102,9 +102,9 @@ class CampoTempoBinario(CampoBinario, CampoTempoBasico):
 
     numero_bytes = 8
 
-    def __init__(self, tipo: str = "tempo binário",
+    def __init__(self, nome:str,
                  valor: str = "1970-01-01 00:00:00"):
-        CampoTempoBasico.__init__(self, tipo)
+        CampoTempoBasico.__init__(self, nome, "tempo binário")
         CampoBinario.__init__(self, self.numero_bytes)
         self.tempo = valor
 
@@ -145,8 +145,8 @@ class CampoDataBinario(CampoTempoBinario):
 
     numero_bytes = 8
 
-    def __init__(self, valor: str = "1970-01-01"):
-        CampoTempoBasico.__init__(self, tipo = "data binário")
+    def __init__(self, nome: str, valor: str = "1970-01-01"):
+        CampoTempoBasico.__init__(self, nome, "data binário")
         CampoBinario.__init__(self, self.numero_bytes)
         self.data = valor
         self.hora = "00:00:00"  # hora local
@@ -172,8 +172,8 @@ class CampoHoraBinario(CampoTempoBinario):
 
     numero_bytes = 8
 
-    def __init__(self, valor: str = "00:00:00"):
-        CampoTempoBinario.__init__(self, tipo = "hora binário")
+    def __init__(self, nome: str, valor: str = "00:00:00"):
+        CampoTempoBinario.__init__(self, nome, "hora binário")
         CampoBinario.__init__(self, self.numero_bytes)
         self.data = "1970-01-01"  # data padrão
         self.hora = valor

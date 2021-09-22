@@ -14,8 +14,8 @@ class CampoIntBasico(CampoBasico):
     Classe básica para campo inteiro
     """
 
-    def __init__(self, tipo: str, valor: int = 0, **kwargs):
-        super().__init__(tipo, **kwargs)
+    def __init__(self, nome: str, tipo: str, valor: int = 0, **kwargs):
+        super().__init__(nome, tipo, **kwargs)
         self.valor = valor
 
     @property
@@ -45,8 +45,8 @@ class CampoIntTerminador(CampoTerminador, CampoIntBasico):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, terminador: str = "\x00", valor: int = 0):
-        super().__init__("int terminador")
+    def __init__(self, nome: str, terminador: str = "\x00", valor: int = 0):
+        super().__init__(nome, "int terminador")
         self.terminador = terminador
         self.valor = valor
 
@@ -66,9 +66,9 @@ class CampoIntTerminador(CampoTerminador, CampoIntBasico):
 class CampoIntPrefixado(CampoIntBasico):
     """Classe para inteiro textual com prefixo de comprimento"""
 
-    def __init__(self):
+    def __init__(self, nome: str):
         """Construtor"""
-        super().__init__("int prefixado")
+        super().__init__(nome, "int prefixado")
 
     # code::start prefixado_para_bytes
     def para_bytes(self):
@@ -96,9 +96,9 @@ class CampoIntPrefixado(CampoIntBasico):
 class CampoIntFixo(CampoIntBasico):
     """Classe para inteiro textual com tamanho fixo"""
 
-    def __init__(self, comprimento):
+    def __init__(self, nome, comprimento):
         """Construtor"""
-        super().__init__("int fixo")
+        super().__init__(nome, "int fixo")
         self.__comprimento = comprimento
 
     # code::start fixo_para_bytes
@@ -121,8 +121,8 @@ class CampoIntBinario(CampoBinario, CampoIntBasico):
 
     numero_bytes = 8  # 8 bytes
 
-    def __init__(self, **kwargs):
-        CampoIntBasico.__init__(self, "inteiro binário", **kwargs)
+    def __init__(self, nome: str, **kwargs):
+        CampoIntBasico.__init__(self, nome, "inteiro binário", **kwargs)
         CampoBinario.__init__(self, self.numero_bytes)
 
     # code::start binario_para_bytes

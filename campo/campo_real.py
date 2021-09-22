@@ -120,8 +120,8 @@ class CampoRealBinario(CampoBinario, CampoRealBasico):
     Classe para real em formato binário usando IEEE 754 de precisão dupla
     """
 
-    def __init__(self, **kwargs):
-        CampoRealBasico.__init__(self, "real binário", **kwargs)
+    def __init__(self, nome: str, **kwargs):
+        CampoRealBasico.__init__(self, nome, "real binário", **kwargs)
         CampoBinario.__init__(self, len(pack("d", 0)))
 
     # code::start binario_para_bytes
