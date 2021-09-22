@@ -1,0 +1,2 @@
+from registro import \
+    RegistroBruto

@@ -1,5 +1,6 @@
 # Cadeias de caracteres
 from .campo_cadeia import \
+    CampoBasico, \
     CampoCadeiaFixo, \
     CampoCadeiaTerminador, \
     CampoCadeiaPrefixado, \
