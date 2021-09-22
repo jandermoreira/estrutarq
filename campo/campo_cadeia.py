@@ -11,8 +11,8 @@ class CampoCadeiaBasico(CampoBasico):
     Classe básica para cadeias de caracteres
     """
 
-    def __init__(self, tipo: str = "bruto", valor: str = ""):
-        super().__init__(tipo)
+    def __init__(self, nome: str, tipo: str = "bruto", valor: str = ""):
+        super().__init__(nome, tipo)
         self.valor = valor
 
     @property
@@ -39,6 +39,8 @@ class CampoCadeiaTerminador(CampoTerminador, CampoCadeiaBasico):
     """
     Classe para inteiro textual com terminador
     """
+    def __init__(self, nome: str, *args, **kwargs):
+        super().__init__(nome, "cadeia terminador", *args, **kwargs)
 
     # code::start terminador_para_bytes
     def para_bytes(self) -> bytes:
@@ -62,8 +64,8 @@ class CampoCadeiaPrefixado(CampoPrefixado, CampoCadeiaBasico):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, *args, **kwargs):
-        super().__init__("cadeia prefixado", *args, **kwargs)
+    def __init__(self, nome: str,  *args, **kwargs):
+        super().__init__(nome, "cadeia prefixado", *args, **kwargs)
 
     # code::start prefixado_para_bytes
     def para_bytes(self) -> bytes:
@@ -85,8 +87,8 @@ class CampoCadeiaFixo(CampoFixo, CampoCadeiaBasico):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, *args, **kwargs):
-        CampoCadeiaBasico.__init__(self, "cadeia fixo", **kwargs)
+    def __init__(self, nome: str, *args, **kwargs):
+        CampoCadeiaBasico.__init__(self, nome, "cadeia fixo", **kwargs)
         CampoFixo.__init__(self, *args, **kwargs)
 
     # code::start fixo_para_bytes

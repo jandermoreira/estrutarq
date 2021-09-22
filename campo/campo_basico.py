@@ -13,11 +13,23 @@ class CampoBasico:
     de campo. O valor é sempre armazenado como cadeia de caracteres.
     """
 
-    def __init__(self, tipo: str = "bruto"):
+    def __init__(self, nome: str, tipo: str = "bruto"):
         # if tipo not in relacao_tipo_campos.keys():
         #     raise TypeError(f"Tipo de campo desconhecido ({tipo})")
+        print(f"nome = {nome}; tipo = {tipo} em {type(self).__name__}")
+        self.nome = nome
         self.__tipo = tipo
         self.__valor = None
+
+    @property
+    def nome(self):
+        return self.__nome
+
+    @nome.setter
+    def nome(self, valor):
+        if not isinstance(valor, str):
+            raise TypeError("Nome do campo deve ser uma cadeia de caracteres.")
+        self.__nome = valor
 
     @property
     def tipo(self):
@@ -159,7 +171,7 @@ class CampoFixo:
     """
 
     def __init__(self, comprimento: int, preenchimento = '\xFF'):
-        print(f"comprimento '{comprimento}'")
+        print(f"comprimento = {comprimento} em {self.__doc__}")
         self.comprimento = comprimento
         self.preenchimento = preenchimento
 
@@ -249,40 +261,3 @@ class CampoBinario:
         else:
             return dado
     # code::end
-
-################################################################################
-################################################################################
-# Interface
-
-# relacao_tipo_campos = [
-#     "bruto": CampoBasico,
-#     "cadeia terminador",
-#     "cadeia prefixado",
-#     "cadeia fixo",
-#     "inteiro binário",
-#     "real binário",
-#     "data binário": campo_tempo.CampoDataBinario,
-# ]
-
-#
-# def crie_campo(tipo: str, *args, **kwargs):
-#     import estrutarq.campo_inteiro as campo_inteiro
-#     import estrutarq.campo_cadeia as campo_cadeia
-#     import estrutarq.campo_real as campo_real
-#     import estrutarq.campo_tempo as campo_tempo
-#     global relacao_tipo_campos
-#     relacao_tipo_campos = {
-#         "bruto": CampoBasico,
-#         "cadeia terminador": campo_cadeia.CampoCadeiaTerminador,
-#         "cadeia prefixado": campo_cadeia.CampoCadeiaPrefixado,
-#         "cadeia fixo": campo_cadeia.CampoCadeiaFixo,
-#         "inteiro binário": campo_inteiro.CampoIntBinario,
-#         "real binário": campo_real.CampoRealBinario,
-#         "data binário": campo_tempo.CampoDataBinario,
-#     }
-#
-#     if tipo not in relacao_tipo_campos.keys():
-#         raise TypeError(f"Tipo de campo desconhecido ({tipo})")
-#     else:
-#         return relacao_tipo_campos[tipo](*args, **kwargs)
-
