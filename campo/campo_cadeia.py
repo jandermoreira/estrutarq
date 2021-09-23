@@ -2,8 +2,9 @@
 ################################################################################
 # Campos de cadeias de caracteres
 
-from .campo_basico import CampoBasico, CampoFixo, CampoPrefixado, \
-    CampoTerminador
+from estrutarq.dado import DadoFixo, DadoPrefixado, \
+    DadoTerminador
+from .campo_basico import CampoBasico
 
 
 # cadeia de caracteres básica
@@ -28,7 +29,7 @@ class CampoCadeiaBasico(CampoBasico):
 
     def leia(self, arquivo):
         """
-        Conversão dos dados lidos para valor inteiro
+        Conversão dos dado lidos para valor inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_dado_de_arquivo(arquivo)
@@ -36,14 +37,14 @@ class CampoCadeiaBasico(CampoBasico):
 
 
 # cadeia de caracteres com terminador
-class CampoCadeiaTerminador(CampoTerminador, CampoCadeiaBasico):
+class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     """
     Classe para inteiro textual com terminador
     """
 
     def __init__(self, nome: str, **kwargs):
         CampoCadeiaBasico.__init__(self, nome, "cadeia terminador", **kwargs)
-        CampoTerminador.__init__(self, **kwargs)
+        DadoTerminador.__init__(self, **kwargs)
 
     # code::start terminador_para_bytes
     def para_bytes(self) -> bytes:
@@ -56,13 +57,13 @@ class CampoCadeiaTerminador(CampoTerminador, CampoCadeiaBasico):
         byte_terminador = bytes(f"{self.terminador}", "latin")
         if byte_terminador in dado:
             raise ValueError(
-                "Byte terminador não pode estar presente nos dados")
+                "Byte terminador não pode estar presente nos dado")
         return dado + byte_terminador
     # code::end
 
 
 # cadeia de caracteres com prefixo de comprimento
-class CampoCadeiaPrefixado(CampoPrefixado, CampoCadeiaBasico):
+class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     """
     Classe para inteiro textual com terminador
     """
@@ -85,14 +86,14 @@ class CampoCadeiaPrefixado(CampoPrefixado, CampoCadeiaBasico):
 
 
 # cadeia de caracteres com prefixo de comprimento
-class CampoCadeiaFixo(CampoFixo, CampoCadeiaBasico):
+class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     """
     Classe para inteiro textual com terminador
     """
 
     def __init__(self, nome: str, *args, **kwargs):
         CampoCadeiaBasico.__init__(self, nome, "cadeia fixo", **kwargs)
-        CampoFixo.__init__(self, *args, **kwargs)
+        DadoFixo.__init__(self, *args, **kwargs)
 
     # code::start fixo_para_bytes
     def para_bytes(self) -> bytes:

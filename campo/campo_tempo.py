@@ -2,10 +2,10 @@
 ################################################################################
 # Campos tempo
 
-from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
-    CampoBinario
-from time import mktime, gmtime, strptime, strftime, localtime
-from struct import pack, unpack
+from time import gmtime, localtime, mktime, strftime, strptime
+
+from estrutarq.dado import DadoBinario
+from .campo_basico import CampoBasico
 
 
 ################################################################################
@@ -20,6 +20,8 @@ class CampoTempoBasico(CampoBasico):
     formato_hora = "%H:%M:%S"
     formato_data = "%Y-%m-%d"
     formato_tempo = "%Y-%m-%d %H:%M:%S"
+
+    __valor = 0
 
     def __init__(self, nome: str, tipo: str, valor: int = 0):
         super().__init__(nome, tipo)
@@ -88,13 +90,13 @@ class CampoTempoBasico(CampoBasico):
 
     def leia(self, arquivo):
         """
-        Conversão dos dados lidos para valor inteiro
+        Conversão dos dado lidos para valor inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         pass
 
 
-class CampoTempoBinario(CampoBinario, CampoTempoBasico):
+class CampoTempoBinario(DadoBinario, CampoTempoBasico):
     """
     Classe para armazenamento de tempo em formato binário (8 bytes,
     big endian, com sinal)
@@ -102,10 +104,10 @@ class CampoTempoBinario(CampoBinario, CampoTempoBasico):
 
     numero_bytes = 8
 
-    def __init__(self, nome:str,
+    def __init__(self, nome: str,
                  valor: str = "1970-01-01 00:00:00"):
         CampoTempoBasico.__init__(self, nome, "tempo binário")
-        CampoBinario.__init__(self, self.numero_bytes)
+        DadoBinario.__init__(self, self.numero_bytes)
         self.tempo = valor
 
     @property
@@ -147,7 +149,7 @@ class CampoDataBinario(CampoTempoBinario):
 
     def __init__(self, nome: str, valor: str = "1970-01-01"):
         CampoTempoBasico.__init__(self, nome, "data binário")
-        CampoBinario.__init__(self, self.numero_bytes)
+        DadoBinario.__init__(self, self.numero_bytes)
         self.data = valor
         self.hora = "00:00:00"  # hora local
 
@@ -174,7 +176,7 @@ class CampoHoraBinario(CampoTempoBinario):
 
     def __init__(self, nome: str, valor: str = "00:00:00"):
         CampoTempoBinario.__init__(self, nome, "hora binário")
-        CampoBinario.__init__(self, self.numero_bytes)
+        DadoBinario.__init__(self, self.numero_bytes)
         self.data = "1970-01-01"  # data padrão
         self.hora = valor
 
@@ -207,7 +209,7 @@ class CampoHoraBinario(CampoTempoBinario):
 #
 #     def leia(self, arquivo):
 #         """
-#         Conversão dos dados lidos de bytes para IEEE 754 de precisão dupla
+#         Conversão dos dado lidos de bytes para IEEE 754 de precisão dupla
 #         :param arquivo: arquivo binário aberto com permissão de leitura
 #         """
 #         dado = self.leia_dado_de_arquivo(arquivo)

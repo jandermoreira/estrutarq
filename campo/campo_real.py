@@ -4,7 +4,8 @@
 
 from struct import pack, unpack
 
-from .campo_basico import CampoBasico, CampoBinario
+from estrutarq.dado import DadoBinario
+from .campo_basico import CampoBasico
 
 
 ################################################################################
@@ -31,7 +32,7 @@ class CampoRealBasico(CampoBasico):
 
     def leia(self, arquivo):
         """
-        Conversão dos dados lidos para valor inteiro
+        Conversão dos dado lidos para valor inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_dado_de_arquivo(arquivo)
@@ -44,7 +45,7 @@ class CampoRealBasico(CampoBasico):
 #
 #
 # # inteiro textual com terminador
-# class CampoIntTerminador(CampoTerminador, CampoIntBasico):
+# class CampoIntTerminador(DadoTerminador, CampoIntBasico):
 #     """
 #     Classe para inteiro textual com terminador
 #     """
@@ -119,14 +120,14 @@ class CampoRealBasico(CampoBasico):
 #
 # inteiro binário
 
-class CampoRealBinario(CampoBinario, CampoRealBasico):
+class CampoRealBinario(DadoBinario, CampoRealBasico):
     """
     Classe para real em formato binário usando IEEE 754 de precisão dupla
     """
 
     def __init__(self, nome: str, **kwargs):
         CampoRealBasico.__init__(self, nome, "real binário", **kwargs)
-        CampoBinario.__init__(self, len(pack("d", 0)))
+        DadoBinario.__init__(self, len(pack("d", 0)))
 
     # code::start binario_para_bytes
     def para_bytes(self):
@@ -142,7 +143,7 @@ class CampoRealBinario(CampoBinario, CampoRealBasico):
     # code::start binario_leia
     def leia(self, arquivo):
         """
-        Conversão dos dados lidos de bytes para IEEE 754 de precisão dupla
+        Conversão dos dado lidos de bytes para IEEE 754 de precisão dupla
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_dado_de_arquivo(arquivo)

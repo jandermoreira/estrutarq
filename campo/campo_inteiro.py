@@ -2,8 +2,8 @@
 ################################################################################
 # Campos inteiros
 
-from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
-    CampoBinario
+from estrutarq.dado import DadoBinario, DadoTerminador
+from .campo_basico import CampoBasico
 
 
 ################################################################################
@@ -30,23 +30,21 @@ class CampoIntBasico(CampoBasico):
 
     def leia(self, arquivo):
         """
-        Conversão dos dados lidos para valor inteiro
+        Conversão dos dado lidos para valor inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = int(dado)
 
 
-
-
 # inteiro textual com terminador
-class CampoIntTerminador(CampoTerminador, CampoIntBasico):
+class CampoIntTerminador(DadoTerminador, CampoIntBasico):
     """
     Classe para inteiro textual com terminador
     """
 
     def __init__(self, nome: str, valor: int = 0, **kwargs):
-        CampoTerminador.__init__(self, **kwargs)
+        DadoTerminador.__init__(self, **kwargs)
         CampoIntBasico.__init__(self, nome, "int terminador", **kwargs)
         self.valor = valor
 
@@ -78,9 +76,10 @@ class CampoIntPrefixado(CampoIntBasico):
         sequência de dígitos que formam o valor numérico, com "-" se negativo
         :return: sequência de bytes com o prefixo binário e os bytes do campo
         """
-        numero_bytes = bytes(f"{self._CampoBasico__valor}", encoding = "utf-8")
+        numero_bytes = bytes(f"{self.valor}", encoding = "utf-8")
         prefixo_binario = len(numero_bytes).to_bytes(2, "big")
         return prefixo_binario + numero_bytes
+
     # code::end
 
     def leia(self, arquivo):
@@ -113,7 +112,8 @@ class CampoIntFixo(CampoIntBasico):
         return numero_bytes
     # code::end
 
-class CampoIntBinario(CampoBinario, CampoIntBasico):
+
+class CampoIntBinario(DadoBinario, CampoIntBasico):
     """
     Classe para inteiro em formato binário (big endian) com 8 bytes
     e complemento para 2 para valores negativos
@@ -123,7 +123,7 @@ class CampoIntBinario(CampoBinario, CampoIntBasico):
 
     def __init__(self, nome: str, **kwargs):
         CampoIntBasico.__init__(self, nome, "inteiro binário", **kwargs)
-        CampoBinario.__init__(self, self.numero_bytes)
+        DadoBinario.__init__(self, self.numero_bytes)
 
     # code::start binario_para_bytes
     def para_bytes(self):
@@ -139,7 +139,7 @@ class CampoIntBinario(CampoBinario, CampoIntBasico):
     # code::start binario_leia
     def leia(self, arquivo):
         """
-        Conversão dos dados lidos de bytes para inteiro
+        Conversão dos dado lidos de bytes para inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_dado_de_arquivo(arquivo)
