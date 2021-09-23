@@ -2,9 +2,11 @@
 ################################################################################
 # Campos reais
 
-from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, CampoFixo, \
+from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, \
+    CampoFixo, \
     CampoBinario
 from struct import pack, unpack
+
 
 ################################################################################
 ################################################################################
@@ -14,8 +16,8 @@ class CampoRealBasico(CampoBasico):
     Classe básica para campo real
     """
 
-    def __init__(self, tipo: str, valor: int = 0, **kwargs):
-        super().__init__(tipo, **kwargs)
+    def __init__(self, nome: str, tipo: str, valor: int = 0, **kwargs):
+        super().__init__(nome, tipo, **kwargs)
         self.valor = valor
 
     @property
@@ -132,6 +134,7 @@ class CampoRealBinario(CampoBinario, CampoRealBasico):
         :return: o valor real no padrão IEEE 754 de precisão dupla
         """
         return pack("d", self.valor)
+
     # code::end
 
     # code::start binario_leia

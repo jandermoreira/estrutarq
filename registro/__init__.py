@@ -1,2 +1,3 @@
-from registro import \
+from .registro_basico import \
     RegistroBruto
+

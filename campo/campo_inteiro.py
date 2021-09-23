@@ -45,9 +45,9 @@ class CampoIntTerminador(CampoTerminador, CampoIntBasico):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, nome: str, terminador: str = "\x00", valor: int = 0):
-        super().__init__(nome, "int terminador")
-        self.terminador = terminador
+    def __init__(self, nome: str, valor: int = 0, **kwargs):
+        CampoTerminador.__init__(self, **kwargs)
+        CampoIntBasico.__init__(self, nome, "int terminador", **kwargs)
         self.valor = valor
 
     # code::start terminador_para_bytes

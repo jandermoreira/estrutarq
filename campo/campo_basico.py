@@ -6,6 +6,9 @@
 ################################################################################
 # Campo básico
 
+from copy import copy
+
+
 class CampoBasico:
     """
     Estruturação básica do campo como menor unidade de informação
@@ -14,9 +17,6 @@ class CampoBasico:
     """
 
     def __init__(self, nome: str, tipo: str = "bruto"):
-        # if tipo not in relacao_tipo_campos.keys():
-        #     raise TypeError(f"Tipo de campo desconhecido ({tipo})")
-        print(f"nome = {nome}; tipo = {tipo} em {type(self).__name__}")
         self.nome = nome
         self.__tipo = tipo
         self.__valor = None
@@ -75,7 +75,22 @@ class CampoBasico:
         :param arquivo: arquivo binário aberto com permissão de escrita
         """
         arquivo.write(self.para_bytes())
+
     # code::end
+
+    def __str__(self):
+        """
+        Valor padrão do campo para um 'print'
+        :return: o valor do campo
+        """
+        return str(self.valor)
+
+    def copy(self):
+        """
+        Cópia "rasa" deste campo
+        :return: outra instância com os mesmos valores
+        """
+        return copy(self)
 
 
 class CampoTerminador:
@@ -171,7 +186,6 @@ class CampoFixo:
     """
 
     def __init__(self, comprimento: int, preenchimento = '\xFF'):
-        print(f"comprimento = {comprimento} em {self.__doc__}")
         self.comprimento = comprimento
         self.preenchimento = preenchimento
 
