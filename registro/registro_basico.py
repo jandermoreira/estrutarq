@@ -2,7 +2,7 @@
 Registros
 """
 
-from estrutarq.campo import CampoBasico
+from estrutarq.campo.campo_basico import CampoBasico
 
 
 class RegistroBasico:

@@ -2,10 +2,9 @@
 ################################################################################
 # Campos reais
 
-from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, \
-    CampoFixo, \
-    CampoBinario
 from struct import pack, unpack
+
+from .campo_basico import CampoBasico, CampoBinario
 
 
 ################################################################################
@@ -16,8 +15,8 @@ class CampoRealBasico(CampoBasico):
     Classe básica para campo real
     """
 
-    def __init__(self, nome: str, tipo: str, valor: int = 0, **kwargs):
-        super().__init__(nome, tipo, **kwargs)
+    def __init__(self, nome: str, tipo: str, valor: float = 0):
+        super().__init__(nome, tipo)
         self.valor = valor
 
     @property
@@ -37,6 +36,9 @@ class CampoRealBasico(CampoBasico):
         """
         dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = float(dado)
+
+    def __str__(self):
+        return float(self.valor)
 
 
 #

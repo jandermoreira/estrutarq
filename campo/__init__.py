@@ -1,23 +1,18 @@
+# Bruto
+from .campo_basico import \
+    CampoBruto
+
 # Cadeias de caracteres
-from .campo_cadeia import \
-    CampoBasico, \
-    CampoCadeiaFixo, \
-    CampoCadeiaTerminador, \
-    CampoCadeiaPrefixado, \
-    CampoCadeiaBasico
+from .campo_cadeia import CampoCadeiaBasico, CampoCadeiaFixo, \
+    CampoCadeiaPrefixado, CampoCadeiaTerminador
 
 # Inteiros
-from .campo_inteiro import \
-    CampoIntTerminador, \
-    CampoIntPrefixado, \
-    CampoIntFixo, \
-    CampoIntBinario
+from .campo_inteiro import CampoIntBinario, CampoIntFixo, CampoIntPrefixado, \
+    CampoIntTerminador
 
 # Reais
 from .campo_real import \
     CampoRealBinario
+
 # Tempo, data e hora
-from .campo_tempo import \
-    CampoTempoBinario, \
-    CampoDataBinario, \
-    CampoHoraBinario
+from .campo_tempo import CampoDataBinario, CampoHoraBinario, CampoTempoBinario

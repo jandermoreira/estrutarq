@@ -2,8 +2,8 @@
 ################################################################################
 # Campos de cadeias de caracteres
 
-from .campo_basico import CampoBasico, CampoTerminador, CampoPrefixado, \
-    CampoFixo
+from .campo_basico import CampoBasico, CampoFixo, CampoPrefixado, \
+    CampoTerminador
 
 
 # cadeia de caracteres básica
@@ -41,9 +41,8 @@ class CampoCadeiaTerminador(CampoTerminador, CampoCadeiaBasico):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, nome: str, *args, **kwargs):
-        CampoCadeiaBasico.__init__(self, nome, "cadeia terminador", *args,
-                                   **kwargs)
+    def __init__(self, nome: str, **kwargs):
+        CampoCadeiaBasico.__init__(self, nome, "cadeia terminador", **kwargs)
         CampoTerminador.__init__(self, **kwargs)
 
     # code::start terminador_para_bytes

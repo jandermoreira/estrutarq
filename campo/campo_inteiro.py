@@ -14,8 +14,8 @@ class CampoIntBasico(CampoBasico):
     Classe básica para campo inteiro
     """
 
-    def __init__(self, nome: str, tipo: str, valor: int = 0, **kwargs):
-        super().__init__(nome, tipo, **kwargs)
+    def __init__(self, nome: str, tipo: str, valor: int = 0):
+        super().__init__(nome, tipo)
         self.valor = valor
 
     @property
