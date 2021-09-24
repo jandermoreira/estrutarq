@@ -1,1 +1,1 @@
-from .dado_basico import *
+from .dado_comum import *

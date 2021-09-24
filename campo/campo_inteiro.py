@@ -3,7 +3,7 @@
 # Campos inteiros
 
 from estrutarq.dado import DadoBinario, DadoTerminador
-from .campo_basico import CampoBasico
+from .campo_comum import CampoBasico, terminador_de_campo
 
 
 ################################################################################
@@ -28,13 +28,21 @@ class CampoIntBasico(CampoBasico):
             raise TypeError("O valor deve ser inteiro")
         self.__valor = valor
 
+    def de_bytes(self, dado: bytes):
+        """
+        Conversão de uma sequência de bytes (representação textual)
+        para inteiro
+        :param dado: sequência de bytes
+        """
+        self.valor = int(dado)
+
     def leia(self, arquivo):
         """
         Conversão dos dado lidos para valor inteiro
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_dado_de_arquivo(arquivo)
-        self.valor = int(dado)
+        self.de_bytes(dado)
 
 
 # inteiro textual com terminador
@@ -44,7 +52,7 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
     """
 
     def __init__(self, nome: str, valor: int = 0, **kwargs):
-        DadoTerminador.__init__(self, **kwargs)
+        DadoTerminador.__init__(self, terminador_de_campo)
         CampoIntBasico.__init__(self, nome, "int terminador", **kwargs)
         self.valor = valor
 
@@ -57,6 +65,7 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
         dado = bytes(f"{self.valor}", encoding = "utf-8")
         byte_terminador = bytes(f"{self.terminador}", "latin")
         return dado + byte_terminador
+
     # code::end
 
 

@@ -5,7 +5,7 @@
 from time import gmtime, localtime, mktime, strftime, strptime
 
 from estrutarq.dado import DadoBinario
-from .campo_basico import CampoBasico
+from .campo_comum import CampoBasico
 
 
 ################################################################################

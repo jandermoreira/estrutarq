@@ -7,8 +7,12 @@
 
 from copy import copy
 
+from estrutarq.dado import DadoBasico
 
-class CampoBasico:
+terminador_de_campo = "\x00"
+
+
+class CampoBasico(DadoBasico):
     """
     Estruturação básica do campo como menor unidade de informação.
     """
@@ -36,12 +40,30 @@ class CampoBasico:
     def para_bytes(self) -> bytes:
         pass
 
+    def de_bytes(self, dado: bytes):
+        pass
+
     @staticmethod
     def leia_dado_de_arquivo(arquivo) -> bytes:
         pass
 
+    def leia(self, arquivo):
+        """
+        Conversão dos dado lidos para o valor do campo, obedecendo a
+        organização e formato de representação
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        """
+        dado = self.leia_dado_de_arquivo(arquivo)
+        self.dado_de_bytes(dado)
+
     def escreva(self, arquivo):
-        pass
+        """
+        Conversão do valor para sequência de bytes e armazenamento no
+        arquivo
+        :param arquivo: arquivo binário aberto com permissão de escrita
+        """
+        dado = self.para_bytes()
+        arquivo.write(dado)
 
     def __str__(self):
         """
@@ -56,6 +78,7 @@ class CampoBasico:
         :return: outra instância com os mesmos valores
         """
         return copy(self)
+
 
 
 class CampoBruto(CampoBasico):
@@ -80,6 +103,9 @@ class CampoBruto(CampoBasico):
         :param valor: um valor qualquer
         """
         self.__valor = str(valor)
+
+    def de_bytes(self, dado: bytes):
+        self.valor = dado.decode("utf-8")
 
     # code::start bruto_para_bytes
     def para_bytes(self) -> bytes:

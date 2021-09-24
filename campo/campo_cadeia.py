@@ -4,7 +4,7 @@
 
 from estrutarq.dado import DadoFixo, DadoPrefixado, \
     DadoTerminador
-from .campo_basico import CampoBasico
+from .campo_comum import CampoBasico, terminador_de_campo
 
 
 # cadeia de caracteres básica
@@ -14,7 +14,7 @@ class CampoCadeiaBasico(CampoBasico):
     """
 
     def __init__(self, nome: str, tipo: str, valor: str = ""):
-        super().__init__(nome, tipo)
+        CampoBasico.__init__(self, nome, tipo)
         self.valor = valor
 
     @property
@@ -27,13 +27,30 @@ class CampoCadeiaBasico(CampoBasico):
             raise TypeError("O valor deve ser uma cadeia de caracteres")
         self.__valor = valor
 
-    def leia(self, arquivo):
+    def dado_de_bytes(self, dado: bytes):
         """
-        Conversão dos dado lidos para valor inteiro
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        Atribuição de valor a partir da representação de dados
+        :param dado: sequência de bytes
         """
-        dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = dado.decode("utf-8")
+
+    def dado_para_bytes(self) -> bytes:
+        """
+        Conversão da cadeia de caracteres para sequência de bytes com
+        codificação UTF-8
+        :return: sequência de bytes
+        """
+        return bytes(self.valor, "utf-8")
+
+
+class CampoCadeiaBruto(CampoCadeiaBasico):
+    """
+    Classe para cadeia de caracteres em formato bruto, ou seja, sem
+    organização de campo
+    """
+
+    def __init__(self, nome: str, **kwargs):
+        super().__init__(nome, "cadeia bruto", **kwargs)
 
 
 # cadeia de caracteres com terminador
@@ -44,7 +61,7 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
 
     def __init__(self, nome: str, **kwargs):
         CampoCadeiaBasico.__init__(self, nome, "cadeia terminador", **kwargs)
-        DadoTerminador.__init__(self, **kwargs)
+        DadoTerminador.__init__(self, terminador_de_campo)
 
     # code::start terminador_para_bytes
     def para_bytes(self) -> bytes:
@@ -53,12 +70,7 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
         bytes finalizada com terminador
         :return a sequência de bytes seguida pelo byte do terminador
         """
-        dado = bytes(f"{self.valor}", encoding = "utf-8")
-        byte_terminador = bytes(f"{self.terminador}", "latin")
-        if byte_terminador in dado:
-            raise ValueError(
-                "Byte terminador não pode estar presente nos dado")
-        return dado + byte_terminador
+        return self.formate_dado(self.para_bytes())
     # code::end
 
 
@@ -106,8 +118,6 @@ class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
         os com comprimento menor têm as posições inválidas preenchidas com um
         byte de preenchimento.
         """
-        dado = bytes(self.valor, encoding = "utf-8")[:self.comprimento]
-        byte_preenchimento = bytes(self.preenchimento, "latin")
-        dado = dado + byte_preenchimento * (self.comprimento - len(dado))
-        return dado
+        dado = bytes(self.valor, encoding = "utf-8")
+        return self.formate_dado(dado)
     # code::end

@@ -1,9 +1,9 @@
 # Bruto
-from .campo_basico import \
+from .campo_comum import \
     CampoBruto
 
 # Cadeias de caracteres
-from .campo_cadeia import CampoCadeiaBasico, CampoCadeiaFixo, \
+from .campo_cadeia import CampoCadeiaBruto, CampoCadeiaFixo, \
     CampoCadeiaPrefixado, CampoCadeiaTerminador
 
 # Inteiros

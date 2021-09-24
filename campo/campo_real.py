@@ -5,7 +5,7 @@
 from struct import pack, unpack
 
 from estrutarq.dado import DadoBinario
-from .campo_basico import CampoBasico
+from .campo_comum import CampoBasico
 
 
 ################################################################################
@@ -30,6 +30,10 @@ class CampoRealBasico(CampoBasico):
             raise TypeError("O valor deve ser real ou inteiro")
         self.__valor = valor
 
+    def de_bytes(self, dado: bytes):
+        self.valor = unpack("d", dado)[0]
+
+
     def leia(self, arquivo):
         """
         Conversão dos dado lidos para valor inteiro
@@ -38,8 +42,8 @@ class CampoRealBasico(CampoBasico):
         dado = self.leia_dado_de_arquivo(arquivo)
         self.valor = float(dado)
 
-    def __str__(self):
-        return float(self.valor)
+    def __str__(self) -> str:
+        return str(self.valor)
 
 
 #
