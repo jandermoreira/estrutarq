@@ -9,7 +9,7 @@ from copy import copy
 
 from estrutarq.dado import DadoBasico
 
-terminador_de_campo = "\x00"
+terminador_de_campo = b"\x00"
 
 
 class CampoBasico(DadoBasico):
@@ -65,6 +65,14 @@ class CampoBasico(DadoBasico):
         dado = self.para_bytes()
         arquivo.write(dado)
 
+    def para_bytes(self) -> bytes:
+        """
+        Representação do valor em uma sequência de obedecendo à representação
+        de dados e à organização
+        :return a sequência de bytes seguida pelo byte do terminador
+        """
+        return self.formate_dado(self.dado_para_bytes())
+
     def __str__(self):
         """
         Valor padrão do campo para um 'print'
@@ -78,6 +86,7 @@ class CampoBasico(DadoBasico):
         :return: outra instância com os mesmos valores
         """
         return copy(self)
+
 
 
 

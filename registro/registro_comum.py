@@ -5,7 +5,7 @@ Registros
 from estrutarq.campo.campo_comum import CampoBasico
 from estrutarq.dado import DadoPrefixado, DadoTerminador
 
-terminador_de_registro = "\x01"
+terminador_de_registro = b"\x01"
 
 
 class RegistroBasico:

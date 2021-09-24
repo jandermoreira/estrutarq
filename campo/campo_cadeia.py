@@ -63,15 +63,6 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
         CampoCadeiaBasico.__init__(self, nome, "cadeia terminador", **kwargs)
         DadoTerminador.__init__(self, terminador_de_campo)
 
-    # code::start terminador_para_bytes
-    def para_bytes(self) -> bytes:
-        """
-        Representação da cadeia de caracteres em uma sequência de
-        bytes finalizada com terminador
-        :return a sequência de bytes seguida pelo byte do terminador
-        """
-        return self.formate_dado(self.para_bytes())
-    # code::end
 
 
 # cadeia de caracteres com prefixo de comprimento

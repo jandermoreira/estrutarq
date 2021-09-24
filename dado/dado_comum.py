@@ -1,29 +1,67 @@
-class DadoBasico:
+from abc import ABCMeta, abstractmethod
+
+
+class DadoBasico(metaclass = ABCMeta):
     """
     Classe básica para dados
     """
 
-    def dado_de_bytes(self, dado: bytes) -> bytes:
+    @abstractmethod
+    def leia_de_arquivo(self, arquivo) -> bytes:
+        """
+        Recuperação de um dado lido de um arquivo, observando a
+        representação do dado e a forma de organização
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        """
         pass
 
-    def dado_para_bytes(self) -> bytes:
+    @abstractmethod
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+        """
+        Recuperação de um dado extraído de uma sequencia de bytes,
+        retornando os bytes do dado em si e o restante da sequência
+        depois da extração do dado, observando a representação do dado
+        e a forma de organização
+        :param sequencia: sequência de bytes
+        :return: tupla com os bytes do dado, removido os bytes de organização
+            de dados, a sequência de bytes restante
+        """
+        pass
+
+    @abstractmethod
+    def adicione_formatacao(self, dado: bytes) -> bytes:
+        """
+        Acrescenta aos bytes do dado a organização de dados em uso
+        :param dado: bytes do dado
+        :return: bytes do dado acrescida da forma de organização
+        """
+        pass
+
+    @abstractmethod
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
+        """
+        Remove da sequência de bytes aqueles correspondentes à forma de
+        organização
+        :param sequencia: uma sequência de bytes
+        :return: a sequência depois de extraídos os bytes de organização
+        """
         pass
 
 
 class DadoBinario(DadoBasico):
     """
-    Classe para dados binários com um determinado número de bytes
+    Classe para dados binários com um determinado comprimento em bytes
     """
 
     def __init__(self, comprimento: int):
         self.comprimento = comprimento
 
     @property
-    def comprimento(self):
+    def comprimento(self) -> int:
         return self.__comprimento
 
     @comprimento.setter
-    def comprimento(self, valor):
+    def comprimento(self, valor: int):
         if not isinstance(valor, int):
             raise AttributeError("O comprimento do campo deve ser inteiro")
         if valor <= 0:
@@ -31,9 +69,9 @@ class DadoBinario(DadoBasico):
         self.__comprimento = valor
 
     # code::start leitura_binario
-    def leia_dado_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo) -> bytes:
         """
-        Recuperação dos bytes gravados no arquivo
+        Recuperação dos bytes do valor binário a partir de um arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: a sequência de bytes lidos
         """
@@ -45,19 +83,19 @@ class DadoBinario(DadoBasico):
 
     # code::end
 
-    def leia_dado_de_buffer(self, buffer: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um buffer que será varrido,
-        retornando o dado e o restante do buffer
-        :param buffer: uma sequência de bytes
-        :return: o restante do buffer
+        Recuperação de um dado binário de comprimento definido a partir de
+        uma sequencia de bytes
+        :param sequencia: sequência de bytes
+        :return: tupla com os bytes do dado, removidos os bytes de organização
+            de dados, e a sequência de bytes restante
         """
-        dado = buffer[:self.comprimento]
-        buffer_restante = buffer[self.comprimento + 1:]
-        return dado, buffer_restante
+        dado = sequencia[:self.comprimento]
+        sequencia_restante = sequencia[self.comprimento:]
+        return dado, sequencia_restante
 
-    @staticmethod
-    def formate_dado(dado: bytes):
+    def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: apenas repassa o dado binário
         :param dado: valor binário
@@ -65,14 +103,13 @@ class DadoBinario(DadoBasico):
         """
         return dado
 
-    @staticmethod
-    def desformate_dado(dado):
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
         Desformatação do dado: apenas repassa o dado binário
-        :param dado: bytes de dados
-        :return: dado binário
+        :param sequencia: bytes de dados
+        :return: o dado sem a formatação
         """
-        return dado
+        return sequencia
 
 
 class DadoFixo(DadoBasico):
@@ -80,7 +117,7 @@ class DadoFixo(DadoBasico):
     Classe dado de comprimento fixo
     """
 
-    def __init__(self, comprimento: int, preenchimento = '\xFF'):
+    def __init__(self, comprimento: int, preenchimento = b'\xFF'):
         self.comprimento = comprimento
         self.preenchimento = preenchimento
 
@@ -97,51 +134,38 @@ class DadoFixo(DadoBasico):
         self.__comprimento = comprimento
 
     @property
-    def preenchimento(self) -> str:
+    def preenchimento(self) -> bytes:
         return self.__preenchimento
 
-    def byte_preenchimento(self) -> bytes:
-        """
-        O caractere de preenchimento convertido para byte
-        :return: o byte de preenchimento
-        """
-        return bytes(self.preenchimento, 'latin')
-
     @preenchimento.setter
-    def preenchimento(self, preenchimento: str):
+    def preenchimento(self, preenchimento: bytes):
         """
-        Determina o caractere que será usado como preenchimento de
+        Determina o byte que será usado como preenchimento de
         campo
-        :param preenchimento: um caractere que será traduzido para
-        o preenchimento com um único byte
-
-        A conversão é feita usando o conjunto de caracteres Latin, que
-        mapeia qualquer caractere para um único byte. Havendo mais que
-        um caractere cadeia de entrada, somente o primeiro será considerado.
+        :param preenchimento: um byte para preenchimento
         """
-        if not isinstance(preenchimento, str):
-            raise AttributeError("O preenchimento deve ser str"
-                                 f" (não '{type(preenchimento).__name__}')")
+        if not isinstance(preenchimento, bytes) \
+                or len(preenchimento) != 1:
+            raise AttributeError("O byte de preenchimento deve ter um byte")
+        self.__preenchimento = preenchimento
 
-        self.__preenchimento = preenchimento[0]
-        if len(self.byte_preenchimento()) != 1:
-            raise AttributeError("O preenchimento deve ser um único byte")
-
-    def leia_dado_de_buffer(self, buffer: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um buffer que será varrido,
-        retornando o dado sem os bytes de preenchimento e o restante do buffer
-        :param buffer: uma sequência de bytes
-        :return: o restante do buffer
+        Recuperação de um dado individual de um sequencia de bytes,
+        retornando o dado sem os bytes de preenchimento e o restante da
+        sequencia
+        :param sequencia: uma sequência de bytes
+        :return: tupla com os bytes do dado, removidos os bytes de organização
+            de dados, e a sequência de bytes restante
         """
-        dado = buffer[:self.comprimento].replace(self.byte_preenchimento(), b"")
-        buffer_restante = buffer[self.comprimento + 1:]
-        return dado, buffer_restante
+        dado = sequencia[:self.comprimento].replace(self.preenchimento, b"")
+        sequencia_restante = sequencia[self.comprimento:]
+        return dado, sequencia_restante
 
     # code::start leitura_fixo
-    def leia_dado_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo) -> bytes:
         """
-        Leitura de um único dado de comprimento fixo
+        Leitura de um único dado de comprimento fixo a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: os bytes do campo
 
@@ -151,28 +175,28 @@ class DadoFixo(DadoBasico):
         if len(dado) != self.comprimento:
             raise EOFError
         else:
-            return dado.replace(self.byte_preenchimento(), b"")
+            return self.remova_formatacao(dado)
 
     # code::end
 
-    def formate_dado(self, dado: bytes):
+    def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: ajusta o dado para o comprimento definido,
         truncando ou adicionando o byte de preenchimento
         :param dado: valor do dado
-        :return: o dado formatado
+        :return: o dado formatado no comprimento especificado
         """
         dado = dado[: self.comprimento]
-        dado = dado + byte_preenchimento() * (self.comprimento - len(dado))
+        dado = dado + self.preenchimento * (self.comprimento - len(dado))
         return dado
 
-    def desformate_dado(self, dado):
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
         Desformatação do dado: remoção de caracteres de preenchimento
-        :param dado: bytes de dados
+        :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
-        return dado.replace(self.byte_preenchimento(), b"")
+        return sequencia.replace(self.preenchimento, b"")
 
 
 class DadoPrefixado(DadoBasico):
@@ -181,8 +205,7 @@ class DadoPrefixado(DadoBasico):
     """
 
     # code::start leitura_prefixado
-    @staticmethod
-    def leia_dado_de_arquivo(arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Leitura de um único dado prefixado pelo comprimento.
         :param arquivo: arquivo binário aberto com permissão de leitura
@@ -205,21 +228,19 @@ class DadoPrefixado(DadoBasico):
 
     # code::end
 
-    @staticmethod
-    def leia_dado_de_buffer(buffer: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um buffer que será varrido,
-        retornando o dado sem o prefixo e o restante do buffer
-        :param buffer: uma sequência de bytes
-        :return: o restante do buffer
+        Recuperação de um dado individual de um sequencia de bytes,
+        retornando o dado sem o prefixo e o restante do sequencia
+        :param sequencia: uma sequência de bytes
+        :return: o restante do sequencia
         """
-        comprimento = int.from_bytes(buffer[:1], "big", signed = False)
-        dado = buffer[2:comprimento + 1]
-        buffer_restante = buffer[comprimento + 4:]
-        return dado, buffer_restante
+        comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
+        dado = sequencia[2:comprimento + 2]
+        sequencia_restante = sequencia[comprimento + 2:]
+        return dado, sequencia_restante
 
-    @staticmethod
-    def formate_dado(dado: bytes):
+    def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: acréscimo do prefixo binário com comprimento
         (2 bytes, big-endian, sem sinal)
@@ -229,14 +250,13 @@ class DadoPrefixado(DadoBasico):
         bytes_comprimento = len(dado).to_bytes(2, "big", signed = False)
         return bytes_comprimento + dado
 
-    @staticmethod
-    def desformate_dado(dado):
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
         Desformatação do dado: remoção dos dois bytes do comprimento
-        :param dado: bytes de dados
+        :param sequencia: bytes de dados
         :return: dado efetivo, sem o prefixo de comprimento
         """
-        return dado[2:]
+        return sequencia[2:]
 
 
 class DadoTerminador(DadoBasico):
@@ -244,45 +264,30 @@ class DadoTerminador(DadoBasico):
     Classe para implementação de campos com terminador
     """
 
-    def __init__(self, terminador: str):
+    def __init__(self, terminador: bytes):
         self.terminador = terminador
 
     @property
-    def terminador(self) -> str:
+    def terminador(self) -> bytes:
         return self.__terminador
 
-    def byte_terminador(self):
-        """
-        Retorna o byte terminador gerado a partir do caractere terminador
-        :return:
-        """
-        return bytes(self.terminador, 'latin')
-
     @terminador.setter
-    def terminador(self, terminador: str):
+    def terminador(self, terminador: bytes):
         """
-        Determina o caractere que será usado como terminador de
-        campo
-        :param terminador: um caractere que será traduzido para
-        o terminador com um único byte
-
-        A conversão é feita usando o conjunto de caracteres Latin, que
-        mapeia qualquer caractere para um único byte. Havendo mais que
-        um caractere cadeia de entrada, somente o primeiro será considerado.
+        Determina o byte que será usado como terminador
+        :param terminador: o byte terminador
         """
-        if not isinstance(terminador, str):
-            raise AttributeError("O terminador deve ser str"
-                                 f" (não '{type(terminador).__name__}')")
-        self.__terminador = terminador[0]
-        if len(self.byte_terminador()) != 1:
-            raise AttributeError("O terminador deve ser um único byte")
+        if not isinstance(terminador, bytes) \
+                or len(terminador) != 1:
+            raise AttributeError("O terminador deve ter um byte")
+        self.__terminador = terminador
 
     # code::start leitura_terminador
-    def leia_dado_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo) -> bytes:
         """
-        Leitura de um único campo com terminador
+        Leitura de um único dado com terminador
         :param arquivo: arquivo binário aberto com permissão de leitura
-        :return: os bytes do campo sem o terminador
+        :return: os bytes do dado sem o terminador
 
         Em caso de falha na leitura é lançada a exceção EOFError
         """
@@ -292,41 +297,39 @@ class DadoTerminador(DadoBasico):
             byte_lido = arquivo.read(1)  # byte a byte
             if len(byte_lido) == 0:
                 raise EOFError
-            elif byte_lido == self.byte_terminador():
+            elif byte_lido == self.terminador:
                 achou_terminador = True
             else:
                 dado += byte_lido
-
         return dado
 
     # code::end
 
-    def leia_dado_de_buffer(self, buffer: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um buffer que será varrido,
-        retornando o dado até o terminador e o restante do buffer depois
+        Recuperação de um dado individual de um sequencia de bytes,
+        retornando o dado até o terminador e o restante do sequencia depois
         do terminador
-        :param buffer: uma sequência de bytes
-        :return: o restante do buffer
+        :param sequencia: uma sequência de bytes
+        :return: o restante do sequencia
         """
-        posicao_terminador = buffer.find(self.byte_terminador())
-        dado = buffer[:posicao_terminador]
-        buffer_restante = buffer[posicao_terminador + 1:]
-        return dado, buffer_restante
+        posicao_terminador = sequencia.find(self.terminador)
+        dado = sequencia[:posicao_terminador]
+        sequencia_restante = sequencia[posicao_terminador + 1:]
+        return dado, sequencia_restante
 
-    def formate_dado(self, dado: bytes):
+    def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: acréscimo do byte terminador
         :param dado: valor do dado
         :return: o dado formatado
         """
-        return dado + self.byte_terminador()
+        return dado + self.terminador
 
-    @staticmethod
-    def desformate_dado(dado):
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
         Desformatação do dado: remoção de byte terminador
-        :param dado: bytes de dados
+        :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
-        return dado[:-1]
+        return sequencia[:-1]
