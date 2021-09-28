@@ -9,15 +9,16 @@ from copy import copy
 
 from estrutarq.dado import DadoBasico
 
+from re import match
+from abc import ABCMeta, abstractmethod
+
 terminador_de_campo = b"\x00"
 
 
-class CampoBasico(DadoBasico):
+class CampoBasico(DadoBasico, metaclass = ABCMeta):
     """
     Estruturação básica do campo como menor unidade de informação.
     """
-
-    valor = ""
 
     def __init__(self, nome: str, tipo: str):
         self.nome = nome
@@ -30,31 +31,60 @@ class CampoBasico(DadoBasico):
     @nome.setter
     def nome(self, valor):
         if not isinstance(valor, str):
-            raise TypeError("Nome do campo deve ser uma cadeia de caracteres.")
+            raise TypeError("Nome do campo deve ser uma cadeia de caracteres")
+        # if match(r"\w+", valor):
+        #     raise TypeError("O nome do campo deve ser um identificador")
         self.__nome = valor
 
     @property
     def tipo(self):
         return self.__tipo
 
-    def para_bytes(self) -> bytes:
+    @property
+    @abstractmethod
+    def valor(self):
+        """
+        Recuperação, com as devidas conversões, do atributo __valor
+        :return: o valor de __valor
+        """
         pass
 
-    def de_bytes(self, dado: bytes):
+    @valor.setter
+    @abstractmethod
+    def valor(self, valor):
+        """
+        Atribuição, com as devidas conversões, para o atributo __valor
+        """
         pass
 
-    @staticmethod
-    def leia_dado_de_arquivo(arquivo) -> bytes:
+    @abstractmethod
+    def bytes_para_valor(self, dado: bytes):
+        """
+        Conversão de uma sequência de bytes para armazenamento no valor
+        do campo, de acordo com a representação de dados
+        :param dado: sequência de bytes
+        :return: o valor do campo de acordo com seu tipo
+        """
         pass
 
+    @abstractmethod
+    def valor_para_bytes(self) -> bytes:
+        """
+        Conversão do valor do campo para sequência de bytes de acordo
+        com a representação de dados
+        :return:
+        """
+        pass
+
+    # code::start leitura_escrita
     def leia(self, arquivo):
         """
         Conversão dos dado lidos para o valor do campo, obedecendo a
         organização e formato de representação
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
-        dado = self.leia_dado_de_arquivo(arquivo)
-        self.dado_de_bytes(dado)
+        dado = self.leia_de_arquivo(arquivo)
+        self.bytes_para_valor(dado)
 
     def escreva(self, arquivo):
         """
@@ -62,16 +92,10 @@ class CampoBasico(DadoBasico):
         arquivo
         :param arquivo: arquivo binário aberto com permissão de escrita
         """
-        dado = self.para_bytes()
-        arquivo.write(dado)
+        dado = self.valor_para_bytes()
+        arquivo.write(self.adicione_formatacao(dado))
 
-    def para_bytes(self) -> bytes:
-        """
-        Representação do valor em uma sequência de obedecendo à representação
-        de dados e à organização
-        :return a sequência de bytes seguida pelo byte do terminador
-        """
-        return self.formate_dado(self.dado_para_bytes())
+    # code::end
 
     def __str__(self):
         """
@@ -86,8 +110,6 @@ class CampoBasico(DadoBasico):
         :return: outra instância com os mesmos valores
         """
         return copy(self)
-
-
 
 
 class CampoBruto(CampoBasico):
@@ -113,25 +135,63 @@ class CampoBruto(CampoBasico):
         """
         self.__valor = str(valor)
 
-    def de_bytes(self, dado: bytes):
+    # code::start bruto_conversoes
+    def bytes_para_valor(self, dado: bytes):
+        """
+        Conversão de sequência de bytes para valor o campo, considerando
+        uma cadeia de caracteres simples
+        :param dado: a sequência de bytes
+        """
         self.valor = dado.decode("utf-8")
 
-    # code::start bruto_para_bytes
-    def para_bytes(self) -> bytes:
+    def valor_para_bytes(self) -> bytes:
         """
-        Conversão para bytes feita para o conteúdo bruto com conjunto de
-        caracteres UTF-8
-        :return: os bytes do valor textual armazenado
+        Conversão do valor do campo (cadeia de caracteres) para uma
+        sequência de bytes, usando codificação UTF-8
+        :return: a sequência de bytes
         """
         return bytes(self.valor, "utf-8")
 
     # code::end
 
-    # code::start escreva
-    def escreva(self, arquivo):
+    # code::start bruto_leituras
+    def leia_de_arquivo(self, arquivo) -> bytes:
         """
-        Gravação do conteúdo do campo em um arquivo
-        :param arquivo: arquivo binário aberto com permissão de escrita
+        Obtenção de campo a partir de um arquivo: ignorada por não ser
+        viável separar um campo de outro
+        :param arquivo: arquivo binário aberto com permissão de leitura
+
+        Se utilizada, uma exceção é lançada.
         """
-        arquivo.write(self.para_bytes())
+        raise NotImplemented("A leitura de dados sem organização é inviável.")
+
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+        """
+        Obtenção de campo a partir de uma sequência de caracteres: ignorada
+        por não ser viável separar um campo de outro
+        :param sequencia: sequência de bytes que seria analisada
+
+        Se utilizada, uma exceção é lançada.
+        """
+        raise NotImplemented("A leitura de dados sem organização é inviável.")
+
+    # code::end
+
+    # code::start bruto_formatacoes
+    def adicione_formatacao(self, dado: bytes) -> bytes:
+        """
+        Adição de formatação ao dado: o dado é apenas repassado neste caso
+        :param dado: sequência de bytes que compõe o campo
+        :return: a mesma sequência
+        """
+        return dado
+
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
+        """
+        Remoção da formatação de campo: a sequência é apenas repassada neste
+        caso
+        :param sequencia: sequênciad de bytes que compõe um campo
+        :return: a mesma sequência
+        """
+        return sequencia
     # code::end

@@ -17,7 +17,7 @@ def teste_classe(dado, classe):
     imprima("remova_formatacao", classe.remova_formatacao(dado_formatado))
 
     with open("/tmp/teste-dados.tmp", "wb") as arquivo:
-        arquivo.write(dado_formatado)
+        arquivo.write(dado_formatado + b'XYZ123ASDF')
     with open("/tmp/teste-dados.tmp", "rb") as arquivo:
         dado_lido = classe.leia_de_arquivo(arquivo)
         imprima("leia_de_arquivo", dado_lido)
@@ -33,7 +33,7 @@ def main():
     dado = b'123 ABC_abc'
     teste_classe(dado, DadoBinario(len(dado)))
     teste_classe(dado, DadoFixo(len(dado) + 5))
-    teste_classe(dado, DadoPrefixado())
+    # teste_classe(dado, DadoPrefixado())
     teste_classe(dado, DadoTerminador(b'\x00'))
 
 

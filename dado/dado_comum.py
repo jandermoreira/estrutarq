@@ -53,6 +53,8 @@ class DadoBinario(DadoBasico):
     Classe para dados binários com um determinado comprimento em bytes
     """
 
+    __comprimento = None
+
     def __init__(self, comprimento: int):
         self.comprimento = comprimento
 
@@ -68,7 +70,7 @@ class DadoBinario(DadoBasico):
             raise AttributeError("O comprimento deve ser maior ou igual a um")
         self.__comprimento = valor
 
-    # code::start leitura_binario
+    # code::start binario_leituras
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Recuperação dos bytes do valor binário a partir de um arquivo
@@ -81,8 +83,6 @@ class DadoBinario(DadoBasico):
         else:
             return dado
 
-    # code::end
-
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
         Recuperação de um dado binário de comprimento definido a partir de
@@ -91,16 +91,23 @@ class DadoBinario(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
+        if len(sequencia) < self.comprimento:
+            raise TypeError("A sequência não possui bytes suficientes")
         dado = sequencia[:self.comprimento]
         sequencia_restante = sequencia[self.comprimento:]
         return dado, sequencia_restante
 
+    # code::end
+
+    # code::start binario_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: apenas repassa o dado binário
         :param dado: valor binário
         :return: o dado formatado
         """
+        if len(dado) != self.comprimento:
+            raise TypeError("O dado não possui o comprimento correto")
         return dado
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
@@ -109,7 +116,11 @@ class DadoBinario(DadoBasico):
         :param sequencia: bytes de dados
         :return: o dado sem a formatação
         """
+        if len(sequencia) != self.comprimento:
+            raise TypeError("A sequência de dados não possui o "
+                            "comprimento correto")
         return sequencia
+    # code::end
 
 
 class DadoFixo(DadoBasico):
@@ -149,20 +160,7 @@ class DadoFixo(DadoBasico):
             raise AttributeError("O byte de preenchimento deve ter um byte")
         self.__preenchimento = preenchimento
 
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
-        """
-        Recuperação de um dado individual de um sequencia de bytes,
-        retornando o dado sem os bytes de preenchimento e o restante da
-        sequencia
-        :param sequencia: uma sequência de bytes
-        :return: tupla com os bytes do dado, removidos os bytes de organização
-            de dados, e a sequência de bytes restante
-        """
-        dado = sequencia[:self.comprimento].replace(self.preenchimento, b"")
-        sequencia_restante = sequencia[self.comprimento:]
-        return dado, sequencia_restante
-
-    # code::start leitura_fixo
+    # code::start fixo_leituras
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Leitura de um único dado de comprimento fixo a partir do arquivo
@@ -177,8 +175,22 @@ class DadoFixo(DadoBasico):
         else:
             return self.remova_formatacao(dado)
 
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+        """
+        Recuperação de um dado individual de um sequencia de bytes,
+        retornando o dado sem os bytes de preenchimento e o restante da
+        sequencia
+        :param sequencia: uma sequência de bytes
+        :return: tupla com os bytes do dado, removidos os bytes de organização
+            de dados, e a sequência de bytes restante
+        """
+        dado = sequencia[:self.comprimento].replace(self.preenchimento, b"")
+        sequencia_restante = sequencia[self.comprimento:]
+        return dado, sequencia_restante
+
     # code::end
 
+    # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: ajusta o dado para o comprimento definido,
@@ -186,6 +198,8 @@ class DadoFixo(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado no comprimento especificado
         """
+        if dado.find(self.preenchimento) != -1:
+            raise TypeError("O byte de preenchimento está presente no dado.")
         dado = dado[: self.comprimento]
         dado = dado + self.preenchimento * (self.comprimento - len(dado))
         return dado
@@ -196,7 +210,10 @@ class DadoFixo(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
+        if len(sequencia) != self.comprimento:
+            raise TypeError("A sequência de dados tem comprimento incorreto.")
         return sequencia.replace(self.preenchimento, b"")
+    # code::end
 
 
 class DadoPrefixado(DadoBasico):
@@ -204,7 +221,7 @@ class DadoPrefixado(DadoBasico):
     Classe dado prefixados pelo seu comprimento
     """
 
-    # code::start leitura_prefixado
+    # code::start prefixado_leituras
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Leitura de um único dado prefixado pelo comprimento.
@@ -226,8 +243,6 @@ class DadoPrefixado(DadoBasico):
             else:
                 return dado
 
-    # code::end
-
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
         Recuperação de um dado individual de um sequencia de bytes,
@@ -238,8 +253,13 @@ class DadoPrefixado(DadoBasico):
         comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
         dado = sequencia[2:comprimento + 2]
         sequencia_restante = sequencia[comprimento + 2:]
+        if len(dado) != comprimento:
+            raise TypeError("A sequência de bytes não contém bytes suficientes")
         return dado, sequencia_restante
 
+    # code::end
+
+    # code::start prefixado_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: acréscimo do prefixo binário com comprimento
@@ -256,8 +276,11 @@ class DadoPrefixado(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem o prefixo de comprimento
         """
-        return sequencia[2:]
-
+        dado, sequencia_restante = self.leia_de_bytes(sequencia)
+        if len(sequencia_restante) != 0:
+            raise TypeError("O sequência é mais longa que o tamanho registrado")
+        return dado
+    # code::end
 
 class DadoTerminador(DadoBasico):
     """
@@ -297,13 +320,12 @@ class DadoTerminador(DadoBasico):
             byte_lido = arquivo.read(1)  # byte a byte
             if len(byte_lido) == 0:
                 raise EOFError
+                # todo: alterar para TypeError?
             elif byte_lido == self.terminador:
                 achou_terminador = True
             else:
                 dado += byte_lido
         return dado
-
-    # code::end
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
@@ -314,16 +336,22 @@ class DadoTerminador(DadoBasico):
         :return: o restante do sequencia
         """
         posicao_terminador = sequencia.find(self.terminador)
+        if posicao_terminador == -1:
+            raise TypeError("Nenhum terminador presente na sequência de bytes")
         dado = sequencia[:posicao_terminador]
         sequencia_restante = sequencia[posicao_terminador + 1:]
         return dado, sequencia_restante
+    # code::end
 
+    # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: acréscimo do byte terminador
         :param dado: valor do dado
         :return: o dado formatado
         """
+        if dado.find(self.terminador) != -1:
+            raise TypeError("O byte terminador não pode estar contido no dado")
         return dado + self.terminador
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
@@ -332,4 +360,7 @@ class DadoTerminador(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
+        if sequencia.find(self.terminador) != len(sequencia) - 1:
+            raise TypeError("A sequência de bytes não possui o terminador")
         return sequencia[:-1]
+    # code::end
