@@ -14,8 +14,8 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
     Classe básica para campo inteiro
     """
 
-    def __init__(self, nome: str, tipo: str, valor: int = 0):
-        super().__init__(nome, tipo)
+    def __init__(self, tipo: str, valor: int = 0):
+        super().__init__(tipo)
         self.valor = valor
 
     @property
@@ -52,25 +52,24 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
     Classe para inteiro textual com terminador
     """
 
-    def __init__(self, nome: str, terminador: bytes = terminador_de_campo,
-                 **kwargs):
-        CampoIntBasico.__init__(self, nome, "int terminador", **kwargs)
+    def __init__(self, terminador: bytes = terminador_de_campo, **kwargs):
+        CampoIntBasico.__init__(self, "int terminador", **kwargs)
         DadoTerminador.__init__(self, terminador)
 
 
 class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
     """Classe para inteiro textual com prefixo de comprimento"""
 
-    def __init__(self, nome: str, **kwargs):
-        super().__init__(nome, "int prefixado", **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__("int prefixado", **kwargs)
 
 
 class CampoIntFixo(DadoFixo, CampoIntBasico):
     """Classe para inteiro textual com tamanho fixo"""
 
-    def __init__(self, nome, comprimento: int, **kwargs):
+    def __init__(self, comprimento: int, **kwargs):
         """Construtor"""
-        CampoIntBasico.__init__(self, nome, "int fixo", **kwargs)
+        CampoIntBasico.__init__(self, "int fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
 
 
@@ -82,8 +81,8 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
 
     numero_bytes = 8  # 8 bytes
 
-    def __init__(self, nome: str, **kwargs):
-        CampoIntBasico.__init__(self, nome, "inteiro binário", **kwargs)
+    def __init__(self, **kwargs):
+        CampoIntBasico.__init__(self, "inteiro binário", **kwargs)
         DadoBinario.__init__(self, self.numero_bytes)
 
     # code::start binario_conversoes

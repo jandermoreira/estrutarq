@@ -15,8 +15,8 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     Classe básica para cadeias de caracteres
     """
 
-    def __init__(self, nome: str, tipo: str, valor: str = ""):
-        CampoBasico.__init__(self, nome, tipo)
+    def __init__(self, tipo: str, valor: str = ""):
+        CampoBasico.__init__(self, tipo)
         self.valor = valor
 
     @property
@@ -46,14 +46,15 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
         return bytes(self.valor, "utf-8")
     # code::end
 
+
 # cadeia de caracteres com terminador
 class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     """
     Classe para cadeia de caracteres com terminador
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoCadeiaBasico.__init__(self, nome, "cadeia terminador", **kwargs)
+    def __init__(self, **kwargs):
+        CampoCadeiaBasico.__init__(self, "cadeia terminador", **kwargs)
         DadoTerminador.__init__(self, terminador_de_campo)
 
 
@@ -63,8 +64,8 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     Classe para cadeia de caracteres prefixada pelo comprimento
     """
 
-    def __init__(self, nome: str, *args, **kwargs):
-        super().__init__(nome, "cadeia prefixado", *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__("cadeia prefixado", *args, **kwargs)
 
 
 class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
@@ -73,6 +74,6 @@ class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     de dados inválidos
     """
 
-    def __init__(self, nome: str, comprimento: int, **kwargs):
-        CampoCadeiaBasico.__init__(self, nome, "cadeia fixo", **kwargs)
+    def __init__(self, comprimento: int, **kwargs):
+        CampoCadeiaBasico.__init__(self, "cadeia fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)

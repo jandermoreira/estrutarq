@@ -5,12 +5,10 @@
 ################################################################################
 ################################################################################
 
+from abc import ABCMeta, abstractmethod
 from copy import copy
 
 from estrutarq.dado import DadoBasico
-
-from re import match
-from abc import ABCMeta, abstractmethod
 
 terminador_de_campo = b"\x00"
 
@@ -20,21 +18,8 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     Estruturação básica do campo como menor unidade de informação.
     """
 
-    def __init__(self, nome: str, tipo: str):
-        self.nome = nome
+    def __init__(self, tipo: str):
         self.__tipo = tipo
-
-    @property
-    def nome(self):
-        return self.__nome
-
-    @nome.setter
-    def nome(self, valor):
-        if not isinstance(valor, str):
-            raise TypeError("Nome do campo deve ser uma cadeia de caracteres")
-        # if match(r"\w+", valor):
-        #     raise TypeError("O nome do campo deve ser um identificador")
-        self.__nome = valor
 
     @property
     def tipo(self):
@@ -118,8 +103,8 @@ class CampoBruto(CampoBasico):
     de campo. O valor é sempre armazenado como cadeia de caracteres.
     """
 
-    def __init__(self, nome: str, valor = ""):
-        super().__init__(nome, "bruto")
+    def __init__(self, valor = ""):
+        super().__init__("bruto")
         self.valor = valor
 
     @property

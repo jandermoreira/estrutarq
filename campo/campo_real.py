@@ -17,8 +17,8 @@ class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
     Classe básica para campo real
     """
 
-    def __init__(self, nome: str, tipo: str, valor: float = 0):
-        super().__init__(nome, tipo)
+    def __init__(self, tipo: str, valor: float = 0):
+        super().__init__(tipo)
         self.valor = valor
 
     @property
@@ -53,8 +53,8 @@ class CampoRealFixo(DadoFixo, CampoRealBasico):
     Classe para campo real com representação textual de comprimento fixo
     """
 
-    def __init__(self, nome: str, comprimento: int, **kwargs):
-        CampoRealBasico.__init__(self, nome, "real fixo", **kwargs)
+    def __init__(self, comprimento: int, **kwargs):
+        CampoRealBasico.__init__(self, "real fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
 
 
@@ -63,8 +63,8 @@ class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
     Classe para campo real com representação textual de comprimento fixo
     """
 
-    def __init__(self, nome: str, **kwargs):
-        super().__init__(nome, "real prefixado", **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__("real prefixado", **kwargs)
 
 
 class CampoRealTerminador(DadoTerminador, CampoRealBasico):
@@ -72,9 +72,9 @@ class CampoRealTerminador(DadoTerminador, CampoRealBasico):
     Classe para campo real com representação textual de comprimento fixo
     """
 
-    def __init__(self, nome: str, terminador: bytes = terminador_de_campo,
+    def __init__(self, terminador: bytes = terminador_de_campo,
                  **kwargs):
-        CampoRealBasico.__init__(self, nome, "real fixo", **kwargs)
+        CampoRealBasico.__init__(self, "real fixo", **kwargs)
         DadoTerminador.__init__(self, terminador)
 
 
@@ -83,8 +83,8 @@ class CampoRealBinario(DadoBinario, CampoRealBasico):
     Classe para real em formato binário usando IEEE 754 de precisão dupla
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoRealBasico.__init__(self, nome, "real binário", **kwargs)
+    def __init__(self, **kwargs):
+        CampoRealBasico.__init__(self, "real binário", **kwargs)
         DadoBinario.__init__(self, len(pack("d", 0)))
 
     # code::start binario_conversoes

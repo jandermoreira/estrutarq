@@ -25,9 +25,9 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     formato_hora = "%H:%M:%S"
     comprimento_hora = 8  # 00:00:00
 
-    def __init__(self, nome: str, tipo: str, formato: str, apenas_data: bool,
+    def __init__(self, tipo: str, formato: str, apenas_data: bool,
                  valor: str = "", **kwargs):
-        CampoBasico.__init__(self, nome, tipo)
+        CampoBasico.__init__(self, tipo)
         self.__formato_tempo = formato
         self.__apenas_data = apenas_data
         if valor == "":
@@ -128,8 +128,8 @@ class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
     em formato binário.
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoTempoBasicoBinario.__init__(self, nome, "data binário",
+    def __init__(self, **kwargs):
+        CampoTempoBasicoBinario.__init__(self, "data binário",
                                          self.formato_data, apenas_data = True,
                                          **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
@@ -142,11 +142,11 @@ class CampoDataFixo(DadoFixo, CampoTempoBasicoFixo):
     'formato_data'.
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoTempoBasicoFixo.__init__(self, nome, "data fixo",
-                                      self.formato_data,
+    def __init__(self, **kwargs):
+        CampoTempoBasicoFixo.__init__(self, "data fixo", self.formato_data,
                                       apenas_data = True, **kwargs)
         DadoFixo.__init__(self, self.comprimento_data)
+
 
 class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
     """
@@ -154,10 +154,10 @@ class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
     com sinal, big-endian.
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoTempoBasicoBinario.__init__(self, nome, "hora binário",
-                                         self.formato_hora,
-                                         apenas_data = False, **kwargs)
+    def __init__(self, **kwargs):
+        CampoTempoBasicoBinario.__init__(self, "hora binário",
+                                         self.formato_hora, apenas_data = False,
+                                         **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
 
 
@@ -167,9 +167,8 @@ class CampoHoraFixo(DadoFixo, CampoTempoBasicoFixo):
     'formato_hora'.
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoTempoBasicoFixo.__init__(self, nome, "hora fixo",
-                                      self.formato_hora,
+    def __init__(self, **kwargs):
+        CampoTempoBasicoFixo.__init__(self, "hora fixo", self.formato_hora,
                                       apenas_data = False, **kwargs)
         DadoFixo.__init__(self, self.comprimento_hora)
 
@@ -181,8 +180,8 @@ class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
     big-endian.
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoTempoBasicoBinario.__init__(self, nome, "tempo binário",
+    def __init__(self, **kwargs):
+        CampoTempoBasicoBinario.__init__(self, "tempo binário",
                                          self.formato_tempo,
                                          apenas_data = False, **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
@@ -195,8 +194,7 @@ class CampoTempoFixo(DadoFixo, CampoTempoBasicoFixo):
     'formato_tempo'.
     """
 
-    def __init__(self, nome: str, **kwargs):
-        CampoTempoBasicoFixo.__init__(self, nome, "tempo fixo",
-                                      self.formato_tempo,
+    def __init__(self, **kwargs):
+        CampoTempoBasicoFixo.__init__(self, "tempo fixo", self.formato_tempo,
                                       apenas_data = False, **kwargs)
         DadoFixo.__init__(self, self.comprimento_tempo)
