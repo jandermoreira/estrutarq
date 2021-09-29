@@ -70,7 +70,7 @@ class DadoBinario(DadoBasico):
             raise AttributeError("O comprimento deve ser maior ou igual a um")
         self.__comprimento = valor
 
-    # code::start binario_leituras
+    # code::start binario_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Recuperação dos bytes do valor binário a partir de um arquivo
@@ -82,6 +82,8 @@ class DadoBinario(DadoBasico):
             raise EOFError
         else:
             return dado
+
+    # code::end
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
@@ -96,8 +98,6 @@ class DadoBinario(DadoBasico):
         dado = sequencia[:self.comprimento]
         sequencia_restante = sequencia[self.comprimento:]
         return dado, sequencia_restante
-
-    # code::end
 
     # code::start binario_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
@@ -160,7 +160,7 @@ class DadoFixo(DadoBasico):
             raise AttributeError("O byte de preenchimento deve ter um byte")
         self.__preenchimento = preenchimento
 
-    # code::start fixo_leituras
+    # code::start fixo_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Leitura de um único dado de comprimento fixo a partir do arquivo
@@ -175,6 +175,8 @@ class DadoFixo(DadoBasico):
         else:
             return self.remova_formatacao(dado)
 
+    # code::end
+
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
         Recuperação de um dado individual de um sequencia de bytes,
@@ -188,8 +190,6 @@ class DadoFixo(DadoBasico):
         sequencia_restante = sequencia[self.comprimento:]
         return dado, sequencia_restante
 
-    # code::end
-
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
@@ -200,7 +200,7 @@ class DadoFixo(DadoBasico):
         """
         if dado.find(self.preenchimento) != -1:
             raise TypeError("O byte de preenchimento está presente no dado.")
-        dado = dado[: self.comprimento]
+        dado = dado[:self.comprimento]
         dado = dado + self.preenchimento * (self.comprimento - len(dado))
         return dado
 
@@ -221,7 +221,7 @@ class DadoPrefixado(DadoBasico):
     Classe dado prefixados pelo seu comprimento
     """
 
-    # code::start prefixado_leituras
+    # code::start prefixado_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Leitura de um único dado prefixado pelo comprimento.
@@ -243,6 +243,8 @@ class DadoPrefixado(DadoBasico):
             else:
                 return dado
 
+    # code::end
+
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
         Recuperação de um dado individual de um sequencia de bytes,
@@ -256,8 +258,6 @@ class DadoPrefixado(DadoBasico):
         if len(dado) != comprimento:
             raise TypeError("A sequência de bytes não contém bytes suficientes")
         return dado, sequencia_restante
-
-    # code::end
 
     # code::start prefixado_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
@@ -282,6 +282,7 @@ class DadoPrefixado(DadoBasico):
         return dado
     # code::end
 
+
 class DadoTerminador(DadoBasico):
     """
     Classe para implementação de campos com terminador
@@ -305,7 +306,7 @@ class DadoTerminador(DadoBasico):
             raise AttributeError("O terminador deve ter um byte")
         self.__terminador = terminador
 
-    # code::start leitura_terminador
+    # code::start terminador_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo) -> bytes:
         """
         Leitura de um único dado com terminador
@@ -320,12 +321,13 @@ class DadoTerminador(DadoBasico):
             byte_lido = arquivo.read(1)  # byte a byte
             if len(byte_lido) == 0:
                 raise EOFError
-                # todo: alterar para TypeError?
             elif byte_lido == self.terminador:
                 achou_terminador = True
             else:
                 dado += byte_lido
         return dado
+
+    # code::end
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
@@ -341,7 +343,6 @@ class DadoTerminador(DadoBasico):
         dado = sequencia[:posicao_terminador]
         sequencia_restante = sequencia[posicao_terminador + 1:]
         return dado, sequencia_restante
-    # code::end
 
     # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
