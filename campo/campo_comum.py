@@ -8,7 +8,7 @@
 from abc import ABCMeta, abstractmethod
 from copy import copy
 
-from estrutarq.dado import DadoBasico
+from estrutarq.dado import DadoBasico, DadoBruto
 
 terminador_de_campo = b"\x00"
 
@@ -61,6 +61,14 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         pass
 
+    @abstractmethod
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        pass
+
     # code::start leitura_escrita
     def leia(self, arquivo):
         """
@@ -97,7 +105,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         return copy(self)
 
 
-class CampoBruto(CampoBasico):
+class CampoBruto(DadoBruto, CampoBasico):
     """
     Implementação das funções de um campo bruto, ou seja, sem organização
     de campo. O valor é sempre armazenado como cadeia de caracteres.
@@ -139,44 +147,9 @@ class CampoBruto(CampoBasico):
 
     # code::end
 
-    # code::start bruto_leituras
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def comprimento_fixo(self):
         """
-        Obtenção de campo a partir de um arquivo: ignorada por não ser
-        viável separar um campo de outro
-        :param arquivo: arquivo binário aberto com permissão de leitura
-
-        Se utilizada, uma exceção é lançada.
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
         """
-        raise NotImplemented("A leitura de dados sem organização é inviável.")
-
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
-        """
-        Obtenção de campo a partir de uma sequência de caracteres: ignorada
-        por não ser viável separar um campo de outro
-        :param sequencia: sequência de bytes que seria analisada
-
-        Se utilizada, uma exceção é lançada.
-        """
-        raise NotImplemented("A leitura de dados sem organização é inviável.")
-
-    # code::end
-
-    # code::start bruto_formatacoes
-    def adicione_formatacao(self, dado: bytes) -> bytes:
-        """
-        Adição de formatação ao dado: o dado é apenas repassado neste caso
-        :param dado: sequência de bytes que compõe o campo
-        :return: a mesma sequência
-        """
-        return dado
-
-    def remova_formatacao(self, sequencia: bytes) -> bytes:
-        """
-        Remoção da formatação de campo: a sequência é apenas repassada neste
-        caso
-        :param sequencia: sequênciad de bytes que compõe um campo
-        :return: a mesma sequência
-        """
-        return sequencia
-    # code::end
+        return None

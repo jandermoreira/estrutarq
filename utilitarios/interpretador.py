@@ -2,7 +2,6 @@
 Interpretador de comandos para manipulação de arquivos, registros e
 campos
 """
-import re
 
 from pypeg2 import *
 
@@ -84,6 +83,7 @@ class CrieArquivo(str):
         attr("campos", ListaEspecificacaoCampos)
     )
 
+
 class CrieIndice(str):
     grammar = (
         attr("comando", re.compile(r"crie\s+[ií]ndice|ci")),
@@ -91,10 +91,12 @@ class CrieIndice(str):
         attr("organizacao", OrganizacaoRegistro),
     )
 
+
 class InsiraRegistro(str):
     grammar = (
         attr("comando", re.compile("insira registro|ir")),
     )
+
 
 class Comando(List):
     grammar = maybe_some([
@@ -111,11 +113,14 @@ class Comando(List):
         ignore(comment_sh),
     ])
 
+
 import inspect
+
 
 def ins(c):
     for m in inspect.getmembers(c):
         if m[0][0] != "_": print(m)
+
 
 for comando in [
     "crie arquivo outroteste com x:real binário, a: data fixo(10);",

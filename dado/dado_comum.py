@@ -47,6 +47,44 @@ class DadoBasico(metaclass = ABCMeta):
         """
         pass
 
+class DadoBruto(DadoBasico):
+    """
+    Classe para dado bruto
+    """
+    def leia_de_arquivo(self, arquivo) -> bytes:
+        """
+        Recuperação de um dado lido de um arquivo, que é inviável para
+        dado bruto
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        """
+        raise NotImplemented("A leitura de dado bruto é inviável.")
+
+    def leia_de_bytes(self, sequencia: bytes):
+        """
+        Recuperação de um dado extraído de uma sequencia de bytes,
+        que é inviável para dado bruto
+        :param sequencia: sequência de bytes
+        """
+        raise NotImplemented("A leitura de dado bruto é inviável.")
+
+    def adicione_formatacao(self, dado: bytes) -> bytes:
+        """
+        Acrescenta aos bytes do dado a organização de dados em uso.
+        Para dado bruto, apenas repassa o dado sem modificação.
+        :param dado: bytes do dado
+        :return: bytes do dado inalterados
+        """
+        return dado
+
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
+        """
+        Remove da sequência de bytes de organização. Para dado bruto,
+        apenas repassa a sequência sem modificação.
+        :param sequencia: uma sequência de bytes
+        :return: a sequência inalterada
+        """
+        return sequencia
+
 
 class DadoBinario(DadoBasico):
     """
@@ -139,9 +177,9 @@ class DadoFixo(DadoBasico):
     @comprimento.setter
     def comprimento(self, comprimento: int):
         if not isinstance(comprimento, int):
-            raise AttributeError("O comprimento de campo deve ser inteiro")
+            raise AttributeError("O comprimento deve ser inteiro")
         if comprimento <= 0:
-            raise AttributeError("O comprimento mínimo para o campo é um byte")
+            raise AttributeError("O comprimento mínimo para é um byte")
         self.__comprimento = comprimento
 
     @property

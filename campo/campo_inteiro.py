@@ -55,6 +55,14 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
     def __init__(self, terminador: bytes = terminador_de_campo, **kwargs):
         CampoIntBasico.__init__(self, "int terminador", **kwargs)
         DadoTerminador.__init__(self, terminador)
+        
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return None
+
 
 
 class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
@@ -62,6 +70,13 @@ class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
 
     def __init__(self, **kwargs):
         super().__init__("int prefixado", **kwargs)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return None
 
 
 class CampoIntFixo(DadoFixo, CampoIntBasico):
@@ -72,6 +87,12 @@ class CampoIntFixo(DadoFixo, CampoIntBasico):
         CampoIntBasico.__init__(self, "int fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
 
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return DadoFixo.comprimento
 
 class CampoIntBinario(DadoBinario, CampoIntBasico):
     """
@@ -104,3 +125,10 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
         """
         return self.valor.to_bytes(self.numero_bytes, "big", signed = True)
     # code::end
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return DadoBinario.comprimento

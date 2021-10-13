@@ -29,7 +29,7 @@ class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
     def valor(self, valor: (float, int)):
         if not isinstance(valor, (float, int)):
             raise TypeError("O valor deve ser real ou inteiro")
-        self.__valor = valor
+        self.__valor = float(valor)
 
     # code::start conversoes
     def bytes_para_valor(self, dado: bytes):
@@ -56,6 +56,13 @@ class CampoRealFixo(DadoFixo, CampoRealBasico):
     def __init__(self, comprimento: int, **kwargs):
         CampoRealBasico.__init__(self, "real fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
+        
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return self.comprimento
 
 
 class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
@@ -65,6 +72,13 @@ class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
 
     def __init__(self, **kwargs):
         super().__init__("real prefixado", **kwargs)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return None
 
 
 class CampoRealTerminador(DadoTerminador, CampoRealBasico):
@@ -76,6 +90,13 @@ class CampoRealTerminador(DadoTerminador, CampoRealBasico):
                  **kwargs):
         CampoRealBasico.__init__(self, "real fixo", **kwargs)
         DadoTerminador.__init__(self, terminador)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return None
 
 
 class CampoRealBinario(DadoBinario, CampoRealBasico):
@@ -104,3 +125,10 @@ class CampoRealBinario(DadoBinario, CampoRealBasico):
         """
         return pack("d", self.valor)
     # code::end
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável 
+        """
+        return self.comprimento

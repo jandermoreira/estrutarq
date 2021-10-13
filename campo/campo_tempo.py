@@ -40,10 +40,14 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         return strftime(self.__formato_tempo, localtime(self.segundos))
 
     @valor.setter
-    def valor(self, valor):
+    def valor(self, valor: str):
         if not isinstance(valor, str):
             raise TypeError("O tempo deve ser uma cadeia de caracteres.")
-        self.segundos = int(mktime(strptime(valor, self.__formato_tempo)))
+        if self.__apenas_data:
+            self.segundos = int(
+                mktime(strptime(valor + " 12:00:00", self.formato_tempo)))
+        else:
+            self.segundos = int(mktime(strptime(valor, self.__formato_tempo)))
 
     @property
     def segundos(self) -> int:
@@ -53,10 +57,7 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     def segundos(self, valor: int):
         if not isinstance(valor, int):
             raise TypeError("O tempo deve ser um valor inteiro de segundos.")
-        if self.__apenas_data:
-            self.__valor = valor + 43200  # +12 horas
-        else:
-            self.__valor = valor
+        self.__valor = valor
 
     def __str__(self) -> str:
         tempo_utc = strftime(self.formato_tempo,
@@ -68,7 +69,7 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         return type(self).__name__ + "\n" + texto
 
 
-class CampoTempoBasicoBinario(CampoTempoBasico):
+class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
     """
     Implementação das conversões tempo-> binário e binário->tempo
     """
@@ -95,7 +96,7 @@ class CampoTempoBasicoBinario(CampoTempoBasico):
         return self.segundos.to_bytes(self.comprimento, "big", signed = True)
 
 
-class CampoTempoBasicoFixo(CampoTempoBasico):
+class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
     """
     Implementação das conversões tempo-> binário e binário->tempo
     """
@@ -134,6 +135,13 @@ class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
                                          **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
 
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento
+
 
 class CampoDataFixo(DadoFixo, CampoTempoBasicoFixo):
     """
@@ -146,6 +154,13 @@ class CampoDataFixo(DadoFixo, CampoTempoBasicoFixo):
         CampoTempoBasicoFixo.__init__(self, "data fixo", self.formato_data,
                                       apenas_data = True, **kwargs)
         DadoFixo.__init__(self, self.comprimento_data)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento
 
 
 class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
@@ -160,6 +175,13 @@ class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
                                          **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
 
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento
+
 
 class CampoHoraFixo(DadoFixo, CampoTempoBasicoFixo):
     """
@@ -172,6 +194,12 @@ class CampoHoraFixo(DadoFixo, CampoTempoBasicoFixo):
                                       apenas_data = False, **kwargs)
         DadoFixo.__init__(self, self.comprimento_hora)
 
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento
 
 class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
     """
@@ -186,6 +214,13 @@ class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
                                          apenas_data = False, **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
 
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento
+
 
 class CampoTempoFixo(DadoFixo, CampoTempoBasicoFixo):
     """
@@ -198,3 +233,10 @@ class CampoTempoFixo(DadoFixo, CampoTempoBasicoFixo):
         CampoTempoBasicoFixo.__init__(self, "tempo fixo", self.formato_tempo,
                                       apenas_data = False, **kwargs)
         DadoFixo.__init__(self, self.comprimento_tempo)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento

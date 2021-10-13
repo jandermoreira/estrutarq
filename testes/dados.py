@@ -2,6 +2,7 @@
 Testes para classes de dados
 """
 
+from os import remove
 from estrutarq.dado import *
 
 
@@ -26,6 +27,8 @@ def teste_classe(dado, classe):
     imprima("leia_de_bytes (dado)", dado_lido)
     imprima("leia_de_bytes (restante)", resto)
 
+    remove("/tmp/teste-dados.tmp")
+
     print()
 
 
@@ -33,7 +36,8 @@ def main():
     dado = b'123 ABC_abc'
     teste_classe(dado, DadoBinario(len(dado)))
     teste_classe(dado, DadoFixo(len(dado) + 5))
-    # teste_classe(dado, DadoPrefixado())
+    teste_classe(dado, DadoFixo(len(dado) - 5))
+    teste_classe(dado, DadoPrefixado())
     teste_classe(dado, DadoTerminador(b'\x00'))
 
 

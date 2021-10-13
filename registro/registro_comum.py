@@ -2,13 +2,22 @@
 Registros
 """
 
+from abc import ABCMeta
+from re import compile
+
 from estrutarq.campo.campo_comum import CampoBasico
-from estrutarq.dado import DadoPrefixado, DadoTerminador
+from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
+    DadoTerminador
+from estrutarq.utilitarios.geral import verifique_versao
+
+#######
+verifique_versao()
 
 terminador_de_registro = b"\x01"
+preenchimento_de_registro = b"\xfe"
 
 
-class RegistroBasico:
+class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
     Classe básica para registros
 
@@ -17,20 +26,40 @@ class RegistroBasico:
 
     def __init__(self, tipo: str, *lista_campos):
         self.__tipo = tipo
-        self.lista_campos = []
+        self.lista_campos = {}
         self.adicione_campos(*lista_campos)
 
     @property
     def tipo(self):
         return self.__tipo
 
-    def __adicione_um_campo(self, campo: CampoBasico):
-        if not isinstance(campo, CampoBasico):
-            raise TypeError("Esperado um campo para o registro")
-        setattr(self, campo.nome, campo.copy())
-        self.lista_campos.append(getattr(self, campo.nome))
+    def __adicione_um_campo(self, campo: (str, CampoBasico)):
+        """
+        Acréscimo de um campo a registro, com criação de um atributo e
+        inclusão na lista de campos
+        :param campo: uma tupla (nome, campo), com nome (str) sendo o nome
+        do campo e campo sendo uma instância de um campo válido
+        """
+        nome_campo = campo[0]
+        tipo_campo = campo[1]
+        identificador = compile(r"^\w[_\w\d]+$")
+        if not isinstance(nome_campo, str) or \
+                not identificador.match(campo[0]):
+            mensagem = "O nome do campo deve ser um identificador válido " + \
+                       f"('{nome_campo}')."
+            raise TypeError(mensagem)
+        if not isinstance(tipo_campo, CampoBasico):
+            raise TypeError("Esperado um campo valido para o registro.")
+        setattr(self, nome_campo, tipo_campo.copy())
+        self.lista_campos[nome_campo] = getattr(self, nome_campo)
 
     def adicione_campos(self, *lista_campos):
+        """
+        Inclusão de uma sequência de campos ao registro
+        :param lista_campos: uma sequência de um ou mais campos, cada um
+        especificado pela tupla (nome, campo), com nome (str) sendo o nome
+        do campo e campo sendo uma instância de um campo válido
+        """
         for campo in lista_campos:
             self.__adicione_um_campo(campo)
 
@@ -40,33 +69,105 @@ class RegistroBasico:
         :param dados_registro: sequência de bytes do registro
         """
         dados_restantes = dados_registro
-        for campo in self.lista_campos:
-            dado_campo, dados_restantes = campo.leia_dados_de_buffer(
-                dados_restantes)
-            campo.de_bytes(dado_campo)
+        for campo in self.lista_campos.values():
+            dado_campo, dados_restantes = campo.leia_de_bytes(dados_restantes)
+            campo.bytes_para_valor(dado_campo)
 
-    # code::start para_bytes
     def para_bytes(self) -> bytes:
         """
-        Criação do registro pela concatenação dos bytes dos campos,
+        Criação dos bytes do registro pela concatenação dos bytes dos campos,
         sucessivamente
         :return: sequência dos bytes dos campos
         """
         dado_campos = bytes()
-        for campo in self.lista_campos:
-            dado_campos += campo.para_bytes()
+        for campo in self.lista_campos.values():
+            dado_campos += campo.adicione_formatacao(campo.valor_para_bytes())
         return dado_campos
+
+    def tem_comprimento_fixo(self):
+        """
+        Verifica se o registro tem comprimento fixo.
+        :return: True se o comprimento for fixo
+
+        O registro é considerado de tamanho fixo se qualquer uma das
+        propriedades foram verdadeiras:
+            1) o registro tem o atributo 'comprimento'
+            2) todos os campos tiverem comprimento fixo
+        """
+        registro_fixo = hasattr(self, "comprimento")
+        campos_fixos = all(hasattr(campo, "comprimento") for campo in
+                           self.lista_campos.values())
+        return registro_fixo or campos_fixos
+
+    def comprimento_fixo(self):
+        """
+        Retorna o comprimento do registro em bytes caso ele tenha comprimento
+        total fixo
+        :return: o comprimento do registro em bytes ou None se tiver
+        comprimento variável
+        """
+        comprimentos = [campo.comprimento_fixo() for campo in
+                        self.lista_campos.values()]
+        if None not in comprimentos:
+            return sum(comprimentos)
+        else:
+            return None
+
+    def _leia_registro(self, arquivo):
+        """
+        Leitura genérica de um registro usando a forma de organização de
+        dados atual, preenchendo os campos
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        """
+        bytes_arquivo = self.leia_de_arquivo(arquivo)
+        self.de_bytes(bytes_arquivo)
+
+    # code::start basico_leia
+    def leia(self, arquivo):
+        """
+        Obtenção de um registro a partir do arquivo
+        :param arquivo: arquivo binário aberto com permissão de leitura
+
+        Sendo possível determinar o comprimento do registro como um valor
+        fixo e conhecido, todos os bytes são lidos em uma única chamada de
+        leitura; caso contrário, é feita a recuperação de acordo com a
+        organização de registro utilizada.
+        """
+        comprimento_registro = self.comprimento_fixo()
+        if comprimento_registro:
+            # leitura do registro inteiro (tamanho fixo)
+            comprimento_total = comprimento_registro + \
+                                len(self.adicione_formatacao(b""))
+            bytes_registro = arquivo.read(comprimento_total)
+            if len(bytes_registro) != comprimento_total:
+                raise EOFError
+            self.de_bytes(bytes_registro)
+        else:
+            # leitura dependente da organização de registro
+            self._leia_registro(arquivo)
 
     # code::end
 
     def escreva(self, arquivo):
-        pass
+        """
+        Escrita do registro no arquivo
+        :param arquivo:
+        """
+        bytes_dados = self.para_bytes()
+        if hasattr(self, "comprimento") and len(bytes_dados) > self.comprimento:
+            raise ValueError("Comprimento do dados excede máximo do registro.")
+        arquivo.write(self.adicione_formatacao(bytes_dados))
 
-    def leia(self, arquivo):
-        pass
+    def __str__(self):
+        texto = ''
+        for nome, campo in self.lista_campos.items():
+            em_bytes = campo.adicione_formatacao(campo.valor_para_bytes())
+            texto += f"{nome}: {type(campo).__name__} = {campo.valor} " + \
+                     f"({em_bytes})\n"
+        return texto[:-1]
 
 
-class RegistroBruto(RegistroBasico):
+class RegistroBruto(DadoBruto, RegistroBasico):
     """
     Classe básica para registro, com controle exclusivamente pelo número
     de campos
@@ -77,25 +178,13 @@ class RegistroBruto(RegistroBasico):
     def __init__(self, *lista_campos):
         super().__init__("bruto", *lista_campos)
 
-    # code::start bruto_escreva
-    def escreva(self, arquivo):
+    # code::start bruto_leia_registro
+    def _leia_registro(self, arquivo):
         """
-        Escrita do registro no arquivo após a concatenação dos bytes de
-        cada campo
-        :param arquivo: arquivo binário aberto com permissão de escrita
-        """
-        arquivo.write(self.para_bytes())
-
-    # code::end
-
-    # code::start bruto_leia
-    def leia(self, arquivo):
-        """
-        Leitura do registro do arquivo pela recuperação sucessiva de cada
-        campo
+        Leitura de registro bruto, campo a campo
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
-        for campo in self.lista_campos:
+        for campo in self.lista_campos.values():
             campo.leia(arquivo)
     # code::end
 
@@ -109,29 +198,6 @@ class RegistroPrefixado(DadoPrefixado, RegistroBasico):
         RegistroBasico.__init__(self, "prefixado", *lista_campos)
         DadoPrefixado.__init__(self)
 
-    def escreva(self, arquivo):
-        """
-        Escrita de registro, que é montado integralmente, seguido da
-        escrita do comprimento total e escrita dos bytes do registro em si
-        :param arquivo: arquivo binário aberto com permissão para escrita
-
-        O prefixo é um inteiro binário sem sinal de 2 bytes, big-endian
-        """
-        dado_campos = self.para_bytes()
-        comprimento_campos = len(dado_campos)
-        bytes_prefixo = comprimento_campos.to_bytes(2, "big", signed = False)
-        arquivo.write(bytes_prefixo + dado_campos)
-
-    def leia(self, arquivo):
-        """
-        Leitura de um registro do arquivo, com posterior separação dos campos
-        :param arquivo: arquivo binário aberto com permissão para leitura
-        """
-        dado_campos = self.leia_dado_de_arquivo(arquivo)
-        for campo in self.lista_campos:
-            bytes_campo, dado_campos = campo.leia_dado_de_buffer(dado_campos)
-            campo.de_bytes(bytes_campo)
-
 
 class RegistroTerminador(DadoTerminador, RegistroBasico):
     """
@@ -141,3 +207,14 @@ class RegistroTerminador(DadoTerminador, RegistroBasico):
     def __init__(self, *lista_campos):
         RegistroBasico.__init__(self, "terminador", *lista_campos)
         DadoTerminador.__init__(self, terminador_de_registro)
+
+
+class RegistroFixo(DadoFixo, RegistroBasico):
+    """
+    Classe para registros com terminador
+    """
+
+    def __init__(self, comprimento: int, *lista_campos):
+        RegistroBasico.__init__(self, "terminador", *lista_campos)
+        DadoFixo.__init__(self, comprimento,
+                          preenchimento = preenchimento_de_registro)

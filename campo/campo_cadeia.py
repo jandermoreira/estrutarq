@@ -57,6 +57,13 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
         CampoCadeiaBasico.__init__(self, "cadeia terminador", **kwargs)
         DadoTerminador.__init__(self, terminador_de_campo)
 
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return None
+
 
 # cadeia de caracteres com prefixo de comprimento
 class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
@@ -66,6 +73,13 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
 
     def __init__(self, *args, **kwargs):
         super().__init__("cadeia prefixado", *args, **kwargs)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return None
 
 
 class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
@@ -77,3 +91,10 @@ class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     def __init__(self, comprimento: int, **kwargs):
         CampoCadeiaBasico.__init__(self, "cadeia fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
+
+    def comprimento_fixo(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se for variável
+        """
+        return self.comprimento
