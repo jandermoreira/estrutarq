@@ -1,2 +1,2 @@
-from .registro_comum import RegistroBruto, RegistroFixo, RegistroPrefixado, \
-    RegistroTerminador
+from .registro_comum import RegistroBasico, RegistroBruto, RegistroFixo, \
+    RegistroPrefixado, RegistroTerminador

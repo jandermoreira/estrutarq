@@ -1,8 +1,8 @@
 """
 Testes para classes de dados
 """
-
 from os import remove
+
 from estrutarq.dado import *
 
 

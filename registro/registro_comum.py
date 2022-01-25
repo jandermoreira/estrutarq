@@ -37,7 +37,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Acréscimo de um campo a registro, com criação de um atributo e
         inclusão na lista de campos
-        :param campo: uma tupla (nome, campo), com nome (str) sendo o nome
+        :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str) sendo o nome_arquivo
         do campo e campo sendo uma instância de um campo válido
         """
         nome_campo = campo[0]
@@ -45,7 +45,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         identificador = compile(r"^\w[_\w\d]+$")
         if not isinstance(nome_campo, str) or \
                 not identificador.match(campo[0]):
-            mensagem = "O nome do campo deve ser um identificador válido " + \
+            mensagem = "O nome_arquivo do campo deve ser um identificador válido " + \
                        f"('{nome_campo}')."
             raise TypeError(mensagem)
         if not isinstance(tipo_campo, CampoBasico):
@@ -57,7 +57,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Inclusão de uma sequência de campos ao registro
         :param lista_campos: uma sequência de um ou mais campos, cada um
-        especificado pela tupla (nome, campo), com nome (str) sendo o nome
+        especificado pela tupla (nome_arquivo, campo), com nome_arquivo (str) sendo o nome_arquivo
         do campo e campo sendo uma instância de um campo válido
         """
         for campo in lista_campos:

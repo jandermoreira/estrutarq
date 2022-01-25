@@ -2,9 +2,9 @@
 Testes para classes de dados
 """
 
-from estrutarq.campo import *
-
 from os import system
+
+from estrutarq.campo import *
 
 
 def imprima(msg, dado):

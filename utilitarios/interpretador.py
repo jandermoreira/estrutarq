@@ -124,10 +124,10 @@ def ins(c):
 
 for comando in [
     "crie arquivo outroteste com x:real binário, a: data fixo(10);",
-    "ca teste terminador com nome: cadeia terminador,"
+    "ca teste terminador com nome_arquivo: cadeia terminador,"
     "telefone: inteiro prefixado;",
     """crie    arquivo  arq fixo(10) com 
-        nome: inteiro terminador, x: real fixo(20);
+        nome_arquivo: inteiro terminador, x: real fixo(20);
     ir;
     ci a fixo;""",
     "# nada aqui...",

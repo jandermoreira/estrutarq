@@ -1,8 +1,6 @@
 """   Criação de arquivos com valores binários
 """
-
 from time import localtime, strftime
-
 from estrutarq.campo import CampoDataBinario, CampoIntBinario, CampoRealBinario
 
 
