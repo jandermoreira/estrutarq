@@ -42,11 +42,12 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         nome_campo = campo[0]
         tipo_campo = campo[1]
+        print("************", nome_campo, type(tipo_campo))
         identificador = compile(r"^\w[_\w\d]+$")
         if not isinstance(nome_campo, str) or \
                 not identificador.match(campo[0]):
-            mensagem = "O nome_arquivo do campo deve ser um identificador válido " + \
-                       f"('{nome_campo}')."
+            mensagem = "O nome_arquivo do campo deve ser " + \
+                       f"um identificador válido ('{nome_campo}')."
             raise TypeError(mensagem)
         if not isinstance(tipo_campo, CampoBasico):
             raise TypeError("Esperado um campo valido para o registro.")
@@ -215,6 +216,6 @@ class RegistroFixo(DadoFixo, RegistroBasico):
     """
 
     def __init__(self, comprimento: int, *lista_campos):
-        RegistroBasico.__init__(self, "terminador", *lista_campos)
+        RegistroBasico.__init__(self, "fixo", *lista_campos)
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)

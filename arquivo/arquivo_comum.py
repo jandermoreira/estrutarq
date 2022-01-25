@@ -2,32 +2,56 @@
 # Implementação de arquivos
 #############################
 
+from os.path import exists
+from time import localtime, mktime
+
 # from registro import RegistroBasico
 from bloco import Bloco
-from os.path import exists
+from campo import *
+from registro import RegistroFixo
+from utilitarios.dispositivo import comprimento_de_bloco
+from os.path import dirname
 
 
 class Arquivo:
-    def __init__(self, nome: str,
-                 cabecalho: bool = True,
-                 novo: bool = False,
-                 ):
-        self.nome_arquivo = nome
-        self._usa_cabecalho = cabecalho
-        self._inicia_arquivo(novo)
+    lista_campos_cabecalho = [
+        ("comprimento_do_bloco", CampoDataFixo(8)),
+        ("criacao", CampoTempoFixo())
+    ]
 
-    def _inicia_arquivo(self, novo: bool):
+    def __init__(self, nome: str, novo: bool = False):
         if not exists(self.nome_arquivo) or novo:
-            modo = "wb"  # cria arquivo novo
+            self._crie_arquivo_novo()
         else:
-            modo = "rb"  # arquivo já existe
+            self._abra_arquivo_existente()
 
+    def _crie_arquivo_novo(self):
+        """
+            Criação de um arquivo novo, com seu cabeçalho
+        """
         try:
-            self._arquivo = open(self.nome_arquivo, modo)
+            self._arquivo = open(self.nome_arquivo, "wb")
         except IOError:
-            raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
+            raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
         else:
-            self.bloco = Bloco(self._arquivo)
+            comprimento_do_bloco = comprimento_de_bloco(
+                dirname(self.nome_arquivo))
+            cabecalho = RegistroFixo(comprimento_do_bloco)
+            cabecalho.adicione_campos(self.lista_campos_cabecalho)
+            cabecalho.criacao.segundos = int(mktime(localtime()))
+            print(cabecalho)
+            cabecalho.escreva(self._arquivo)
+
+    def _abra_arquivo_existente(self):
+        """
+
+        """
+        # try:
+        #     self._arquivo = open(self.nome_arquivo, modo)
+        # except IOError:
+        #     raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
+        # else:
+        #     self.bloco = Bloco(self._arquivo)
 
     # def registro(self, formato):
     #     if isinstance(formato, str):
