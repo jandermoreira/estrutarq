@@ -11,7 +11,6 @@ class Arquivo:
     def __init__(self, nome: str,
                  cabecalho: bool = True,
                  novo: bool = False,
-
                  ):
         self.nome_arquivo = nome
         self._usa_cabecalho = cabecalho
