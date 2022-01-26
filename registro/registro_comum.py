@@ -5,7 +5,7 @@ Registros
 from abc import ABCMeta
 from re import compile
 
-from estrutarq.campo.campo_comum import CampoBasico
+from estrutarq.campo import CampoBasico, CampoIntBinario
 from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
 from estrutarq.utilitarios.geral import verifique_versao
@@ -42,15 +42,15 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         nome_campo = campo[0]
         tipo_campo = campo[1]
-        print("************", nome_campo, type(tipo_campo))
         identificador = compile(r"^\w[_\w\d]+$")
         if not isinstance(nome_campo, str) or \
                 not identificador.match(campo[0]):
             mensagem = "O nome_arquivo do campo deve ser " + \
                        f"um identificador válido ('{nome_campo}')."
             raise TypeError(mensagem)
-        if not isinstance(tipo_campo, CampoBasico):
-            raise TypeError("Esperado um campo valido para o registro.")
+        # if not isinstance(tipo_campo, str):
+        #     print("************", type(tipo_campo))
+        #     raise TypeError("Esperado um campo valido para o registro.")
         setattr(self, nome_campo, tipo_campo.copy())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
 

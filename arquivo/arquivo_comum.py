@@ -15,11 +15,12 @@ from os.path import dirname
 
 class Arquivo:
     lista_campos_cabecalho = [
-        ("comprimento_do_bloco", CampoDataFixo(8)),
+        ("comprimento_do_bloco", CampoIntFixo(8)),
         ("criacao", CampoTempoFixo())
     ]
 
     def __init__(self, nome: str, novo: bool = False):
+        self.nome_arquivo = nome
         if not exists(self.nome_arquivo) or novo:
             self._crie_arquivo_novo()
         else:
@@ -37,7 +38,8 @@ class Arquivo:
             comprimento_do_bloco = comprimento_de_bloco(
                 dirname(self.nome_arquivo))
             cabecalho = RegistroFixo(comprimento_do_bloco)
-            cabecalho.adicione_campos(self.lista_campos_cabecalho)
+            cabecalho.adicione_campos(*self.lista_campos_cabecalho)
+            cabecalho.comprimento_do_bloco.valor = comprimento_do_bloco
             cabecalho.criacao.segundos = int(mktime(localtime()))
             print(cabecalho)
             cabecalho.escreva(self._arquivo)

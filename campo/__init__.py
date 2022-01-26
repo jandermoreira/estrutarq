@@ -1,4 +1,4 @@
-from .campo_cadeia import CampoCadeiaBasico, CampoCadeiaFixo, \
+from .campo_cadeia import CampoBasico, CampoCadeiaBasico, CampoCadeiaFixo, \
     CampoCadeiaPrefixado, CampoCadeiaTerminador
 from .campo_comum import \
     CampoBruto
