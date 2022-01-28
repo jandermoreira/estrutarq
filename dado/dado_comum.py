@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-
+from typing import BinaryIO
 
 class DadoBasico(metaclass = ABCMeta):
     """
@@ -7,7 +7,7 @@ class DadoBasico(metaclass = ABCMeta):
     """
 
     @abstractmethod
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Recuperação de um dado lido de um arquivo, observando a
         representação do dado e a forma de organização
@@ -51,7 +51,7 @@ class DadoBruto(DadoBasico):
     """
     Classe para dado bruto
     """
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Recuperação de um dado lido de um arquivo, que é inviável para
         dado bruto
@@ -109,7 +109,7 @@ class DadoBinario(DadoBasico):
         self.__comprimento = valor
 
     # code::start binario_leitura_de_arquivo
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Recuperação dos bytes do valor binário a partir de um arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
@@ -199,7 +199,7 @@ class DadoFixo(DadoBasico):
         self.__preenchimento = preenchimento
 
     # code::start fixo_leitura_de_arquivo
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Leitura de um único dado de comprimento fixo a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
@@ -260,7 +260,7 @@ class DadoPrefixado(DadoBasico):
     """
 
     # code::start prefixado_leitura_de_arquivo
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Leitura de um único dado prefixado pelo comprimento.
         :param arquivo: arquivo binário aberto com permissão de leitura
@@ -345,7 +345,7 @@ class DadoTerminador(DadoBasico):
         self.__terminador = terminador
 
     # code::start terminador_leitura_de_arquivo
-    def leia_de_arquivo(self, arquivo) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Leitura de um único dado com terminador
         :param arquivo: arquivo binário aberto com permissão de leitura

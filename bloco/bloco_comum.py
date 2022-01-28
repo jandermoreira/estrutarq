@@ -2,8 +2,10 @@
 #  Blocos
 #
 
-from utilitarios.dispositivo import comprimento_de_bloco
+from dado import DadoFixo
+from typing import BinaryIO
 
-class Bloco:
-    def __init__(self, arquivo):
+class Bloco(DadoFixo):
+    def __init__(self, comprimento: int, arquivo: BinaryIO):
         self._arquivo = arquivo
+        super.__init__()

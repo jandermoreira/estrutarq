@@ -3,6 +3,7 @@
 # Campos de cadeias de caracteres
 
 from abc import ABCMeta
+import typing
 
 from estrutarq.dado import DadoFixo, DadoPrefixado, \
     DadoTerminador

@@ -7,6 +7,7 @@
 
 from abc import ABCMeta, abstractmethod
 from copy import copy
+from typing import BinaryIO
 
 from estrutarq.dado import DadoBasico, DadoBruto
 
@@ -70,7 +71,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         pass
 
     # code::start leitura_escrita
-    def leia(self, arquivo):
+    def leia(self, arquivo: BinaryIO):
         """
         Conversão dos dado lidos para o valor do campo, obedecendo a
         organização e formato de representação
@@ -79,7 +80,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         dado = self.leia_de_arquivo(arquivo)
         self.bytes_para_valor(dado)
 
-    def escreva(self, arquivo):
+    def escreva(self, arquivo: BinaryIO):
         """
         Conversão do valor para sequência de bytes e armazenamento no
         arquivo
