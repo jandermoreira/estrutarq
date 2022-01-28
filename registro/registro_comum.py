@@ -3,9 +3,10 @@ Registros
 """
 
 from abc import ABCMeta
+from copy import deepcopy
 from re import compile
 
-from estrutarq.campo import CampoBasico, CampoIntBinario
+from estrutarq.campo import CampoBasico
 from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
 from estrutarq.utilitarios.geral import verifique_versao
@@ -72,7 +73,6 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         dados_restantes = dados_registro
         for campo in self.lista_campos.values():
             dado_campo, dados_restantes = campo.leia_de_bytes(dados_restantes)
-            print(dado_campo, dados_restantes)
             campo.bytes_para_valor(dado_campo)
 
     def para_bytes(self) -> bytes:
@@ -168,6 +168,13 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
             texto += f"{nome}: {type(campo).__name__} = {campo.valor} " + \
                      f"({em_bytes})\n"
         return texto[:-1]
+
+    def copy(self):
+        """
+        Cópia "profunda" deste campo
+        :return: outra instância com os mesmos valores
+        """
+        return deepcopy(self)
 
 
 class RegistroBruto(DadoBruto, RegistroBasico):
