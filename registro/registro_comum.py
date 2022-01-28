@@ -72,6 +72,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         dados_restantes = dados_registro
         for campo in self.lista_campos.values():
             dado_campo, dados_restantes = campo.leia_de_bytes(dados_restantes)
+            print(dado_campo, dados_restantes)
             campo.bytes_para_valor(dado_campo)
 
     def para_bytes(self) -> bytes:
@@ -137,12 +138,13 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         comprimento_registro = self.comprimento_fixo()
         if comprimento_registro:
             # leitura do registro inteiro (tamanho fixo)
-            comprimento_total = comprimento_registro + \
-                                len(self.adicione_formatacao(b""))
+            comprimento_total = len(
+                self.adicione_formatacao(b" " * comprimento_registro))
             bytes_registro = arquivo.read(comprimento_total)
             if len(bytes_registro) != comprimento_total:
-                raise EOFError
-            self.de_bytes(bytes_registro)
+                raise EOFError(
+                    "Quantidade de bytes lidos inferior ao solicitado")
+            self.de_bytes(self.remova_formatacao(bytes_registro))
         else:
             # leitura dependente da organização de registro
             self._leia_registro(arquivo)
@@ -160,7 +162,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         arquivo.write(self.adicione_formatacao(bytes_dados))
 
     def __str__(self):
-        texto = ''
+        texto = f"Registro: {self.tipo}\n"
         for nome, campo in self.lista_campos.items():
             em_bytes = campo.adicione_formatacao(campo.valor_para_bytes())
             texto += f"{nome}: {type(campo).__name__} = {campo.valor} " + \

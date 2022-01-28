@@ -92,7 +92,7 @@ class CampoIntFixo(DadoFixo, CampoIntBasico):
         Obtém o comprimento do campo, se ele for fixo
         :return: o comprimento do campo se for fixo ou None se for variável 
         """
-        return DadoFixo.comprimento
+        return self.comprimento
 
 class CampoIntBinario(DadoBinario, CampoIntBasico):
     """

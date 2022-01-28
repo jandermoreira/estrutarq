@@ -37,7 +37,6 @@ class Arquivo:
             raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
         else:
             # Dois bytes para o comprimento do bloco
-            # a ser usado como registro prefixado pelo comprimento
             comprimento_do_bloco = comprimento_de_bloco(
                 dirname(self.nome_arquivo))
             comprimento_em_bytes = comprimento_do_bloco.to_bytes(
@@ -45,8 +44,8 @@ class Arquivo:
             self._arquivo.write(comprimento_em_bytes)
 
             # Restante do cabeçalho
-            self.cabecalho = RegistroFixo(comprimento_do_bloco - 2)
-            self.cabecalho.adicione_campos(*self.lista_campos_cabecalho)
+            self.cabecalho = RegistroFixo(comprimento_do_bloco - 2,
+                                          *self.lista_campos_cabecalho)
             self.cabecalho.comprimento_do_bloco.valor = comprimento_do_bloco
             self.cabecalho.criacao.segundos = int(mktime(localtime()))
             self.cabecalho.escreva(self._arquivo)
@@ -61,9 +60,12 @@ class Arquivo:
             raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
         else:
             # Obtenção do cabeçalho
-            self.cabecalho = RegistroPrefixado(*self.lista_campos_cabecalho)
+            comprimento_do_bloco = int.from_bytes(
+                self._arquivo.read(2), "big", signed = False)
+            self.cabecalho = RegistroFixo(comprimento_do_bloco - 2,
+                                          *self.lista_campos_cabecalho)
             self.cabecalho.leia(self._arquivo)
-
+            print(self.cabecalho)
 
     def registro(self, formato):
         """

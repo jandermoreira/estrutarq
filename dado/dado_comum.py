@@ -285,10 +285,10 @@ class DadoPrefixado(DadoBasico):
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um sequencia de bytes,
-        retornando o dado sem o prefixo e o restante do sequencia
+        Recuperação de um dado individual de uma sequência de bytes,
+        retornando o dado sem o prefixo e o restante da sequência
         :param sequencia: uma sequência de bytes
-        :return: o restante do sequencia
+        :return: os bytes de dados e o restante da sequência
         """
         comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
         dado = sequencia[2:comprimento + 2]
