@@ -8,7 +8,7 @@ from time import localtime, mktime
 # from registro import RegistroBasico
 from bloco import Bloco
 from campo import *
-from registro import RegistroFixo
+from registro import RegistroFixo, RegistroPrefixado
 from utilitarios.dispositivo import comprimento_de_bloco
 from os.path import dirname
 
@@ -16,7 +16,8 @@ from os.path import dirname
 class Arquivo:
     lista_campos_cabecalho = [
         ("comprimento_do_bloco", CampoIntFixo(8)),
-        ("criacao", CampoTempoFixo())
+        ("criacao", CampoTempoFixo()),
+        # todo: ("quantidade_de_esquemas", CampoIntFixo(2)),
     ]
 
     def __init__(self, nome: str, novo: bool = False):
@@ -35,27 +36,42 @@ class Arquivo:
         except IOError:
             raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
         else:
+            # Dois bytes para o comprimento do bloco
+            # a ser usado como registro prefixado pelo comprimento
             comprimento_do_bloco = comprimento_de_bloco(
                 dirname(self.nome_arquivo))
-            cabecalho = RegistroFixo(comprimento_do_bloco)
-            cabecalho.adicione_campos(*self.lista_campos_cabecalho)
-            cabecalho.comprimento_do_bloco.valor = comprimento_do_bloco
-            cabecalho.criacao.segundos = int(mktime(localtime()))
-            print(cabecalho)
-            cabecalho.escreva(self._arquivo)
+            comprimento_em_bytes = comprimento_do_bloco.to_bytes(
+                2, "big", signed = False)
+            self._arquivo.write(comprimento_em_bytes)
+
+            # Restante do cabeçalho
+            self.cabecalho = RegistroFixo(comprimento_do_bloco - 2)
+            self.cabecalho.adicione_campos(*self.lista_campos_cabecalho)
+            self.cabecalho.comprimento_do_bloco.valor = comprimento_do_bloco
+            self.cabecalho.criacao.segundos = int(mktime(localtime()))
+            self.cabecalho.escreva(self._arquivo)
 
     def _abra_arquivo_existente(self):
         """
 
         """
-        # try:
-        #     self._arquivo = open(self.nome_arquivo, modo)
-        # except IOError:
-        #     raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
-        # else:
-        #     self.bloco = Bloco(self._arquivo)
+        try:
+            self._arquivo = open(self.nome_arquivo, "rb")
+        except IOError:
+            raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
+        else:
+            # Obtenção do cabeçalho
+            self.cabecalho = RegistroPrefixado(*self.lista_campos_cabecalho)
+            self.cabecalho.leia(self._arquivo)
 
-    # def registro(self, formato):
+
+    def registro(self, formato):
+        """
+
+        :param formato:
+        :return:
+        """
+
     #     if isinstance(formato, str):
     #         # cria arquivo a partir de especificação textual
     #         ""
@@ -70,3 +86,14 @@ class Arquivo:
         Fecha o arquivo
         """
         self._arquivo.close()
+
+    def __str__(self):
+        """
+        Descrição textual do arquivo
+        """
+        descricao = \
+            f"Nome do arquivo: {self.nome_arquivo}\n" + \
+            f"Data de criação: {self.cabecalho.criacao.valor}\n" + \
+            "Comprimento do bloco na criação: " + \
+            f"{self.cabecalho.comprimento_do_bloco} bytes\n"
+        return descricao
