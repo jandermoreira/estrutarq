@@ -390,6 +390,8 @@ class DadoTerminador(DadoBasico):
         :return: o dado formatado
         """
         if dado.find(self.terminador) != -1:
+            print(self.terminador)
+            print(dado)
             raise TypeError("O byte terminador não pode estar contido no dado")
         return dado + self.terminador
 
