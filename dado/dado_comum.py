@@ -1,10 +1,37 @@
 from abc import ABCMeta, abstractmethod
 from typing import BinaryIO
 
+from regex import sub as regex_sub
+
+
 class DadoBasico(metaclass = ABCMeta):
     """
     Classe básica para dados
     """
+
+    byte_enchimento = b"0xaa"
+
+    def enchimento_de_bytes(self, sequencia: bytes,
+                            lista_bytes: bytes) -> bytes:
+        """
+        Operação de enchimento de bytes (byte stuffing)
+        :param sequencia: a sequência de bytes a ser "enchida"
+        :param lista_bytes: os bytes especiais que serão "escapados"
+        :return: a sequência original enchida
+        """
+        lista_bytes = lista_bytes + self.byte_enchimento
+        for byte_especial in lista_bytes:
+            sequencia.replace(bytes_especial,
+                              self.byte_enchimento + byte_especial)
+
+    def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
+        """
+        Operação de esvaziamento de bytes (byte unstuffing)
+        :param sequencia: a sequência de bytes a ser "esvaziada"
+        :return: a sequência sem o enchimento
+        """
+        sequencia = self.byte_enchimento + rb"(.)"
+        return regex_sub(padrao, rb"\1", sequencia)
 
     @abstractmethod
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
@@ -47,10 +74,12 @@ class DadoBasico(metaclass = ABCMeta):
         """
         pass
 
+
 class DadoBruto(DadoBasico):
     """
     Classe para dado bruto
     """
+
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Recuperação de um dado lido de um arquivo, que é inviável para
@@ -326,6 +355,8 @@ class DadoTerminador(DadoBasico):
     Classe para implementação de campos com terminador
     """
 
+    byte_preenchimento = b"0xaa"
+
     def __init__(self, terminador: bytes):
         self.terminador = terminador
 
@@ -385,13 +416,12 @@ class DadoTerminador(DadoBasico):
     # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: acréscimo do byte terminador
+        Formatação do dado: acréscimo do byte terminador e uso de
+        'byte stuffing' para incluir o terminador como dado
         :param dado: valor do dado
         :return: o dado formatado
         """
         if dado.find(self.terminador) != -1:
-            print(self.terminador)
-            print(dado)
             raise TypeError("O byte terminador não pode estar contido no dado")
         return dado + self.terminador
 
@@ -401,7 +431,7 @@ class DadoTerminador(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
-        if sequencia.find(self.terminador) != len(sequencia) - 1:
+        if sequencia[-1] != self.terminador:
             raise TypeError("A sequência de bytes não possui o terminador")
         return sequencia[:-1]
     # code::end
