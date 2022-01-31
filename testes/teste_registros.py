@@ -60,14 +60,21 @@ def crie_registro():
 
 
 def main():
-    from sys import stdout
-    campo = CampoCadeiaTerminador()
-    campo.terminador = b"b"
-    campo.valor = "abc"
-    campo.escreva(stdout)
-    print(campo.valor_para_bytes())
+    from os import system
+    arquivo = open("/tmp/dados", "wb")
+    registro = RegistroTerminador(
+        ("campo", CampoCadeiaTerminador())
+    )
+    registro.campo.valor = "abacate \x00 berinjela, ébano"
+    registro.escreva(arquivo)
+    arquivo.close()
+    system("hd /tmp/dados")
+    arquivo = open("/tmp/dados", "rb")
+    registro.leia(arquivo)
+    print(registro)
+    arquivo.close()
 
-def main2():
+def mainx():
     numero_registros = 10000
 
     print("Criando /tmp/dados com", numero_registros, "registros")
@@ -75,7 +82,7 @@ def main2():
     dados = []
     for i in range(numero_registros):
         if i % 5 == 0:
-            print(f"{i/numero_registros:.1f}% ", end = "")
+            print(f"{100 * i/numero_registros:.1f}% \r", end = "", flush = True)
         reg, reg_base = crie_registro()
         dados.append(reg_base.copy())  # salva estrutura de cada registro
 
@@ -90,12 +97,12 @@ def main2():
     arquivo_ref = open("/tmp/dados_ref", "wb")
     for i, dado in enumerate(dados):
         if i % 5 == 0:
-            print(f"{i/numero_registros:.1f}% ", end = "")
+            print(f"{100 * i/numero_registros:.1f}% \r", end = "", flush = True)
         dado.leia(arquivo)
-        print(dado)
-        print(type(dado.rrn.valor))
         if dado.rrn.valor != i:
             print(f"\nErro na numeração: {dado.rrn.valor} != {i}.")
+            print(dado)
+            print(type(dado.rrn.valor))
             exit()
         dado.escreva(arquivo_ref)
     print()
