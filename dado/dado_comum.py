@@ -1,3 +1,4 @@
+import re
 from abc import ABCMeta, abstractmethod
 from typing import BinaryIO, List
 
@@ -277,7 +278,8 @@ class DadoFixo(DadoBasico):
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
-        dado_efetivo = dado_restrito + self.preenchimento * (self.comprimento - len(dado_restrito))
+        dado_efetivo = dado_restrito + self.preenchimento * (
+                self.comprimento - len(dado_restrito))
         print("df:af>", dado, f"{len(dado)}/{self.comprimento}")
         return dado_efetivo
         # if self.esvaziamento_de_bytes(dado_enchimento) != dado[:self.comprimento]:
@@ -399,16 +401,22 @@ class DadoTerminador(DadoBasico):
         Em caso de falha na leitura é lançada a exceção EOFError
         """
         achou_terminador = False
+        byte_anterior = b''
         dado = b""
         while not achou_terminador:
             byte_lido = arquivo.read(1)  # byte a byte
             if len(byte_lido) == 0:
                 raise EOFError
-            elif byte_lido == self.terminador:
+            if byte_lido == self.terminador \
+                    and byte_anterior != self.byte_enchimento:
                 achou_terminador = True
-            else:
-                dado += byte_lido
-        return dado
+            print("**", byte_lido)
+            dado += byte_lido
+            byte_anterior = byte_lido
+        print(dado, "lido com terminador")
+        dado_limpo = self.remova_formatacao(dado)
+        print(dado_limpo)
+        return dado_limpo
 
     # code::end
 
@@ -420,8 +428,8 @@ class DadoTerminador(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: o restante do sequencia
         """
-        print("l>", sequencia)
-        posicao_terminador = sequencia.find(self.terminador)
+        padrao = "[!" + self.byte_enchimento + "]"
+        posicao_terminador = re.search(padrao, )
         if posicao_terminador == -1:
             raise TypeError("Nenhum terminador presente na sequência de bytes")
         dado = sequencia[:posicao_terminador]
@@ -446,9 +454,9 @@ class DadoTerminador(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
-        print("rf>", sequencia, self.terminador)
+        # print("in>", sequencia, self.terminador)
         sequencia = self.esvaziamento_de_bytes(sequencia)
-        print("rf>", bytes([sequencia[-1]]), self.terminador)
+        # print("out>", sequencia)
         if bytes([sequencia[-1]]) != self.terminador:
             raise TypeError("A sequência de bytes não possui o terminador")
         return sequencia[:-1]
