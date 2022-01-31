@@ -60,28 +60,45 @@ def crie_registro():
 
 
 def main():
+    from sys import stdout
+    campo = CampoCadeiaTerminador()
+    campo.terminador = b"b"
+    campo.valor = "abc"
+    campo.escreva(stdout)
+    print(campo.valor_para_bytes())
+
+def main2():
     numero_registros = 10000
 
     print("Criando /tmp/dados com", numero_registros, "registros")
     arquivo = open("/tmp/dados", "wb")
     dados = []
     for i in range(numero_registros):
+        if i % 5 == 0:
+            print(f"{i/numero_registros:.1f}% ", end = "")
         reg, reg_base = crie_registro()
         dados.append(reg_base.copy())  # salva estrutura de cada registro
 
         reg.rrn.valor = i
-        print("**************\n", reg)
+        # print("**************\n", reg)
         reg.escreva(arquivo)
+    print()
     arquivo.close()
 
+    print("Recuperando dados do arquivo")
     arquivo = open("/tmp/dados", "rb")
     arquivo_ref = open("/tmp/dados_ref", "wb")
     for i, dado in enumerate(dados):
+        if i % 5 == 0:
+            print(f"{i/numero_registros:.1f}% ", end = "")
         dado.leia(arquivo)
-        if dado.rrn != i:
-            print(f"Erro na numeração: {dado.rrn} != {i}.")
+        print(dado)
+        print(type(dado.rrn.valor))
+        if dado.rrn.valor != i:
+            print(f"\nErro na numeração: {dado.rrn.valor} != {i}.")
             exit()
         dado.escreva(arquivo_ref)
+    print()
     arquivo.close()
     arquivo_ref.close()
 

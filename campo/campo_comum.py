@@ -87,7 +87,9 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         :param arquivo: arquivo binário aberto com permissão de escrita
         """
         dado = self.valor_para_bytes()
-        arquivo.write(self.adicione_formatacao(dado))
+        dado_formatado = self.adicione_formatacao(dado)
+        print(dado_formatado)
+        arquivo.write(dado_formatado)
 
     # code::end
 

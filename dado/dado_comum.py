@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from typing import BinaryIO
+from typing import BinaryIO, List
 
-from regex import sub as regex_sub
+from re import sub as regex_sub
 
 
 class DadoBasico(metaclass = ABCMeta):
@@ -9,20 +9,26 @@ class DadoBasico(metaclass = ABCMeta):
     Classe básica para dados
     """
 
-    byte_enchimento = b"0xaa"
+    byte_enchimento = b"\xaa"
 
     def enchimento_de_bytes(self, sequencia: bytes,
-                            lista_bytes: bytes) -> bytes:
+                            lista_bytes) -> bytes:
         """
         Operação de enchimento de bytes (byte stuffing)
         :param sequencia: a sequência de bytes a ser "enchida"
         :param lista_bytes: os bytes especiais que serão "escapados"
         :return: a sequência original enchida
         """
-        lista_bytes = lista_bytes + self.byte_enchimento
-        for byte_especial in lista_bytes:
-            sequencia.replace(bytes_especial,
-                              self.byte_enchimento + byte_especial)
+        print(">", sequencia)
+        lista_bytes.append(self.byte_enchimento)
+        sequencia_enchida = b''
+        for single_byte in [bytes([b]) for b in sequencia]:
+            if single_byte in lista_bytes:
+                sequencia_enchida += self.byte_enchimento + single_byte
+            else:
+                sequencia_enchida += single_byte
+        print("<", sequencia_enchida)
+        return sequencia_enchida
 
     def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
         """
@@ -265,8 +271,7 @@ class DadoFixo(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado no comprimento especificado
         """
-        if dado.find(self.preenchimento) != -1:
-            raise TypeError("O byte de preenchimento está presente no dado.")
+        dado = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado = dado[:self.comprimento]
         dado = dado + self.preenchimento * (self.comprimento - len(dado))
         return dado
@@ -355,8 +360,6 @@ class DadoTerminador(DadoBasico):
     Classe para implementação de campos com terminador
     """
 
-    byte_preenchimento = b"0xaa"
-
     def __init__(self, terminador: bytes):
         self.terminador = terminador
 
@@ -421,9 +424,9 @@ class DadoTerminador(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado
         """
-        if dado.find(self.terminador) != -1:
-            raise TypeError("O byte terminador não pode estar contido no dado")
-        return dado + self.terminador
+
+        return self.enchimento_de_bytes(
+            dado, [self.terminador]) + self.terminador
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
@@ -431,6 +434,7 @@ class DadoTerminador(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
+        sequencia = self.esvaziamento_de_bytes(sequencia)
         if sequencia[-1] != self.terminador:
             raise TypeError("A sequência de bytes não possui o terminador")
         return sequencia[:-1]
