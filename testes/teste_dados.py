@@ -10,11 +10,19 @@ def imprima(msg, dado):
     print(f"> {msg}: {dado} / {len(dado)}")
 
 
+
+
 def verifique(dado1, dado2, termina = True):
-    if dado1 != dado2:
+    global numero_verificacoes
+    global numero_falhas
+    numero_verificacoes += 1
+    if dado1 == dado2:
+        print("Tudo ok")
+    else:
+        numero_falhas += 1
         print("Verificação:", dado1, "!=", dado2, " <-------------")
-        if termina:
-            exit(1)
+        # if termina:
+        #     exit(1)
 
 
 def teste_classe(dado, classe):
@@ -35,24 +43,37 @@ def teste_classe(dado, classe):
         imprima("dado gravado e lido de arquivo", dado_lido)
         verifique(dado_lido, dado,
                   termina = type(classe).__name__ != "DadoFixo")
+        bytes_restantes = arquivo.read(1024)
+        imprima("bytes restantes no arquivo", bytes_restantes)
+        verifique(bytes_restantes, dado)
 
     dado_escaneado, resto = classe.leia_de_bytes(dado_formatado + dado)
     imprima("dado obtido de sequência de bytes", dado_escaneado)
     verifique(dado_escaneado, dado,
               termina = type(classe).__name__ != "DadoFixo")
+    imprima("restante da sequência de bytes", resto)
+    verifique(resto, dado)
 
     remove("/tmp/teste-dados.tmp")
 
     print()
+    print(f"Erros/Total: {numero_falhas / numero_verificacoes * 100:.2f}%")
+    print(f"{numero_falhas}/{numero_verificacoes}")
 
 
 def main():
-    dado = b'A\x00B\x01C\xfeD\xffE'
-    # teste_classe(dado, DadoBinario(len(dado)))
+    global numero_verificacoes
+    global numero_falhas
+    numero_verificacoes = 0
+    numero_falhas = 0
+
+    # dado = b'\x00B\xaa\x01C\xfeD\xffE'
+    dado = b"jander\xff moreira"
+    teste_classe(dado, DadoBinario(len(dado)))
     teste_classe(dado, DadoFixo(len(dado) + 5))
-    # teste_classe(dado, DadoFixo(len(dado) - 5))
-    # teste_classe(dado, DadoPrefixado())
-    # teste_classe(dado, DadoTerminador(b'\x00'))
+    teste_classe(dado, DadoFixo(len(dado) - 5))
+    teste_classe(dado, DadoPrefixado())
+    teste_classe(dado, DadoTerminador(b'\x00'))
 
 
 if __name__ == "__main__":
