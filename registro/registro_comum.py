@@ -135,19 +135,19 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         leitura; caso contrário, é feita a recuperação de acordo com a
         organização de registro utilizada.
         """
-        comprimento_registro = self.comprimento_fixo()
-        if comprimento_registro:
-            # leitura do registro inteiro (tamanho fixo)
-            comprimento_total = len(
-                self.adicione_formatacao(b" " * comprimento_registro))
-            bytes_registro = arquivo.read(comprimento_total)
-            if len(bytes_registro) != comprimento_total:
-                raise EOFError(
-                    "Quantidade de bytes lidos inferior ao solicitado")
-            self.de_bytes(self.remova_formatacao(bytes_registro))
-        else:
-            # leitura dependente da organização de registro
-            self._leia_registro(arquivo)
+        # comprimento_registro = self.comprimento_fixo()
+        # if comprimento_registro:
+        #     # leitura do registro inteiro (tamanho fixo)
+        #     comprimento_total = len(
+        #         self.adicione_formatacao(b" " * comprimento_registro))
+        #     bytes_registro = arquivo.read(comprimento_total)
+        #     if len(bytes_registro) != comprimento_total:
+        #         raise EOFError(
+        #             "Quantidade de bytes lidos inferior ao solicitado")
+        #     self.de_bytes(self.remova_formatacao(bytes_registro))
+        # else:
+        #     # leitura dependente da organização de registro
+        self._leia_registro(arquivo)
 
     # code::end
 

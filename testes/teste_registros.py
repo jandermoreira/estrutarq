@@ -71,7 +71,7 @@ def main():
     system("hd /tmp/dados")
     arquivo = open("/tmp/dados", "rb")
     registro.leia(arquivo)
-    print(registro)
+    print("***\n", registro)
     arquivo.close()
 
 def mainx():

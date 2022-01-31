@@ -19,7 +19,7 @@ class DadoBasico(metaclass = ABCMeta):
         :param lista_bytes: os bytes especiais que serão "escapados"
         :return: a sequência original enchida
         """
-        print(">", sequencia)
+        # print("+>", sequencia, len(sequencia))
         lista_bytes.append(self.byte_enchimento)
         sequencia_enchida = b''
         for single_byte in [bytes([b]) for b in sequencia]:
@@ -27,7 +27,7 @@ class DadoBasico(metaclass = ABCMeta):
                 sequencia_enchida += self.byte_enchimento + single_byte
             else:
                 sequencia_enchida += single_byte
-        print("<", sequencia_enchida)
+        # print("+<", sequencia_enchida, len(sequencia_enchida))
         return sequencia_enchida
 
     def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
@@ -36,8 +36,11 @@ class DadoBasico(metaclass = ABCMeta):
         :param sequencia: a sequência de bytes a ser "esvaziada"
         :return: a sequência sem o enchimento
         """
-        sequencia = self.byte_enchimento + rb"(.)"
-        return regex_sub(padrao, rb"\1", sequencia)
+        # print("->", sequencia)
+        padrao = self.byte_enchimento + rb"(.)"
+        sequencia_esvaziada = regex_sub(padrao, rb"\1", sequencia)
+        # print("-<", sequencia_esvaziada)
+        return sequencia_esvaziada
 
     @abstractmethod
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
@@ -259,7 +262,8 @@ class DadoFixo(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
-        dado = sequencia[:self.comprimento].replace(self.preenchimento, b"")
+        dado = self.esvaziamento_de_bytes(sequencia[:self.comprimento]).replace(
+            self.preenchimento, b"")
         sequencia_restante = sequencia[self.comprimento:]
         return dado, sequencia_restante
 
@@ -271,10 +275,14 @@ class DadoFixo(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado no comprimento especificado
         """
-        dado = self.enchimento_de_bytes(dado, [self.preenchimento])
-        dado = dado[:self.comprimento]
-        dado = dado + self.preenchimento * (self.comprimento - len(dado))
-        return dado
+        dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
+        dado_restrito = dado_enchimento[:self.comprimento]
+        dado_efetivo = dado_restrito + self.preenchimento * (self.comprimento - len(dado_restrito))
+        print("df:af>", dado, f"{len(dado)}/{self.comprimento}")
+        return dado_efetivo
+        # if self.esvaziamento_de_bytes(dado_enchimento) != dado[:self.comprimento]:
+        #     print(">>>", dado_efetivo, self.esvaziamento_de_bytes(dado_enchimento))
+        #     raise ValueError("Truncamento do dado implicou em corrupção")
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
@@ -283,7 +291,10 @@ class DadoFixo(DadoBasico):
         :return: dado efetivo, sem preenchimento
         """
         if len(sequencia) != self.comprimento:
-            raise TypeError("A sequência de dados tem comprimento incorreto.")
+            raise TypeError("A sequência de dados tem comprimento incorreto:" +
+                            f" esperados {self.comprimento}," +
+                            f" recebidos {len(sequencia)}.")
+        sequencia = self.esvaziamento_de_bytes(sequencia)
         return sequencia.replace(self.preenchimento, b"")
     # code::end
 
@@ -409,6 +420,7 @@ class DadoTerminador(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: o restante do sequencia
         """
+        print("l>", sequencia)
         posicao_terminador = sequencia.find(self.terminador)
         if posicao_terminador == -1:
             raise TypeError("Nenhum terminador presente na sequência de bytes")
@@ -434,8 +446,10 @@ class DadoTerminador(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
+        print("rf>", sequencia, self.terminador)
         sequencia = self.esvaziamento_de_bytes(sequencia)
-        if sequencia[-1] != self.terminador:
+        print("rf>", bytes([sequencia[-1]]), self.terminador)
+        if bytes([sequencia[-1]]) != self.terminador:
             raise TypeError("A sequência de bytes não possui o terminador")
         return sequencia[:-1]
     # code::end
