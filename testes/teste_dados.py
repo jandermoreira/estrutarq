@@ -12,12 +12,9 @@ def imprima(msg, dado):
 
 def verifique(dado1, dado2, termina = True):
     if dado1 != dado2:
-        print("Verificação:", dado1, "!=", dado2, " <-------------", end = "")
+        print("Verificação:", dado1, "!=", dado2, " <-------------")
         if termina:
-            print(" FALHA")
             exit(1)
-        else:
-            print(" OK")
 
 
 def teste_classe(dado, classe):
@@ -51,11 +48,11 @@ def teste_classe(dado, classe):
 
 def main():
     dado = b'A\x00B\x01C\xfeD\xffE'
-    teste_classe(dado, DadoBinario(len(dado)))
+    # teste_classe(dado, DadoBinario(len(dado)))
     teste_classe(dado, DadoFixo(len(dado) + 5))
-    teste_classe(dado, DadoFixo(len(dado) - 5))
-    teste_classe(dado, DadoPrefixado())
-    teste_classe(dado, DadoTerminador(b'\x00'))
+    # teste_classe(dado, DadoFixo(len(dado) - 5))
+    # teste_classe(dado, DadoPrefixado())
+    # teste_classe(dado, DadoTerminador(b'\x00'))
 
 
 if __name__ == "__main__":

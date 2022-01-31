@@ -1,8 +1,6 @@
 import re
 from abc import ABCMeta, abstractmethod
-from typing import BinaryIO, List
-
-from re import sub as regex_sub
+from typing import BinaryIO
 
 
 class DadoBasico(metaclass = ABCMeta):
@@ -39,7 +37,7 @@ class DadoBasico(metaclass = ABCMeta):
         """
         # print("->", sequencia)
         padrao = self.byte_enchimento + rb"(.)"
-        sequencia_esvaziada = regex_sub(padrao, rb"\1", sequencia)
+        sequencia_esvaziada = re.sub(padrao, rb"\1", sequencia)
         # print("-<", sequencia_esvaziada)
         return sequencia_esvaziada
 
@@ -263,10 +261,9 @@ class DadoFixo(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
-        dado = self.esvaziamento_de_bytes(sequencia[:self.comprimento]).replace(
-            self.preenchimento, b"")
+        dado_bruto = self.esvaziamento_de_bytes(sequencia[:self.comprimento])
         sequencia_restante = sequencia[self.comprimento:]
-        return dado, sequencia_restante
+        return dado_bruto, sequencia_restante
 
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
@@ -278,9 +275,9 @@ class DadoFixo(DadoBasico):
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
-        dado_efetivo = dado_restrito + self.preenchimento * (
-                self.comprimento - len(dado_restrito))
-        print("df:af>", dado, f"{len(dado)}/{self.comprimento}")
+        dado_efetivo = dado_restrito + self.preenchimento \
+                       * (self.comprimento - len(dado_restrito))
+        print("df:af>", dado_efetivo, f"{len(dado)}/{self.comprimento}")
         return dado_efetivo
         # if self.esvaziamento_de_bytes(dado_enchimento) != dado[:self.comprimento]:
         #     print(">>>", dado_efetivo, self.esvaziamento_de_bytes(dado_enchimento))
@@ -297,7 +294,7 @@ class DadoFixo(DadoBasico):
                             f" esperados {self.comprimento}," +
                             f" recebidos {len(sequencia)}.")
         sequencia = self.esvaziamento_de_bytes(sequencia)
-        return sequencia.replace(self.preenchimento, b"")
+        return sequencia
     # code::end
 
 
@@ -428,13 +425,15 @@ class DadoTerminador(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: o restante do sequencia
         """
-        padrao = "[!" + self.byte_enchimento + "]"
-        posicao_terminador = re.search(padrao, )
-        if posicao_terminador == -1:
+        padrao = b"[^" + self.byte_enchimento + b"]" + self.terminador
+        busca = re.search(padrao, sequencia)
+        if not busca:
             raise TypeError("Nenhum terminador presente na sequência de bytes")
-        dado = sequencia[:posicao_terminador]
-        sequencia_restante = sequencia[posicao_terminador + 1:]
-        return dado, sequencia_restante
+        else:
+            posicao_terminador = busca.span()[1] - 1
+            dado = sequencia[:posicao_terminador]
+            sequencia_restante = sequencia[posicao_terminador + 1:]
+            return self.esvaziamento_de_bytes(dado), sequencia_restante
 
     # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
