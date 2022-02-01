@@ -36,6 +36,8 @@ class DadoBasico(metaclass = ABCMeta):
         """
         padrao = self.byte_enchimento + rb"(.)"
         sequencia_esvaziada = re.sub(padrao, rb"\1", sequencia)
+        print("]]", sequencia)
+        print("]]", sequencia_esvaziada)
         return sequencia_esvaziada
 
     def varredura_com_enchimento(self, sequencia: bytes,
@@ -61,7 +63,6 @@ class DadoBasico(metaclass = ABCMeta):
             posicao += 1
         if bytes([dado[-1]]) != referencia:
             raise ValueError("Byte de referência não encontrado na sequência.")
-        # dado_limpo = self.remova_formatacao(dado)
         sequencia_restante = sequencia[posicao:]
         return dado, sequencia_restante
 
@@ -287,22 +288,6 @@ class DadoFixo(DadoBasico):
         """
         sequencia_restante = sequencia[self.comprimento:]
         sequencia = sequencia[:self.comprimento] + self.preenchimento
-        # achou_preenchimento = False
-        # achou_enchimento = False
-        # dado = b""
-        # posicao = 0
-        # while not achou_preenchimento and posicao < len(sequencia):
-        #     byte_atual = bytes([sequencia[posicao]])
-        #     if byte_atual == self.preenchimento and not achou_enchimento:
-        #         achou_preenchimento = True
-        #     achou_enchimento = byte_atual == self.byte_enchimento \
-        #                        and not achou_enchimento
-        #     dado += byte_atual
-        #     posicao += 1
-        # # dado_limpo = self.esvaziamento_de_bytes(dado[:-1])
-        # print("***********************************")
-        # # print(dado_limpo, "dado limpo /", len(dado_limpo))
-        # print(sequencia_restante, "ficou no buffer /", len(sequencia_restante))
         dado_limpo = \
             self.varredura_com_enchimento(sequencia, self.preenchimento)[0][:-1]
         return dado_limpo, sequencia_restante
@@ -317,10 +302,18 @@ class DadoFixo(DadoBasico):
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
+        sequencia_desprezada = dado_enchimento[self.comprimento:]
         dado_efetivo = dado_restrito + self.preenchimento \
                        * (self.comprimento - len(dado_restrito))
-        print("df:af>", dado_efetivo, f"{len(dado)}/{self.comprimento}")
 
+        # print("****************")
+        # print("dado:\t\t\t", dado)
+        # print("quebrado:\t\t", dado_restrito, sequencia_desprezada)
+        # print("efetivo:\t\t", dado_efetivo)
+        dado_recuperado = self.esvaziamento_de_bytes(self.remova_formatacao(dado_efetivo))
+        # print("recuperado:\t\t", dado_recuperado)
+        if dado.find(dado_recuperado) == -1:
+            raise ValueError("Truncamento nos dados gerou corrupção.")
         return dado_efetivo
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
@@ -331,7 +324,7 @@ class DadoFixo(DadoBasico):
         """
         # if len(sequencia) != self.comprimento:
         #     raise TypeError("A sequência de dados tem comprimento incorreto.")
-        return self.leia_de_bytes(sequencia)[0]
+        return self.esvaziamento_de_bytes(self.leia_de_bytes(sequencia)[0])
         # code::end
 
 
@@ -459,23 +452,6 @@ class DadoTerminador(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: o restante do sequencia
         """
-        # achou_terminador = False
-        # achou_enchimento = False
-        # dado = b""
-        # posicao = 0
-        # while not achou_terminador and posicao < len(sequencia):
-        #     byte_atual = bytes([sequencia[posicao]])
-        #     if byte_atual == self.terminador and not achou_enchimento:
-        #         achou_terminador = True
-        #     achou_enchimento = byte_atual == self.byte_enchimento \
-        #                        and not achou_enchimento
-        #     dado += byte_atual
-        #     posicao += 1
-        # if bytes([dado[-1]]) != self.terminador:
-        #     raise ValueError("Terminador não encontrado na sequência de bytes.")
-        # dado_limpo = self.remova_formatacao(dado)
-        # sequencia_restante = sequencia[posicao:]
-        # return dado_limpo, sequencia_restante
         bytes_dados, sequencia_restante = \
             self.varredura_com_enchimento(sequencia, self.terminador)
         return self.remova_formatacao(bytes_dados), sequencia_restante
