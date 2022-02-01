@@ -294,9 +294,7 @@ class DadoFixo(DadoBasico):
         dado_efetivo = dado_restrito + self.preenchimento \
                        * (self.comprimento - len(dado_restrito))
         print("df:af>", dado_efetivo, f"{len(dado)}/{self.comprimento}")
-        if self.remova_formatacao(dado_efetivo) != dado[:self.comprimento]:
-            print(">>>", self.remova_formatacao(dado_efetivo), self.esvaziamento_de_bytes(dado_enchimento))
-            raise ValueError("Truncamento do dado implicou em corrupção")
+
         return dado_efetivo
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
