@@ -36,8 +36,6 @@ class DadoBasico(metaclass = ABCMeta):
         """
         padrao = self.byte_enchimento + rb"(.)"
         sequencia_esvaziada = re.sub(padrao, rb"\1", sequencia)
-        print("]]", sequencia)
-        print("]]", sequencia_esvaziada)
         return sequencia_esvaziada
 
     def varredura_com_enchimento(self, sequencia: bytes,
@@ -290,7 +288,7 @@ class DadoFixo(DadoBasico):
         sequencia = sequencia[:self.comprimento] + self.preenchimento
         dado_limpo = \
             self.varredura_com_enchimento(sequencia, self.preenchimento)[0][:-1]
-        return dado_limpo, sequencia_restante
+        return self.esvaziamento_de_bytes(dado_limpo), sequencia_restante
 
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
@@ -310,9 +308,10 @@ class DadoFixo(DadoBasico):
         # print("dado:\t\t\t", dado)
         # print("quebrado:\t\t", dado_restrito, sequencia_desprezada)
         # print("efetivo:\t\t", dado_efetivo)
-        dado_recuperado = self.esvaziamento_de_bytes(self.remova_formatacao(dado_efetivo))
+        dado_recuperado = self.esvaziamento_de_bytes(
+            self.remova_formatacao(dado_efetivo))
         # print("recuperado:\t\t", dado_recuperado)
-        if dado.find(dado_recuperado) == -1:
+        if dado_recuperado != dado[:len(dado_recuperado)]:
             raise ValueError("Truncamento nos dados gerou corrupção.")
         return dado_efetivo
 
