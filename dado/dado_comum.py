@@ -61,9 +61,9 @@ class DadoBasico(metaclass = ABCMeta):
             posicao += 1
         if bytes([dado[-1]]) != referencia:
             raise ValueError("Byte de referência não encontrado na sequência.")
-        dado_limpo = self.remova_formatacao(dado)
+        # dado_limpo = self.remova_formatacao(dado)
         sequencia_restante = sequencia[posicao:]
-        return dado_limpo, sequencia_restante
+        return dado, sequencia_restante
 
     @abstractmethod
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
@@ -287,7 +287,6 @@ class DadoFixo(DadoBasico):
         """
         sequencia_restante = sequencia[self.comprimento:]
         sequencia = sequencia[:self.comprimento] + self.preenchimento
-        print(" >>> ", sequencia, sequencia_restante)
         # achou_preenchimento = False
         # achou_enchimento = False
         # dado = b""
@@ -300,10 +299,12 @@ class DadoFixo(DadoBasico):
         #                        and not achou_enchimento
         #     dado += byte_atual
         #     posicao += 1
-        dado_bruto = self.varredura_com_enchimento(sequencia,
-                                                   self.preenchimento)
-        dado_limpo = self.esvaziamento_de_bytes(dado_bruto[:-1])
-        # print(sequencia_restante, "ficou no buffer")
+        # # dado_limpo = self.esvaziamento_de_bytes(dado[:-1])
+        # print("***********************************")
+        # # print(dado_limpo, "dado limpo /", len(dado_limpo))
+        # print(sequencia_restante, "ficou no buffer /", len(sequencia_restante))
+        dado_limpo = \
+            self.varredura_com_enchimento(sequencia, self.preenchimento)[0][:-1]
         return dado_limpo, sequencia_restante
 
     # code::start fixo_formatacoes
@@ -328,8 +329,8 @@ class DadoFixo(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
-        if len(sequencia) != self.comprimento:
-            raise TypeError("A sequência de dados tem comprimento incorreto.")
+        # if len(sequencia) != self.comprimento:
+        #     raise TypeError("A sequência de dados tem comprimento incorreto.")
         return self.leia_de_bytes(sequencia)[0]
         # code::end
 
@@ -475,7 +476,9 @@ class DadoTerminador(DadoBasico):
         # dado_limpo = self.remova_formatacao(dado)
         # sequencia_restante = sequencia[posicao:]
         # return dado_limpo, sequencia_restante
-        return self.varredura_com_enchimento(sequencia, self.terminador)
+        bytes_dados, sequencia_restante = \
+            self.varredura_com_enchimento(sequencia, self.terminador)
+        return self.remova_formatacao(bytes_dados), sequencia_restante
 
     # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
