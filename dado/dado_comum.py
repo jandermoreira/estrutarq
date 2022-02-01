@@ -34,11 +34,36 @@ class DadoBasico(metaclass = ABCMeta):
         :param sequencia: a sequência de bytes a ser "esvaziada"
         :return: a sequência sem o enchimento
         """
-        # print("->", sequencia)
         padrao = self.byte_enchimento + rb"(.)"
         sequencia_esvaziada = re.sub(padrao, rb"\1", sequencia)
-        # print("-<", sequencia_esvaziada)
         return sequencia_esvaziada
+
+    def varredura_com_enchimento(self, sequencia: bytes,
+                                 referencia: bytes) -> (bytes, bytes):
+        """
+        Recuperação de um dado individual de um sequencia de bytes,
+        retornando o dado até um byte de referência (não "enchido") e o
+        restante da sequência depois desse byte
+        :param sequencia: uma sequência de bytes
+        :return: o restante do sequencia
+        """
+        achou_referencia = False
+        achou_enchimento = False
+        dado = b""
+        posicao = 0
+        while not achou_referencia and posicao < len(sequencia):
+            byte_atual = bytes([sequencia[posicao]])
+            if byte_atual == referencia and not achou_enchimento:
+                achou_referencia = True
+            achou_enchimento = byte_atual == self.byte_enchimento \
+                               and not achou_enchimento
+            dado += byte_atual
+            posicao += 1
+        if bytes([dado[-1]]) != referencia:
+            raise ValueError("Byte de referência não encontrado na sequência.")
+        dado_limpo = self.remova_formatacao(dado)
+        sequencia_restante = sequencia[posicao:]
+        return dado_limpo, sequencia_restante
 
     @abstractmethod
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
@@ -262,23 +287,23 @@ class DadoFixo(DadoBasico):
         """
         sequencia_restante = sequencia[self.comprimento:]
         sequencia = sequencia[:self.comprimento] + self.preenchimento
-        achou_preenchimento = False
-        achou_enchimento = False
-        dado = b""
-        posicao = 0
-        while not achou_preenchimento and posicao < len(sequencia):
-            byte_atual = bytes([sequencia[posicao]])
-            if byte_atual == self.preenchimento and not achou_enchimento:
-                achou_preenchimento = True
-            achou_enchimento = byte_atual == self.byte_enchimento \
-                               and not achou_enchimento
-            # print("scan:", byte_atual, achou_enchimento)
-            dado += byte_atual
-            posicao += 1
-        # print(dado[:-1], "escaneado em fixo")
-        dado_limpo = self.esvaziamento_de_bytes(dado[:-1])
-        # print(dado_limpo)
-        print(sequencia_restante, "ficou no buffer")
+        print(" >>> ", sequencia, sequencia_restante)
+        # achou_preenchimento = False
+        # achou_enchimento = False
+        # dado = b""
+        # posicao = 0
+        # while not achou_preenchimento and posicao < len(sequencia):
+        #     byte_atual = bytes([sequencia[posicao]])
+        #     if byte_atual == self.preenchimento and not achou_enchimento:
+        #         achou_preenchimento = True
+        #     achou_enchimento = byte_atual == self.byte_enchimento \
+        #                        and not achou_enchimento
+        #     dado += byte_atual
+        #     posicao += 1
+        dado_bruto = self.varredura_com_enchimento(sequencia,
+                                                   self.preenchimento)
+        dado_limpo = self.esvaziamento_de_bytes(dado_bruto[:-1])
+        # print(sequencia_restante, "ficou no buffer")
         return dado_limpo, sequencia_restante
 
     # code::start fixo_formatacoes
@@ -304,12 +329,9 @@ class DadoFixo(DadoBasico):
         :return: dado efetivo, sem preenchimento
         """
         if len(sequencia) != self.comprimento:
-            raise TypeError("A sequência de dados tem comprimento incorreto:" +
-                            f" esperados {self.comprimento}," +
-                            f" recebidos {len(sequencia)}.")
-
-        return self.leia_de_bytes(sequencia)[0]  # somente o dado
-    # code::end
+            raise TypeError("A sequência de dados tem comprimento incorreto.")
+        return self.leia_de_bytes(sequencia)[0]
+        # code::end
 
 
 class DadoPrefixado(DadoBasico):
@@ -423,9 +445,7 @@ class DadoTerminador(DadoBasico):
             achou_enchimento = byte_lido == self.byte_enchimento \
                                and not achou_enchimento
             dado += byte_lido
-        # print(dado, "lido com terminador")
         dado_limpo = self.remova_formatacao(dado)
-        # print(dado_limpo)
         return dado_limpo
 
     # code::end
@@ -438,27 +458,24 @@ class DadoTerminador(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: o restante do sequencia
         """
-        achou_terminador = False
-        achou_enchimento = False
-        dado = b""
-        posicao = 0
-        while not achou_terminador and posicao < len(sequencia):
-            byte_atual = bytes([sequencia[posicao]])
-            if byte_atual == self.terminador and not achou_enchimento:
-                achou_terminador = True
-            achou_enchimento = byte_atual == self.byte_enchimento \
-                               and not achou_enchimento
-            # print("scan:", byte_atual, achou_enchimento)
-            dado += byte_atual
-            posicao += 1
-        if bytes([dado[-1]]) != self.terminador:
-            raise ValueError("Terminador não encontrado na sequência de bytes.")
-        # print(dado, "escaneado com terminador")
-        dado_limpo = self.remova_formatacao(dado)
-        # print(dado_limpo)
-        sequencia_restante = sequencia[posicao:]
-        # print(sequencia_restante, "ficou no buffer")
-        return dado_limpo, sequencia_restante
+        # achou_terminador = False
+        # achou_enchimento = False
+        # dado = b""
+        # posicao = 0
+        # while not achou_terminador and posicao < len(sequencia):
+        #     byte_atual = bytes([sequencia[posicao]])
+        #     if byte_atual == self.terminador and not achou_enchimento:
+        #         achou_terminador = True
+        #     achou_enchimento = byte_atual == self.byte_enchimento \
+        #                        and not achou_enchimento
+        #     dado += byte_atual
+        #     posicao += 1
+        # if bytes([dado[-1]]) != self.terminador:
+        #     raise ValueError("Terminador não encontrado na sequência de bytes.")
+        # dado_limpo = self.remova_formatacao(dado)
+        # sequencia_restante = sequencia[posicao:]
+        # return dado_limpo, sequencia_restante
+        return self.varredura_com_enchimento(sequencia, self.terminador)
 
     # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
@@ -478,9 +495,7 @@ class DadoTerminador(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem terminador
         """
-        # print("in>", sequencia, self.terminador)
         sequencia = self.esvaziamento_de_bytes(sequencia)
-        # print("out>", sequencia)
         if bytes([sequencia[-1]]) != self.terminador:
             raise TypeError("A sequência de bytes não possui o terminador")
         return sequencia[:-1]

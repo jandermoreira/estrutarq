@@ -68,12 +68,12 @@ def main():
     numero_falhas = 0
 
     # dado = b'\x00B\xaa\x01C\xfeD\xffE'
-    dado = b"\xffaasdf"
-    # teste_classe(dado, DadoBinario(len(dado)))
-    teste_classe(dado, DadoFixo(len(dado)) + 6)
-    # teste_classe(dado, DadoFixo(len(dado) - 5))
-    # teste_classe(dado, DadoPrefixado())
-    # teste_classe(dado, DadoTerminador(b'\x00'))
+    dado = b"asdfadsfa\xaasdfsdf"
+    teste_classe(dado, DadoBinario(len(dado)))
+    teste_classe(dado, DadoFixo(len(dado) + 6))
+    teste_classe(dado, DadoFixo(len(dado) - 5))
+    teste_classe(dado, DadoPrefixado())
+    teste_classe(dado, DadoTerminador(b'\x00'))
 
 
 if __name__ == "__main__":
