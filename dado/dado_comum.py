@@ -8,7 +8,7 @@ class DadoBasico(metaclass = ABCMeta):
     Classe básica para dados
     """
 
-    byte_enchimento = b"\xaa"
+    byte_enchimento = b"\x1b"  # ESC
 
     # code::start basico_enchimento_bytes
     def enchimento_de_bytes(self, sequencia: bytes, lista_bytes) -> bytes:
