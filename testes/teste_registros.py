@@ -2,8 +2,9 @@
 # Teste com registros
 #
 
-from os import system
+from os import remove, system
 from random import randint, sample
+from sys import stdout
 
 from estrutarq.campo import *
 from estrutarq.registro import *
@@ -59,7 +60,7 @@ def crie_registro():
     return registro, registro_base
 
 
-def main():
+def mainx():
     from os import system
     arquivo = open("/tmp/dados", "wb")
     registro = RegistroTerminador(
@@ -74,15 +75,18 @@ def main():
     print("***\n", registro)
     arquivo.close()
 
-def mainx():
+
+def main():
     numero_registros = 10000
 
     print("Criando /tmp/dados com", numero_registros, "registros")
     arquivo = open("/tmp/dados", "wb")
     dados = []
     for i in range(numero_registros):
-        if i % 5 == 0:
-            print(f"{100 * i/numero_registros:.1f}% \r", end = "", flush = True)
+        # if i % 5 == 0:
+        #     print(f"\r{100 * i / numero_registros:.1f}%", end = "")
+        #     stdout.flush()
+
         reg, reg_base = crie_registro()
         dados.append(reg_base.copy())  # salva estrutura de cada registro
 
@@ -96,8 +100,9 @@ def mainx():
     arquivo = open("/tmp/dados", "rb")
     arquivo_ref = open("/tmp/dados_ref", "wb")
     for i, dado in enumerate(dados):
-        if i % 5 == 0:
-            print(f"{100 * i/numero_registros:.1f}% \r", end = "", flush = True)
+        # if i % 19 == 0 or i == numero_registros - 1:
+        #     print(f"{100 * i / numero_registros:.1f}% \r", end = "",
+        #           flush = True)
         dado.leia(arquivo)
         if dado.rrn.valor != i:
             print(f"\nErro na numeração: {dado.rrn.valor} != {i}.")
@@ -112,6 +117,9 @@ def mainx():
     diff = "diff /tmp/dados /tmp/dados_ref && echo Iguais || echo Diferentes"
     print(diff)
     system(diff)
+
+    remove("/tmp/dados")
+    remove("/tmp/dados_ref")
 
     # for dado, dado_base in dados:
     #     print("********************************************")

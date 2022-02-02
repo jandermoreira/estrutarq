@@ -69,6 +69,7 @@ def teste(tipo_campo):
     dado_estendido = dado_formatado + b"xyzXYZ=-+_()*&$#@!"
     with open("/tmp/campo.tmp", "wb") as arquivo:
         campo.escreva(arquivo)
+        arquivo.write(b"LIXO\x00A\x01B\xffC\xfe\00EF")
     with open("/tmp/campo.tmp", "rb") as arquivo:
         campo.leia(arquivo)
     imprima("valor recuperado do arquivo 1", campo.valor)
