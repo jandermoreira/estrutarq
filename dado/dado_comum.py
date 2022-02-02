@@ -10,6 +10,7 @@ class DadoBasico(metaclass = ABCMeta):
 
     byte_enchimento = b"\xaa"
 
+    # code::start basico_enchimento_bytes
     def enchimento_de_bytes(self, sequencia: bytes, lista_bytes) -> bytes:
         """
         Operação de enchimento de bytes (byte stuffing)
@@ -17,7 +18,6 @@ class DadoBasico(metaclass = ABCMeta):
         :param lista_bytes: os bytes especiais que serão "escapados"
         :return: a sequência original enchida
         """
-        # print("+>", sequencia, len(sequencia))
         lista_bytes.append(self.byte_enchimento)
         sequencia_enchida = b''
         for single_byte in [bytes([b]) for b in sequencia]:
@@ -25,12 +25,11 @@ class DadoBasico(metaclass = ABCMeta):
                 sequencia_enchida += self.byte_enchimento + single_byte
             else:
                 sequencia_enchida += single_byte
-        # print("+<", sequencia_enchida, len(sequencia_enchida))
         return sequencia_enchida
 
     def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
         """
-        Operação de esvaziamento de bytes (byte unstuffing)
+        Operação de esvaziamento de bytes (byte un-stuffing)
         :param sequencia: a sequência de bytes a ser "esvaziada"
         :return: a sequência sem o enchimento
         """
@@ -38,14 +37,17 @@ class DadoBasico(metaclass = ABCMeta):
         sequencia_esvaziada = re.sub(padrao, rb"\1", sequencia)
         return sequencia_esvaziada
 
+    # code::end
+
     def varredura_com_enchimento(self, sequencia: bytes,
                                  referencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um sequencia de bytes,
+        Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado até um byte de referência (não "enchido") e o
         restante da sequência depois desse byte
         :param sequencia: uma sequência de bytes
-        :return: o restante do sequencia
+        :param referencia: byte simples usado como sentinela (terminador)
+        :return: o restante da sequência
         """
         achou_referencia = False
         achou_enchimento = False
@@ -55,8 +57,8 @@ class DadoBasico(metaclass = ABCMeta):
             byte_atual = bytes([sequencia[posicao]])
             if byte_atual == referencia and not achou_enchimento:
                 achou_referencia = True
-            achou_enchimento = byte_atual == self.byte_enchimento \
-                               and not achou_enchimento
+            achou_enchimento = (byte_atual == self.byte_enchimento
+                                and not achou_enchimento)
             dado += byte_atual
             posicao += 1
         if bytes([dado[-1]]) != referencia:
@@ -76,7 +78,7 @@ class DadoBasico(metaclass = ABCMeta):
     @abstractmethod
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado extraído de uma sequencia de bytes,
+        Recuperação de um dado extraído de uma sequência de bytes,
         retornando os bytes do dado em si e o restante da sequência
         depois da extração do dado, observando a representação do dado
         e a forma de organização
@@ -101,7 +103,7 @@ class DadoBasico(metaclass = ABCMeta):
         Remove da sequência de bytes aqueles correspondentes à forma de
         organização
         :param sequencia: uma sequência de bytes
-        :return: a sequência depois de extraídos os bytes de organização
+        :return: a sequência após extraídos os bytes de organização
         """
         pass
 
@@ -113,16 +115,16 @@ class DadoBruto(DadoBasico):
 
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Recuperação de um dado lido de um arquivo, que é inviável para
-        dado bruto
+        Recuperação de um dado lido de um arquivo (inviável para
+        dado bruto)
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
 
     def leia_de_bytes(self, sequencia: bytes):
         """
-        Recuperação de um dado extraído de uma sequencia de bytes,
-        que é inviável para dado bruto
+        Recuperação de um dado extraído de uma sequência de bytes
+        (inviável para dado bruto)
         :param sequencia: sequência de bytes
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
@@ -130,7 +132,7 @@ class DadoBruto(DadoBasico):
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Acrescenta aos bytes do dado a organização de dados em uso.
-        Para dado bruto, apenas repassa o dado sem modificação.
+        Para dado bruto, apenas repassa o dado sem modificação
         :param dado: bytes do dado
         :return: bytes do dado inalterados
         """
@@ -139,7 +141,7 @@ class DadoBruto(DadoBasico):
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
         Remove da sequência de bytes de organização. Para dado bruto,
-        apenas repassa a sequência sem modificação.
+        apenas repassa a sequência sem modificação
         :param sequencia: uma sequência de bytes
         :return: a sequência inalterada
         """
@@ -186,7 +188,7 @@ class DadoBinario(DadoBasico):
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
         Recuperação de um dado binário de comprimento definido a partir de
-        uma sequencia de bytes
+        uma sequência de bytes
         :param sequencia: sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
@@ -277,9 +279,9 @@ class DadoFixo(DadoBasico):
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um sequencia de bytes,
+        Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado sem os bytes de preenchimento e o restante da
-        sequencia
+        sequência
         :param sequencia: uma sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
@@ -300,17 +302,10 @@ class DadoFixo(DadoBasico):
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
-        sequencia_desprezada = dado_enchimento[self.comprimento:]
-        dado_efetivo = dado_restrito + self.preenchimento \
-                       * (self.comprimento - len(dado_restrito))
-
-        # print("****************")
-        # print("dado:\t\t\t", dado)
-        # print("quebrado:\t\t", dado_restrito, sequencia_desprezada)
-        # print("efetivo:\t\t", dado_efetivo)
+        dado_efetivo = (dado_restrito + self.preenchimento *
+                        (self.comprimento - len(dado_restrito)))
         dado_recuperado = self.esvaziamento_de_bytes(
             self.remova_formatacao(dado_efetivo))
-        # print("recuperado:\t\t", dado_recuperado)
         if dado_recuperado != dado[:len(dado_recuperado)]:
             raise ValueError("Truncamento nos dados gerou corrupção.")
         return dado_efetivo
@@ -335,7 +330,7 @@ class DadoPrefixado(DadoBasico):
     # code::start prefixado_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado prefixado pelo comprimento.
+        Leitura de um único dado prefixado pelo comprimento
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: os bytes do dado
 
@@ -435,8 +430,8 @@ class DadoTerminador(DadoBasico):
                 raise EOFError
             if byte_lido == self.terminador and not achou_enchimento:
                 achou_terminador = True
-            achou_enchimento = byte_lido == self.byte_enchimento \
-                               and not achou_enchimento
+            achou_enchimento = (byte_lido == self.byte_enchimento
+                                and not achou_enchimento)
             dado += byte_lido
         dado_limpo = self.remova_formatacao(dado)
         return dado_limpo
@@ -445,11 +440,11 @@ class DadoTerminador(DadoBasico):
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado individual de um sequencia de bytes,
-        retornando o dado até o terminador e o restante do sequencia depois
+        Recuperação de um dado individual de uma sequência de bytes,
+        retornando o dado até o terminador e o restante da sequência depois
         do terminador
         :param sequencia: uma sequência de bytes
-        :return: o restante do sequencia
+        :return: o restante da sequência
         """
         bytes_dados, sequencia_restante = \
             self.varredura_com_enchimento(sequencia, self.terminador)
@@ -463,9 +458,8 @@ class DadoTerminador(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado
         """
-
-        return self.enchimento_de_bytes(
-            dado, [self.terminador]) + self.terminador
+        dado_enchido = self.enchimento_de_bytes(dado, [self.terminador])
+        return dado_enchido + self.terminador
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
