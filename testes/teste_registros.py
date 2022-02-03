@@ -4,7 +4,6 @@
 
 from os import remove, system
 from random import randint, sample
-from sys import stdout
 
 from estrutarq.campo import *
 from estrutarq.registro import *
@@ -40,8 +39,8 @@ lista_registros = [
 def crie_registro():
     tipo_comprimento, tipo_registro = sample(lista_registros, 1)[0]
     if tipo_comprimento == "fix":
-        registro = tipo_registro(300)
-        registro_base = tipo_registro(300)
+        registro = tipo_registro(400)
+        registro_base = tipo_registro(400)
     else:
         registro = tipo_registro()
         registro_base = tipo_registro()
@@ -55,6 +54,7 @@ def crie_registro():
             registro.adicione_campos((nome, campo(valor = valor)))
             registro_base.adicione_campos((nome, campo()))
         # print("ok")
+
     registro.adicione_campos(("rrn", CampoIntBinario(valor = 0)))
     registro_base.adicione_campos(("rrn", CampoIntBinario(valor = -1)))
     return registro, registro_base

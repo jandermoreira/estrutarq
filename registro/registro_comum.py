@@ -38,8 +38,9 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Acréscimo de um campo a registro, com criação de um atributo e
         inclusão na lista de campos
-        :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str) sendo o nome_arquivo
-        do campo e campo sendo uma instância de um campo válido
+        :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str)
+            sendo o nome_arquivo do campo e campo sendo uma instância de um
+            campo válido
         """
         nome_campo = campo[0]
         tipo_campo = campo[1]
@@ -59,8 +60,9 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Inclusão de uma sequência de campos ao registro
         :param lista_campos: uma sequência de um ou mais campos, cada um
-        especificado pela tupla (nome_arquivo, campo), com nome_arquivo (str) sendo o nome_arquivo
-        do campo e campo sendo uma instância de um campo válido
+            especificado pela tupla (nome_arquivo, campo), com
+            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo
+            uma instância de um campo válido
         """
         for campo in lista_campos:
             self.__adicione_um_campo(campo)
@@ -88,7 +90,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def tem_comprimento_fixo(self):
         """
-        Verifica se o registro tem comprimento fixo.
+        Verifica se o registro tem comprimento fixo
         :return: True se o comprimento for fixo
 
         O registro é considerado de tamanho fixo se qualquer uma das
