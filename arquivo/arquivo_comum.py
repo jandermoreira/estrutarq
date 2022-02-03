@@ -2,22 +2,19 @@
 # Implementação de arquivos
 #############################
 
-from os.path import exists
+from os.path import dirname, exists
 from time import localtime, mktime
 
-# from registro import RegistroBasico
-from bloco import Bloco
 from campo import *
-from registro import RegistroFixo, RegistroPrefixado
+from registro import RegistroFixo
 from utilitarios.dispositivo import comprimento_de_bloco
-from os.path import dirname
 
 
 class Arquivo:
     lista_campos_cabecalho = [
         ("comprimento_do_bloco", CampoIntFixo(8)),
         ("criacao", CampoTempoFixo()),
-        # todo: ("quantidade_de_esquemas", CampoIntFixo(2)),
+        ("quantidade_de_esquemas", CampoIntFixo(2)),
     ]
 
     def __init__(self, nome: str, novo: bool = False):
@@ -85,7 +82,7 @@ class Arquivo:
 
     def feche(self):
         """
-        Fecha o arquivo
+        Fechamento do arquivo associado
         """
         self._arquivo.close()
 

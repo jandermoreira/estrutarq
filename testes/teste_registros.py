@@ -9,19 +9,19 @@ from estrutarq.campo import *
 from estrutarq.registro import *
 
 lista_campos = [
-    # ("fix", "nome", CampoCadeiaFixo, "Jander"),
+    ("fix", "nome", CampoCadeiaFixo, "Jander"),
     ("var", "sobrenome", CampoCadeiaPrefixado, "Moreira"),
     ("var", "apelido", CampoCadeiaTerminador, "olieli"),
     ("var", "data1", CampoDataBinario, "1967-01-24"),
-    # ("-", "data2", CampoDataFixo, "1967-01-20"),
+    ("-", "data2", CampoDataFixo, "1967-01-20"),
     ("var", "hora1", CampoHoraBinario, "00:12:13"),
-    # ("-", "hora2", CampoHoraFixo, "11:12:13"),
+    ("-", "hora2", CampoHoraFixo, "11:12:13"),
     ("-", "int1", CampoIntBinario, 1238),
-    # ("fix", "int2", CampoIntFixo, 1236),
+    ("fix", "int2", CampoIntFixo, 1236),
     ("var", "int3", CampoIntPrefixado, 1230),
     ("var", "int4", CampoIntTerminador, 1231),
     ("var", "real1", CampoRealBinario, 123.2),
-    # ("fix", "real2", CampoRealFixo, 123.3),
+    ("fix", "real2", CampoRealFixo, 123.3),
     ("var", "real3", CampoRealPrefixado, 123.5),
     ("var", "real4", CampoRealTerminador, 123.6),
     ("var", "tempo1", CampoTempoBinario, "2000-01-24 11:12:13"),
@@ -30,9 +30,9 @@ lista_campos = [
 
 lista_registros = [
     ("fix", RegistroFixo),
-    # ("var", RegistroPrefixado),
-    # ("var", RegistroBruto),
-    # ("var", RegistroTerminador),
+    ("var", RegistroPrefixado),
+    ("var", RegistroBruto),
+    ("var", RegistroTerminador),
 ]
 
 
@@ -44,7 +44,7 @@ def crie_registro():
     else:
         registro = tipo_registro()
         registro_base = tipo_registro()
-    campos = sample(lista_campos, randint(15, len(lista_campos)))
+    campos = sample(lista_campos, randint(7, len(lista_campos)))
     for tipo_comprimento, nome, campo, valor in campos:
         # print(tipo_comprimento, nome, campo, valor)
         if tipo_comprimento == "fix":
@@ -77,7 +77,7 @@ def mainx():
 
 
 def main():
-    numero_registros = 10000
+    numero_registros = 1000
 
     print("Criando /tmp/dados com", numero_registros, "registros")
     arquivo = open("/tmp/dados", "wb")
@@ -89,19 +89,19 @@ def main():
         reg, reg_base = crie_registro()
         dados.append(reg_base.copy())  # salva estrutura de cada registro
 
-        reg.rrn.valor = i + 6912
+        reg.rrn.valor = i
         # print("**************\n", reg)
         reg.escreva(arquivo)
-    print()
+    print("100%      ")
     arquivo.close()
 
-    print("Recuperando dados do arquivo")
+    print("Copiando dados para novo arquivo /tmp/dados_ref")
     arquivo = open("/tmp/dados", "rb")
     arquivo_ref = open("/tmp/dados_ref", "wb")
     for i, dado in enumerate(dados):
-        # if i % 19 == 0 or i == numero_registros - 1:
-        #     print(f"{100 * i / numero_registros:.1f}% \r", end = "",
-        #           flush = True)
+        if i % (numero_registros//19) == 0:
+            print(f"{100 * i / numero_registros:.1f}%")
+
         dado.leia(arquivo)
         if dado.rrn.valor != i:
             print(f"\nErro na numeração: {dado.rrn.valor} != {i}.")
@@ -109,25 +109,19 @@ def main():
             print(type(dado.rrn.valor))
             exit()
         dado.escreva(arquivo_ref)
-    print()
+    print("100%     ")
     arquivo.close()
     arquivo_ref.close()
 
     diff = "diff /tmp/dados /tmp/dados_ref && echo Iguais || echo Diferentes"
     print(diff)
     system(diff)
+    print()
+    system("hd /tmp/dados | less")
 
     remove("/tmp/dados")
     remove("/tmp/dados_ref")
 
-    # for dado, dado_base in dados:
-    #     print("********************************************")
-    #     print(dado)
-    #     print("--------------------------------------------")
-    #     print(dado_base)
-    #     print("********************************************")
-    #     print()
-    #     # input("ENTER... ")
 
 
 if __name__ == "__main__":

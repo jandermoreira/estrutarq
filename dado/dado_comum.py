@@ -286,7 +286,6 @@ class DadoFixo(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
-        print(sequencia, len(sequencia), "leia de bytes")
         sequencia_restante = sequencia[self.comprimento:]
         sequencia = sequencia[:self.comprimento] + self.preenchimento
         dado_limpo = self.varredura_com_enchimento(sequencia,
@@ -301,7 +300,6 @@ class DadoFixo(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado no comprimento especificado
         """
-        print(dado, len(dado), "adicione_formatacao")
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
         dado_efetivo = (dado_restrito + self.preenchimento *
@@ -321,7 +319,6 @@ class DadoFixo(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
-        print(sequencia, len(sequencia), "remove_formatacao")
         # if len(sequencia) != self.comprimento:
         #     raise TypeError("A sequência de dados tem comprimento incorreto.")
         return self.leia_de_bytes(sequencia)[0]
