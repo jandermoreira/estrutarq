@@ -304,10 +304,11 @@ class DadoFixo(DadoBasico):
         dado_restrito = dado_enchimento[:self.comprimento]
         dado_efetivo = (dado_restrito + self.preenchimento *
                         (self.comprimento - len(dado_restrito)))
-        dado_recuperado = self.esvaziamento_de_bytes(
-            self.remova_formatacao(dado_efetivo))
+        dado_recuperado = self.remova_formatacao(dado_efetivo)
         if dado_recuperado != dado[:len(dado_recuperado)]:
+            print(self)
             print(dado)
+            print(dado_enchimento)
             print(dado_recuperado)
             raise ValueError("Truncamento nos dados gerou corrupção.")
         return dado_efetivo
