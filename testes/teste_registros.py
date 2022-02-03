@@ -39,12 +39,12 @@ lista_registros = [
 def crie_registro():
     tipo_comprimento, tipo_registro = sample(lista_registros, 1)[0]
     if tipo_comprimento == "fix":
-        registro = tipo_registro(400)
-        registro_base = tipo_registro(400)
+        registro = tipo_registro(300)
+        registro_base = tipo_registro(300)
     else:
         registro = tipo_registro()
         registro_base = tipo_registro()
-    campos = sample(lista_campos, 5) #randint(15, len(lista_campos)))
+    campos = sample(lista_campos, randint(15, len(lista_campos)))
     for tipo_comprimento, nome, campo, valor in campos:
         # print(tipo_comprimento, nome, campo, valor)
         if tipo_comprimento == "fix":

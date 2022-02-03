@@ -286,10 +286,11 @@ class DadoFixo(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
+        print(sequencia, len(sequencia), "leia de bytes")
         sequencia_restante = sequencia[self.comprimento:]
         sequencia = sequencia[:self.comprimento] + self.preenchimento
-        dado_limpo = \
-            self.varredura_com_enchimento(sequencia, self.preenchimento)[0][:-1]
+        dado_limpo = self.varredura_com_enchimento(sequencia,
+                                                   self.preenchimento)[0][:-1]
         return self.esvaziamento_de_bytes(dado_limpo), sequencia_restante
 
     # code::start fixo_formatacoes
@@ -300,6 +301,7 @@ class DadoFixo(DadoBasico):
         :param dado: valor do dado
         :return: o dado formatado no comprimento especificado
         """
+        print(dado, len(dado), "adicione_formatacao")
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
         dado_efetivo = (dado_restrito + self.preenchimento *
@@ -307,9 +309,9 @@ class DadoFixo(DadoBasico):
         dado_recuperado = self.remova_formatacao(dado_efetivo)
         if dado_recuperado != dado[:len(dado_recuperado)]:
             print(self)
-            print(dado)
-            print(dado_enchimento)
-            print(dado_recuperado)
+            print(dado, 'dado')
+            print(dado_enchimento, 'enchimento')
+            print(dado_recuperado, 'recuperado')
             raise ValueError("Truncamento nos dados gerou corrupção.")
         return dado_efetivo
 
@@ -319,9 +321,10 @@ class DadoFixo(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
+        print(sequencia, len(sequencia), "remove_formatacao")
         # if len(sequencia) != self.comprimento:
         #     raise TypeError("A sequência de dados tem comprimento incorreto.")
-        return self.esvaziamento_de_bytes(self.leia_de_bytes(sequencia)[0])
+        return self.leia_de_bytes(sequencia)[0]
         # code::end
 
 
