@@ -29,7 +29,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         self.__tipo = tipo
         self.lista_campos = {}
         self.adicione_campos(*lista_campos)
-        self._comprimento_fixo = False
+        self.__comprimento_fixo = False
 
     @property
     def tipo(self):
@@ -89,20 +89,19 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
             dado_campos += campo.adicione_formatacao(campo.valor_para_bytes())
         return dado_campos
 
-    # def tem_comprimento_fixo(self):
-    #     """
-    #     Verifica se o registro tem comprimento fixo
-    #     :return: True se o comprimento for fixo
-    #
-    #     O registro é considerado de tamanho fixo se qualquer uma das
-    #     propriedades foram verdadeiras:
-    #         1) o registro tem o atributo 'comprimento'
-    #         2) todos os campos tiverem comprimento fixo
-    #     """
-    #     registro_fixo = hasattr(self, "comprimento")
-    #     campos_fixos = all(hasattr(campo, "comprimento") for campo in
-    #                        self.lista_campos.values())
-    #     return registro_fixo or campos_fixos
+    def tem_comprimento_fixo(self):
+        """
+        Verifica se o registro tem comprimento fixo
+        :return: True se o comprimento for fixo
+
+        O registro é considerado de tamanho fixo se qualquer uma das
+        propriedades foram verdadeiras:
+            1) o registro tem é marcado com __comprimento_fixo == True
+            2) todos os campos tiverem comprimento fixo
+        """
+        print("\t** ", self.__comprimento_fixo)
+        return self.__comprimento_fixo or all(
+            campo._comprimento_fixo for campo in self.lista_campos.values())
 
     def comprimento(self):
         """
@@ -227,4 +226,6 @@ class RegistroFixo(DadoFixo, RegistroBasico):
         RegistroBasico.__init__(self, "fixo", *lista_campos)
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)
-        self._comprimento_fixo = True
+        self.__comprimento_fixo = True
+        print("XXXXXXXX", self.__comprimento_fixo)
+        self.tem_comprimento_fixo()

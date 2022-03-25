@@ -30,9 +30,9 @@ lista_campos = [
 
 lista_registros = [
     ("fix", RegistroFixo),
-    ("var", RegistroPrefixado),
-    ("var", RegistroBruto),
-    ("var", RegistroTerminador),
+    # ("var", RegistroPrefixado),
+    # ("var", RegistroBruto),
+    # ("var", RegistroTerminador),
 ]
 
 
@@ -92,7 +92,7 @@ def main():
         reg.rrn.valor = i
         # print("**************\n", reg)
         reg.escreva(arquivo)
-        print(reg.comprimento())
+        print(type(reg), reg.comprimento(), reg.tem_comprimento_fixo())
     print("100%      ")
     arquivo.close()
 
