@@ -10,6 +10,9 @@ class DadoBasico(metaclass = ABCMeta):
 
     byte_enchimento = b"\x1b"  # ESC
 
+    def __init__(self):
+        self._comprimento_fixo = False
+
     # code::start basico_enchimento_bytes
     def enchimento_de_bytes(self, sequencia: bytes, lista_bytes) -> bytes:
         """
@@ -114,7 +117,6 @@ class DadoBruto(DadoBasico):
     """
 
     def __init__(self):
-        self._comprimento_fixo = False
         super().__init__()
 
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
@@ -160,6 +162,7 @@ class DadoBinario(DadoBasico):
     __comprimento = None
 
     def __init__(self, comprimento: int):
+        super().__init__()
         self.comprimento = comprimento
         self._comprimento_fixo = True
 
@@ -236,6 +239,7 @@ class DadoFixo(DadoBasico):
     """
 
     def __init__(self, comprimento: int, preenchimento = b'\xFF'):
+        super().__init__()
         self.comprimento = comprimento
         self.preenchimento = preenchimento
         self._comprimento_fixo = True
@@ -340,7 +344,7 @@ class DadoPrefixado(DadoBasico):
     """
 
     def __init__(self):
-        self._comprimento_fixo = False
+        print(">>>>>>>>>>>>>> dado prefixodo")
         super().__init__()
 
     # code::start prefixado_leitura_de_arquivo
@@ -411,8 +415,8 @@ class DadoTerminador(DadoBasico):
     """
 
     def __init__(self, terminador: bytes):
+        super().__init__()
         self.terminador = terminador
-        self._comprimento_fixo = False
 
     @property
     def terminador(self) -> bytes:

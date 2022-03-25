@@ -60,15 +60,16 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
 
 
 
-# cadeia de caracteres com prefixo de comprimento_bloco
+# cadeia de caracteres com prefixo de comprimento
 class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     """
     Classe para cadeia de caracteres prefixada pelo comprimento_bloco
     """
 
     def __init__(self, *args, **kwargs):
-        super().__init__("cadeia prefixado", *args, **kwargs)
-        # self._comprimento_fixo = True
+        CampoCadeiaBasico.__init__(self, "cadeia prefixado", *args, **kwargs)
+        DadoPrefixado.__init__(self)
+        self._comprimento_fixo = True
 
 
 

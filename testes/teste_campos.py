@@ -30,16 +30,17 @@ valor_campo = {
 }
 
 com_comprimento = [
-    CampoCadeiaFixo, CampoIntFixo, CampoRealFixo,
+    # CampoCadeiaFixo, CampoIntFixo, CampoRealFixo,
 ]
 
 sem_comprimento = [
-    CampoCadeiaTerminador, CampoIntTerminador, CampoRealTerminador,
-    CampoCadeiaPrefixado, CampoIntPrefixado, CampoRealPrefixado,
-    CampoIntBinario, CampoRealBinario,
-    CampoDataBinario, CampoDataFixo,
-    CampoHoraBinario, CampoHoraFixo,
-    CampoTempoBinario, CampoTempoFixo
+    # CampoCadeiaTerminador, CampoIntTerminador, CampoRealTerminador,
+    CampoCadeiaPrefixado,
+    # CampoIntPrefixado, CampoRealPrefixado,
+    # CampoIntBinario, CampoRealBinario,
+    # CampoDataBinario, CampoDataFixo,
+    # CampoHoraBinario, CampoHoraFixo,
+    # CampoTempoBinario, CampoTempoFixo
 ]
 
 
