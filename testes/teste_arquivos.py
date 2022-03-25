@@ -7,14 +7,14 @@ from estrutarq.registro import RegistroFixo
 
 def main():
     registro = RegistroFixo(0x60,
-                            ("nome", CampoCadeiaTerminador()),
+                            ("nome", CampoCadeiaTerminador(valor = "AB")),
                             ("sobrenome", CampoCadeiaTerminador()),
                             ("endereco", CampoCadeiaTerminador()),
                             )
     arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro, novo = True)
-    registro.nome = "Jander"
-    registro.sobrenome = "Moreira"
-    registro.endereco = "Passeio das Palmeiras"
+    registro.nome.valor = "Jander"
+    registro.sobrenome.valor = "Moreira"
+    registro.endereco.valor = "Passeio das Palmeiras"
     print(registro.nome)
 
     registro.escreva(arquivo.arquivo)
