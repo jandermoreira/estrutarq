@@ -188,7 +188,8 @@ class RegistroBruto(DadoBruto, RegistroBasico):
     """
 
     def __init__(self, *lista_campos):
-        super().__init__("bruto", *lista_campos)
+        RegistroBasico.__init__(self,"bruto", *lista_campos)
+        DadoBruto.__init__(self)
 
     # code::start bruto_leia_registro
     def _leia_registro(self, arquivo):

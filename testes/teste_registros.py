@@ -60,20 +60,20 @@ def crie_registro():
     return registro, registro_base
 
 
-def mainx():
-    from os import system
-    arquivo = open("/tmp/dados", "wb")
-    registro = RegistroTerminador(
-        ("campo", CampoCadeiaTerminador())
-    )
-    registro.campo.valor = "abacate \x00 berinjela, ébano"
-    registro.escreva(arquivo)
-    arquivo.close()
-    system("hd /tmp/dados")
-    arquivo = open("/tmp/dados", "rb")
-    registro.leia(arquivo)
-    print("***\n", registro)
-    arquivo.close()
+# def mainx():
+#     from os import system
+#     arquivo = open("/tmp/dados", "wb")
+#     registro = RegistroTerminador(
+#         ("campo", CampoCadeiaTerminador())
+#     )
+#     registro.campo.valor = "abacate \x00 berinjela, ébano"
+#     registro.escreva(arquivo)
+#     arquivo.close()
+#     system("hd /tmp/dados")
+#     arquivo = open("/tmp/dados", "rb")
+#     registro.leia(arquivo)
+#     print("***\n", registro)
+#     arquivo.close()
 
 
 def main():
@@ -117,7 +117,7 @@ def main():
     print(diff)
     system(diff)
     print()
-    system("hd /tmp/dados | less")
+    # system("hd /tmp/dados | less")
 
     remove("/tmp/dados")
     remove("/tmp/dados_ref")
