@@ -22,6 +22,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     def __init__(self, tipo: str):
         self.__tipo = tipo
         self._comprimento_fixo = False
+        self._comprimento = None
 
     @property
     def tipo(self):
@@ -52,7 +53,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         :param dado: sequência de bytes
         :return: o valor do campo de acordo com seu tipo
         """
-        pass
+        return self._comprimento
 
     @abstractmethod
     def valor_para_bytes(self) -> bytes:
@@ -65,11 +66,18 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se
-            for variável
+        Retorna se o comprimento é ou não fixo
+        :return: True para comprimento fixo ou False para variável
         """
         return self._comprimento_fixo
+
+    def comprimento(self):
+        """
+        Obtém o comprimento do campo, se ele for fixo
+        :return: o comprimento do campo se for fixo ou None se
+            for variável
+        """
+        return self._comprimento
 
     # code::start leitura_escrita
     def leia(self, arquivo: BinaryIO):

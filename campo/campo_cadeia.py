@@ -80,10 +80,3 @@ class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     def __init__(self, comprimento: int, **kwargs):
         CampoCadeiaBasico.__init__(self, "cadeia fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
-
-    def comprimento(self):
-        """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
-        """
-        return self.comprimento

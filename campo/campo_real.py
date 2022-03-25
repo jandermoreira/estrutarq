@@ -57,12 +57,12 @@ class CampoRealFixo(DadoFixo, CampoRealBasico):
         CampoRealBasico.__init__(self, "real fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
         
-    def comprimento_fixo(self):
-        """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
-        """
-        return self.comprimento
+    # def comprimento_fixo(self):
+    #     """
+    #     Obtém o comprimento_bloco do campo, se ele for fixo
+    #     :return: o comprimento_bloco do campo se for fixo ou None se for variável
+    #     """
+    #     return self.comprimento
 
 
 class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
@@ -91,12 +91,12 @@ class CampoRealTerminador(DadoTerminador, CampoRealBasico):
         CampoRealBasico.__init__(self, "real fixo", **kwargs)
         DadoTerminador.__init__(self, terminador)
 
-    def comprimento_fixo(self):
-        """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
-        """
-        return None
+    # def comprimento_fixo(self):
+    #     """
+    #     Obtém o comprimento_bloco do campo, se ele for fixo
+    #     :return: o comprimento_bloco do campo se for fixo ou None se for variável
+    #     """
+    #     return None
 
 
 class CampoRealBinario(DadoBinario, CampoRealBasico):
@@ -126,9 +126,9 @@ class CampoRealBinario(DadoBinario, CampoRealBasico):
         return pack("d", self.valor)
     # code::end
 
-    def comprimento_fixo(self):
-        """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
-        """
-        return self.comprimento
+    # def comprimento_fixo(self):
+    #     """
+    #     Obtém o comprimento_bloco do campo, se ele for fixo
+    #     :return: o comprimento_bloco do campo se for fixo ou None se for variável
+    #     """
+    #     return self.comprimento
