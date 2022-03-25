@@ -163,15 +163,15 @@ class DadoBinario(DadoBasico):
 
     def __init__(self, comprimento: int):
         DadoBasico.__init__(self)
-        self.comprimento = comprimento
+        self._comprimento = comprimento
         self._comprimento_fixo = True
 
     @property
-    def comprimento(self) -> int:
+    def _comprimento(self) -> int:
         return self.__comprimento
 
-    @comprimento.setter
-    def comprimento(self, valor: int):
+    @_comprimento.setter
+    def _comprimento(self, valor: int):
         if not isinstance(valor, int):
             raise AttributeError(
                 "O comprimento_bloco do campo deve ser inteiro")
@@ -187,8 +187,8 @@ class DadoBinario(DadoBasico):
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: a sequência de bytes lidos
         """
-        dado = arquivo.read(self.comprimento)
-        if len(dado) < self.comprimento:
+        dado = arquivo.read(self._comprimento)
+        if len(dado) < self._comprimento:
             raise EOFError
         else:
             return dado
@@ -203,10 +203,10 @@ class DadoBinario(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
-        if len(sequencia) < self.comprimento:
+        if len(sequencia) < self._comprimento:
             raise TypeError("A sequência não possui bytes suficientes")
-        dado = sequencia[:self.comprimento]
-        sequencia_restante = sequencia[self.comprimento:]
+        dado = sequencia[:self._comprimento]
+        sequencia_restante = sequencia[self._comprimento:]
         return dado, sequencia_restante
 
     # code::start binario_formatacoes
@@ -216,7 +216,7 @@ class DadoBinario(DadoBasico):
         :param dado: valor binário
         :return: o dado formatado
         """
-        if len(dado) != self.comprimento:
+        if len(dado) != self._comprimento:
             raise TypeError("O dado não possui o comprimento_bloco correto")
         return dado
 
@@ -226,7 +226,7 @@ class DadoBinario(DadoBasico):
         :param sequencia: bytes de dados
         :return: o dado sem a formatação
         """
-        if len(sequencia) != self.comprimento:
+        if len(sequencia) != self._comprimento:
             raise TypeError("A sequência de dados não possui o "
                             "comprimento_bloco correto")
         return sequencia

@@ -34,13 +34,20 @@ com_comprimento = [
 ]
 
 sem_comprimento = [
-    CampoCadeiaTerminador, CampoIntTerminador, CampoRealTerminador,
-    CampoCadeiaPrefixado,
-    CampoIntPrefixado, CampoRealPrefixado,
-    # CampoIntBinario, CampoRealBinario,
-    # CampoDataBinario, CampoDataFixo,
-    # CampoHoraBinario, CampoHoraFixo,
-    # CampoTempoBinario, CampoTempoFixo
+        # CampoCadaTerminador,
+        # CampoIntTerminador,
+        # CampoRealTerminador,
+        # CampoCadeiaPrefixado,
+        # CampoIntPrefixado,
+        # CampoRealPrefixado,
+    # CampoIntBinario,
+    # CampoRealBinario,
+    # CampoDataBinario,
+    # CampoDataFixo,
+    # CampoHoraBinario,
+    # CampoHoraFixo,
+    # CampoTempoBinario,
+    # CampoTempoFixo,
 ]
 
 
@@ -64,7 +71,7 @@ def teste(tipo_campo):
     dado_formatado = campo.adicione_formatacao(campo.valor_para_bytes())
     imprima("valor em bytes formatado", dado_formatado)
     imprima("comprimento dos bytes formatados", len(dado_formatado))
-    imprima(">>>>>>>>>>>> comprimento anunciado", campo.comprimento())
+    compare(len(dado_formatado), campo.comprimento())
     dado_desformatado = campo.remova_formatacao(dado_formatado)
     imprima("valor removendo o formato", dado_desformatado)
     compare(dado, dado_desformatado)
