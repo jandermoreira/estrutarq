@@ -115,6 +115,7 @@ class CampoBruto(DadoBruto, CampoBasico):
     def __init__(self, valor = ""):
         super().__init__("bruto")
         self.valor = valor
+        self.comprimento_fixo = False
 
     @property
     def valor(self):

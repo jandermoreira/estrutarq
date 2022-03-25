@@ -10,8 +10,6 @@ def imprima(msg, dado):
     print(f"> {msg}: {dado} / {len(dado)}")
 
 
-
-
 def verifique(dado1, dado2, termina = True):
     global numero_verificacoes
     global numero_falhas

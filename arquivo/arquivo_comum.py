@@ -96,6 +96,8 @@ class ArquivoSimplesFixo(ArquivoBasico):
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
         self.registro = esquema_registro
+        self.comprimento_registro = registro.comprimento()
+        print(self.comprimento_registro)
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
 
     def _inicie_arquivo_novo(self):
@@ -116,11 +118,12 @@ class ArquivoSimplesFixo(ArquivoBasico):
         :return: a sequência de bytes lida
         """
 
-    def escreva(self, registro: RegistroBasico, offset: int = None,
-                posicao_relativa: int = None):
+    def escreva(self, registro: RegistroBasico, posicao_relativa: int = None):
         """
         Gravação de um registro no arquivo
         """
+        if posicao_relativa != None:
+            self.arquivo.seek(posicao_relativa * self.comprimento_registro)
         registro.escreva(self.arquivo)
 
 # class GABloco:

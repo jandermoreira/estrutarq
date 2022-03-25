@@ -17,6 +17,7 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
     def __init__(self, tipo: str, valor: int = 0):
         super().__init__(tipo)
         self.valor = valor
+        self.comprimento_fixo = False
 
     @property
     def valor(self) -> int:
@@ -86,6 +87,7 @@ class CampoIntFixo(DadoFixo, CampoIntBasico):
         """Construtor"""
         CampoIntBasico.__init__(self, "int fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
+        self.comprimento_fixo = True
 
     def comprimento_fixo(self):
         """
@@ -105,6 +107,7 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
     def __init__(self, **kwargs):
         CampoIntBasico.__init__(self, "inteiro binário", **kwargs)
         DadoBinario.__init__(self, self.numero_bytes)
+        self.comprimento_fixo = True
 
     # code::start binario_conversoes
     def bytes_para_valor(self, dado: bytes):

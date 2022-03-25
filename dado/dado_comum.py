@@ -113,6 +113,10 @@ class DadoBruto(DadoBasico):
     Classe para dado bruto
     """
 
+    def __init__(self):
+        self._comprimento_fixo = False
+        super().__init__()
+
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Recuperação de um dado lido de um arquivo (inviável para
@@ -157,6 +161,7 @@ class DadoBinario(DadoBasico):
 
     def __init__(self, comprimento: int):
         self.comprimento = comprimento
+        self._comprimento_fixo = True
 
     @property
     def comprimento(self) -> int:
@@ -165,9 +170,11 @@ class DadoBinario(DadoBasico):
     @comprimento.setter
     def comprimento(self, valor: int):
         if not isinstance(valor, int):
-            raise AttributeError("O comprimento_bloco do campo deve ser inteiro")
+            raise AttributeError(
+                "O comprimento_bloco do campo deve ser inteiro")
         if valor <= 0:
-            raise AttributeError("O comprimento_bloco deve ser maior ou igual a um")
+            raise AttributeError(
+                "O comprimento_bloco deve ser maior ou igual a um")
         self.__comprimento = valor
 
     # code::start binario_leitura_de_arquivo
@@ -231,6 +238,7 @@ class DadoFixo(DadoBasico):
     def __init__(self, comprimento: int, preenchimento = b'\xFF'):
         self.comprimento = comprimento
         self.preenchimento = preenchimento
+        self._comprimento_fixo = True
 
     @property
     def comprimento(self):
@@ -320,7 +328,8 @@ class DadoFixo(DadoBasico):
         :return: dado efetivo, sem preenchimento
         """
         # if len(sequencia) != self.comprimento_bloco:
-        #     raise TypeError("A sequência de dados tem comprimento_bloco incorreto.")
+        #     raise TypeError(
+        #     "A sequência de dados tem comprimento_bloco incorreto.")
         return self.leia_de_bytes(sequencia)[0]
         # code::end
 
@@ -329,6 +338,10 @@ class DadoPrefixado(DadoBasico):
     """
     Classe dado prefixados pelo seu comprimento_bloco
     """
+
+    def __init__(self):
+        self._comprimento_fixo = False
+        super().__init__()
 
     # code::start prefixado_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
@@ -399,6 +412,7 @@ class DadoTerminador(DadoBasico):
 
     def __init__(self, terminador: bytes):
         self.terminador = terminador
+        self._comprimento_fixo = False
 
     @property
     def terminador(self) -> bytes:

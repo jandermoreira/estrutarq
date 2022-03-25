@@ -19,6 +19,7 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     def __init__(self, tipo: str, valor: str = ""):
         CampoBasico.__init__(self, tipo)
         self.valor = valor
+        self.comprimento_fixo = False
 
     @property
     def valor(self):
@@ -74,6 +75,7 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
 
     def __init__(self, *args, **kwargs):
         super().__init__("cadeia prefixado", *args, **kwargs)
+        # self.comprimento_fixo = True
 
     def comprimento_fixo(self):
         """
