@@ -21,6 +21,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     def __init__(self, tipo: str):
         self.__tipo = tipo
+        self._comprimento_fixo = False
 
     @property
     def tipo(self):
@@ -62,18 +63,18 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         pass
 
-    @abstractmethod
     def comprimento_fixo(self):
         """
         Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
+        :return: o comprimento_bloco do campo se for fixo ou None se
+            for variável
         """
-        pass
+        return self._comprimento_fixo
 
     # code::start leitura_escrita
     def leia(self, arquivo: BinaryIO):
         """
-        Conversão dos dado lidos para o valor do campo, obedecendo a
+        Conversão dos dado lidos para o valor do campo, obedecendo à
         organização e formato de representação
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
@@ -115,7 +116,6 @@ class CampoBruto(DadoBruto, CampoBasico):
     def __init__(self, valor = ""):
         super().__init__("bruto")
         self.valor = valor
-        self.comprimento_fixo = False
 
     @property
     def valor(self):
@@ -148,10 +148,3 @@ class CampoBruto(DadoBruto, CampoBasico):
         return bytes(self.valor, "utf-8")
 
     # code::end
-
-    def comprimento_fixo(self):
-        """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
-        """
-        return None
