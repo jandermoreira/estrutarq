@@ -5,6 +5,7 @@
 # from os import fstat
 from abc import ABCMeta, abstractmethod
 from os.path import exists
+from estrutarq.registro import RegistroBasico
 
 
 class ArquivoBasico(metaclass = ABCMeta):
@@ -12,9 +13,11 @@ class ArquivoBasico(metaclass = ABCMeta):
     Gerenciador dedicado a um único arquivo aberto
     """
 
-    def __init__(self, nome_arquivo: str, tipo: str, novo: bool = False):
+    def __init__(self, nome_arquivo: str, tipo: str,
+                 esquema_registro: RegistroBasico, novo: bool = False):
         self.tipo = tipo
         self.nome_arquivo = nome_arquivo
+        self.esquema_registro = esquema_registro
         if not exists(self.nome_arquivo) or novo:
             self._crie_arquivo_novo()
         else:
@@ -29,7 +32,7 @@ class ArquivoBasico(metaclass = ABCMeta):
         except IOError:
             raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
         else:
-            self.inicie_arquivo_novo()
+            self._inicie_arquivo_novo()
 
     def _abra_arquivo_existente(self):
         """
@@ -40,21 +43,33 @@ class ArquivoBasico(metaclass = ABCMeta):
         except IOError:
             raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
         else:
-            self.inicie_arquivo_existente()
+            self._inicie_arquivo_existente()
 
     @abstractmethod
-    def inicie_arquivo_novo(self):
+    def _inicie_arquivo_novo(self):
         """
         Iniciação necessária à criação de um novo arquivo
         """
         pass
 
     @abstractmethod
-    def inicie_arquivo_existente(self):
+    def _inicie_arquivo_existente(self):
         """
         Iniciação necessária para a abertura de um arquivo já existente
         """
         pass
+
+    def feche(self):
+        """
+        Fechamento do arquivo associado
+        """
+        self._arquivo.close()
+
+    def __str__(self):
+        """
+        Descrição textual do arquivo
+        """
+        return f"Nome do arquivo: {self.nome_arquivo}"
 
 
 class ArquivoSimplesFixo(ArquivoBasico):
@@ -63,14 +78,14 @@ class ArquivoSimplesFixo(ArquivoBasico):
     comprimento fixo.
     """
 
-    def __init__(self, nome_arquivo: str, comprimento_registro: int):
-        super().__init__(nome_arquivo, "simples fixo")
+    def __init__(self, nome_arquivo: str, comprimento_registro: int, **kwargs):
+        super().__init__(nome_arquivo, "simples fixo", **kwargs)
         self.comprimento_registro = comprimento_registro
 
-    def inicie_arquivo_novo(self):
+    def _inicie_arquivo_novo(self):
         pass
 
-    def inicie_arquivo_existente(self):
+    def _inicie_arquivo_existente(self):
         pass
 
 # class GABloco:

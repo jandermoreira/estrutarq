@@ -1,11 +1,11 @@
 from os import system
 
-from estrutarq.arquivo import Arquivo
+from estrutarq.arquivo import ArquivoSimplesFixo
 
 
 def main():
-    arquivo = Arquivo("/tmp/arq.dat", novo = True)
-    print(arquivo)
+    arquivo = ArquivoSimplesFixo("/tmp/arq.dat", 10)
+    print(arquivo.nome_arquivo)
     arquivo.feche()
     system("hd /tmp/arq.dat")
 
