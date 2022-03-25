@@ -5,6 +5,7 @@
 # from os import fstat
 from abc import ABCMeta, abstractmethod
 from os.path import exists
+from typing import BinaryIO
 from estrutarq.registro import RegistroBasico
 
 
@@ -13,11 +14,9 @@ class ArquivoBasico(metaclass = ABCMeta):
     Gerenciador dedicado a um único arquivo aberto
     """
 
-    def __init__(self, nome_arquivo: str, tipo: str,
-                 esquema_registro: RegistroBasico, novo: bool = False):
+    def __init__(self, nome_arquivo: str, tipo: str, novo: bool = False):
         self.tipo = tipo
         self.nome_arquivo = nome_arquivo
-        self.esquema_registro = esquema_registro
         if not exists(self.nome_arquivo) or novo:
             self._crie_arquivo_novo()
         else:
@@ -25,11 +24,11 @@ class ArquivoBasico(metaclass = ABCMeta):
 
     def _crie_arquivo_novo(self):
         """
-            Criação de um arquivo novo, com seu cabeçalho
+        Criação de um novo arquivo binário
         """
         try:
             self._arquivo = open(self.nome_arquivo, "wb")
-        except IOError:
+        except BaseException:
             raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
         else:
             self._inicie_arquivo_novo()
@@ -40,7 +39,7 @@ class ArquivoBasico(metaclass = ABCMeta):
         """
         try:
             self._arquivo = open(self.nome_arquivo, "rb")
-        except IOError:
+        except BaseException:
             raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
         else:
             self._inicie_arquivo_existente()
