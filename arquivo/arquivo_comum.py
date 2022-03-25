@@ -5,7 +5,6 @@
 # from os import fstat
 from abc import ABCMeta, abstractmethod
 from os.path import exists
-from typing import BinaryIO
 from estrutarq.registro import RegistroBasico
 
 
@@ -24,7 +23,8 @@ class ArquivoBasico(metaclass = ABCMeta):
 
     def _crie_arquivo_novo(self):
         """
-        Criação de um novo arquivo binário
+        Criação de um arquivo binário novo com permissão para leitura
+        e escrita
         """
         try:
             self.arquivo = open(self.nome_arquivo, "wb+")
@@ -35,7 +35,8 @@ class ArquivoBasico(metaclass = ABCMeta):
 
     def _abra_arquivo_existente(self):
         """
-
+        Abertura de um arquivo binário existente com permissão para leitura
+        e escrita
         """
         try:
             self.arquivo = open(self.nome_arquivo, "rb+")
