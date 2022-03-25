@@ -74,7 +74,7 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
     Implementação das conversões tempo-> binário e binário->tempo
     """
 
-    comprimento = 8  # 8 bytes
+    _comprimento = 8  # 8 bytes
 
     def __init__(self, *args, **kwargs):
         CampoTempoBasico.__init__(self, *args, **kwargs)
@@ -93,7 +93,7 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
         inteiro binário (8 bytes, big-endian, com sinal)
         :return: a sequência de bytes
         """
-        return self.segundos.to_bytes(self.comprimento, "big", signed = True)
+        return self.segundos.to_bytes(self._comprimento, "big", signed = True)
 
 
 class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):

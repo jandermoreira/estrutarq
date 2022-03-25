@@ -174,10 +174,10 @@ class DadoBinario(DadoBasico):
     def _comprimento(self, valor: int):
         if not isinstance(valor, int):
             raise AttributeError(
-                "O comprimento_bloco do campo deve ser inteiro")
+                "O comprimento do campo deve ser inteiro")
         if valor <= 0:
             raise AttributeError(
-                "O comprimento_bloco deve ser maior ou igual a um")
+                "O comprimento deve ser maior ou igual a um")
         self.__comprimento = valor
 
     # code::start binario_leitura_de_arquivo

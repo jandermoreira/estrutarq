@@ -22,7 +22,6 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     def __init__(self, tipo: str):
         self.__tipo = tipo
         self._comprimento_fixo = False
-        self._comprimento = None
 
     @property
     def tipo(self):
