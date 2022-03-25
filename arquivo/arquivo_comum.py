@@ -27,9 +27,9 @@ class ArquivoBasico(metaclass = ABCMeta):
         Criação de um novo arquivo binário
         """
         try:
-            self._arquivo = open(self.nome_arquivo, "wb")
-        except BaseException:
-            raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
+            self.arquivo = open(self.nome_arquivo, "wb+")
+        except IOError as erro:
+            raise IOError(f"Erro de crição do arquivo. {erro}")
         else:
             self._inicie_arquivo_novo()
 
@@ -38,9 +38,9 @@ class ArquivoBasico(metaclass = ABCMeta):
 
         """
         try:
-            self._arquivo = open(self.nome_arquivo, "rb")
-        except BaseException:
-            raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
+            self.arquivo = open(self.nome_arquivo, "rb+")
+        except IOError as erro:
+            raise IOError(f"Erro de abertura do arquivo. {erro}")
         else:
             self._inicie_arquivo_existente()
 
@@ -62,7 +62,7 @@ class ArquivoBasico(metaclass = ABCMeta):
         """
         Fechamento do arquivo associado
         """
-        self._arquivo.close()
+        self.arquivo.close()
 
     def __str__(self):
         """
