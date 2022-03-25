@@ -29,7 +29,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         self.__tipo = tipo
         self.lista_campos = {}
         self.adicione_campos(*lista_campos)
-        self.__comprimento_fixo = False
+        self._comprimento_fixo = False
 
     @property
     def tipo(self):
@@ -96,11 +96,10 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
         O registro é considerado de tamanho fixo se qualquer uma das
         propriedades foram verdadeiras:
-            1) o registro tem é marcado com __comprimento_fixo == True
+            1) o registro tem é marcado com _comprimento_fixo == True
             2) todos os campos tiverem comprimento fixo
         """
-        print("\t** ", self.__comprimento_fixo)
-        return self.__comprimento_fixo or all(
+        return self._comprimento_fixo or all(
             campo._comprimento_fixo for campo in self.lista_campos.values())
 
     def comprimento(self):
@@ -127,23 +126,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         Obtenção de um registro a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
 
-        Sendo possível determinar o comprimento do registro como um valor
-        fixo e conhecido, todos os bytes são lidos em uma única chamada de
-        leitura; caso contrário, é feita a recuperação de acordo com a
-        organização de registro utilizada.
         """
-        # comprimento_registro = self.comprimento_fixo()
-        # if comprimento_registro:
-        #     # leitura do registro inteiro (tamanho fixo)
-        #     comprimento_total = len(
-        #         self.adicione_formatacao(b" " * comprimento_registro))
-        #     bytes_registro = arquivo.read(comprimento_total)
-        #     if len(bytes_registro) != comprimento_total:
-        #         raise EOFError(
-        #             "Quantidade de bytes lidos inferior ao solicitado")
-        #     self.de_bytes(self.remova_formatacao(bytes_registro))
-        # else:
-        #     # leitura dependente da organização de registro
         self._leia_registro(arquivo)
 
     # code::end
@@ -226,6 +209,4 @@ class RegistroFixo(DadoFixo, RegistroBasico):
         RegistroBasico.__init__(self, "fixo", *lista_campos)
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)
-        self.__comprimento_fixo = True
-        print("XXXXXXXX", self.__comprimento_fixo)
-        self.tem_comprimento_fixo()
+        self._comprimento_fixo = True

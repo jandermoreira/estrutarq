@@ -30,9 +30,9 @@ lista_campos = [
 
 lista_registros = [
     ("fix", RegistroFixo),
-    # ("var", RegistroPrefixado),
-    # ("var", RegistroBruto),
-    # ("var", RegistroTerminador),
+    ("var", RegistroPrefixado),
+    ("var", RegistroBruto),
+    ("var", RegistroTerminador),
 ]
 
 
@@ -44,7 +44,7 @@ def crie_registro():
     else:
         registro = tipo_registro()
         registro_base = tipo_registro()
-    campos = sample(lista_campos, randint(7, len(lista_campos)))
+    campos = sample(lista_campos, randint(2, len(lista_campos)))
     for tipo_comprimento, nome, campo, valor in campos:
         # print(tipo_comprimento, nome, campo, valor)
         if tipo_comprimento == "fix":
@@ -77,7 +77,7 @@ def crie_registro():
 
 
 def main():
-    numero_registros = 20
+    numero_registros = 2000
 
     print("Criando /tmp/dados com", numero_registros, "registros")
     arquivo = open("/tmp/dados", "wb")
@@ -92,7 +92,7 @@ def main():
         reg.rrn.valor = i
         # print("**************\n", reg)
         reg.escreva(arquivo)
-        print(type(reg), reg.comprimento(), reg.tem_comprimento_fixo())
+        # print(type(reg), reg.comprimento(), reg.tem_comprimento_fixo())
     print("100%      ")
     arquivo.close()
 
