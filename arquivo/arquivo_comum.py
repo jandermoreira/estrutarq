@@ -48,14 +48,22 @@ class ArquivoBasico(metaclass = ABCMeta):
     @abstractmethod
     def _inicie_arquivo_novo(self):
         """
-        Iniciação necessária à criação de um novo arquivo
+        Iniciação necessária depois da criação de um novo arquivo
         """
         pass
 
     @abstractmethod
     def _inicie_arquivo_existente(self):
         """
-        Iniciação necessária para a abertura de um arquivo já existente
+        Iniciação necessária depois da abertura de um arquivo já existente
+        """
+        pass
+
+    @abstractmethod
+    def leia(self) -> bytes:
+        """
+        Leitura dos dados do arquivo
+        :return: a sequência de bytes lida
         """
         pass
 
@@ -78,15 +86,29 @@ class ArquivoSimplesFixo(ArquivoBasico):
     comprimento fixo.
     """
 
-    def __init__(self, nome_arquivo: str, comprimento_registro: int, **kwargs):
+    def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
+                 **kwargs):
+        self.registro = esquema_registro
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
-        self.comprimento_registro = comprimento_registro
 
     def _inicie_arquivo_novo(self):
+        """
+        Iniciação necessária depois da criação de um novo arquivo
+        """
         pass
 
     def _inicie_arquivo_existente(self):
+        """
+        Iniciação necessária depois da abertura de um arquivo já existente
+        """
         pass
+
+    def leia(self) -> bytes:
+        """
+        Leitura dos dados do arquivo
+        :return: a sequência de bytes lida
+        """
+
 
 # class GABloco:
 #
