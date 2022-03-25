@@ -77,7 +77,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         :return: o comprimento do campo se for fixo ou None se
             for variável
         """
-        return self._comprimento
+        return len(self.adicione_formatacao(self.valor_para_bytes()))
 
     # code::start leitura_escrita
     def leia(self, arquivo: BinaryIO):
