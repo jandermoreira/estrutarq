@@ -6,7 +6,7 @@ from tempfile import mkstemp
 
 def comprimento_de_bloco(diretorio: str = None):
     """
-    Determina o comprimento de um bloco do dispositivo externo, tendo como
+    Determina o comprimento_bloco de um bloco do dispositivo externo, tendo como
     referência aquele onde está o diretório temporário do sistema (parãmetro
     igual a None); se um diretório em que haja direito de criação de arquivos
     for informado, então o dispostivo em que ele está será utilizado.

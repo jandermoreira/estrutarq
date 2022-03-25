@@ -6,7 +6,7 @@ from tempfile import mkstemp
 
 def comprimento_de_bloco(diretorio: str = None):
     """
-    Determina o comprimento de um bloco de disco, tendo como referência
+    Determina o comprimento_bloco de um bloco de disco, tendo como referência
     o disco onde está o diretório temporário do sistema; para outro
     disco, é preciso informar um diretório nesse disco em que haja direito
     de criação de arquivos.

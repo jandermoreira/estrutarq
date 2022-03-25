@@ -90,25 +90,25 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def tem_comprimento_fixo(self):
         """
-        Verifica se o registro tem comprimento fixo
-        :return: True se o comprimento for fixo
+        Verifica se o registro tem comprimento_bloco fixo
+        :return: True se o comprimento_bloco for fixo
 
         O registro é considerado de tamanho fixo se qualquer uma das
         propriedades foram verdadeiras:
-            1) o registro tem o atributo 'comprimento'
-            2) todos os campos tiverem comprimento fixo
+            1) o registro tem o atributo 'comprimento_bloco'
+            2) todos os campos tiverem comprimento_bloco fixo
         """
-        registro_fixo = hasattr(self, "comprimento")
-        campos_fixos = all(hasattr(campo, "comprimento") for campo in
+        registro_fixo = hasattr(self, "comprimento_bloco")
+        campos_fixos = all(hasattr(campo, "comprimento_bloco") for campo in
                            self.lista_campos.values())
         return registro_fixo or campos_fixos
 
     def comprimento_fixo(self):
         """
-        Retorna o comprimento do registro em bytes caso ele tenha comprimento
+        Retorna o comprimento_bloco do registro em bytes caso ele tenha comprimento_bloco
         total fixo
-        :return: o comprimento do registro em bytes ou None se tiver
-        comprimento variável
+        :return: o comprimento_bloco do registro em bytes ou None se tiver
+        comprimento_bloco variável
         """
         comprimentos = [campo.comprimento_fixo() for campo in
                         self.lista_campos.values()]
@@ -132,7 +132,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         Obtenção de um registro a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
 
-        Sendo possível determinar o comprimento do registro como um valor
+        Sendo possível determinar o comprimento_bloco do registro como um valor
         fixo e conhecido, todos os bytes são lidos em uma única chamada de
         leitura; caso contrário, é feita a recuperação de acordo com a
         organização de registro utilizada.
@@ -159,7 +159,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :param arquivo:
         """
         bytes_dados = self.para_bytes()
-        if hasattr(self, "comprimento") and len(bytes_dados) > self.comprimento:
+        if hasattr(self, "comprimento_bloco") and len(bytes_dados) > self.comprimento:
             raise ValueError("Comprimento do dados excede máximo do registro.")
         arquivo.write(self.adicione_formatacao(bytes_dados))
 
@@ -203,7 +203,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
 
 class RegistroPrefixado(DadoPrefixado, RegistroBasico):
     """
-    Classe para registros prefixados pelo comprimento
+    Classe para registros prefixados pelo comprimento_bloco
     """
 
     def __init__(self, *lista_campos):

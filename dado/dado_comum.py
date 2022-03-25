@@ -150,7 +150,7 @@ class DadoBruto(DadoBasico):
 
 class DadoBinario(DadoBasico):
     """
-    Classe para dados binários com um determinado comprimento em bytes
+    Classe para dados binários com um determinado comprimento_bloco em bytes
     """
 
     __comprimento = None
@@ -165,9 +165,9 @@ class DadoBinario(DadoBasico):
     @comprimento.setter
     def comprimento(self, valor: int):
         if not isinstance(valor, int):
-            raise AttributeError("O comprimento do campo deve ser inteiro")
+            raise AttributeError("O comprimento_bloco do campo deve ser inteiro")
         if valor <= 0:
-            raise AttributeError("O comprimento deve ser maior ou igual a um")
+            raise AttributeError("O comprimento_bloco deve ser maior ou igual a um")
         self.__comprimento = valor
 
     # code::start binario_leitura_de_arquivo
@@ -187,7 +187,7 @@ class DadoBinario(DadoBasico):
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado binário de comprimento definido a partir de
+        Recuperação de um dado binário de comprimento_bloco definido a partir de
         uma sequência de bytes
         :param sequencia: sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de organização
@@ -207,7 +207,7 @@ class DadoBinario(DadoBasico):
         :return: o dado formatado
         """
         if len(dado) != self.comprimento:
-            raise TypeError("O dado não possui o comprimento correto")
+            raise TypeError("O dado não possui o comprimento_bloco correto")
         return dado
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
@@ -218,14 +218,14 @@ class DadoBinario(DadoBasico):
         """
         if len(sequencia) != self.comprimento:
             raise TypeError("A sequência de dados não possui o "
-                            "comprimento correto")
+                            "comprimento_bloco correto")
         return sequencia
     # code::end
 
 
 class DadoFixo(DadoBasico):
     """
-    Classe dado de comprimento fixo
+    Classe dado de comprimento_bloco fixo
     """
 
     def __init__(self, comprimento: int, preenchimento = b'\xFF'):
@@ -239,9 +239,9 @@ class DadoFixo(DadoBasico):
     @comprimento.setter
     def comprimento(self, comprimento: int):
         if not isinstance(comprimento, int):
-            raise AttributeError("O comprimento deve ser inteiro")
+            raise AttributeError("O comprimento_bloco deve ser inteiro")
         if comprimento <= 0:
-            raise AttributeError("O comprimento mínimo para é um byte")
+            raise AttributeError("O comprimento_bloco mínimo para é um byte")
         self.__comprimento = comprimento
 
     @property
@@ -263,7 +263,7 @@ class DadoFixo(DadoBasico):
     # code::start fixo_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado de comprimento fixo a partir do arquivo
+        Leitura de um único dado de comprimento_bloco fixo a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: os bytes do campo
 
@@ -295,10 +295,10 @@ class DadoFixo(DadoBasico):
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: ajusta o dado para o comprimento definido,
+        Formatação do dado: ajusta o dado para o comprimento_bloco definido,
         truncando ou adicionando o byte de preenchimento
         :param dado: valor do dado
-        :return: o dado formatado no comprimento especificado
+        :return: o dado formatado no comprimento_bloco especificado
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self.comprimento]
@@ -319,25 +319,25 @@ class DadoFixo(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
-        # if len(sequencia) != self.comprimento:
-        #     raise TypeError("A sequência de dados tem comprimento incorreto.")
+        # if len(sequencia) != self.comprimento_bloco:
+        #     raise TypeError("A sequência de dados tem comprimento_bloco incorreto.")
         return self.leia_de_bytes(sequencia)[0]
         # code::end
 
 
 class DadoPrefixado(DadoBasico):
     """
-    Classe dado prefixados pelo seu comprimento
+    Classe dado prefixados pelo seu comprimento_bloco
     """
 
     # code::start prefixado_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado prefixado pelo comprimento
+        Leitura de um único dado prefixado pelo comprimento_bloco
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: os bytes do dado
 
-        O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
+        O comprimento_bloco é armazenado como um inteiro de 2 bytes, big-endian.
         Em caso de falha na leitura é lançada a exceção EOFError
         """
         bytes_comprimento = arquivo.read(2)
@@ -371,7 +371,7 @@ class DadoPrefixado(DadoBasico):
     # code::start prefixado_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: acréscimo do prefixo binário com comprimento
+        Formatação do dado: acréscimo do prefixo binário com comprimento_bloco
         (2 bytes, big-endian, sem sinal)
         :param dado: valor do dado
         :return: o dado formatado
@@ -381,9 +381,9 @@ class DadoPrefixado(DadoBasico):
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
-        Desformatação do dado: remoção dos dois bytes do comprimento
+        Desformatação do dado: remoção dos dois bytes do comprimento_bloco
         :param sequencia: bytes de dados
-        :return: dado efetivo, sem o prefixo de comprimento
+        :return: dado efetivo, sem o prefixo de comprimento_bloco
         """
         dado, sequencia_restante = self.leia_de_bytes(sequencia)
         if len(sequencia_restante) != 0:

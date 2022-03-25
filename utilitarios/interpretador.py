@@ -64,7 +64,7 @@ class EspecificacaoCampo(List):
         name(), ":",
         attr("tipo_campo", TipoCampo),
         attr("organizacao_campo", OrganizacaoCampo),
-        attr("comprimento", optional(Comprimento)),
+        attr("comprimento_bloco", optional(Comprimento)),
     )
 
 
@@ -77,7 +77,7 @@ class CrieArquivo(str):
         attr("comando", re.compile(r"crie\s+arquivo|ca")),
         attr("nome_arquivo", word),
         attr("tipo_registro", optional(OrganizacaoRegistro)),
-        attr("comprimento", optional(Comprimento)),
+        attr("comprimento_bloco", optional(Comprimento)),
         "com",
         attr("campos", ListaEspecificacaoCampos)
     )
@@ -151,10 +151,10 @@ for comando in [
             print(":", c.comando)
             # if c.comando == "crie arquivo":
             #     print("::", c.nome_arquivo, c.tipo_registro,
-            #           c.comprimento if hasattr(c, "comprimento") else "")
+            #           c.comprimento_bloco if hasattr(c, "comprimento_bloco") else "")
             #     for campo in c.campos:
             #         print(":::", campo.name, campo.tipo_campo,
-            #               campo.organizacao_campo, campo.comprimento)
+            #               campo.organizacao_campo, campo.comprimento_bloco)
             #     print("\n\n\n")
         print()
 

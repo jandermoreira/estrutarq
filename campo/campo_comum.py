@@ -65,8 +65,8 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     @abstractmethod
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         pass
 
@@ -150,7 +150,7 @@ class CampoBruto(DadoBruto, CampoBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None

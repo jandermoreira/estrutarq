@@ -60,16 +60,16 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None
 
 
-# cadeia de caracteres com prefixo de comprimento
+# cadeia de caracteres com prefixo de comprimento_bloco
 class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres prefixada pelo comprimento
+    Classe para cadeia de caracteres prefixada pelo comprimento_bloco
     """
 
     def __init__(self, *args, **kwargs):
@@ -77,15 +77,15 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None
 
 
 class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres com comprimento fixo e preenchimento
+    Classe para cadeia de caracteres com comprimento_bloco fixo e preenchimento
     de dados inválidos
     """
 
@@ -95,7 +95,7 @@ class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento

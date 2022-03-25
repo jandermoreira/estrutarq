@@ -137,8 +137,8 @@ class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
@@ -157,8 +157,8 @@ class CampoDataFixo(DadoFixo, CampoTempoBasicoFixo):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
@@ -177,8 +177,8 @@ class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
@@ -196,8 +196,8 @@ class CampoHoraFixo(DadoFixo, CampoTempoBasicoFixo):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
@@ -216,8 +216,8 @@ class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
@@ -236,7 +236,7 @@ class CampoTempoFixo(DadoFixo, CampoTempoBasicoFixo):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento

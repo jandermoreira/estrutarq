@@ -58,23 +58,23 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
         
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None
 
 
 
 class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
-    """Classe para inteiro textual com prefixo de comprimento"""
+    """Classe para inteiro textual com prefixo de comprimento_bloco"""
 
     def __init__(self, **kwargs):
         super().__init__("int prefixado", **kwargs)
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None
 
@@ -89,8 +89,8 @@ class CampoIntFixo(DadoFixo, CampoIntBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
@@ -114,7 +114,7 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
         :param dado: sequência de bytes
         """
         if len(dado) != self.numero_bytes:
-            raise TypeError("Sequência de bytes com comprimento inesperado.")
+            raise TypeError("Sequência de bytes com comprimento_bloco inesperado.")
         self.valor = int.from_bytes(dado, "big", signed = True)
 
     def valor_para_bytes(self) -> bytes:
@@ -128,7 +128,7 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento

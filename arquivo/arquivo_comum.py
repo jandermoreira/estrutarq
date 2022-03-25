@@ -33,7 +33,7 @@ class Arquivo:
         except IOError:
             raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
         else:
-            # Dois bytes para o comprimento do bloco
+            # Dois bytes para o comprimento_bloco do bloco
             comprimento_do_bloco = comprimento_de_bloco(
                 dirname(self.nome_arquivo))
             comprimento_em_bytes = comprimento_do_bloco.to_bytes(

@@ -50,7 +50,7 @@ class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
 
 class CampoRealFixo(DadoFixo, CampoRealBasico):
     """
-    Classe para campo real com representação textual de comprimento fixo
+    Classe para campo real com representação textual de comprimento_bloco fixo
     """
 
     def __init__(self, comprimento: int, **kwargs):
@@ -59,15 +59,15 @@ class CampoRealFixo(DadoFixo, CampoRealBasico):
         
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
 
 
 class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
     """
-    Classe para campo real com representação textual de comprimento fixo
+    Classe para campo real com representação textual de comprimento_bloco fixo
     """
 
     def __init__(self, **kwargs):
@@ -75,15 +75,15 @@ class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None
 
 
 class CampoRealTerminador(DadoTerminador, CampoRealBasico):
     """
-    Classe para campo real com representação textual de comprimento fixo
+    Classe para campo real com representação textual de comprimento_bloco fixo
     """
 
     def __init__(self, terminador: bytes = terminador_de_campo,
@@ -93,8 +93,8 @@ class CampoRealTerminador(DadoTerminador, CampoRealBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return None
 
@@ -128,7 +128,7 @@ class CampoRealBinario(DadoBinario, CampoRealBasico):
 
     def comprimento_fixo(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se for variável 
+        Obtém o comprimento_bloco do campo, se ele for fixo
+        :return: o comprimento_bloco do campo se for fixo ou None se for variável
         """
         return self.comprimento
