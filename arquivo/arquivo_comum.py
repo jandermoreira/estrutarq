@@ -60,10 +60,17 @@ class ArquivoBasico(metaclass = ABCMeta):
         pass
 
     @abstractmethod
-    def leia(self) -> bytes:
+    def leia(self) -> RegistroBasico:
         """
-        Leitura dos dados do arquivo
-        :return: a sequência de bytes lida
+        Leitura de um registro do arquivo
+        :return: o registro lido
+        """
+        pass
+
+    @abstractmethod
+    def escreva(self, registro: RegistroBasico):
+        """
+        Gravação de um registro no arquivo
         """
         pass
 
@@ -109,6 +116,12 @@ class ArquivoSimplesFixo(ArquivoBasico):
         :return: a sequência de bytes lida
         """
 
+    def escreva(self, registro: RegistroBasico, offset: int = None,
+                posicao_relativa: int = None):
+        """
+        Gravação de um registro no arquivo
+        """
+        registro.escreva(self.arquivo)
 
 # class GABloco:
 #

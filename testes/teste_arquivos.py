@@ -6,18 +6,16 @@ from estrutarq.registro import RegistroFixo
 
 
 def main():
-    registro = RegistroFixo(0x60,
-                            ("nome", CampoCadeiaTerminador(valor = "AB")),
+    registro = RegistroFixo(60,
+                            ("nome", CampoCadeiaTerminador()),
                             ("sobrenome", CampoCadeiaTerminador()),
                             ("endereco", CampoCadeiaTerminador()),
                             )
     arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro, novo = True)
-    registro.nome.valor = "Jander"
-    registro.sobrenome.valor = "Moreira"
-    registro.endereco.valor = "Passeio das Palmeiras"
-    print(registro.nome)
-
-    registro.escreva(arquivo.arquivo)
+    registro.nome.valor = "Jan\x00der"
+    registro.sobrenome.valor = "Mo\xfereira"
+    registro.endereco.valor = "Passeio das\x1bPalmeiras"
+    arquivo.escreva(registro)
     arquivo.feche()
     system("hd /tmp/arq.dat")
 
