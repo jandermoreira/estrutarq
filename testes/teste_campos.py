@@ -42,11 +42,11 @@ sem_comprimento = [
         # CampoRealPrefixado,
         # CampoIntBinario,
         # CampoRealBinario,
-    CampoDataBinario,
-    # CampoDataFixo,
-    # CampoHoraBinario,
+        # CampoDataBinario,
+    CampoDataFixo,
+        # CampoHoraBinario,
     # CampoHoraFixo,
-    # CampoTempoBinario,
+        # CampoTempoBinario,
     # CampoTempoFixo,
 ]
 

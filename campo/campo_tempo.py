@@ -133,7 +133,7 @@ class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
         CampoTempoBasicoBinario.__init__(self, "data binário",
                                          self.formato_data, apenas_data = True,
                                          **kwargs)
-        DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
+        DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
     # def comprimento_fixo(self):
     #     """
@@ -173,7 +173,7 @@ class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
         CampoTempoBasicoBinario.__init__(self, "hora binário",
                                          self.formato_hora, apenas_data = False,
                                          **kwargs)
-        DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
+        DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
     # def comprimento_fixo(self):
     #     """
@@ -212,7 +212,7 @@ class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
         CampoTempoBasicoBinario.__init__(self, "tempo binário",
                                          self.formato_tempo,
                                          apenas_data = False, **kwargs)
-        DadoBinario.__init__(self, CampoTempoBasicoBinario.comprimento)
+        DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
     # def comprimento_fixo(self):
     #     """

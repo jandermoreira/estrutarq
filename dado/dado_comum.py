@@ -156,7 +156,7 @@ class DadoBruto(DadoBasico):
 
 class DadoBinario(DadoBasico):
     """
-    Classe para dados binários com um determinado comprimento_bloco em bytes
+    Classe para dados binários com um determinado comprimento em bytes
     """
 
     __comprimento = None
@@ -197,7 +197,7 @@ class DadoBinario(DadoBasico):
 
     def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
         """
-        Recuperação de um dado binário de comprimento_bloco definido a partir de
+        Recuperação de um dado binário de comprimento definido a partir de
         uma sequência de bytes
         :param sequencia: sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de organização
@@ -217,7 +217,7 @@ class DadoBinario(DadoBasico):
         :return: o dado formatado
         """
         if len(dado) != self._comprimento:
-            raise TypeError("O dado não possui o comprimento_bloco correto")
+            raise TypeError("O dado não possui o comprimento correto")
         return dado
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
@@ -228,32 +228,32 @@ class DadoBinario(DadoBasico):
         """
         if len(sequencia) != self._comprimento:
             raise TypeError("A sequência de dados não possui o "
-                            "comprimento_bloco correto")
+                            "comprimento correto")
         return sequencia
     # code::end
 
 
 class DadoFixo(DadoBasico):
     """
-    Classe dado de comprimento_bloco fixo
+    Classe dado de comprimento fixo
     """
 
     def __init__(self, comprimento: int, preenchimento = b'\xFF'):
         DadoBasico.__init__(self)
-        self.comprimento = comprimento
+        self._comprimento = comprimento
         self.preenchimento = preenchimento
         self._comprimento_fixo = True
 
     @property
-    def comprimento(self):
+    def _comprimento(self):
         return self.__comprimento
 
-    @comprimento.setter
-    def comprimento(self, comprimento: int):
+    @_comprimento.setter
+    def _comprimento(self, comprimento: int):
         if not isinstance(comprimento, int):
-            raise AttributeError("O comprimento_bloco deve ser inteiro")
+            raise AttributeError("O comprimento deve ser inteiro")
         if comprimento <= 0:
-            raise AttributeError("O comprimento_bloco mínimo para é um byte")
+            raise AttributeError("O comprimento mínimo para é um byte")
         self.__comprimento = comprimento
 
     @property
@@ -275,14 +275,14 @@ class DadoFixo(DadoBasico):
     # code::start fixo_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado de comprimento_bloco fixo a partir do arquivo
+        Leitura de um único dado de comprimento fixo a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: os bytes do campo
 
         Os bytes de preenchimento que existirem são removidos.
         """
-        dado = arquivo.read(self.comprimento)
-        if len(dado) != self.comprimento:
+        dado = arquivo.read(self._comprimento)
+        if len(dado) != self._comprimento:
             raise EOFError
         else:
             return self.remova_formatacao(dado)
@@ -298,8 +298,8 @@ class DadoFixo(DadoBasico):
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
         """
-        sequencia_restante = sequencia[self.comprimento:]
-        sequencia = sequencia[:self.comprimento] + self.preenchimento
+        sequencia_restante = sequencia[self._comprimento:]
+        sequencia = sequencia[:self._comprimento] + self.preenchimento
         dado_limpo = self.varredura_com_enchimento(sequencia,
                                                    self.preenchimento)[0][:-1]
         return self.esvaziamento_de_bytes(dado_limpo), sequencia_restante
@@ -307,15 +307,15 @@ class DadoFixo(DadoBasico):
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: ajusta o dado para o comprimento_bloco definido,
+        Formatação do dado: ajusta o dado para o comprimento definido,
         truncando ou adicionando o byte de preenchimento
         :param dado: valor do dado
-        :return: o dado formatado no comprimento_bloco especificado
+        :return: o dado formatado no comprimento especificado
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
-        dado_restrito = dado_enchimento[:self.comprimento]
+        dado_restrito = dado_enchimento[:self._comprimento]
         dado_efetivo = (dado_restrito + self.preenchimento *
-                        (self.comprimento - len(dado_restrito)))
+                        (self._comprimento - len(dado_restrito)))
         dado_recuperado = self.remova_formatacao(dado_efetivo)
         if dado_recuperado != dado[:len(dado_recuperado)]:
             print(self)
@@ -331,16 +331,16 @@ class DadoFixo(DadoBasico):
         :param sequencia: bytes de dados
         :return: dado efetivo, sem preenchimento
         """
-        # if len(sequencia) != self.comprimento_bloco:
+        # if len(sequencia) != self.comprimento:
         #     raise TypeError(
-        #     "A sequência de dados tem comprimento_bloco incorreto.")
+        #     "A sequência de dados tem comprimento incorreto.")
         return self.leia_de_bytes(sequencia)[0]
         # code::end
 
 
 class DadoPrefixado(DadoBasico):
     """
-    Classe dado prefixados pelo seu comprimento_bloco
+    Classe dado prefixados pelo seu comprimento
     """
 
     def __init__(self):
@@ -349,11 +349,11 @@ class DadoPrefixado(DadoBasico):
     # code::start prefixado_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado prefixado pelo comprimento_bloco
+        Leitura de um único dado prefixado pelo comprimento
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: os bytes do dado
 
-        O comprimento_bloco é armazenado como um inteiro de 2 bytes, big-endian.
+        O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
         Em caso de falha na leitura é lançada a exceção EOFError
         """
         bytes_comprimento = arquivo.read(2)
@@ -387,7 +387,7 @@ class DadoPrefixado(DadoBasico):
     # code::start prefixado_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: acréscimo do prefixo binário com comprimento_bloco
+        Formatação do dado: acréscimo do prefixo binário com comprimento
         (2 bytes, big-endian, sem sinal)
         :param dado: valor do dado
         :return: o dado formatado
@@ -397,9 +397,9 @@ class DadoPrefixado(DadoBasico):
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
-        Desformatação do dado: remoção dos dois bytes do comprimento_bloco
+        Desformatação do dado: remoção dos dois bytes do comprimento
         :param sequencia: bytes de dados
-        :return: dado efetivo, sem o prefixo de comprimento_bloco
+        :return: dado efetivo, sem o prefixo de comprimento
         """
         dado, sequencia_restante = self.leia_de_bytes(sequencia)
         if len(sequencia_restante) != 0:
