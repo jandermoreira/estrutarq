@@ -1,98 +1,64 @@
-#############################
-# Implementação de arquivos
-#############################
+#
+#  Blocos
+#
 
-from os.path import dirname, exists
-from time import localtime, mktime
-
-from campo import *
-from registro import RegistroFixo
-from utilitarios.dispositivo import comprimento_de_bloco
+from typing import BinaryIO
+from os import fstat
 
 
-class Arquivo:
-    lista_campos_cabecalho = [
-        ("comprimento_do_bloco", CampoIntFixo(8)),
-        ("criacao", CampoTempoFixo()),
-        ("quantidade_de_esquemas", CampoIntFixo(2)),
-    ]
+# from dado import DadoFixo
 
-    def __init__(self, nome: str, novo: bool = False):
-        self.nome_arquivo = nome
-        if not exists(self.nome_arquivo) or novo:
-            self._crie_arquivo_novo()
-        else:
-            self._abra_arquivo_existente()
+class GerenciadorArquivo:
+    """
+    Gerenciador dedicado a um único arquivo aberto. O arquivo pode ser
+    simples ou usando blocos, cada um deles podendo conter registros de
+    comprimento fixo ou variável
+    """
 
-    def _crie_arquivo_novo(self):
-        """
-            Criação de um arquivo novo, com seu cabeçalho
-        """
-        try:
-            self._arquivo = open(self.nome_arquivo, "wb")
-        except IOError:
-            raise IOError(f"Erro de criação do arquivo {self.nome_arquivo}.")
-        else:
-            # Dois bytes para o comprimento_bloco do bloco
-            comprimento_do_bloco = comprimento_de_bloco(
-                dirname(self.nome_arquivo))
-            comprimento_em_bytes = comprimento_do_bloco.to_bytes(
-                2, "big", signed = False)
-            self._arquivo.write(comprimento_em_bytes)
+    def __init__(self, arquivo: BinaryIO, tipo: str):
+        self.tipo = tipo
+        self.arquivo = arquivo
 
-            # Restante do cabeçalho
-            self.cabecalho = RegistroFixo(comprimento_do_bloco - 2,
-                                          *self.lista_campos_cabecalho)
-            self.cabecalho.comprimento_do_bloco.valor = comprimento_do_bloco
-            self.cabecalho.criacao.segundos = int(mktime(localtime()))
-            self.cabecalho.escreva(self._arquivo)
 
-    def _abra_arquivo_existente(self):
-        """
+class GASimplesFixo(GerenciadorArquivo):
+    """
+    Gerenciador de arquivo simples (como fluxo de dados) com registros de
+    comprimento fixo.
+    """
 
-        """
-        try:
-            self._arquivo = open(self.nome_arquivo, "rb")
-        except IOError:
-            raise IOError(f"Erro de abertura do arquivo {self.nome_arquivo}.")
-        else:
-            # Obtenção do cabeçalho
-            comprimento_do_bloco = int.from_bytes(
-                self._arquivo.read(2), "big", signed = False)
-            self.cabecalho = RegistroFixo(comprimento_do_bloco - 2,
-                                          *self.lista_campos_cabecalho)
-            self.cabecalho.leia(self._arquivo)
-            print(self.cabecalho)
+    def __init__(self, arquivo: BinaryIO, comprimento_registro: int):
+        super().__init__(arquivo, "simples fixo")
+        self.comprimento_registro = comprimento_registro
 
-    def registro(self, formato):
-        """
 
-        :param formato:
-        :return:
-        """
+class GABloco:
 
-    #     if isinstance(formato, str):
-    #         # cria arquivo a partir de especificação textual
-    #         ""
-    #     elif isinstance(RegistroBasico):
-    #         # cria arquivo a partir de um registro pré-existente
-    #         ""
-    #     else:
-    #         raise TypeError("Esperado um registro ou uma especificação.")
+    def __init__(self, arquivo: BinaryIO, comprimento_bloco: int):
+        self.arquivo = arquivo
+        self.comprimento_bloco = comprimento_bloco
+        self.proximo_novo = fstat(
+            self.arquivo.fileno()).st_size / comprimento_bloco
 
-    def feche(self):
-        """
-        Fechamento do arquivo associado
-        """
-        self._arquivo.close()
 
-    def __str__(self):
-        """
-        Descrição textual do arquivo
-        """
-        descricao = \
-            f"Nome do arquivo: {self.nome_arquivo}\n" + \
-            f"Data de criação: {self.cabecalho.criacao.valor}\n" + \
-            "Comprimento do bloco na criação: " + \
-            f"{self.cabecalho.comprimento_do_bloco} bytes\n"
-        return descricao
+# class BlocoBasico:
+#     def __init__(self, comprimento_bloco: int):
+#         self.comprimento = comprimento_bloco
+#
+#     def novo_bloco(self):
+#         """
+#         Criação de um novo bloco em MP
+#         :return:
+#         """
+#
+#
+# class BlocoRegistrosFixos(BlocoBasico):
+#     """
+#     Blocos com registros de comprimento_bloco fixo:
+#         -uso do byte offset para indicar o início de cada registro
+#         -controle do espaço livre pelo número de bytes disponível
+#     """
+#
+#     def __init__(self, comprimento_bloco: int, arquivo: BinaryIO,
+#                  comprimento_registro: int):
+#         super().__init__(comprimento_bloco)
+#         self.comprimento_registro = comprimento_registro
