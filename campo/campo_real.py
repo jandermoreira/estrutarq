@@ -71,14 +71,14 @@ class CampoRealPrefixado(DadoPrefixado, CampoRealBasico):
     """
 
     def __init__(self, **kwargs):
-        super().__init__("real prefixado", **kwargs)
+        CampoRealBasico.__init__(self, "real prefixado", **kwargs)
 
-    def comprimento_fixo(self):
-        """
-        Obtém o comprimento_bloco do campo, se ele for fixo
-        :return: o comprimento_bloco do campo se for fixo ou None se for variável
-        """
-        return None
+    # def comprimento_fixo(self):
+    #     """
+    #     Obtém o comprimento_bloco do campo, se ele for fixo
+    #     :return: o comprimento_bloco do campo se for fixo ou None se for variável
+    #     """
+    #     return None
 
 
 class CampoRealTerminador(DadoTerminador, CampoRealBasico):

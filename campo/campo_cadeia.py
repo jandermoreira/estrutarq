@@ -69,8 +69,6 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     def __init__(self, *args, **kwargs):
         CampoCadeiaBasico.__init__(self, "cadeia prefixado", *args, **kwargs)
         DadoPrefixado.__init__(self)
-        self._comprimento_fixo = True
-
 
 
 class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):

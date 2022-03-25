@@ -35,8 +35,8 @@ com_comprimento = [
 
 sem_comprimento = [
     # CampoCadeiaTerminador, CampoIntTerminador, CampoRealTerminador,
-    CampoCadeiaPrefixado,
-    # CampoIntPrefixado, CampoRealPrefixado,
+    # CampoCadeiaPrefixado,
+    CampoIntPrefixado, CampoRealPrefixado,
     # CampoIntBinario, CampoRealBinario,
     # CampoDataBinario, CampoDataFixo,
     # CampoHoraBinario, CampoHoraFixo,
@@ -51,6 +51,7 @@ def teste(tipo_campo):
         campo = tipo_campo(25)
     else:
         campo = tipo_campo()
+    imprima("fixo?", campo.comprimento_fixo())
     imprima("valor padrão do campo", campo.valor)
     info = [valor_campo[k] for k in valor_campo.keys() if k in campo.tipo][0]
     imprima("dado em uso", info)
@@ -93,6 +94,7 @@ def teste(tipo_campo):
         campo = tipo_campo(valor = info)
     imprima("valor atribuído no construtor", campo.valor)
     compare(info, campo.valor)
+    # input("Press ENTER")
     print()
 
 
