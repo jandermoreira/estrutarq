@@ -29,6 +29,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         self.__tipo = tipo
         self.lista_campos = {}
         self.adicione_campos(*lista_campos)
+        self._comprimento_fixo = False
 
     @property
     def tipo(self):
@@ -88,34 +89,29 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
             dado_campos += campo.adicione_formatacao(campo.valor_para_bytes())
         return dado_campos
 
-    def tem_comprimento_fixo(self):
-        """
-        Verifica se o registro tem comprimento_bloco fixo
-        :return: True se o comprimento_bloco for fixo
+    # def tem_comprimento_fixo(self):
+    #     """
+    #     Verifica se o registro tem comprimento fixo
+    #     :return: True se o comprimento for fixo
+    #
+    #     O registro é considerado de tamanho fixo se qualquer uma das
+    #     propriedades foram verdadeiras:
+    #         1) o registro tem o atributo 'comprimento'
+    #         2) todos os campos tiverem comprimento fixo
+    #     """
+    #     registro_fixo = hasattr(self, "comprimento")
+    #     campos_fixos = all(hasattr(campo, "comprimento") for campo in
+    #                        self.lista_campos.values())
+    #     return registro_fixo or campos_fixos
 
-        O registro é considerado de tamanho fixo se qualquer uma das
-        propriedades foram verdadeiras:
-            1) o registro tem o atributo 'comprimento_bloco'
-            2) todos os campos tiverem comprimento_bloco fixo
+    def comprimento(self):
         """
-        registro_fixo = hasattr(self, "comprimento_bloco")
-        campos_fixos = all(hasattr(campo, "comprimento_bloco") for campo in
-                           self.lista_campos.values())
-        return registro_fixo or campos_fixos
-
-    def comprimento_fixo(self):
-        """
-        Retorna o comprimento_bloco do registro em bytes caso ele tenha comprimento_bloco
+        Retorna o comprimento do registro em bytes caso ele tenha comprimento
         total fixo
-        :return: o comprimento_bloco do registro em bytes ou None se tiver
-        comprimento_bloco variável
+        :return: o comprimento do registro em bytes ou None se tiver
+        comprimento variável
         """
-        comprimentos = [campo.comprimento_fixo() for campo in
-                        self.lista_campos.values()]
-        if None not in comprimentos:
-            return sum(comprimentos)
-        else:
-            return None
+        return sum(campo.comprimento() for campo in self.lista_campos.values())
 
     def _leia_registro(self, arquivo):
         """
@@ -132,7 +128,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         Obtenção de um registro a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
 
-        Sendo possível determinar o comprimento_bloco do registro como um valor
+        Sendo possível determinar o comprimento do registro como um valor
         fixo e conhecido, todos os bytes são lidos em uma única chamada de
         leitura; caso contrário, é feita a recuperação de acordo com a
         organização de registro utilizada.
@@ -159,8 +155,8 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :param arquivo:
         """
         bytes_dados = self.para_bytes()
-        if hasattr(self, "comprimento_bloco") and len(bytes_dados) > self.comprimento:
-            raise ValueError("Comprimento do dados excede máximo do registro.")
+        # if hasattr(self, "comprimento") and len(bytes_dados) > self.comprimento:
+        #     raise ValueError("Comprimento do dados excede máximo do registro.")
         arquivo.write(self.adicione_formatacao(bytes_dados))
 
     def __str__(self):
@@ -188,7 +184,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
     """
 
     def __init__(self, *lista_campos):
-        RegistroBasico.__init__(self,"bruto", *lista_campos)
+        RegistroBasico.__init__(self, "bruto", *lista_campos)
         DadoBruto.__init__(self)
 
     # code::start bruto_leia_registro
@@ -204,7 +200,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
 
 class RegistroPrefixado(DadoPrefixado, RegistroBasico):
     """
-    Classe para registros prefixados pelo comprimento_bloco
+    Classe para registros prefixados pelo comprimento
     """
 
     def __init__(self, *lista_campos):
@@ -231,3 +227,4 @@ class RegistroFixo(DadoFixo, RegistroBasico):
         RegistroBasico.__init__(self, "fixo", *lista_campos)
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)
+        self._comprimento_fixo = True

@@ -77,7 +77,7 @@ def crie_registro():
 
 
 def main():
-    numero_registros = 1000
+    numero_registros = 20
 
     print("Criando /tmp/dados com", numero_registros, "registros")
     arquivo = open("/tmp/dados", "wb")
@@ -92,6 +92,7 @@ def main():
         reg.rrn.valor = i
         # print("**************\n", reg)
         reg.escreva(arquivo)
+        print(reg.comprimento())
     print("100%      ")
     arquivo.close()
 
