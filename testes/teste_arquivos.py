@@ -17,6 +17,12 @@ def main():
     registro.endereco.valor = "Passeio das\x1bPalmeiras"
     arquivo.escreva(registro)
     arquivo.feche()
+
+    arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro)
+    registro = arquivo.leia()
+    arquivo.feche()
+    print(registro)
+
     system("hd /tmp/arq.dat")
 
 

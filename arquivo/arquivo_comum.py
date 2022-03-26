@@ -95,7 +95,7 @@ class ArquivoSimplesFixo(ArquivoBasico):
 
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
-        self.registro = esquema_registro
+        self.esquema_registro = esquema_registro.copy()
         self.comprimento_registro = registro._comprimento()
         print(self.comprimento_registro)
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
@@ -112,17 +112,20 @@ class ArquivoSimplesFixo(ArquivoBasico):
         """
         pass
 
-    def leia(self) -> bytes:
+    def leia(self):
         """
         Leitura dos dados do arquivo
-        :return: a sequência de bytes lida
+        :return: o registro lido
         """
+        registro = self.esquema_registro.copy()
+        registro.leia(self.arquivo)
+        return registro
 
     def escreva(self, registro: RegistroBasico, posicao_relativa: int = None):
         """
         Gravação de um registro no arquivo
         """
-        if posicao_relativa != None:
+        if posicao_relativa is not None:
             self.arquivo.seek(posicao_relativa * self.comprimento_registro)
         registro.escreva(self.arquivo)
 
