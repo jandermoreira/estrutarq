@@ -125,7 +125,6 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Obtenção de um registro a partir do arquivo
         :param arquivo: arquivo binário aberto com permissão de leitura
-
         """
         self._leia_registro(arquivo)
 
