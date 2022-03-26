@@ -1,28 +1,50 @@
 from os import system
 
 from estrutarq.arquivo import ArquivoSimplesFixo
-from estrutarq.campo import CampoCadeiaTerminador
-from estrutarq.registro import RegistroFixo
+from estrutarq.campo import *
+from estrutarq.registro import *
+
+from random import sample
+
+nomes = ["jander", "jonatan", "jurandir", "zilda", "olivia", "elisa"]
+sobrenomes = ["moreira", "caseli", "lima", "medeiros", "anversa"]
+enderecos = ["passeio das palmeiras", "rua XV", "carlos botelho"]
+
+dados = [[nome, sobrenome, endereco]
+         for nome in nomes
+         for sobrenome in sobrenomes
+         for endereco in enderecos]
 
 
 def main():
-    registro = RegistroFixo(60,
-                            ("nome", CampoCadeiaTerminador()),
-                            ("sobrenome", CampoCadeiaTerminador()),
-                            ("endereco", CampoCadeiaTerminador()),
-                            )
+    registro = RegistroTerminador(
+        ("nome", CampoCadeiaTerminador()),
+        ("sobrenome", CampoCadeiaPrefixado()),
+        ("endereco", CampoCadeiaTerminador()),
+    )
     arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro, novo = True)
-    registro.nome.valor = "Jan\x00der"
-    registro.sobrenome.valor = "Mo\xfereira"
-    registro.endereco.valor = "Passeio das\x1bPalmeiras"
-    arquivo.escreva(registro)
+
+    numero_registros = 5
+    for nome, sobrenome, endereco in sample(dados, numero_registros):
+        registro.nome.valor = nome
+        registro.sobrenome.valor = sobrenome
+        registro.endereco.valor = endereco
+        arquivo.escreva(registro)
     arquivo.feche()
 
     arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro)
-    registro = arquivo.leia()
+    fim_de_arquivo = False
+    while not fim_de_arquivo:
+        try:
+            registro = arquivo.leia()
+        except IOError:
+            fim_de_arquivo = True
+        else:
+            print("-----------------")
+            print(registro)
     arquivo.feche()
-    print(registro)
 
+    print()
     system("hd /tmp/arq.dat")
 
 

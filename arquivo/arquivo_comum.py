@@ -96,8 +96,7 @@ class ArquivoSimplesFixo(ArquivoBasico):
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
         self.esquema_registro = esquema_registro.copy()
-        self.comprimento_registro = registro._comprimento()
-        print(self.comprimento_registro)
+        self.comprimento_registro = esquema_registro.comprimento()
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
 
     def _inicie_arquivo_novo(self):
