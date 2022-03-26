@@ -1,1 +1,1 @@
-from .arquivo_comum import ArquivoSimplesFixo
+from .arquivo_comum import ArquivoSimples

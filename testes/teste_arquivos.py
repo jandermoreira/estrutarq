@@ -1,6 +1,6 @@
 from os import system
 
-from estrutarq.arquivo import ArquivoSimplesFixo
+from estrutarq.arquivo import ArquivoSimples
 from estrutarq.campo import *
 from estrutarq.registro import *
 
@@ -22,7 +22,7 @@ def main():
         ("sobrenome", CampoCadeiaPrefixado()),
         ("endereco", CampoCadeiaTerminador()),
     )
-    arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro, novo = True)
+    arquivo = ArquivoSimples("/tmp/arq.dat", registro, novo = True)
 
     numero_registros = 30
     for nome, sobrenome, endereco in sample(dados, numero_registros):
@@ -33,7 +33,7 @@ def main():
     arquivo.feche()
 
     # registro.adicione_campos(("rnn", CampoIntBinario()))
-    arquivo = ArquivoSimplesFixo("/tmp/arq.dat", registro)
+    arquivo = ArquivoSimples("/tmp/arq.dat", registro)
     fim_de_arquivo = False
     while not fim_de_arquivo:
         try:

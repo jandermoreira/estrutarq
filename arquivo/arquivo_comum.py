@@ -87,7 +87,7 @@ class ArquivoBasico(metaclass = ABCMeta):
         return f"Nome do arquivo: {self.nome_arquivo}"
 
 
-class ArquivoSimplesFixo(ArquivoBasico):
+class ArquivoSimples(ArquivoBasico):
     """
     Gerenciador de arquivo simples (como fluxo de dados) com registros de
     comprimento fixo.
@@ -95,9 +95,16 @@ class ArquivoSimplesFixo(ArquivoBasico):
 
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
-        self.esquema_registro = esquema_registro.copy()
-        self.comprimento_registro = esquema_registro.comprimento()
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
+        self.esquema_registro = esquema_registro.copy()
+
+        if esquema_registro.tem_comprimento_fixo():
+            self.comprimento_registro = esquema_registro.comprimento()
+            self.leia = self.leia_fixo
+            self.escreva = self.esdreva_fixo
+        else:
+            self.leia = self.leia_variavel
+            self.escreva = self.escreva_variavel
 
     def _inicie_arquivo_novo(self):
         """
@@ -111,16 +118,41 @@ class ArquivoSimplesFixo(ArquivoBasico):
         """
         pass
 
-    def leia(self):
+    def leia_fixo(selfRegistroBasico, posicao_relativa: int = None):
         """
-        Leitura dos dados do arquivo
+        Leitura de um registro de comprimento fixo
         :return: o registro lido
         """
+        if posicao_relativa is not None:
+            self.arquivo.seek(posicao_relativa * self.comprimento_registro)
         registro = self.esquema_registro.copy()
         registro.leia(self.arquivo)
         return registro
 
-    def escreva(self, registro: RegistroBasico, posicao_relativa: int = None):
+    def escreva_fixo(self, registro: RegistroBasico,
+                     posicao_relativa: int = None):
+        """
+        Gravação de um registro no arquivo
+        """
+        # todo: ajustar o seek
+        if posicao_relativa is not None:
+            self.arquivo.seek(posicao_relativa * self.comprimento_registro, 0)
+        registro.escreva(self.arquivo)
+
+    def leia_variavel(selfRegistroBasico, posicao_relativa: int = None):
+        """
+        Leitura de um registro de comprimento variavel
+        :return: o registro lido
+        """
+        # todo: ajustar o seek
+        if posicao_relativa is not None:
+            self.arquivo.seek(posicao_relativa * self.comprimento_registro, 0)
+        registro = self.esquema_registro.copy()
+        registro.leia(self.arquivo)
+        return registro
+
+    def escreva_variavel(self, registro: RegistroBasico,
+                     posicao_relativa: int = None):
         """
         Gravação de um registro no arquivo
         """
