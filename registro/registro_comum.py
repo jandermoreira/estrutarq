@@ -100,8 +100,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
             2) todos os campos tiverem comprimento fixo
         """
         return self._comprimento_fixo or all(
-            campo.tem_comprimento_fixo() for campo in
-            self.lista_campos.values())
+            campo._comprimento_fixo for campo in self.lista_campos.values())
 
     def comprimento(self):
         """

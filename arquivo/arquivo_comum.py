@@ -157,6 +157,9 @@ class ArquivoSimples(ArquivoBasico):
             self.arquivo.seek(0)
             for i in range(posicao_relativa):
                 registro.leia(self.arquivo)
+        else:
+            # leitura do próximo
+            registro.leia(self.arquivo)
         return registro
 
     def escreva_variavel(self, registro: RegistroBasico,
