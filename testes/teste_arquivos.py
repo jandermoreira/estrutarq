@@ -15,20 +15,28 @@ dados = [[nome, sobrenome, endereco]
          for sobrenome in sobrenomes
          for endereco in enderecos]
 
+def igual(valor1, valor2):
+    if valor1 != valor2:
+        print("**", valor1, "!=", valor2)
+        exit(1)
 
 def teste(registro):
     arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro, novo = True)
 
-    numero_registros = 2
+    numero_registros = 300
 
     print("Escrevendo registros: ", end = "")
     contador = 0
-    for nome, sobrenome, endereco in sample(dados, numero_registros):
-        print(f"({contador})", end = "")
+    amostras = sample(dados, numero_registros)
+    if len(amostras) < numero_registros:
+        amostras = amostras * (numero_registros//len(amostras))
+    print(len(amostras))
+    for nome, sobrenome, endereco in amostras:
         registro.numero.valor = contador
         registro.nome.valor = nome
         registro.sobrenome.valor = sobrenome
         registro.endereco.valor = endereco
+        print(f"({contador}, {registro.numero})", end = "")
         arquivo.escreva(registro)
         contador += 1
     print()
@@ -48,8 +56,8 @@ def teste(registro):
         except EOFError:
             fim_de_arquivo = True
         else:
-            print(f"({contador})", end = "")
-            print(registro)
+            print(f"({contador}, {registro.numero})", end = "")
+            igual(contador, registro.numero.valor)
             contador += 1
         if contador > numero_registros + 1:
             print("Algo errado aqui com o número de leituras...")
@@ -66,8 +74,8 @@ def teste(registro):
             print(erro)
             raise IOError("Fora do intervalo")
         else:
-            print(f"({posicao})", end = "")
-            print("--------------\n", registro)
+            print(f"({posicao}, {registro.numero})", end = "")
+            igual(posicao, registro.numero.valor)
     arquivo.feche()
 
     print()
@@ -85,7 +93,7 @@ def main():
         # ),
         RegistroTerminador(
             ("numero", CampoIntBinario()),
-            ("nome", CampoCadeiaTerminador()),
+            ("nome", CampoCadeiaFixo(12)),
             ("sobrenome", CampoCadeiaPrefixado()),
             ("endereco", CampoCadeiaTerminador()),
         ),

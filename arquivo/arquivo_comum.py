@@ -155,8 +155,7 @@ class ArquivoSimples(ArquivoBasico):
         if posicao_relativa is not None:
             # busca sequencial a partir do início do arquivo
             self.arquivo.seek(0)
-            for i in range(posicao_relativa):
-                print(">>>>>>>>>", i)
+            for i in range(posicao_relativa + 1):
                 registro.leia(self.arquivo)
         else:
             # leitura do próximo
