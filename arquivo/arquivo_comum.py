@@ -80,6 +80,13 @@ class ArquivoBasico(metaclass = ABCMeta):
         """
         self.arquivo.close()
 
+    def posicao_atual(self):
+        """
+        Posição atual do arquivo
+        :return:
+        """
+        return self.arquivo.tell()
+
     def __str__(self):
         """
         Descrição textual do arquivo
@@ -101,6 +108,7 @@ class ArquivoSimples(ArquivoBasico):
             self.comprimento_registro = esquema_registro.comprimento()
             self.leia_efetivo = self.leia_fixo
             self.escreva_efetivo = self.escreva_fixo
+            print("> comprimento do registro fixo:", self.comprimento_registro)
         else:
             self.leia_efetivo = self.leia_variavel
             self.escreva_efetivo = self.escreva_variavel
@@ -122,10 +130,10 @@ class ArquivoSimples(ArquivoBasico):
         Leitura de um registro de comprimento fixo
         :return: o registro lido
         """
+        registro = self.esquema_registro.copy()
         if posicao_relativa is not None:
             # posicionamento por acesso direto
             self.arquivo.seek(posicao_relativa * self.comprimento_registro)
-        registro = self.esquema_registro.copy()
         registro.leia(self.arquivo)
         return registro
 
@@ -134,7 +142,6 @@ class ArquivoSimples(ArquivoBasico):
         """
         Gravação de um registro no arquivo
         """
-        # todo: ajustar o seek
         if posicao_relativa is not None:
             self.arquivo.seek(posicao_relativa * self.comprimento_registro)
         registro.escreva(self.arquivo)
@@ -144,7 +151,6 @@ class ArquivoSimples(ArquivoBasico):
         Leitura de um registro de comprimento variavel
         :return: o registro lido
         """
-        # todo: ajustar o seek
         registro = self.esquema_registro.copy()
         if posicao_relativa is not None:
             # busca sequencial a partir do início do arquivo

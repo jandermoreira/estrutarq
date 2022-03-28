@@ -100,7 +100,8 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
             2) todos os campos tiverem comprimento fixo
         """
         return self._comprimento_fixo or all(
-            campo._comprimento_fixo for campo in self.lista_campos.values())
+            campo.tem_comprimento_fixo() for campo in
+            self.lista_campos.values())
 
     def comprimento(self):
         """
@@ -109,7 +110,11 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :return: o comprimento do registro em bytes ou None se tiver
         comprimento variável
         """
-        return sum(campo.comprimento() for campo in self.lista_campos.values())
+        if self._comprimento_fixo:
+            return self._comprimento
+        else:
+            return sum(
+                campo.comprimento() for campo in self.lista_campos.values())
 
     def _leia_registro(self, arquivo):
         """
