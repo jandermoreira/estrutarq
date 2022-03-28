@@ -4,7 +4,7 @@ from estrutarq.arquivo import ArquivoSimples
 from estrutarq.campo import *
 from estrutarq.registro import *
 
-from random import sample
+from random import sample, shuffle
 
 nomes = ["jander", "jonatan", "jurandir", "zilda", "olivia", "elisa"]
 sobrenomes = ["moreira", "caseli", "lima", "medeiros", "anversa"]
@@ -25,28 +25,38 @@ def main():
     arquivo = ArquivoSimples("/tmp/arq.dat", registro, novo = True)
 
     numero_registros = 30
+
+    print("Escrevendo registros: ", end = "")
     for nome, sobrenome, endereco in sample(dados, numero_registros):
+        print(".", end = "")
         registro.nome.valor = nome
         registro.sobrenome.valor = sobrenome
         registro.endereco.valor = endereco
         arquivo.escreva(registro)
+    print()
     arquivo.feche()
 
-    # registro.adicione_campos(("rnn", CampoIntBinario()))
     arquivo = ArquivoSimples("/tmp/arq.dat", registro)
     fim_de_arquivo = False
+    print("Lendo registros sequencialmente: ", end = "")
     while not fim_de_arquivo:
         try:
             registro = arquivo.leia()
         except EOFError:
             fim_de_arquivo = True
         else:
-            print("-----------------")
-            print(registro)
+            print(".", end = "")
+    print()
+
+    print("Leituras aleatórias: ", end = "")
+    consultas = list(range(numero_registros))
+    shuffle(consultas)
+    for posicao in consultas:
+        print(posicao)
     arquivo.feche()
 
     print()
-    system("hd /tmp/arq.dat")
+    # system("hd /tmp/arq.dat")
 
 
 if __name__ == '__main__':

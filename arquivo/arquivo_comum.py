@@ -97,14 +97,13 @@ class ArquivoSimples(ArquivoBasico):
                  **kwargs):
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
         self.esquema_registro = esquema_registro.copy()
-
         if esquema_registro.tem_comprimento_fixo():
             self.comprimento_registro = esquema_registro.comprimento()
-            self.leia = self.leia_fixo
-            self.escreva = self.escreva_fixo
+            self.leia_efetivo = self.leia_fixo
+            self.escreva_efetivo = self.escreva_fixo
         else:
-            self.leia = self.leia_variavel
-            self.escreva = self.escreva_variavel
+            self.leia_efetivo = self.leia_variavel
+            self.escreva_efetivo = self.escreva_variavel
 
     def _inicie_arquivo_novo(self):
         """
@@ -155,11 +154,24 @@ class ArquivoSimples(ArquivoBasico):
         return registro
 
     def escreva_variavel(self, registro: RegistroBasico,
-                     deslocamento: int = None):
+                         deslocamento: int = None):
         """
         Gravação de um registro no arquivo
         """
         pass
+
+    def leia(self, **kwargs) -> RegistroBasico:
+        """
+        Leitura de um registro do arquivo
+        :return: o registro lido
+        """
+        return self.leia_efetivo(**kwargs)
+
+    def escreva(self, registro: RegistroBasico, **kwargs):
+        """
+        Gravação de um registro no arquivo
+        """
+        self.escreva_efetivo(registro, **kwargs)
 
 # class GABloco:
 #
