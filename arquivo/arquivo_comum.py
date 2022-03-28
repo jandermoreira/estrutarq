@@ -156,6 +156,7 @@ class ArquivoSimples(ArquivoBasico):
             # busca sequencial a partir do início do arquivo
             self.arquivo.seek(0)
             for i in range(posicao_relativa):
+                print(">>>>>>>>>", i)
                 registro.leia(self.arquivo)
         else:
             # leitura do próximo
@@ -167,7 +168,7 @@ class ArquivoSimples(ArquivoBasico):
         """
         Gravação de um registro no arquivo
         """
-        pass
+        registro.escreva(self.arquivo)
 
     def leia(self, **kwargs) -> RegistroBasico:
         """

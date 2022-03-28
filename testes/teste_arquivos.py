@@ -17,7 +17,7 @@ dados = [[nome, sobrenome, endereco]
 
 
 def teste(registro):
-    arquivo = ArquivoSimples("/tmp/arq.dat", registro, novo = True)
+    arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro, novo = True)
 
     numero_registros = 2
 
@@ -34,11 +34,15 @@ def teste(registro):
     print()
     arquivo.feche()
 
-    arquivo = ArquivoSimples("/tmp/arq.dat", registro)
+    # system("ls -l /tmp/arq-teste.dat")
+    # system("hd /tmp/arq-teste.dat")
+
+    arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro)
     fim_de_arquivo = False
     print("Lendo registros sequencialmente: ", end = "")
     contador = 0
     while not fim_de_arquivo:
+        # print("p", arquivo.arquivo.tell())
         try:
             registro = arquivo.leia()
         except EOFError:
@@ -48,22 +52,22 @@ def teste(registro):
             print(registro)
             contador += 1
         if contador > numero_registros + 1:
-            print("Algo errado aqui...")
+            print("Algo errado aqui com o número de leituras...")
             exit(1)
     print()
 
-    # print("Leituras aleatórias: ", end = "")
-    # consultas = list(range(numero_registros))
-    # shuffle(consultas)
-    # for posicao in consultas:
-    #     print(f"({posicao})", end = "")
-    #     try:
-    #         registro = arquivo.leia(posicao_relativa = posicao)
-    #     except IOError as erro:
-    #         print(erro)
-    #         raise erro
-    #     else:
-    #         print("--------------\n", registro)
+    print("Leituras aleatórias: ", end = "")
+    consultas = list(range(numero_registros))
+    shuffle(consultas)
+    for posicao in consultas:
+        try:
+            registro = arquivo.leia(posicao_relativa = posicao)
+        except IOError as erro:
+            print(erro)
+            raise IOError("Fora do intervalo")
+        else:
+            print(f"({posicao})", end = "")
+            print("--------------\n", registro)
     arquivo.feche()
 
     print()
