@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Estruturas de arquivos'
+project = 'Estruturas de drquivos'
 copyright = '2022, Jander Moreira'
 author = 'Jander Moreira'
 
