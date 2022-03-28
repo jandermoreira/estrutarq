@@ -125,9 +125,11 @@ class ArquivoSimples(ArquivoBasico):
         """
         pass
 
-    def leia_fixo(self, posicao_relativa: int = None):
+    def leia_fixo(self, posicao_relativa: int = None) -> RegistroBasico:
         """
         Leitura de um registro de comprimento fixo
+        :param posicao_relativa: posição relativa do registro no arquivo,
+            com o primeiro registro sendo o registro 0
         :return: o registro lido
         """
         registro = self.esquema_registro.copy()
@@ -141,15 +143,22 @@ class ArquivoSimples(ArquivoBasico):
                      posicao_relativa: int = None):
         """
         Gravação de um registro no arquivo
+        :param registro: o registro a ser escrito
+        :param posicao_relativa: posição relativa do registro no arquivo,
+            com o primeiro registro sendo o registro 0
         """
         if posicao_relativa is not None:
             self.arquivo.seek(posicao_relativa * self.comprimento_registro)
         registro.escreva(self.arquivo)
 
-    def leia_variavel(self, posicao_relativa: int = None):
+    def leia_variavel(self, posicao_relativa: int = None) -> RegistroBasico:
         """
         Leitura de um registro de comprimento variavel
+        :param posicao_relativa: posição relativa do registro no arquivo,
+            com o primeiro registro sendo o registro 0
         :return: o registro lido
+
+        A determinação da posição relativa é feita por busca sequencial
         """
         registro = self.esquema_registro.copy()
         if posicao_relativa is not None:
@@ -166,19 +175,30 @@ class ArquivoSimples(ArquivoBasico):
                          deslocamento: int = None):
         """
         Gravação de um registro no arquivo
+        :param registro: o registro a ser escrito
+        :param deslocamento: posição absoluta (byte offset) da posição
+            de escrita
         """
+        if deslocamento is not None:
+            self.arquivo.seek(deslocamento)
         registro.escreva(self.arquivo)
 
     def leia(self, **kwargs) -> RegistroBasico:
         """
         Leitura de um registro do arquivo
         :return: o registro lido
+
+        self.leia_efetivo chama leia_fixo ou leia_variável, conforme
+        o registro tenha comprimento fixo ou variável
         """
         return self.leia_efetivo(**kwargs)
 
     def escreva(self, registro: RegistroBasico, **kwargs):
         """
         Gravação de um registro no arquivo
+
+        self.escreva_efetivo chama escreva_fixo ou escreva_variável, conforme
+        o registro tenha comprimento fixo ou variável
         """
         self.escreva_efetivo(registro, **kwargs)
 
