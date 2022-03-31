@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QtHelpProject version="1.0">
+    <namespace>org.sphinx.estruturasdearquivosestrutarq</namespace>
+    <virtualFolder>doc</virtualFolder>
+    <customFilter name="Estruturas de arquivos: estrutarq ">
+        <filterAttribute>Estruturasdearquivosestrutarq</filterAttribute>
+        <filterAttribute></filterAttribute>
+    </customFilter>
+    <filterSection>
+        <filterAttribute>Estruturasdearquivosestrutarq</filterAttribute>
+        <filterAttribute></filterAttribute>
+        <toc>
+            <section title="documentação Estruturas de arquivos: estrutarq 0.1" ref="index.html">
+                <section title="Índice de Módulos Python" ref="py-modindex.html"/>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_cadeia.CampoCadeiaBasico)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_comum.CampoBruto)" ref="index.html#estrutarq.campo.campo_comum.CampoBruto.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_inteiro.CampoIntBasico)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_inteiro.CampoIntBinario)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBinario.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_real.CampoRealBasico)" ref="index.html#estrutarq.campo.campo_real.CampoRealBasico.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_real.CampoRealBinario)" ref="index.html#estrutarq.campo.campo_real.CampoRealBinario.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_tempo.CampoTempoBasicoBinario)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.bytes_para_valor"/>
+            <keyword name="bytes_para_valor() (método estrutarq.campo.campo_tempo.CampoTempoBasicoFixo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.bytes_para_valor"/>
+            <keyword name="CampoBasico (classe em estrutarq.campo.campo_comum)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico"/>
+            <keyword name="CampoBruto (classe em estrutarq.campo.campo_comum)" ref="index.html#estrutarq.campo.campo_comum.CampoBruto"/>
+            <keyword name="CampoCadeiaBasico (classe em estrutarq.campo.campo_cadeia)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico"/>
+            <keyword name="CampoCadeiaFixo (classe em estrutarq.campo.campo_cadeia)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaFixo"/>
+            <keyword name="CampoCadeiaPrefixado (classe em estrutarq.campo.campo_cadeia)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaPrefixado"/>
+            <keyword name="CampoCadeiaTerminador (classe em estrutarq.campo.campo_cadeia)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaTerminador"/>
+            <keyword name="CampoDataBinario (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoDataBinario"/>
+            <keyword name="CampoDataFixo (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoDataFixo"/>
+            <keyword name="CampoHoraBinario (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoHoraBinario"/>
+            <keyword name="CampoHoraFixo (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoHoraFixo"/>
+            <keyword name="CampoIntBasico (classe em estrutarq.campo.campo_inteiro)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBasico"/>
+            <keyword name="CampoIntBinario (classe em estrutarq.campo.campo_inteiro)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBinario"/>
+            <keyword name="CampoIntFixo (classe em estrutarq.campo.campo_inteiro)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntFixo"/>
+            <keyword name="CampoIntPrefixado (classe em estrutarq.campo.campo_inteiro)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntPrefixado"/>
+            <keyword name="CampoIntTerminador (classe em estrutarq.campo.campo_inteiro)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntTerminador"/>
+            <keyword name="CampoRealBasico (classe em estrutarq.campo.campo_real)" ref="index.html#estrutarq.campo.campo_real.CampoRealBasico"/>
+            <keyword name="CampoRealBinario (classe em estrutarq.campo.campo_real)" ref="index.html#estrutarq.campo.campo_real.CampoRealBinario"/>
+            <keyword name="CampoRealFixo (classe em estrutarq.campo.campo_real)" ref="index.html#estrutarq.campo.campo_real.CampoRealFixo"/>
+            <keyword name="CampoRealPrefixado (classe em estrutarq.campo.campo_real)" ref="index.html#estrutarq.campo.campo_real.CampoRealPrefixado"/>
+            <keyword name="CampoRealTerminador (classe em estrutarq.campo.campo_real)" ref="index.html#estrutarq.campo.campo_real.CampoRealTerminador"/>
+            <keyword name="CampoTempoBasico (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasico"/>
+            <keyword name="CampoTempoBasicoBinario (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario"/>
+            <keyword name="CampoTempoBasicoFixo (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo"/>
+            <keyword name="CampoTempoBinario (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBinario"/>
+            <keyword name="CampoTempoFixo (classe em estrutarq.campo.campo_tempo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoFixo"/>
+            <keyword name="comprimento() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.comprimento"/>
+            <keyword name="comprimento_fixo() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.comprimento_fixo"/>
+            <keyword name="copy() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.copy"/>
+            <keyword name="escreva() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.escreva"/>
+            <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_cadeia"/>
+            <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_comum"/>
+            <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_inteiro"/>
+            <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_real"/>
+            <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_tempo"/>
+            <keyword name="leia() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.leia"/>
+            <keyword name="estrutarq.campo.campo_cadeia" ref="index.html#module-estrutarq.campo.campo_cadeia"/>
+            <keyword name="estrutarq.campo.campo_comum" ref="index.html#module-estrutarq.campo.campo_comum"/>
+            <keyword name="estrutarq.campo.campo_inteiro" ref="index.html#module-estrutarq.campo.campo_inteiro"/>
+            <keyword name="estrutarq.campo.campo_real" ref="index.html#module-estrutarq.campo.campo_real"/>
+            <keyword name="estrutarq.campo.campo_tempo" ref="index.html#module-estrutarq.campo.campo_tempo"/>
+            <keyword name="valor (propriedade estrutarq.campo.campo_cadeia.CampoCadeiaBasico )" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor"/>
+            <keyword name="valor (propriedade estrutarq.campo.campo_comum.CampoBasico )" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.valor"/>
+            <keyword name="valor (propriedade estrutarq.campo.campo_comum.CampoBruto )" ref="index.html#estrutarq.campo.campo_comum.CampoBruto.valor"/>
+            <keyword name="valor (propriedade estrutarq.campo.campo_inteiro.CampoIntBasico )" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBasico.valor"/>
+            <keyword name="valor (propriedade estrutarq.campo.campo_real.CampoRealBasico )" ref="index.html#estrutarq.campo.campo_real.CampoRealBasico.valor"/>
+            <keyword name="valor (propriedade estrutarq.campo.campo_tempo.CampoTempoBasico )" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasico.valor"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_cadeia.CampoCadeiaBasico)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_comum.CampoBruto)" ref="index.html#estrutarq.campo.campo_comum.CampoBruto.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_inteiro.CampoIntBasico)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_inteiro.CampoIntBinario)" ref="index.html#estrutarq.campo.campo_inteiro.CampoIntBinario.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_real.CampoRealBasico)" ref="index.html#estrutarq.campo.campo_real.CampoRealBasico.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_real.CampoRealBinario)" ref="index.html#estrutarq.campo.campo_real.CampoRealBinario.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_tempo.CampoTempoBasicoBinario)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes"/>
+            <keyword name="valor_para_bytes() (método estrutarq.campo.campo_tempo.CampoTempoBasicoFixo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.valor_para_bytes"/>
+        </keywords>
+        <files>
+            <file>genindex.html</file>
+            <file>index.html</file>
+            <file>py-modindex.html</file>
+            <file>_static/basic.css</file>
+            <file>_static/file.png</file>
+            <file>_static/minus.png</file>
+            <file>_static/nonav.css</file>
+            <file>_static/plus.png</file>
+            <file>_static/pygments.css</file>
+            <file>_modules/index.html</file>
+            <file>_modules/estrutarq/campo/campo_cadeia.html</file>
+            <file>_modules/estrutarq/campo/campo_comum.html</file>
+            <file>_modules/estrutarq/campo/campo_inteiro.html</file>
+            <file>_modules/estrutarq/campo/campo_real.html</file>
+            <file>_modules/estrutarq/campo/campo_tempo.html</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

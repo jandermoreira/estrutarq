@@ -37,17 +37,17 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 
     # code::start conversoes
     def bytes_para_valor(self, dado: bytes):
-        """
-        Atribuição de valor a partir da representação de dados
+        """Armazenamento da sequência de bytes de ``dado`` como valor
+        do campo.
         
-        :param dado: sequência de bytes
+        :param dado: sequência de bytes com codificação UTF-8
         :type dado: bytes
         """
         self.valor = dado.decode("utf-8")
 
     def valor_para_bytes(self) -> bytes:
-        """Retorno do valor armazenado no campo convertido para
-        sequência de bytes usando codificação UTF-8.
+        """Retorno do valor do campo convertido para sequência
+        de bytes usando codificação UTF-8.
         
         :return: sequência de bytes
         :rtype: bytes

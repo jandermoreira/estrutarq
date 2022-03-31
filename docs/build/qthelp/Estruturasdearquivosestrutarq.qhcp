@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QHelpCollectionProject version="1.0">
+    <assistant>
+        <title>documentação Estruturas de arquivos: estrutarq 0.1</title>
+        <homePage>qthelp://org.sphinx.estruturasdearquivosestrutarq/doc/index.html</homePage>
+        <startPage>qthelp://org.sphinx.estruturasdearquivosestrutarq/doc/index.html</startPage>
+    </assistant>
+    <docFiles>
+        <generate>
+            <file>
+                <input>Estruturasdearquivosestrutarq.qhp</input>
+                <output>Estruturasdearquivosestrutarq.qch</output>
+            </file>
+        </generate>
+        <register>
+            <file>Estruturasdearquivosestrutarq.qch</file>
+        </register>
+    </docFiles>
+</QHelpCollectionProject>
