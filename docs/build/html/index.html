@@ -162,12 +162,24 @@ sequência de bytes, usando codificação UTF-8
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_cadeia.</span></span><span class="sig-name descname"><span class="pre">CampoCadeiaBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Classe básica para cadeias de caracteres</p>
+<dd><p>Classe básica para cadeias de caracteres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – nome do tipo (definido nas classes derivadas)</p></li>
+<li><p><strong>valor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><em>opcional</em>) – o valor a ser armazenado no campo (padrão: <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor">
 <span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Atribuição de valor a partir da representação de dados
-:param dado: sequência de bytes</p>
+<dd><p>Atribuição de valor a partir da representação de dados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -180,9 +192,16 @@ sequência de bytes, usando codificação UTF-8
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor_para_bytes">
 <span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Conversão da cadeia de caracteres para sequência de bytes com
-codificação UTF-8
-:return: sequência de bytes</p>
+<dd><p>Retorno do valor armazenado no campo convertido para
+sequência de bytes usando codificação UTF-8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>sequência de bytes</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -204,6 +223,11 @@ de dados inválidos</p>
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaTerminador">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_cadeia.</span></span><span class="sig-name descname"><span class="pre">CampoCadeiaTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaTerminador" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Classe para cadeia de caracteres com terminador</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>:class:dict</em>) – parâmetros nomeados a serem repassados</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

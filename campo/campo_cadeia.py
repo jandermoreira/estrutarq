@@ -13,7 +13,12 @@ from .campo_comum import CampoBasico, terminador_de_campo
 # cadeia de caracteres básica
 class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     """
-    Classe básica para cadeias de caracteres
+    Classe básica para cadeias de caracteres.
+
+    :param tipo: nome do tipo (definido nas classes derivadas)
+    :type tipo: str
+    :param valor: o valor a ser armazenado no campo (padrão: ``""``)
+    :type valor: str, opcional
     """
 
     def __init__(self, tipo: str, valor: str = ""):
@@ -34,15 +39,18 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     def bytes_para_valor(self, dado: bytes):
         """
         Atribuição de valor a partir da representação de dados
+        
         :param dado: sequência de bytes
+        :type dado: bytes
         """
         self.valor = dado.decode("utf-8")
 
     def valor_para_bytes(self) -> bytes:
-        """
-        Conversão da cadeia de caracteres para sequência de bytes com
-        codificação UTF-8
+        """Retorno do valor armazenado no campo convertido para
+        sequência de bytes usando codificação UTF-8.
+        
         :return: sequência de bytes
+        :rtype: bytes
         """
         return bytes(self.valor, "utf-8")
     # code::end
@@ -52,6 +60,9 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     """
     Classe para cadeia de caracteres com terminador
+
+    :param kwargs: parâmetros nomeados a serem repassados
+    :type kwargs: :class:dict
     """
 
     def __init__(self, **kwargs):
