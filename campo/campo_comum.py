@@ -15,8 +15,10 @@ terminador_de_campo = b"\x00"
 
 
 class CampoBasico(DadoBasico, metaclass = ABCMeta):
-    """
-    Estruturação básica do campo como menor unidade de informação.
+    """Estruturação básica do campo como menor unidade de informação.
+
+    :param tipo: cadeia de caracteres com o nome do tipo
+    :type tipo: str
     """
 
     def __init__(self, tipo: str):
@@ -31,8 +33,8 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     @abstractmethod
     def valor(self):
         """
-        Recuperação, com as devidas conversões, do atributo __valor
-        :return: o valor de __valor
+        Recuperação, com as devidas conversões, do atributo ``__valor``
+        :return: o valor de ``__valor``
         """
         pass
 
@@ -66,15 +68,16 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     def comprimento_fixo(self):
         """
         Retorna se o comprimento é ou não fixo
-        :return: True para comprimento fixo ou False para variável
+
+        :return: `True` para comprimento fixo ou `False` para variável
         """
         return self._comprimento_fixo
 
     def comprimento(self):
         """
-        Obtém o comprimento do campo, se ele for fixo
-        :return: o comprimento do campo se for fixo ou None se
-            for variável
+        Obtém o comprimento atual do campo
+
+        :return: o comprimento do campo
         """
         return len(self.adicione_formatacao(self.valor_para_bytes()))
 
@@ -83,6 +86,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         Conversão dos dado lidos para o valor do campo, obedecendo à
         organização e formato de representação
+
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_de_arquivo(arquivo)
@@ -92,6 +96,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         Conversão do valor para sequência de bytes e armazenamento no
         arquivo
+
         :param arquivo: arquivo binário aberto com permissão de escrita
         """
         dado = self.valor_para_bytes()
@@ -102,6 +107,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     def __str__(self):
         """
         Valor padrão do campo para um 'print'
+
         :return: o valor do campo
         """
         return str(self.valor)

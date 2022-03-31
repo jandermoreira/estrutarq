@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Documentação para estrutarq &#8212; documentação Estruturas de arquivos 0.1</title>
+    <title>Documentação para estrutarq &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -36,12 +36,18 @@
 <h1>Documentação para estrutarq<a class="headerlink" href="#documentacao-para-estrutarq" title="Link permanente para este título">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<section id="modulo-campo">
-<h2>Módulo campo<a class="headerlink" href="#modulo-campo" title="Link permanente para este título">¶</a></h2>
-<span class="target" id="module-estrutarq.campo.campo_comum"></span><dl class="py class">
+</section>
+<section id="module-estrutarq.campo.campo_comum">
+<span id="modulo-campo"></span><h1>Módulo campo<a class="headerlink" href="#module-estrutarq.campo.campo_comum" title="Link permanente para este título">¶</a></h1>
+<dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_comum.</span></span><span class="sig-name descname"><span class="pre">CampoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Estruturação básica do campo como menor unidade de informação.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – cadeia de caracteres com o nome do tipo</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico.bytes_para_valor">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
@@ -54,18 +60,23 @@ do campo, de acordo com a representação de dados
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico.comprimento">
 <span class="sig-name descname"><span class="pre">comprimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico.comprimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico.comprimento" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Obtém o comprimento do campo, se ele for fixo
-:return: o comprimento do campo se for fixo ou None se</p>
-<blockquote>
-<div><p>for variável</p>
-</div></blockquote>
+<dd><p>Obtém o comprimento atual do campo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>o comprimento do campo</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico.comprimento_fixo">
 <span class="sig-name descname"><span class="pre">comprimento_fixo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico.comprimento_fixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico.comprimento_fixo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Retorna se o comprimento é ou não fixo
-:return: True para comprimento fixo ou False para variável</p>
+<dd><p>Retorna se o comprimento é ou não fixo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p><cite>True</cite> para comprimento fixo ou <cite>False</cite> para variável</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -79,23 +90,31 @@ do campo, de acordo com a representação de dados
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico.escreva">
 <span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico.escreva" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Conversão do valor para sequência de bytes e armazenamento no
-arquivo
-:param arquivo: arquivo binário aberto com permissão de escrita</p>
+arquivo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de escrita</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico.leia">
 <span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico.leia" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Conversão dos dado lidos para o valor do campo, obedecendo à
-organização e formato de representação
-:param arquivo: arquivo binário aberto com permissão de leitura</p>
+organização e formato de representação</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBasico.valor">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação, com as devidas conversões, do atributo __valor
-:return: o valor de __valor</p>
+<dd><p>Recuperação, com as devidas conversões, do atributo <code class="docutils literal notranslate"><span class="pre">__valor</span></code>
+:return: o valor de <code class="docutils literal notranslate"><span class="pre">__valor</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -124,8 +143,8 @@ uma cadeia de caracteres simples
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.CampoBruto.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.campo_comum.CampoBruto.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação, com as devidas conversões, do atributo __valor
-:return: o valor de __valor</p>
+<dd><p>Recuperação, com as devidas conversões, do atributo <code class="docutils literal notranslate"><span class="pre">__valor</span></code>
+:return: o valor de <code class="docutils literal notranslate"><span class="pre">__valor</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -139,7 +158,7 @@ sequência de bytes, usando codificação UTF-8
 </dd></dl>
 
 <section id="module-estrutarq.campo.campo_cadeia">
-<span id="cadeias-de-caracteres"></span><h3>Cadeias de caracteres<a class="headerlink" href="#module-estrutarq.campo.campo_cadeia" title="Link permanente para este título">¶</a></h3>
+<span id="cadeias-de-caracteres"></span><h2>Cadeias de caracteres<a class="headerlink" href="#module-estrutarq.campo.campo_cadeia" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_cadeia.</span></span><span class="sig-name descname"><span class="pre">CampoCadeiaBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="Link permanente para esta definição">¶</a></dt>
@@ -154,8 +173,8 @@ sequência de bytes, usando codificação UTF-8
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação, com as devidas conversões, do atributo __valor
-:return: o valor de __valor</p>
+<dd><p>Recuperação, com as devidas conversões, do atributo <code class="docutils literal notranslate"><span class="pre">__valor</span></code>
+:return: o valor de <code class="docutils literal notranslate"><span class="pre">__valor</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -189,7 +208,7 @@ de dados inválidos</p>
 
 </section>
 <section id="module-estrutarq.campo.campo_inteiro">
-<span id="inteiros"></span><h3>Inteiros<a class="headerlink" href="#module-estrutarq.campo.campo_inteiro" title="Link permanente para este título">¶</a></h3>
+<span id="inteiros"></span><h2>Inteiros<a class="headerlink" href="#module-estrutarq.campo.campo_inteiro" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_inteiro.</span></span><span class="sig-name descname"><span class="pre">CampoIntBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="Link permanente para esta definição">¶</a></dt>
@@ -205,8 +224,8 @@ para inteiro
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação, com as devidas conversões, do atributo __valor
-:return: o valor de __valor</p>
+<dd><p>Recuperação, com as devidas conversões, do atributo <code class="docutils literal notranslate"><span class="pre">__valor</span></code>
+:return: o valor de <code class="docutils literal notranslate"><span class="pre">__valor</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -262,7 +281,7 @@ representação binária big-endian com sinal
 
 </section>
 <section id="module-estrutarq.campo.campo_real">
-<span id="reais"></span><h3>Reais<a class="headerlink" href="#module-estrutarq.campo.campo_real" title="Link permanente para este título">¶</a></h3>
+<span id="reais"></span><h2>Reais<a class="headerlink" href="#module-estrutarq.campo.campo_real" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_real.</span></span><span class="sig-name descname"><span class="pre">CampoRealBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(em Python v3.10)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealBasico" title="Link permanente para esta definição">¶</a></dt>
@@ -277,8 +296,8 @@ representação binária big-endian com sinal
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBasico.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(em Python v3.10)"><span class="pre">float</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação, com as devidas conversões, do atributo __valor
-:return: o valor de __valor</p>
+<dd><p>Recuperação, com as devidas conversões, do atributo <code class="docutils literal notranslate"><span class="pre">__valor</span></code>
+:return: o valor de <code class="docutils literal notranslate"><span class="pre">__valor</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -332,7 +351,7 @@ IEEE 754 de precisão dupla
 
 </section>
 <section id="module-estrutarq.campo.campo_tempo">
-<span id="tempo-datas-e-horas"></span><h3>Tempo (datas e horas)<a class="headerlink" href="#module-estrutarq.campo.campo_tempo" title="Link permanente para este título">¶</a></h3>
+<span id="tempo-datas-e-horas"></span><h2>Tempo (datas e horas)<a class="headerlink" href="#module-estrutarq.campo.campo_tempo" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoDataBinario">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_tempo.</span></span><span class="sig-name descname"><span class="pre">CampoDataBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoDataBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoDataBinario" title="Link permanente para esta definição">¶</a></dt>
@@ -372,8 +391,8 @@ internamente como o número de segundos desde 1/1/1970, 0h00min00s.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação, com as devidas conversões, do atributo __valor
-:return: o valor de __valor</p>
+<dd><p>Recuperação, com as devidas conversões, do atributo <code class="docutils literal notranslate"><span class="pre">__valor</span></code>
+:return: o valor de <code class="docutils literal notranslate"><span class="pre">__valor</span></code></p>
 </dd></dl>
 
 </dd></dl>
@@ -440,7 +459,6 @@ big-endian.</p>
 
 </section>
 </section>
-</section>
 
 
           </div>
@@ -449,7 +467,7 @@ big-endian.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">Estruturas de arquivos</a></h1>
+<h1 class="logo"><a href="#">Estruturas de arquivos: estrutarq</a></h1>
 
 
 
