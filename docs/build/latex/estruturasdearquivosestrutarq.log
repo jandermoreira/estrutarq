@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2022.3.2)  31 MAR 2022 11:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2022.3.2)  31 MAR 2022 14:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1262,16 +1262,16 @@ Overfull \hbox (22.24248pt too wide) in paragraph at lines 129--131
 [10]) (./estruturasdearquivosestrutarq.aux)
 Package rerunfilecheck Info: File `estruturasdearquivosestrutarq.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: D720E4C9B2459A0CEAC637544F0F63BB;879.
+(rerunfilecheck)             Checksum: 41770C8E46E373B64C878E5614844CD9;1033.
  ) 
 Here is how much of TeX's memory you used:
- 14141 strings out of 479304
- 205566 string characters out of 5869780
- 548677 words of memory out of 5000000
- 30896 multiletter control sequences out of 15000+600000
- 451942 words of font info for 67 fonts, out of 8000000 for 9000
+ 14151 strings out of 479304
+ 205737 string characters out of 5869780
+ 549548 words of memory out of 5000000
+ 30903 multiletter control sequences out of 15000+600000
+ 457791 words of font info for 69 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 83i,12n,88p,989b,536s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 83i,12n,88p,989b,634s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/share/texmf/fonts/
 enc/dvips/tex-gyre/q-ec.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></
@@ -1282,10 +1282,10 @@ fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
 xfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xt
 t.pfb>
-Output written on estruturasdearquivosestrutarq.pdf (14 pages, 184948 bytes).
+Output written on estruturasdearquivosestrutarq.pdf (14 pages, 187134 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 76 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 346 PDF objects out of 1000 (max. 8388607)
+ 311 compressed objects within 4 object streams
+ 77 named destinations out of 1000 (max. 500000)
+ 85 words of extra memory for PDF output out of 10000 (max. 10000000)
 

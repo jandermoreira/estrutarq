@@ -1080,6 +1080,8 @@ INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmri.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qhvb.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmr.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qhvr.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT ./estruturasdearquivosestrutarq.ind
 INPUT estruturasdearquivosestrutarq.ind

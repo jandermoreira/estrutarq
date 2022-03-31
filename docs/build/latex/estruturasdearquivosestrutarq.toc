@@ -1,8 +1,9 @@
 \babel@toc {brazil}{}
 \contentsline {chapter}{\numberline {1}Módulo campo}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Cadeias de caracteres}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}campo.campo\_cadeia}{2}{subsection.1.1.1}%
 \contentsline {section}{\numberline {1.2}Inteiros}{3}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Reais}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.3}Reais}{4}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Tempo (datas e horas)}{4}{section.1.4}%
 \contentsline {chapter}{Índice de Módulos Python}{7}{section*.57}%
 \contentsline {chapter}{Índice}{9}{section*.58}%

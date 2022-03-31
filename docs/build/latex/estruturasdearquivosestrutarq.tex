@@ -290,7 +290,44 @@ sequência de bytes, usando codificação UTF\sphinxhyphen{}8
 
 
 \section{Cadeias de caracteres}
-\label{\detokenize{index:module-estrutarq.campo.campo_cadeia}}\label{\detokenize{index:cadeias-de-caracteres}}\index{módulo@\spxentry{módulo}!estrutarq.campo.campo\_cadeia@\spxentry{estrutarq.campo.campo\_cadeia}}\index{estrutarq.campo.campo\_cadeia@\spxentry{estrutarq.campo.campo\_cadeia}!módulo@\spxentry{módulo}}\index{CampoCadeiaBasico (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaBasico}\spxextra{classe em estrutarq.campo.campo\_cadeia}}
+\label{\detokenize{index:module-estrutarq.campo.campo_cadeia}}\label{\detokenize{index:cadeias-de-caracteres}}\index{módulo@\spxentry{módulo}!estrutarq.campo.campo\_cadeia@\spxentry{estrutarq.campo.campo\_cadeia}}\index{estrutarq.campo.campo\_cadeia@\spxentry{estrutarq.campo.campo\_cadeia}!módulo@\spxentry{módulo}}
+
+\subsection{campo.campo\_cadeia}
+\label{\detokenize{index:campo-campo-cadeia}}
+\sphinxAtStartPar
+Campos para armazenamento de cadeias de caracteres.
+
+\sphinxAtStartPar
+Este arquivo provê classes para uso de campos cujo conteúdo é
+uma cadeia de caracteres. Internamente, o tipo \sphinxtitleref{str} é usado
+para armazenamento e a transformação para sequência de bytes
+usa a codificação UTF\sphinxhyphen{}8.
+
+\sphinxAtStartPar
+Uma classe básica {\hyperref[\detokenize{index:estrutarq.campo.campo_cadeia.CampoCadeiaBasico}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{CampoCadeiaBasico}}}}} define uma classe
+abstrata (ABC) com as propriedades e métodos gerais. Dela são
+derivadas campos:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Com terminadores
+
+\item {} 
+\sphinxAtStartPar
+Prefixada pelo comprimento
+
+\item {} 
+\sphinxAtStartPar
+De comprimento fixo predefinido
+
+\end{itemize}
+
+\sphinxAtStartPar
+Jander Moreira, 2021\sphinxhyphen{}2022
+
+\sphinxAtStartPar
+Licença:
+\index{CampoCadeiaBasico (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaBasico}\spxextra{classe em estrutarq.campo.campo\_cadeia}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{index:estrutarq.campo.campo_cadeia.CampoCadeiaBasico}}
@@ -320,11 +357,12 @@ Classe básica para cadeias de caracteres.
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{bytes\_para\_valor}}}{\emph{\DUrole{n}{dado}\DUrole{p}{:}\DUrole{w}{  }\DUrole{n}{\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#bytes}{bytes}}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Atribuição de valor a partir da representação de dados
+Armazenamento da sequência de bytes de \sphinxcode{\sphinxupquote{dado}} como valor
+do campo.
 \begin{quote}\begin{description}
 \item[{Parâmetros}] \leavevmode
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{dado}} (\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#bytes}{\sphinxstyleliteralemphasis{\sphinxupquote{bytes}}}) \textendash{} sequência de bytes
+\sphinxstyleliteralstrong{\sphinxupquote{dado}} (\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#bytes}{\sphinxstyleliteralemphasis{\sphinxupquote{bytes}}}) \textendash{} sequência de bytes com codificação UTF\sphinxhyphen{}8
 
 \end{description}\end{quote}
 
@@ -351,9 +389,18 @@ Recuperação, com as devidas conversões, do atributo \sphinxcode{\sphinxupquot
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{valor\_para\_bytes}}}{}{{ $\rightarrow$ \sphinxhref{https://docs.python.org/3/library/stdtypes.html\#bytes}{bytes}}}
 \pysigstopsignatures
 \sphinxAtStartPar
-Conversão da cadeia de caracteres para sequência de bytes com
-codificação UTF\sphinxhyphen{}8
-:return: sequência de bytes
+Retorno do valor do campo convertido para sequência
+de bytes usando codificação UTF\sphinxhyphen{}8.
+\begin{quote}\begin{description}
+\item[{Retorna}] \leavevmode
+\sphinxAtStartPar
+sequência de bytes
+
+\item[{Tipo de retorno}] \leavevmode
+\sphinxAtStartPar
+\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#bytes}{bytes}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 

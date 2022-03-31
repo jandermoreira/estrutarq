@@ -16,11 +16,11 @@
   \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_inteiro.CampoIntBinario}, 
 		\hyperpage{3}
   \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}, 
-		\hyperpage{3}
-  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}, 
-		\hyperpage{3}
-  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}, 
 		\hyperpage{4}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}, 
+		\hyperpage{4}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}, 
+		\hyperpage{5}
   \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo}, 
 		\hyperpage{5}
 
@@ -30,11 +30,11 @@
   \item \spxentry{CampoBruto}\spxextra{classe em estrutarq.campo.campo\_comum}, \hyperpage{2}
   \item \spxentry{CampoCadeiaBasico}\spxextra{classe em estrutarq.campo.campo\_cadeia}, 
 		\hyperpage{2}
-  \item \spxentry{CampoCadeiaFixo}\spxextra{classe em estrutarq.campo.campo\_cadeia}, \hyperpage{2}
+  \item \spxentry{CampoCadeiaFixo}\spxextra{classe em estrutarq.campo.campo\_cadeia}, \hyperpage{3}
   \item \spxentry{CampoCadeiaPrefixado}\spxextra{classe em estrutarq.campo.campo\_cadeia}, 
-		\hyperpage{2}
+		\hyperpage{3}
   \item \spxentry{CampoCadeiaTerminador}\spxextra{classe em estrutarq.campo.campo\_cadeia}, 
-		\hyperpage{2}
+		\hyperpage{3}
   \item \spxentry{CampoDataBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{4}
   \item \spxentry{CampoDataFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{4}
   \item \spxentry{CampoHoraBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{4}
@@ -47,8 +47,8 @@
 		\hyperpage{3}
   \item \spxentry{CampoIntTerminador}\spxextra{classe em estrutarq.campo.campo\_inteiro}, 
 		\hyperpage{3}
-  \item \spxentry{CampoRealBasico}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{3}
-  \item \spxentry{CampoRealBinario}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{3}
+  \item \spxentry{CampoRealBasico}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{4}
+  \item \spxentry{CampoRealBinario}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{4}
   \item \spxentry{CampoRealFixo}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{4}
   \item \spxentry{CampoRealPrefixado}\spxextra{classe em estrutarq.campo.campo\_real}, 
 		\hyperpage{4}
@@ -56,9 +56,9 @@
 		\hyperpage{4}
   \item \spxentry{CampoTempoBasico}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{4}
   \item \spxentry{CampoTempoBasicoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
-		\hyperpage{4}
+		\hyperpage{5}
   \item \spxentry{CampoTempoBasicoFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
-		\hyperpage{4}
+		\hyperpage{5}
   \item \spxentry{CampoTempoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
 		\hyperpage{5}
   \item \spxentry{CampoTempoFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{5}
@@ -79,7 +79,7 @@
   \item \spxentry{estrutarq.campo.campo\_inteiro}
     \subitem \spxentry{módulo}, \hyperpage{3}
   \item \spxentry{estrutarq.campo.campo\_real}
-    \subitem \spxentry{módulo}, \hyperpage{3}
+    \subitem \spxentry{módulo}, \hyperpage{4}
   \item \spxentry{estrutarq.campo.campo\_tempo}
     \subitem \spxentry{módulo}, \hyperpage{4}
 
@@ -93,7 +93,7 @@
     \subitem \spxentry{estrutarq.campo.campo\_cadeia}, \hyperpage{2}
     \subitem \spxentry{estrutarq.campo.campo\_comum}, \hyperpage{1}
     \subitem \spxentry{estrutarq.campo.campo\_inteiro}, \hyperpage{3}
-    \subitem \spxentry{estrutarq.campo.campo\_real}, \hyperpage{3}
+    \subitem \spxentry{estrutarq.campo.campo\_real}, \hyperpage{4}
     \subitem \spxentry{estrutarq.campo.campo\_tempo}, \hyperpage{4}
 
   \indexspace
@@ -107,9 +107,9 @@
   \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_inteiro.CampoIntBasico }, 
 		\hyperpage{3}
   \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_real.CampoRealBasico }, 
-		\hyperpage{3}
-  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico }, 
 		\hyperpage{4}
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico }, 
+		\hyperpage{5}
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico}, 
 		\hyperpage{2}
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, 
@@ -121,11 +121,11 @@
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_inteiro.CampoIntBinario}, 
 		\hyperpage{3}
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}, 
-		\hyperpage{3}
+		\hyperpage{4}
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}, 
 		\hyperpage{4}
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}, 
-		\hyperpage{4}
+		\hyperpage{5}
   \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo}, 
 		\hyperpage{5}
 

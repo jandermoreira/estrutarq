@@ -19,9 +19,9 @@
 \indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico}|hyperpage}{2}
 \indexentry{valor (propriedade estrutarq.campo.campo\_cadeia.CampoCadeiaBasico )@\spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_cadeia.CampoCadeiaBasico }|hyperpage}{2}
 \indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico}|hyperpage}{2}
-\indexentry{CampoCadeiaFixo (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaFixo}\spxextra{classe em estrutarq.campo.campo\_cadeia}|hyperpage}{2}
-\indexentry{CampoCadeiaPrefixado (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaPrefixado}\spxextra{classe em estrutarq.campo.campo\_cadeia}|hyperpage}{2}
-\indexentry{CampoCadeiaTerminador (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaTerminador}\spxextra{classe em estrutarq.campo.campo\_cadeia}|hyperpage}{2}
+\indexentry{CampoCadeiaFixo (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaFixo}\spxextra{classe em estrutarq.campo.campo\_cadeia}|hyperpage}{3}
+\indexentry{CampoCadeiaPrefixado (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaPrefixado}\spxextra{classe em estrutarq.campo.campo\_cadeia}|hyperpage}{3}
+\indexentry{CampoCadeiaTerminador (classe em estrutarq.campo.campo\_cadeia)@\spxentry{CampoCadeiaTerminador}\spxextra{classe em estrutarq.campo.campo\_cadeia}|hyperpage}{3}
 \indexentry{módulo@\spxentry{módulo}!estrutarq.campo.campo\_inteiro@\spxentry{estrutarq.campo.campo\_inteiro}|hyperpage}{3}
 \indexentry{estrutarq.campo.campo\_inteiro@\spxentry{estrutarq.campo.campo\_inteiro}!módulo@\spxentry{módulo}|hyperpage}{3}
 \indexentry{CampoIntBasico (classe em estrutarq.campo.campo\_inteiro)@\spxentry{CampoIntBasico}\spxextra{classe em estrutarq.campo.campo\_inteiro}|hyperpage}{3}
@@ -34,14 +34,14 @@
 \indexentry{CampoIntFixo (classe em estrutarq.campo.campo\_inteiro)@\spxentry{CampoIntFixo}\spxextra{classe em estrutarq.campo.campo\_inteiro}|hyperpage}{3}
 \indexentry{CampoIntPrefixado (classe em estrutarq.campo.campo\_inteiro)@\spxentry{CampoIntPrefixado}\spxextra{classe em estrutarq.campo.campo\_inteiro}|hyperpage}{3}
 \indexentry{CampoIntTerminador (classe em estrutarq.campo.campo\_inteiro)@\spxentry{CampoIntTerminador}\spxextra{classe em estrutarq.campo.campo\_inteiro}|hyperpage}{3}
-\indexentry{módulo@\spxentry{módulo}!estrutarq.campo.campo\_real@\spxentry{estrutarq.campo.campo\_real}|hyperpage}{3}
-\indexentry{estrutarq.campo.campo\_real@\spxentry{estrutarq.campo.campo\_real}!módulo@\spxentry{módulo}|hyperpage}{3}
-\indexentry{CampoRealBasico (classe em estrutarq.campo.campo\_real)@\spxentry{CampoRealBasico}\spxextra{classe em estrutarq.campo.campo\_real}|hyperpage}{3}
-\indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_real.CampoRealBasico)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}|hyperpage}{3}
-\indexentry{valor (propriedade estrutarq.campo.campo\_real.CampoRealBasico )@\spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_real.CampoRealBasico }|hyperpage}{3}
-\indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_real.CampoRealBasico)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}|hyperpage}{3}
-\indexentry{CampoRealBinario (classe em estrutarq.campo.campo\_real)@\spxentry{CampoRealBinario}\spxextra{classe em estrutarq.campo.campo\_real}|hyperpage}{3}
-\indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_real.CampoRealBinario)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}|hyperpage}{3}
+\indexentry{módulo@\spxentry{módulo}!estrutarq.campo.campo\_real@\spxentry{estrutarq.campo.campo\_real}|hyperpage}{4}
+\indexentry{estrutarq.campo.campo\_real@\spxentry{estrutarq.campo.campo\_real}!módulo@\spxentry{módulo}|hyperpage}{4}
+\indexentry{CampoRealBasico (classe em estrutarq.campo.campo\_real)@\spxentry{CampoRealBasico}\spxextra{classe em estrutarq.campo.campo\_real}|hyperpage}{4}
+\indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_real.CampoRealBasico)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}|hyperpage}{4}
+\indexentry{valor (propriedade estrutarq.campo.campo\_real.CampoRealBasico )@\spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_real.CampoRealBasico }|hyperpage}{4}
+\indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_real.CampoRealBasico)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}|hyperpage}{4}
+\indexentry{CampoRealBinario (classe em estrutarq.campo.campo\_real)@\spxentry{CampoRealBinario}\spxextra{classe em estrutarq.campo.campo\_real}|hyperpage}{4}
+\indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_real.CampoRealBinario)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}|hyperpage}{4}
 \indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_real.CampoRealBinario)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}|hyperpage}{4}
 \indexentry{CampoRealFixo (classe em estrutarq.campo.campo\_real)@\spxentry{CampoRealFixo}\spxextra{classe em estrutarq.campo.campo\_real}|hyperpage}{4}
 \indexentry{CampoRealPrefixado (classe em estrutarq.campo.campo\_real)@\spxentry{CampoRealPrefixado}\spxextra{classe em estrutarq.campo.campo\_real}|hyperpage}{4}
@@ -53,11 +53,11 @@
 \indexentry{CampoHoraBinario (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoHoraBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{4}
 \indexentry{CampoHoraFixo (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoHoraFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{4}
 \indexentry{CampoTempoBasico (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoTempoBasico}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{4}
-\indexentry{valor (propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico )@\spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico }|hyperpage}{4}
-\indexentry{CampoTempoBasicoBinario (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoTempoBasicoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{4}
-\indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}|hyperpage}{4}
-\indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}|hyperpage}{4}
-\indexentry{CampoTempoBasicoFixo (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoTempoBasicoFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{4}
+\indexentry{valor (propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico )@\spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico }|hyperpage}{5}
+\indexentry{CampoTempoBasicoBinario (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoTempoBasicoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{5}
+\indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}|hyperpage}{5}
+\indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}|hyperpage}{5}
+\indexentry{CampoTempoBasicoFixo (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoTempoBasicoFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{5}
 \indexentry{bytes\_para\_valor() (método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo)@\spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo}|hyperpage}{5}
 \indexentry{valor\_para\_bytes() (método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo)@\spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo}|hyperpage}{5}
 \indexentry{CampoTempoBinario (classe em estrutarq.campo.campo\_tempo)@\spxentry{CampoTempoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}|hyperpage}{5}
