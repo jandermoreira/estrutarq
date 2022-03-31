@@ -1,6 +1,27 @@
-################################################################################
-################################################################################
-# Campos de cadeias de caracteres
+"""
+campo.campo_cadeia
+~~~~~~~~~~~~~~~~~~
+
+Campos para armazenamento de cadeias de caracteres.
+
+Este arquivo provê classes para uso de campos cujo conteúdo é
+uma cadeia de caracteres. Internamente, o tipo `str` é usado
+para armazenamento e a transformação para sequência de bytes
+usa a codificação UTF-8.
+
+Uma classe básica :class:`CampoCadeiaBasico` define uma classe
+abstrata (ABC) com as propriedades e métodos gerais. Dela são
+derivadas campos:
+
+    * Com terminadores
+    * Prefixada pelo comprimento
+    * De comprimento fixo predefinido
+
+
+Jander Moreira, 2021-2022
+
+Licença: 
+"""
 
 from abc import ABCMeta
 import typing
