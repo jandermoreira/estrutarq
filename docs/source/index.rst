@@ -3,18 +3,29 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Estruturas de arquivos's documentation!
-==================================================
+Documentação para estrutarq
+***************************
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Conteúdo:
 
 
+Módulo campo
+=========
+.. automodule:: estrutarq.campo
+.. automodule:: estrutarq.campo.campo_comum
+   :members: 
 
-Indices and tables
-==================
+.. automodule:: estrutarq.campo.campo_cadeia
+   :members: 
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. automodule:: estrutarq.campo.campo_inteiro
+   :members: 
+
+.. automodule:: estrutarq.campo.campo_real
+   :members: 
+
+.. automodule:: estrutarq.campo.campo_tempo
+   :members: 
+
