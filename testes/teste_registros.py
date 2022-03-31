@@ -3,6 +3,7 @@
 #
 
 from os import remove, system
+from sys import stdout
 from random import randint, sample
 
 from estrutarq.campo import *
@@ -44,7 +45,7 @@ def crie_registro():
     else:
         registro = tipo_registro()
         registro_base = tipo_registro()
-    campos = sample(lista_campos, randint(2, len(lista_campos)))
+    campos = sample(lista_campos, randint(15, len(lista_campos)))
     for tipo_comprimento, nome, campo, valor in campos:
         # print(tipo_comprimento, nome, campo, valor)
         if tipo_comprimento == "fix":
@@ -77,14 +78,16 @@ def crie_registro():
 
 
 def main():
-    numero_registros = 2000
+    numero_registros = 10000
 
     print("Criando /tmp/dados com", numero_registros, "registros")
     arquivo = open("/tmp/dados", "wb")
     dados = []
     for i in range(numero_registros):
-        if i % (numero_registros//19) == 0:
-            print(f"{100 * i / numero_registros:.1f}%")
+        if i % 5 == 0:
+            print(f"\r{100 * i / numero_registros:.1f}%", end = "",
+                  flush = True)
+            stdout.flush()
 
         reg, reg_base = crie_registro()
         dados.append(reg_base.copy())  # salva estrutura de cada registro
@@ -93,15 +96,17 @@ def main():
         # print("**************\n", reg)
         reg.escreva(arquivo)
         # print(type(reg), reg.comprimento(), reg.tem_comprimento_fixo())
-    print("100%      ")
+    print("\r100%      ")
     arquivo.close()
 
     print("Copiando dados para novo arquivo /tmp/dados_ref")
     arquivo = open("/tmp/dados", "rb")
     arquivo_ref = open("/tmp/dados_ref", "wb")
     for i, dado in enumerate(dados):
-        if i % (numero_registros//19) == 0:
-            print(f"{100 * i / numero_registros:.1f}%")
+        if i % 5 == 0:
+            print(f"\r{100 * i / numero_registros:.1f}%", end = "",
+                  flush = True)
+            stdout.flush()
 
         dado.leia(arquivo)
         if dado.rrn.valor != i:
@@ -110,7 +115,7 @@ def main():
             print(type(dado.rrn.valor))
             exit()
         dado.escreva(arquivo_ref)
-    print("100%     ")
+    print("\r100%     ")
     arquivo.close()
     arquivo_ref.close()
 
@@ -122,7 +127,6 @@ def main():
 
     remove("/tmp/dados")
     remove("/tmp/dados_ref")
-
 
 
 if __name__ == "__main__":
