@@ -18,7 +18,7 @@ sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
 
-project = 'Estruturas de arquivos'
+project = 'Estruturas de arquivos: estrutarq'
 copyright = '2022, Jander Moreira'
 author = 'Jander Moreira'
 
@@ -50,7 +50,7 @@ language = 'pt_BR'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['capitulo*', 'testes', '__pycache__']
+exclude_patterns = ['__pycache__']
 
 
 # -- Options for HTML output -------------------------------------------------

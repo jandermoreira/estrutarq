@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>estrutarq.campo.campo_cadeia &#8212; documentação Estruturas de arquivos 0.1</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fonte para estrutarq.campo.campo_cadeia</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1"># Campos de cadeias de caracteres</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">from</span> <span class="nn">estrutarq.dado</span> <span class="kn">import</span> <span class="n">DadoFixo</span><span class="p">,</span> <span class="n">DadoPrefixado</span><span class="p">,</span> \
+    <span class="n">DadoTerminador</span>
+<span class="kn">from</span> <span class="nn">.campo_comum</span> <span class="kn">import</span> <span class="n">CampoBasico</span><span class="p">,</span> <span class="n">terminador_de_campo</span>
+
+
+<span class="c1"># cadeia de caracteres básica</span>
+<div class="viewcode-block" id="CampoCadeiaBasico"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe básica para cadeias de caracteres</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">valor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">CampoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span>
+
+    <span class="nd">@valor</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;O valor deve ser uma cadeia de caracteres&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span> <span class="o">=</span> <span class="n">valor</span>
+
+    <span class="c1"># code::start conversoes</span>
+<div class="viewcode-block" id="CampoCadeiaBasico.bytes_para_valor"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Atribuição de valor a partir da representação de dados</span>
+<span class="sd">        :param dado: sequência de bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">dado</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CampoCadeiaBasico.valor_para_bytes"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conversão da cadeia de caracteres para sequência de bytes com</span>
+<span class="sd">        codificação UTF-8</span>
+<span class="sd">        :return: sequência de bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div></div>
+    <span class="c1"># code::end</span>
+
+
+<span class="c1"># cadeia de caracteres com terminador</span>
+<div class="viewcode-block" id="CampoCadeiaTerminador"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_cadeia.CampoCadeiaTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para cadeia de caracteres com terminador</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia terminador&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador_de_campo</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># cadeia de caracteres com prefixo de comprimento</span>
+<div class="viewcode-block" id="CampoCadeiaPrefixado"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_cadeia.CampoCadeiaPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para cadeia de caracteres prefixada pelo comprimento_bloco</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia prefixado&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CampoCadeiaFixo"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_cadeia.CampoCadeiaFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para cadeia de caracteres com comprimento_bloco fixo e preenchimento</span>
+<span class="sd">    de dados inválidos</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia fixo&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Estruturas de arquivos</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegação</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Código do módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Jander Moreira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
