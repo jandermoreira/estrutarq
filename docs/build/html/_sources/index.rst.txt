@@ -5,8 +5,6 @@
    :maxdepth: 1
    :caption: Conteúdo:
 
-   campo
-
 Introdução
 ==========
 
@@ -21,4 +19,5 @@ A implementação desenhada é simplificada. Em especial:
 ``estrutuarq``
 **************
 
-.. automodule:: estrutarq
+.. automodule:: estrutarq.campo.campo_comum
+   :members: comprimento_fixo comprimento
