@@ -19,14 +19,14 @@ A implementação desenhada é simplificada. Em especial:
 * controle e recuperação de erros são mantidos no nível mínimo, restrito ao âmbito de controle de exceções
 * aspectos de acesso simultâneo aos dados são ignorados e, assim, não estão disponíveis mecanismos de exclusão mútua ou escalonamento de acesso
 
-Module contents
----------------
+Conteúdo geral
+--------------
 
 .. toctree::
    :maxdepth: 4
 
-   estrutarq.arquivo
-   estrutarq.campo
    estrutarq.dado
+   estrutarq.campo
    estrutarq.registro
+   estrutarq.arquivo
    estrutarq.utilitarios

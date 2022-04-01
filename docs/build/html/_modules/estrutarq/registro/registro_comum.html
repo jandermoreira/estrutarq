@@ -61,10 +61,11 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para registros</span>
 
-<span class="sd">    Utiliza @DynamicAttrs</span>
+<span class="sd">    **Utiliza @DynamicAttrs**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="n">DadoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span> <span class="o">=</span> <span class="n">tipo</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">adicione_campos</span><span class="p">(</span><span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
@@ -180,7 +181,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bytes_dados</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_bytes</span><span class="p">()</span>
         <span class="c1"># if hasattr(self, &quot;comprimento&quot;) and len(bytes_dados) &gt; self.comprimento:</span>
-        <span class="c1">#     raise ValueError(&quot;Comprimento do dados excede máximo do registro.&quot;)</span>
+        <span class="c1">#     raise ValueError(&quot;Comprimento dos dados excede máximo do registro.&quot;)</span>
         <span class="n">arquivo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">bytes_dados</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

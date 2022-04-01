@@ -1,21 +1,22 @@
-estrutarq.dado package
-======================
+Pacote ``estrutarq.dado``
+=========================
 
-Submodules
-----------
+Sub-módulos
+-----------
 
-estrutarq.dado.dado\_comum module
+Módulo ``estrutarq.dado``
 ---------------------------------
 
+
+
+
 .. automodule:: estrutarq.dado.dado_comum
-   :members:
+   :members: estrutarq.dado.DadoBruto estrutarq.dado.DadoBinario
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+Classe básica
++++++++++++++
 
-.. automodule:: estrutarq.dado
+.. autoclass:: estrutarq.dado.DadoBasico
    :members:
-   :undoc-members:
-   :show-inheritance:

@@ -26,6 +26,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
 
     def __init__(self, tipo: str, *lista_campos):
+        DadoBasico.__init__()
         self.__tipo = tipo
         self.lista_campos = {}
         self.adicione_campos(*lista_campos)
@@ -141,7 +142,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         bytes_dados = self.para_bytes()
         # if hasattr(self, "comprimento") and len(bytes_dados) > self.comprimento:
-        #     raise ValueError("Comprimento do dados excede máximo do registro.")
+        #     raise ValueError("Comprimento dos dados excede máximo do registro.")
         arquivo.write(self.adicione_formatacao(bytes_dados))
 
     def __str__(self):
