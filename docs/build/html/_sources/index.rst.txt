@@ -8,7 +8,8 @@ Documentação para ``estrutarq``
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Conteúdo:
+   :numbered:
 
 Módulo dado
 ***********

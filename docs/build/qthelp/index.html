@@ -16,9 +16,477 @@
           <div class="body" role="main">
             
   <section id="documentacao-para-estrutarq">
-<h1>Documentação para estrutarq</h1>
+<h1>Documentação para <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></h1>
 <div class="toctree-wrapper compound">
 </div>
+</section>
+<section id="module-estrutarq.dado.dado_comum">
+<span id="modulo-dado"></span><h1>Módulo dado</h1>
+<p>Estruturação de dados para armazenamento e gravação, usando representações
+diversas.</p>
+<p>Uma classe básica <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a> define uma classe abstrata (ABC) com
+as propriedades e métodos gerais. Dela são derivadas classes para dados:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Em representação bruta</p></li>
+<li><p>Em formato binário</p></li>
+<li><p>De comprimento fixo predefinido</p></li>
+<li><p>Prefixada pelo comprimento</p></li>
+<li><p>Com terminador</p></li>
+</ul>
+</div></blockquote>
+<p>Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</p>
+<p>Jander Moreira, 2022</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoBasico</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Classe básica para dados.</p>
+<p>Implementa as operações básicas e define os métodos abstratos.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.adicione_formatacao">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Acrescenta aos bytes do dado a organização de dados em uso.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> – bytes do dado</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>bytes do dado acrescida da forma de organização</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.byte_enchimento">
+<span class="sig-name descname"><span class="pre">byte_enchimento</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x1b'</span></em></dt>
+<dd><p>Contém o byte de escape usado para enchimento (<cite>byte stuffing</cite>).
+Valor padrão: <code class="docutils literal notranslate"><span class="pre">0x1B</span></code> (caractere <code class="docutils literal notranslate"><span class="pre">ESC</span></code>).”</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes">
+<span class="sig-name descname"><span class="pre">enchimento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lista_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.enchimento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Operação de enchimento de bytes (<cite>byte stuffing</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – a sequência de bytes a ser “enchida”</p></li>
+<li><p><strong>lista_bytes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a><em>]</em>) – os bytes especiais que serão “escapados”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>a sequência original enchida</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.esvaziamento_de_bytes">
+<span class="sig-name descname"><span class="pre">esvaziamento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.esvaziamento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Operação de esvaziamento de bytes (<cite>byte un-stuffing</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – a sequência de bytes a ser “esvaziada”</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>a sequência sem o enchimento</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.leia_de_arquivo">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado lido de um arquivo, observando a
+representação do dado e a forma de organização.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.leia_de_bytes">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado extraído de uma sequência de bytes,
+retornando os bytes do dado em si e o restante da sequência
+depois da extração do dado, observando a representação do dado
+e a forma de organização.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>tupla com os bytes do dado, removido os bytes de organização</p>
+</dd>
+</dl>
+<p>de dados, a sequência de bytes restante</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.remova_formatacao">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Remove da sequência de bytes aqueles correspondentes à forma de
+organização.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – uma sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>a sequência após extraídos os bytes de organização</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.varredura_com_enchimento">
+<span class="sig-name descname"><span class="pre">varredura_com_enchimento</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">referencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.varredura_com_enchimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado individual de uma sequência de bytes,
+retornando o dado até um byte de referência (não “enchido”) e o
+restante da sequência depois desse byte.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequencia</strong> – uma sequência de bytes</p></li>
+<li><p><strong>referencia</strong> – byte simples usado como sentinela (terminador)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o restante da sequência</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Classe para dados binários com um determinado comprimento em bytes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBinario.adicione_formatacao">
+<span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Formatação do dado: apenas repassa o dado binário.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> – valor binário</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o dado formatado</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBinario.leia_de_arquivo">
+<span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação dos bytes do valor binário a partir de um arquivo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>a sequência de bytes lidos</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBinario.leia_de_bytes">
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado binário de comprimento definido a partir de
+uma sequência de bytes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>tupla com os bytes do dado, removidos os bytes de organização
+de dados, e a sequência de bytes restante</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBinario.remova_formatacao">
+<span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Desformatação do dado: apenas repassa o dado binário.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o dado sem a formatação</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoBruto</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Classe para dado bruto</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto.adicione_formatacao">
+<span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Acrescenta aos bytes do dado a organização de dados em uso.
+Para dado bruto, apenas repassa o dado sem modificação.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> – bytes do dado</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>bytes do dado inalterados</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto.leia_de_arquivo">
+<span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado lido de um arquivo (inviável para
+dado bruto).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto.leia_de_bytes">
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado extraído de uma sequência de bytes
+(inviável para dado bruto).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – sequência de bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto.remova_formatacao">
+<span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Remove da sequência de bytes de organização. Para dado bruto,
+apenas repassa a sequência sem modificação.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – uma sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>a sequência inalterada</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preenchimento</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\xff'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Classe dado de comprimento fixo</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo.adicione_formatacao">
+<span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Formatação do dado: ajusta o dado para o comprimento definido,
+truncando ou adicionando o byte de preenchimento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> – valor do dado</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o dado formatado no comprimento especificado</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo.leia_de_arquivo">
+<span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Leitura de um único dado de comprimento fixo a partir do arquivo
+:param arquivo: arquivo binário aberto com permissão de leitura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>os bytes do campo</p>
+</dd>
+</dl>
+<p>Os bytes de preenchimento que existirem são removidos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo.leia_de_bytes">
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado individual de uma sequência de bytes,
+retornando o dado sem os bytes de preenchimento e o restante da
+sequência.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – uma sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>tupla com os bytes do dado, removidos os bytes de organização</p>
+</dd>
+</dl>
+<p>de dados, e a sequência de bytes restante</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo.remova_formatacao">
+<span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Desformatação do dado: remoção de caracteres de preenchimento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>dado efetivo, sem preenchimento</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoPrefixado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoPrefixado</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Classe dado prefixados pelo seu comprimento</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoPrefixado.adicione_formatacao">
+<span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Formatação do dado: acréscimo do prefixo binário com comprimento
+(2 bytes, big-endian, sem sinal).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> – valor do dado</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o dado formatado</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoPrefixado.leia_de_arquivo">
+<span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Leitura de um único dado prefixado pelo comprimento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>os bytes do dado</p>
+</dd>
+</dl>
+<p>O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
+Em caso de falha na leitura é lançada a exceção EOFError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoPrefixado.leia_de_bytes">
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado individual de uma sequência de bytes,
+retornando o dado sem o prefixo e o restante da sequência.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – uma sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>os bytes de dados e o restante da sequência</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoPrefixado.remova_formatacao">
+<span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Desformatação do dado: remoção dos dois bytes do comprimento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>dado efetivo, sem o prefixo de comprimento</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Classe para implementação de campos com terminador.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador.adicione_formatacao">
+<span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Formatação do dado: acréscimo do byte terminador e uso de
+‘byte stuffing’ para incluir o terminador como dado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> – valor do dado</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o dado formatado</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador.leia_de_arquivo">
+<span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Leitura de um único dado com terminador.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>os bytes do dado sem o terminador</p>
+</dd>
+</dl>
+<p>Em caso de falha na leitura é lançada a exceção EOFError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador.leia_de_bytes">
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Recuperação de um dado individual de uma sequência de bytes,
+retornando o dado até o terminador e o restante da sequência depois
+do terminador.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – uma sequência de bytes</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o restante da sequência</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador.remova_formatacao">
+<span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>
+<dd><p>Desformatação do dado: remoção de byte terminador.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>dado efetivo, sem terminador</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-estrutarq.campo.campo_comum">
 <span id="modulo-campo"></span><h1>Módulo campo</h1>
@@ -142,6 +610,23 @@ sequência de bytes, usando codificação UTF-8
 
 <section id="module-estrutarq.campo.campo_cadeia">
 <span id="cadeias-de-caracteres"></span><h2>Cadeias de caracteres</h2>
+<p>Campos para armazenamento de cadeias de caracteres.</p>
+<p>Este arquivo provê classes para uso de campos cujo conteúdo é
+uma cadeia de caracteres. Internamente, o tipo <cite>str</cite> é usado
+para armazenamento e a transformação para sequência de bytes
+usa a codificação UTF-8.</p>
+<p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code></a> define uma classe
+abstrata (ABC) com as propriedades e métodos gerais. Dela são
+derivadas campos:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Com terminadores</p></li>
+<li><p>Prefixada pelo comprimento</p></li>
+<li><p>De comprimento fixo predefinido</p></li>
+</ul>
+</div></blockquote>
+<p>Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</p>
+<p>Jander Moreira, 2021-2022</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.campo_cadeia.</span></span><span class="sig-name descname"><span class="pre">CampoCadeiaBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a></dt>

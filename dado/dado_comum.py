@@ -28,8 +28,11 @@ class DadoBasico(metaclass = ABCMeta):
     Implementa as operações básicas e define os métodos abstratos.
     """
 
-    #""":cvar:`byte_enchimento` contém o byte de escape usado para encimento."""
-    byte_enchimento = b"\x1b"  # ESC
+    byte_enchimento: bytes = b"\x1b"  # ESC
+    """
+    Contém o byte de escape usado para enchimento (`byte stuffing`).
+    Valor padrão: ``0x1B`` (caractere ``ESC``)."
+    """
 
     def __init__(self):
         self._comprimento_fixo = False

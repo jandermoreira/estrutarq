@@ -15,6 +15,13 @@
             </section>
         </toc>
         <keywords>
+            <keyword name="adicione_formatacao() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.adicione_formatacao"/>
+            <keyword name="adicione_formatacao() (método estrutarq.dado.dado_comum.DadoBinario)" ref="index.html#estrutarq.dado.dado_comum.DadoBinario.adicione_formatacao"/>
+            <keyword name="adicione_formatacao() (método estrutarq.dado.dado_comum.DadoBruto)" ref="index.html#estrutarq.dado.dado_comum.DadoBruto.adicione_formatacao"/>
+            <keyword name="adicione_formatacao() (método estrutarq.dado.dado_comum.DadoFixo)" ref="index.html#estrutarq.dado.dado_comum.DadoFixo.adicione_formatacao"/>
+            <keyword name="adicione_formatacao() (método estrutarq.dado.dado_comum.DadoPrefixado)" ref="index.html#estrutarq.dado.dado_comum.DadoPrefixado.adicione_formatacao"/>
+            <keyword name="adicione_formatacao() (método estrutarq.dado.dado_comum.DadoTerminador)" ref="index.html#estrutarq.dado.dado_comum.DadoTerminador.adicione_formatacao"/>
+            <keyword name="byte_enchimento (atributo estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.byte_enchimento"/>
             <keyword name="bytes_para_valor() (método estrutarq.campo.campo_cadeia.CampoCadeiaBasico)" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor"/>
             <keyword name="bytes_para_valor() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.bytes_para_valor"/>
             <keyword name="bytes_para_valor() (método estrutarq.campo.campo_comum.CampoBruto)" ref="index.html#estrutarq.campo.campo_comum.CampoBruto.bytes_para_valor"/>
@@ -52,18 +59,46 @@
             <keyword name="comprimento() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.comprimento"/>
             <keyword name="comprimento_fixo() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.comprimento_fixo"/>
             <keyword name="copy() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.copy"/>
+            <keyword name="DadoBasico (classe em estrutarq.dado.dado_comum)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico"/>
+            <keyword name="DadoBinario (classe em estrutarq.dado.dado_comum)" ref="index.html#estrutarq.dado.dado_comum.DadoBinario"/>
+            <keyword name="DadoBruto (classe em estrutarq.dado.dado_comum)" ref="index.html#estrutarq.dado.dado_comum.DadoBruto"/>
+            <keyword name="DadoFixo (classe em estrutarq.dado.dado_comum)" ref="index.html#estrutarq.dado.dado_comum.DadoFixo"/>
+            <keyword name="DadoPrefixado (classe em estrutarq.dado.dado_comum)" ref="index.html#estrutarq.dado.dado_comum.DadoPrefixado"/>
+            <keyword name="DadoTerminador (classe em estrutarq.dado.dado_comum)" ref="index.html#estrutarq.dado.dado_comum.DadoTerminador"/>
+            <keyword name="enchimento_de_bytes() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes"/>
             <keyword name="escreva() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.escreva"/>
             <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_cadeia"/>
             <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_comum"/>
             <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_inteiro"/>
             <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_real"/>
             <keyword name="módulo" ref="index.html#module-estrutarq.campo.campo_tempo"/>
+            <keyword name="módulo" ref="index.html#module-estrutarq.dado.dado_comum"/>
+            <keyword name="esvaziamento_de_bytes() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.esvaziamento_de_bytes"/>
             <keyword name="leia() (método estrutarq.campo.campo_comum.CampoBasico)" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.leia"/>
+            <keyword name="leia_de_arquivo() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.leia_de_arquivo"/>
+            <keyword name="leia_de_arquivo() (método estrutarq.dado.dado_comum.DadoBinario)" ref="index.html#estrutarq.dado.dado_comum.DadoBinario.leia_de_arquivo"/>
+            <keyword name="leia_de_arquivo() (método estrutarq.dado.dado_comum.DadoBruto)" ref="index.html#estrutarq.dado.dado_comum.DadoBruto.leia_de_arquivo"/>
+            <keyword name="leia_de_arquivo() (método estrutarq.dado.dado_comum.DadoFixo)" ref="index.html#estrutarq.dado.dado_comum.DadoFixo.leia_de_arquivo"/>
+            <keyword name="leia_de_arquivo() (método estrutarq.dado.dado_comum.DadoPrefixado)" ref="index.html#estrutarq.dado.dado_comum.DadoPrefixado.leia_de_arquivo"/>
+            <keyword name="leia_de_arquivo() (método estrutarq.dado.dado_comum.DadoTerminador)" ref="index.html#estrutarq.dado.dado_comum.DadoTerminador.leia_de_arquivo"/>
+            <keyword name="leia_de_bytes() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.leia_de_bytes"/>
+            <keyword name="leia_de_bytes() (método estrutarq.dado.dado_comum.DadoBinario)" ref="index.html#estrutarq.dado.dado_comum.DadoBinario.leia_de_bytes"/>
+            <keyword name="leia_de_bytes() (método estrutarq.dado.dado_comum.DadoBruto)" ref="index.html#estrutarq.dado.dado_comum.DadoBruto.leia_de_bytes"/>
+            <keyword name="leia_de_bytes() (método estrutarq.dado.dado_comum.DadoFixo)" ref="index.html#estrutarq.dado.dado_comum.DadoFixo.leia_de_bytes"/>
+            <keyword name="leia_de_bytes() (método estrutarq.dado.dado_comum.DadoPrefixado)" ref="index.html#estrutarq.dado.dado_comum.DadoPrefixado.leia_de_bytes"/>
+            <keyword name="leia_de_bytes() (método estrutarq.dado.dado_comum.DadoTerminador)" ref="index.html#estrutarq.dado.dado_comum.DadoTerminador.leia_de_bytes"/>
             <keyword name="estrutarq.campo.campo_cadeia" ref="index.html#module-estrutarq.campo.campo_cadeia"/>
             <keyword name="estrutarq.campo.campo_comum" ref="index.html#module-estrutarq.campo.campo_comum"/>
             <keyword name="estrutarq.campo.campo_inteiro" ref="index.html#module-estrutarq.campo.campo_inteiro"/>
             <keyword name="estrutarq.campo.campo_real" ref="index.html#module-estrutarq.campo.campo_real"/>
             <keyword name="estrutarq.campo.campo_tempo" ref="index.html#module-estrutarq.campo.campo_tempo"/>
+            <keyword name="estrutarq.dado.dado_comum" ref="index.html#module-estrutarq.dado.dado_comum"/>
+            <keyword name="remova_formatacao() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.remova_formatacao"/>
+            <keyword name="remova_formatacao() (método estrutarq.dado.dado_comum.DadoBinario)" ref="index.html#estrutarq.dado.dado_comum.DadoBinario.remova_formatacao"/>
+            <keyword name="remova_formatacao() (método estrutarq.dado.dado_comum.DadoBruto)" ref="index.html#estrutarq.dado.dado_comum.DadoBruto.remova_formatacao"/>
+            <keyword name="remova_formatacao() (método estrutarq.dado.dado_comum.DadoFixo)" ref="index.html#estrutarq.dado.dado_comum.DadoFixo.remova_formatacao"/>
+            <keyword name="remova_formatacao() (método estrutarq.dado.dado_comum.DadoPrefixado)" ref="index.html#estrutarq.dado.dado_comum.DadoPrefixado.remova_formatacao"/>
+            <keyword name="remova_formatacao() (método estrutarq.dado.dado_comum.DadoTerminador)" ref="index.html#estrutarq.dado.dado_comum.DadoTerminador.remova_formatacao"/>
             <keyword name="valor (propriedade estrutarq.campo.campo_cadeia.CampoCadeiaBasico )" ref="index.html#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor"/>
             <keyword name="valor (propriedade estrutarq.campo.campo_comum.CampoBasico )" ref="index.html#estrutarq.campo.campo_comum.CampoBasico.valor"/>
             <keyword name="valor (propriedade estrutarq.campo.campo_comum.CampoBruto )" ref="index.html#estrutarq.campo.campo_comum.CampoBruto.valor"/>
@@ -79,6 +114,7 @@
             <keyword name="valor_para_bytes() (método estrutarq.campo.campo_real.CampoRealBinario)" ref="index.html#estrutarq.campo.campo_real.CampoRealBinario.valor_para_bytes"/>
             <keyword name="valor_para_bytes() (método estrutarq.campo.campo_tempo.CampoTempoBasicoBinario)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes"/>
             <keyword name="valor_para_bytes() (método estrutarq.campo.campo_tempo.CampoTempoBasicoFixo)" ref="index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.valor_para_bytes"/>
+            <keyword name="varredura_com_enchimento() (método estrutarq.dado.dado_comum.DadoBasico)" ref="index.html#estrutarq.dado.dado_comum.DadoBasico.varredura_com_enchimento"/>
         </keywords>
         <files>
             <file>genindex.html</file>
@@ -91,6 +127,7 @@
             <file>_static/plus.png</file>
             <file>_static/pygments.css</file>
             <file>_modules/index.html</file>
+            <file>_modules/estrutarq/dado/dado_comum.html</file>
             <file>_modules/estrutarq/campo/campo_cadeia.html</file>
             <file>_modules/estrutarq/campo/campo_comum.html</file>
             <file>_modules/estrutarq/campo/campo_inteiro.html</file>
