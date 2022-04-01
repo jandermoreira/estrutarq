@@ -5,9 +5,8 @@
    :maxdepth: 1
    :caption: Conteúdo:
 
-   estrutarq.dado
-   estrutarq.campo
-   modules
+    estrutarq
+    modules
 
 Introdução
 ==========
@@ -23,7 +22,11 @@ A implementação desenhada é simplificada. Em especial:
 Module contents
 ---------------
 
-.. automodule:: estrutarq
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. toctree::
+   :maxdepth: 4
+
+   estrutarq.arquivo
+   estrutarq.campo
+   estrutarq.dado
+   estrutarq.registro
+   estrutarq.utilitarios

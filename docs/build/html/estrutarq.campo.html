@@ -16,8 +16,8 @@
     <script src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="next" title="estrutarq" href="modules.html" />
-    <link rel="prev" title="estrutarq.dado package" href="estrutarq.dado.html" /> 
+    <link rel="next" title="estrutarq.dado package" href="estrutarq.dado.html" />
+    <link rel="prev" title="estrutarq.arquivo package" href="estrutarq.arquivo.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegação</h3>
@@ -29,10 +29,10 @@
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="modules.html" title="estrutarq"
+          <a href="estrutarq.dado.html" title="estrutarq.dado package"
              accesskey="N">próximo</a> |</li>
         <li class="right" >
-          <a href="estrutarq.dado.html" title="estrutarq.dado package"
+          <a href="estrutarq.arquivo.html" title="estrutarq.arquivo package"
              accesskey="P">anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">estrutarq.campo package</a></li> 
@@ -583,147 +583,6 @@ big-endian.</p>
 </dd></dl>
 
 </section>
-<section id="module-estrutarq.campo.doc">
-<span id="estrutarq-campo-doc-module"></span><h2>estrutarq.campo.doc module<a class="headerlink" href="#module-estrutarq.campo.doc" title="Link permanente para este título">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.doc.</span></span><span class="sig-name descname"><span class="pre">SimpleBleDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addrType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rssi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updateCount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>This is a conceptual class representation of a simple BLE device
-(GATT Server). It is essentially an extended combination of the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.btle.Peripheral</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.btle.ScanEntry</span></code> classes</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client</strong> (class:<cite>simpleble.SimpleBleClient</cite>) – A handle to the <code class="xref py py-class docutils literal notranslate"><span class="pre">simpleble.SimpleBleClient</span></code> client
-object that detected the device</p></li>
-<li><p><strong>addr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Device MAC address, defaults to None</p></li>
-<li><p><strong>addrType</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Device address type - one of ADDR_TYPE_PUBLIC or
-ADDR_TYPE_RANDOM, defaults to ADDR_TYPE_PUBLIC</p></li>
-<li><p><strong>iface</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Bluetooth interface number (0 = /dev/hci0) used for the
-connection, defaults to 0</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – A list of tuples (adtype, description, value) containing the
-AD type code, human-readable description and value for all available
-advertising data items, defaults to None</p></li>
-<li><p><strong>rssi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Received Signal Strength Indication for the last received
-broadcast from the device. This is an integer value measured in dB,
-where 0 dB is the maximum (theoretical) signal strength, and more
-negative numbers indicate a weaker signal, defaults to 0</p></li>
-<li><p><strong>connectable</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – <cite>True</cite> if the device supports connections, and <cite>False</cite>
-otherwise (typically used for advertising ‘beacons’).,
-defaults to <cite>False</cite></p></li>
-<li><p><strong>updateCount</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Integer count of the number of advertising packets
-received from the device so far, defaults to 0</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.connect">
-<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.connect"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.connect" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Attempts to initiate a connection with the device.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p><cite>True</cite> if connection was successful, <cite>False</cite> otherwise</p>
-</dd>
-<dt class="field-even">Tipo de retorno</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)">bool</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.disconnect">
-<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.disconnect"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.disconnect" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Drops existing connection to device</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.getCharacteristics">
-<span class="sig-name descname"><span class="pre">getCharacteristics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startHnd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endHnd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">65535</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uuids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.getCharacteristics"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.getCharacteristics" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Returns a list containing <code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.btle.Characteristic</span></code>
-objects for the peripheral. If no arguments are given, will return all
-characteristics. If startHnd and/or endHnd are given, the list is
-restricted to characteristics whose handles are within the given range.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>startHnd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Start index, defaults to 1</p></li>
-<li><p><strong>endHnd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – End index, defaults to 0xFFFF</p></li>
-<li><p><strong>uuids</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – a list of UUID strings, defaults to None</p></li>
-</ul>
-</dd>
-<dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>List of returned <code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.btle.Characteristic</span></code> objects</p>
-</dd>
-<dt class="field-odd">Tipo de retorno</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)">list</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.getServices">
-<span class="sig-name descname"><span class="pre">getServices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.getServices"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.getServices" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Returns a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.blte.Service</span></code> objects representing
-the services offered by the device. This will perform Bluetooth service
-discovery if this has not already been done; otherwise it will return a
-cached list of services immediately..</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>uuids</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – A list of string service UUIDs to be discovered,
-defaults to None</p>
-</dd>
-<dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>A list of the discovered <code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.blte.Service</span></code> objects,
-which match the provided <code class="docutils literal notranslate"><span class="pre">uuids</span></code></p>
-</dd>
-<dt class="field-odd">Tipo de retorno</dt>
-<dd class="field-odd"><p>list On Python 3.x, this returns a dictionary view object,
-not a list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.isConnected">
-<span class="sig-name descname"><span class="pre">isConnected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.isConnected"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.isConnected" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Checks to see if device is connected</p>
-<dl class="field-list simple">
-<dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p><cite>True</cite> if connected, <cite>False</cite> otherwise</p>
-</dd>
-<dt class="field-even">Tipo de retorno</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)">bool</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.printInfo">
-<span class="sig-name descname"><span class="pre">printInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.printInfo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.printInfo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Print info about device</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.doc.SimpleBleDevice.setNotificationCallback">
-<span class="sig-name descname"><span class="pre">setNotificationCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/doc.html#SimpleBleDevice.setNotificationCallback"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.doc.SimpleBleDevice.setNotificationCallback" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Set the callback function to be executed when the device sends a
-notification to the client.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>callback</strong> (<em>function</em><em>, </em><em>optional</em>) – A function handle of the form
-<code class="docutils literal notranslate"><span class="pre">callback(client,</span> <span class="pre">characteristic,</span> <span class="pre">data)</span></code>, where <code class="docutils literal notranslate"><span class="pre">client</span></code> is a
-handle to the <code class="xref py py-class docutils literal notranslate"><span class="pre">simpleble.SimpleBleClient</span></code> that invoked the
-callback, <code class="docutils literal notranslate"><span class="pre">characteristic</span></code> is the notified
-<code class="xref py py-class docutils literal notranslate"><span class="pre">bluepy.blte.Characteristic</span></code> object and data is a
-<cite>bytearray</cite> containing the updated value. Defaults to None</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
 <section id="module-estrutarq.campo">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-estrutarq.campo" title="Link permanente para este título">¶</a></h2>
 <p>Módulo: <code class="docutils literal notranslate"><span class="pre">campo</span></code></p>
@@ -748,7 +607,6 @@ callback, <code class="docutils literal notranslate"><span class="pre">character
 <li><a class="reference internal" href="#module-estrutarq.campo.campo_inteiro">estrutarq.campo.campo_inteiro module</a></li>
 <li><a class="reference internal" href="#module-estrutarq.campo.campo_real">estrutarq.campo.campo_real module</a></li>
 <li><a class="reference internal" href="#module-estrutarq.campo.campo_tempo">estrutarq.campo.campo_tempo module</a></li>
-<li><a class="reference internal" href="#module-estrutarq.campo.doc">estrutarq.campo.doc module</a></li>
 <li><a class="reference internal" href="#module-estrutarq.campo">Module contents</a></li>
 </ul>
 </li>
@@ -757,13 +615,13 @@ callback, <code class="docutils literal notranslate"><span class="pre">character
   </div>
   <div>
     <h4>Tópico anterior</h4>
-    <p class="topless"><a href="estrutarq.dado.html"
-                          title="capítulo anterior">estrutarq.dado package</a></p>
+    <p class="topless"><a href="estrutarq.arquivo.html"
+                          title="capítulo anterior">estrutarq.arquivo package</a></p>
   </div>
   <div>
     <h4>Próximo tópico</h4>
-    <p class="topless"><a href="modules.html"
-                          title="próximo capítulo">estrutarq</a></p>
+    <p class="topless"><a href="estrutarq.dado.html"
+                          title="próximo capítulo">estrutarq.dado package</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>Essa Página</h3>
@@ -796,10 +654,10 @@ callback, <code class="docutils literal notranslate"><span class="pre">character
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="modules.html" title="estrutarq"
+          <a href="estrutarq.dado.html" title="estrutarq.dado package"
              >próximo</a> |</li>
         <li class="right" >
-          <a href="estrutarq.dado.html" title="estrutarq.dado package"
+          <a href="estrutarq.arquivo.html" title="estrutarq.arquivo package"
              >anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">estrutarq.campo package</a></li> 

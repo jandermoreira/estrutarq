@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>estrutarq.registro.registro &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <title>estrutarq.registro.registro_comum &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
              >módulos</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Código do módulo</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">estrutarq.registro.registro</a></li> 
+        <li class="nav-item nav-item-this"><a href="">estrutarq.registro.registro_comum</a></li> 
       </ul>
     </div>  
 
@@ -36,7 +36,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Código fonte para estrutarq.registro.registro</h1><div class="highlight"><pre>
+  <h1>Código fonte para estrutarq.registro.registro_comum</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Registros</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -57,7 +57,7 @@
 <span class="n">preenchimento_de_registro</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xfe</span><span class="s2">&quot;</span>
 
 
-<div class="viewcode-block" id="RegistroBasico"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para registros</span>
 
@@ -96,7 +96,7 @@
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">,</span> <span class="n">tipo_campo</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="p">[</span><span class="n">nome_campo</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RegistroBasico.adicione_campos"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.adicione_campos">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.adicione_campos"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.adicione_campos">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inclusão de uma sequência de campos ao registro</span>
 <span class="sd">        :param lista_campos: uma sequência de um ou mais campos, cada um</span>
@@ -107,7 +107,7 @@
         <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="n">lista_campos</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__adicione_um_campo</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RegistroBasico.de_bytes"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dados_registro</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.de_bytes"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dados_registro</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro</span>
 <span class="sd">        :param dados_registro: sequência de bytes do registro</span>
@@ -117,7 +117,7 @@
             <span class="n">dado_campo</span><span class="p">,</span> <span class="n">dados_restantes</span> <span class="o">=</span> <span class="n">campo</span><span class="o">.</span><span class="n">leia_de_bytes</span><span class="p">(</span><span class="n">dados_restantes</span><span class="p">)</span>
             <span class="n">campo</span><span class="o">.</span><span class="n">bytes_para_valor</span><span class="p">(</span><span class="n">dado_campo</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RegistroBasico.para_bytes"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="RegistroBasico.para_bytes"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Criação dos bytes do registro pela concatenação dos bytes dos campos,</span>
 <span class="sd">        sucessivamente</span>
@@ -128,7 +128,7 @@
             <span class="n">dado_campos</span> <span class="o">+=</span> <span class="n">campo</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">dado_campos</span></div>
 
-<div class="viewcode-block" id="RegistroBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Verifica se o registro tem comprimento fixo</span>
 <span class="sd">        :return: True se o comprimento for fixo</span>
@@ -141,7 +141,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span>
             <span class="n">campo</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retorna o comprimento do registro em bytes caso ele tenha comprimento</span>
 <span class="sd">        total fixo</span>
@@ -164,7 +164,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">de_bytes</span><span class="p">(</span><span class="n">bytes_arquivo</span><span class="p">)</span>
 
     <span class="c1"># code::start basico_leia</span>
-<div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtenção de um registro a partir do arquivo</span>
 <span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
@@ -173,7 +173,7 @@
 
     <span class="c1"># code::end</span>
 
-<div class="viewcode-block" id="RegistroBasico.escreva"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.escreva"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Escrita do registro no arquivo</span>
 <span class="sd">        :param arquivo:</span>
@@ -191,7 +191,7 @@
                      <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">em_bytes</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">texto</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-<div class="viewcode-block" id="RegistroBasico.copy"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.copy"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cópia &quot;profunda&quot; deste campo</span>
 <span class="sd">        :return: outra instância com os mesmos valores</span>
@@ -199,7 +199,7 @@
         <span class="k">return</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="RegistroBruto"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroBruto">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBruto"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroBruto">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para registro, com controle exclusivamente pelo número</span>
 <span class="sd">    de campos</span>
@@ -222,7 +222,7 @@
     <span class="c1"># code::end</span>
 
 
-<div class="viewcode-block" id="RegistroPrefixado"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">RegistroPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroPrefixado"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">RegistroPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para registros prefixados pelo comprimento</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -232,7 +232,7 @@
         <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RegistroTerminador"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroTerminador">[documentos]</a><span class="k">class</span> <span class="nc">RegistroTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroTerminador"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroTerminador">[documentos]</a><span class="k">class</span> <span class="nc">RegistroTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para registros com terminador</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -242,7 +242,7 @@
         <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador_de_registro</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RegistroFixo"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro.RegistroFixo">[documentos]</a><span class="k">class</span> <span class="nc">RegistroFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroFixo"><a class="viewcode-back" href="../../../estrutarq.registro.html#estrutarq.registro.registro_comum.RegistroFixo">[documentos]</a><span class="k">class</span> <span class="nc">RegistroFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para registros com terminador</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -285,7 +285,7 @@
              >módulos</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Código do módulo</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">estrutarq.registro.registro</a></li> 
+        <li class="nav-item nav-item-this"><a href="">estrutarq.registro.registro_comum</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

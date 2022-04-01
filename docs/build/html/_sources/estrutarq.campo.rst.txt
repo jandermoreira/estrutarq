@@ -44,13 +44,6 @@ estrutarq.campo.campo\_tempo module
    :undoc-members:
    :show-inheritance:
 
-estrutarq.campo.doc module
---------------------------
-
-.. automodule:: estrutarq.campo.doc
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 Module contents
 ---------------

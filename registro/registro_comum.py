@@ -22,7 +22,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
     Classe básica para registros
 
-    Utiliza @DynamicAttrs
+    **Utiliza @DynamicAttrs**
     """
 
     def __init__(self, tipo: str, *lista_campos):

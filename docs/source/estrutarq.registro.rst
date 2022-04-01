@@ -1,21 +1,10 @@
-estrutarq.registro package
-==========================
+Pacote ``estrutarq.registro``
+=============================
 
-Submodules
-----------
+Módulo ``estrutarq.registro.registro_comum``
+--------------------------------------------
 
-estrutarq.registro.registro module
-----------------------------------
-
-.. automodule:: estrutarq.registro.registro
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: estrutarq.registro
+.. automodule:: estrutarq.registro.registro_comum
    :members:
    :undoc-members:
    :show-inheritance:
