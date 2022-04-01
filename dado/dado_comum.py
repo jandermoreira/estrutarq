@@ -1,3 +1,21 @@
+"""
+Estruturação de dados para armazenamento e gravação, usando representações
+diversas.
+
+Uma classe básica :class:`DadoBasico` define uma classe abstrata (ABC) com
+as propriedades e métodos gerais. Dela são derivadas classes para dados:
+
+    * Em representação bruta
+    * Em formato binário
+    * De comprimento fixo predefinido
+    * Prefixada pelo comprimento
+    * Com terminador
+
+Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+
+Jander Moreira, 2022
+"""
+
 import re
 from abc import ABCMeta, abstractmethod
 from typing import BinaryIO

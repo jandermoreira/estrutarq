@@ -1,7 +1,4 @@
 """
-campo.campo_cadeia
-~~~~~~~~~~~~~~~~~~
-
 Campos para armazenamento de cadeias de caracteres.
 
 Este arquivo provê classes para uso de campos cujo conteúdo é
@@ -17,10 +14,9 @@ derivadas campos:
     * Prefixada pelo comprimento
     * De comprimento fixo predefinido
 
+Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
 
 Jander Moreira, 2021-2022
-
-Licença: 
 """
 
 from abc import ABCMeta
