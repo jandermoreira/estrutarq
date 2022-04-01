@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>estrutarq.registro.registro &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="Índice Geral"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">estrutarq.registro.registro</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fonte para estrutarq.registro.registro</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Registros</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="nb">compile</span>
+
+<span class="kn">from</span> <span class="nn">estrutarq.campo</span> <span class="kn">import</span> <span class="n">CampoBasico</span>
+<span class="kn">from</span> <span class="nn">estrutarq.dado</span> <span class="kn">import</span> <span class="n">DadoBasico</span><span class="p">,</span> <span class="n">DadoBruto</span><span class="p">,</span> <span class="n">DadoFixo</span><span class="p">,</span> <span class="n">DadoPrefixado</span><span class="p">,</span> \
+    <span class="n">DadoTerminador</span>
+<span class="kn">from</span> <span class="nn">estrutarq.utilitarios.geral</span> <span class="kn">import</span> <span class="n">verifique_versao</span>
+
+<span class="c1">#######</span>
+<span class="n">verifique_versao</span><span class="p">()</span>
+
+<span class="n">terminador_de_registro</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span>
+<span class="n">preenchimento_de_registro</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xfe</span><span class="s2">&quot;</span>
+
+
+<div class="viewcode-block" id="RegistroBasico"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe básica para registros</span>
+
+<span class="sd">    Utiliza @DynamicAttrs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span> <span class="o">=</span> <span class="n">tipo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adicione_campos</span><span class="p">(</span><span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tipo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span>
+
+    <span class="k">def</span> <span class="nf">__adicione_um_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">)):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Acréscimo de um campo a registro, com criação de um atributo e</span>
+<span class="sd">        inclusão na lista de campos</span>
+<span class="sd">        :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str)</span>
+<span class="sd">            sendo o nome_arquivo do campo e campo sendo uma instância de um</span>
+<span class="sd">            campo válido</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nome_campo</span> <span class="o">=</span> <span class="n">campo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tipo_campo</span> <span class="o">=</span> <span class="n">campo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">identificador</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\w[_\w\d]+$&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nome_campo</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="ow">not</span> <span class="n">identificador</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">campo</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">mensagem</span> <span class="o">=</span> <span class="s2">&quot;O nome_arquivo do campo deve ser &quot;</span> <span class="o">+</span> \
+                       <span class="sa">f</span><span class="s2">&quot;um identificador válido (&#39;</span><span class="si">{</span><span class="n">nome_campo</span><span class="si">}</span><span class="s2">&#39;).&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span>
+        <span class="c1"># if not isinstance(tipo_campo, str):</span>
+        <span class="c1">#     print(&quot;************&quot;, type(tipo_campo))</span>
+        <span class="c1">#     raise TypeError(&quot;Esperado um campo valido para o registro.&quot;)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">,</span> <span class="n">tipo_campo</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="p">[</span><span class="n">nome_campo</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RegistroBasico.adicione_campos"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.adicione_campos">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inclusão de uma sequência de campos ao registro</span>
+<span class="sd">        :param lista_campos: uma sequência de um ou mais campos, cada um</span>
+<span class="sd">            especificado pela tupla (nome_arquivo, campo), com</span>
+<span class="sd">            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo</span>
+<span class="sd">            uma instância de um campo válido</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="n">lista_campos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__adicione_um_campo</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegistroBasico.de_bytes"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dados_registro</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro</span>
+<span class="sd">        :param dados_registro: sequência de bytes do registro</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dados_restantes</span> <span class="o">=</span> <span class="n">dados_registro</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">dado_campo</span><span class="p">,</span> <span class="n">dados_restantes</span> <span class="o">=</span> <span class="n">campo</span><span class="o">.</span><span class="n">leia_de_bytes</span><span class="p">(</span><span class="n">dados_restantes</span><span class="p">)</span>
+            <span class="n">campo</span><span class="o">.</span><span class="n">bytes_para_valor</span><span class="p">(</span><span class="n">dado_campo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegistroBasico.para_bytes"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Criação dos bytes do registro pela concatenação dos bytes dos campos,</span>
+<span class="sd">        sucessivamente</span>
+<span class="sd">        :return: sequência dos bytes dos campos</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dado_campos</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">dado_campos</span> <span class="o">+=</span> <span class="n">campo</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">dado_campos</span></div>
+
+<div class="viewcode-block" id="RegistroBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica se o registro tem comprimento fixo</span>
+<span class="sd">        :return: True se o comprimento for fixo</span>
+
+<span class="sd">        O registro é considerado de tamanho fixo se qualquer uma das</span>
+<span class="sd">        propriedades foram verdadeiras:</span>
+<span class="sd">            1) o registro tem é marcado com _comprimento_fixo == True</span>
+<span class="sd">            2) todos os campos tiverem comprimento fixo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="n">campo</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna o comprimento do registro em bytes caso ele tenha comprimento</span>
+<span class="sd">        total fixo</span>
+<span class="sd">        :return: o comprimento do registro em bytes ou None se tiver</span>
+<span class="sd">        comprimento variável</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">campo</span><span class="o">.</span><span class="n">comprimento</span><span class="p">()</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+
+    <span class="k">def</span> <span class="nf">_leia_registro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Leitura genérica de um registro usando a forma de organização de</span>
+<span class="sd">        dados atual, preenchendo os campos</span>
+<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bytes_arquivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_arquivo</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">de_bytes</span><span class="p">(</span><span class="n">bytes_arquivo</span><span class="p">)</span>
+
+    <span class="c1"># code::start basico_leia</span>
+<div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtenção de um registro a partir do arquivo</span>
+<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_leia_registro</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span></div>
+
+    <span class="c1"># code::end</span>
+
+<div class="viewcode-block" id="RegistroBasico.escreva"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Escrita do registro no arquivo</span>
+<span class="sd">        :param arquivo:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bytes_dados</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_bytes</span><span class="p">()</span>
+        <span class="c1"># if hasattr(self, &quot;comprimento&quot;) and len(bytes_dados) &gt; self.comprimento:</span>
+        <span class="c1">#     raise ValueError(&quot;Comprimento do dados excede máximo do registro.&quot;)</span>
+        <span class="n">arquivo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">bytes_dados</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">texto</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Registro: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tipo</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">nome</span><span class="p">,</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">em_bytes</span> <span class="o">=</span> <span class="n">campo</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">())</span>
+            <span class="n">texto</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nome</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">campo</span><span class="o">.</span><span class="n">valor</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> \
+                     <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">em_bytes</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">texto</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<div class="viewcode-block" id="RegistroBasico.copy"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cópia &quot;profunda&quot; deste campo</span>
+<span class="sd">        :return: outra instância com os mesmos valores</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="RegistroBruto"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroBruto">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe básica para registro, com controle exclusivamente pelo número</span>
+<span class="sd">    de campos</span>
+
+<span class="sd">    Utiliza @DynamicAttrs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bruto&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
+        <span class="n">DadoBruto</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c1"># code::start bruto_leia_registro</span>
+    <span class="k">def</span> <span class="nf">_leia_registro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Leitura de registro bruto, campo a campo</span>
+<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">campo</span><span class="o">.</span><span class="n">leia</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span></div>
+    <span class="c1"># code::end</span>
+
+
+<div class="viewcode-block" id="RegistroPrefixado"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">RegistroPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para registros prefixados pelo comprimento</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;prefixado&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
+        <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RegistroTerminador"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroTerminador">[documentos]</a><span class="k">class</span> <span class="nc">RegistroTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para registros com terminador</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;terminador&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
+        <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador_de_registro</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RegistroFixo"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro.RegistroFixo">[documentos]</a><span class="k">class</span> <span class="nc">RegistroFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para registros com terminador</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+        <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;fixo&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">,</span>
+                          <span class="n">preenchimento</span> <span class="o">=</span> <span class="n">preenchimento_de_registro</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">True</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="Índice Geral"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">estrutarq.registro.registro</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Jander Moreira.
+      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
