@@ -1,0 +1,5 @@
+"""
+Pacote ``estrutarq``
+
+Jander
+"""
