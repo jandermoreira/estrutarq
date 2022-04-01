@@ -5,4 +5,7 @@
    :maxdepth: 2
    :caption: Conteúdo:
 
-intro
+Introdução
+==========
+
+O pacote ``estrutarq`` foi moldado para dar suporte ao livro `Estruturas de arquivos: uma abordagem prática`.
