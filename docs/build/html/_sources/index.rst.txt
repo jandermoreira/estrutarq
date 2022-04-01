@@ -5,6 +5,10 @@
    :maxdepth: 1
    :caption: Conteúdo:
 
+   estrutarq.dado
+   estrutarq.campo
+   modules
+
 Introdução
 ==========
 
@@ -16,8 +20,10 @@ A implementação desenhada é simplificada. Em especial:
 * controle e recuperação de erros são mantidos no nível mínimo, restrito ao âmbito de controle de exceções
 * aspectos de acesso simultâneo aos dados são ignorados e, assim, não estão disponíveis mecanismos de exclusão mútua ou escalonamento de acesso
 
-``estrutuarq``
-**************
+Module contents
+---------------
 
-.. automodule:: estrutarq.campo.campo_comum
-   :members: comprimento_fixo comprimento
+.. automodule:: estrutarq
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,5 +1,7 @@
 """
-    campo
+    Módulo: ``campo``
+
+    Implementação de representações de campos.
 """
 from .campo_cadeia import CampoBasico, CampoCadeiaBasico, CampoCadeiaFixo, \
     CampoCadeiaPrefixado, CampoCadeiaTerminador

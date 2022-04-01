@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>estrutarq.registro package &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice Geral"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">estrutarq.registro package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="estrutarq-registro-package">
+<h1>estrutarq.registro package<a class="headerlink" href="#estrutarq-registro-package" title="Link permanente para este título">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link permanente para este título">¶</a></h2>
+</section>
+<section id="module-estrutarq.registro.registro">
+<span id="estrutarq-registro-registro-module"></span><h2>estrutarq.registro.registro module<a class="headerlink" href="#module-estrutarq.registro.registro" title="Link permanente para este título">¶</a></h2>
+<p>Registros</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.registro.registro.</span></span><span class="sig-name descname"><span class="pre">RegistroBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<p>Classe básica para registros</p>
+<p>Utiliza &#64;DynamicAttrs</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.adicione_campos">
+<span class="sig-name descname"><span class="pre">adicione_campos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.adicione_campos"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.adicione_campos" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Inclusão de uma sequência de campos ao registro
+:param lista_campos: uma sequência de um ou mais campos, cada um</p>
+<blockquote>
+<div><p>especificado pela tupla (nome_arquivo, campo), com
+nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo
+uma instância de um campo válido</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.comprimento">
+<span class="sig-name descname"><span class="pre">comprimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.comprimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.comprimento" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Retorna o comprimento do registro em bytes caso ele tenha comprimento
+total fixo
+:return: o comprimento do registro em bytes ou None se tiver
+comprimento variável</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.copy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.copy" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Cópia “profunda” deste campo
+:return: outra instância com os mesmos valores</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.de_bytes">
+<span class="sig-name descname"><span class="pre">de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dados_registro</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.de_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro
+:param dados_registro: sequência de bytes do registro</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.escreva">
+<span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.escreva" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Escrita do registro no arquivo
+:param arquivo:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.leia">
+<span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.leia" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Obtenção de um registro a partir do arquivo
+:param arquivo: arquivo binário aberto com permissão de leitura</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.para_bytes">
+<span class="sig-name descname"><span class="pre">para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Criação dos bytes do registro pela concatenação dos bytes dos campos,
+sucessivamente
+:return: sequência dos bytes dos campos</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.tem_comprimento_fixo">
+<span class="sig-name descname"><span class="pre">tem_comprimento_fixo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBasico.tem_comprimento_fixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.tem_comprimento_fixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Verifica se o registro tem comprimento fixo
+:return: True se o comprimento for fixo</p>
+<p>O registro é considerado de tamanho fixo se qualquer uma das
+propriedades foram verdadeiras:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>o registro tem é marcado com _comprimento_fixo == True</p></li>
+<li><p>todos os campos tiverem comprimento fixo</p></li>
+</ol>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBasico.tipo">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tipo</span></span><a class="headerlink" href="#estrutarq.registro.registro.RegistroBasico.tipo" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroBruto">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.registro.registro.</span></span><span class="sig-name descname"><span class="pre">RegistroBruto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroBruto" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.dado_comum.DadoBruto" title="estrutarq.dado.dado_comum.DadoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBruto</span></code></a>, <a class="reference internal" href="#estrutarq.registro.registro.RegistroBasico" title="estrutarq.registro.registro.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro.RegistroBasico</span></code></a></p>
+<p>Classe básica para registro, com controle exclusivamente pelo número
+de campos</p>
+<p>Utiliza &#64;DynamicAttrs</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.registro.registro.</span></span><span class="sig-name descname"><span class="pre">RegistroFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.dado_comum.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.registro.registro.RegistroBasico" title="estrutarq.registro.registro.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro.RegistroBasico</span></code></a></p>
+<p>Classe para registros com terminador</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroPrefixado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.registro.registro.</span></span><span class="sig-name descname"><span class="pre">RegistroPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroPrefixado" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.dado_comum.DadoPrefixado" title="estrutarq.dado.dado_comum.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoPrefixado</span></code></a>, <a class="reference internal" href="#estrutarq.registro.registro.RegistroBasico" title="estrutarq.registro.registro.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro.RegistroBasico</span></code></a></p>
+<p>Classe para registros prefixados pelo comprimento</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.registro.registro.RegistroTerminador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.registro.registro.</span></span><span class="sig-name descname"><span class="pre">RegistroTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro.html#RegistroTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro.RegistroTerminador" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.dado_comum.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <a class="reference internal" href="#estrutarq.registro.registro.RegistroBasico" title="estrutarq.registro.registro.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro.RegistroBasico</span></code></a></p>
+<p>Classe para registros com terminador</p>
+</dd></dl>
+
+</section>
+<section id="module-estrutarq.registro">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-estrutarq.registro" title="Link permanente para este título">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Tabela de Conteúdo</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">estrutarq.registro package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-estrutarq.registro.registro">estrutarq.registro.registro module</a></li>
+<li><a class="reference internal" href="#module-estrutarq.registro">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Essa Página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/estrutarq.registro.rst.txt"
+            rel="nofollow">Exibir Fonte</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice Geral"
+             >índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">estrutarq.registro package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Jander Moreira.
+      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
