@@ -60,8 +60,7 @@ class DadoBasico(metaclass = ABCMeta):
         Operação de esvaziamento de bytes (`byte un-stuffing`). Todos os
         enchimentos feitos com ``byte_enchimento`` são removidos.
 
-        :param sequencia: a sequência de bytes a ser "esvaziada"
-        :type sequencia: bytes
+        :param bytes sequencia: a sequência de bytes a ser "esvaziada"
         :return: a sequência sem os enchimentos
         :rtype: bytes
         """
@@ -72,15 +71,19 @@ class DadoBasico(metaclass = ABCMeta):
     # code::end
 
     def varredura_com_enchimento(self, sequencia: bytes,
-                                 referencia: bytes) -> (bytes, bytes):
+                                 referencia: bytes) -> tuple[bytes, bytes]:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado até um byte de referência (não "enchido") e o
         restante da sequência depois desse byte.
 
-        :param sequencia: uma sequência de bytes
-        :param referencia: byte simples usado como sentinela (terminador)
-        :return: o restante da sequência
+        :param bytes sequencia: uma sequência de bytes
+        :param bytes referencia: byte simples usado como sentinela (terminador)
+        :return: uma tupla contendo a sequência de bytes até ``referencia``
+            e o restante da sequência depois de ``referencia``
+        :rtype: tuple[bytes, bytes]
+        :raise ValueError: se o byte de referência não estiver presente na
+            sequência de bytes
         """
         achou_referencia = False
         achou_enchimento = False
@@ -169,7 +172,7 @@ class DadoBruto(DadoBasico):
         dado bruto).
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
-        :raise NotImplemented: sempre que o método é chamado
+        :raise NotImplemented: se o método for acidentalmente chamado
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
 
@@ -179,7 +182,7 @@ class DadoBruto(DadoBasico):
         para dado bruto).
 
         :param bytes sequencia: sequência de bytes
-        :raise NotImplemented: sempre que o método é chamado
+        :raise NotImplemented: se o método for acidentalmente chamado
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
 
@@ -190,6 +193,7 @@ class DadoBruto(DadoBasico):
 
         :param bytes dado: bytes do dado
         :return: bytes do dado inalterados
+        :rtype: bytes
         """
         return dado
 
@@ -200,8 +204,178 @@ class DadoBruto(DadoBasico):
 
         :param bytes sequencia: uma sequência de bytes
         :return: a sequência inalterada
+        :rtype: bytes
         """
         return sequencia
+
+
+class DadoTerminador(DadoBasico):
+    """
+    Classe para implementação de dados com terminador. O dado é tratado como
+    uma sequência de bytes à qual um byte predefinido (:property:`terminador`) é
+    acrescentado ao final para demarcar o fim dos dados. A existência do
+    valor do byte terminador na sequência de dados é tratada com a técnica
+    de enchimento de bytes (implementada em :class:`estrutarq.dado.DadoBasico`).
+    """
+
+    def __init__(self, terminador: bytes):
+        DadoBasico.__init__(self)
+        self.terminador = terminador
+
+    @property
+    def terminador(self) -> bytes:
+        return self.__terminador
+
+    @terminador.setter
+    def terminador(self, terminador: bytes):
+        """
+        Determina o byte que será usado como terminador.
+
+        :param terminador: o byte terminador
+        """
+        if not isinstance(terminador, bytes) \
+                or len(terminador) != 1:
+            raise AttributeError("O terminador deve ter um byte")
+        self.__terminador = terminador
+
+    # code::start terminador_leitura_de_arquivo
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
+        """
+        Leitura de um único dado com terminador.
+
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        :return: os bytes do dado sem o terminador
+
+        Em caso de falha na leitura é lançada a exceção EOFError
+        """
+        achou_terminador = False
+        achou_enchimento = False
+        dado = b""
+        while not achou_terminador:
+            byte_lido = arquivo.read(1)  # byte a byte
+            if len(byte_lido) == 0:
+                raise EOFError
+            if byte_lido == self.terminador and not achou_enchimento:
+                achou_terminador = True
+            achou_enchimento = (byte_lido == self.byte_enchimento
+                                and not achou_enchimento)
+            dado += byte_lido
+        dado_limpo = self.remova_formatacao(dado)
+        return dado_limpo
+
+    # code::end
+
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+        """
+        Recuperação de um dado individual de uma sequência de bytes,
+        retornando o dado até o terminador e o restante da sequência depois
+        do terminador.
+
+        :param sequencia: uma sequência de bytes
+        :return: o restante da sequência
+        """
+        bytes_dados, sequencia_restante = \
+            self.varredura_com_enchimento(sequencia, self.terminador)
+        return self.remova_formatacao(bytes_dados), sequencia_restante
+
+    # code::start terminador_formatacoes
+    def adicione_formatacao(self, dado: bytes) -> bytes:
+        """
+        Formatação do dado: acréscimo do byte terminador e uso de
+        'byte stuffing' para incluir o terminador como dado.
+
+        :param dado: valor do dado
+        :return: o dado formatado
+        """
+        dado_enchido = self.enchimento_de_bytes(dado, [self.terminador])
+        return dado_enchido + self.terminador
+
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
+        """
+        Desformatação do dado: remoção de byte terminador.
+
+        :param sequencia: bytes de dados
+        :return: dado efetivo, sem terminador
+        """
+        sequencia = self.esvaziamento_de_bytes(sequencia)
+        if bytes([sequencia[-1]]) != self.terminador:
+            raise TypeError("A sequência de bytes não possui o terminador")
+        return sequencia[:-1]
+    # code::end
+
+
+class DadoPrefixado(DadoBasico):
+    """
+    Classe dado prefixados pelo seu comprimento
+    """
+
+    def __init__(self):
+        DadoBasico.__init__(self)
+
+    # code::start prefixado_leitura_de_arquivo
+    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
+        """
+        Leitura de um único dado prefixado pelo comprimento.
+
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        :return: os bytes do dado
+
+        O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
+        Em caso de falha na leitura é lançada a exceção EOFError
+        """
+        bytes_comprimento = arquivo.read(2)
+        if len(bytes_comprimento) == 0:
+            raise EOFError
+        else:
+            comprimento = int.from_bytes(bytes_comprimento, "big",
+                                         signed = False)
+            dado = arquivo.read(comprimento)
+            if len(dado) != comprimento:
+                raise EOFError
+            else:
+                return dado
+
+    # code::end
+
+    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+        """
+        Recuperação de um dado individual de uma sequência de bytes,
+        retornando o dado sem o prefixo e o restante da sequência.
+
+        :param sequencia: uma sequência de bytes
+        :return: os bytes de dados e o restante da sequência
+        """
+        comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
+        dado = sequencia[2:comprimento + 2]
+        sequencia_restante = sequencia[comprimento + 2:]
+        if len(dado) != comprimento:
+            raise TypeError("A sequência de bytes não contém bytes suficientes")
+        return dado, sequencia_restante
+
+    # code::start prefixado_formatacoes
+    def adicione_formatacao(self, dado: bytes) -> bytes:
+        """
+        Formatação do dado: acréscimo do prefixo binário com comprimento
+        (2 bytes, big-endian, sem sinal).
+
+        :param dado: valor do dado
+        :return: o dado formatado
+        """
+        bytes_comprimento = len(dado).to_bytes(2, "big", signed = False)
+        return bytes_comprimento + dado
+
+    def remova_formatacao(self, sequencia: bytes) -> bytes:
+        """
+        Desformatação do dado: remoção dos dois bytes do comprimento.
+
+        :param sequencia: bytes de dados
+        :return: dado efetivo, sem o prefixo de comprimento
+        """
+        dado, sequencia_restante = self.leia_de_bytes(sequencia)
+        if len(sequencia_restante) != 0:
+            raise TypeError("O sequência é mais longa que o tamanho registrado")
+        return dado
+    # code::end
 
 
 class DadoBinario(DadoBasico):
@@ -398,168 +572,3 @@ class DadoFixo(DadoBasico):
         #     "A sequência de dados tem comprimento incorreto.")
         return self.leia_de_bytes(sequencia)[0]
         # code::end
-
-
-class DadoPrefixado(DadoBasico):
-    """
-    Classe dado prefixados pelo seu comprimento
-    """
-
-    def __init__(self):
-        DadoBasico.__init__(self)
-
-    # code::start prefixado_leitura_de_arquivo
-    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
-        """
-        Leitura de um único dado prefixado pelo comprimento.
-
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        :return: os bytes do dado
-
-        O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
-        Em caso de falha na leitura é lançada a exceção EOFError
-        """
-        bytes_comprimento = arquivo.read(2)
-        if len(bytes_comprimento) == 0:
-            raise EOFError
-        else:
-            comprimento = int.from_bytes(bytes_comprimento, "big",
-                                         signed = False)
-            dado = arquivo.read(comprimento)
-            if len(dado) != comprimento:
-                raise EOFError
-            else:
-                return dado
-
-    # code::end
-
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
-        """
-        Recuperação de um dado individual de uma sequência de bytes,
-        retornando o dado sem o prefixo e o restante da sequência.
-
-        :param sequencia: uma sequência de bytes
-        :return: os bytes de dados e o restante da sequência
-        """
-        comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
-        dado = sequencia[2:comprimento + 2]
-        sequencia_restante = sequencia[comprimento + 2:]
-        if len(dado) != comprimento:
-            raise TypeError("A sequência de bytes não contém bytes suficientes")
-        return dado, sequencia_restante
-
-    # code::start prefixado_formatacoes
-    def adicione_formatacao(self, dado: bytes) -> bytes:
-        """
-        Formatação do dado: acréscimo do prefixo binário com comprimento
-        (2 bytes, big-endian, sem sinal).
-
-        :param dado: valor do dado
-        :return: o dado formatado
-        """
-        bytes_comprimento = len(dado).to_bytes(2, "big", signed = False)
-        return bytes_comprimento + dado
-
-    def remova_formatacao(self, sequencia: bytes) -> bytes:
-        """
-        Desformatação do dado: remoção dos dois bytes do comprimento.
-
-        :param sequencia: bytes de dados
-        :return: dado efetivo, sem o prefixo de comprimento
-        """
-        dado, sequencia_restante = self.leia_de_bytes(sequencia)
-        if len(sequencia_restante) != 0:
-            raise TypeError("O sequência é mais longa que o tamanho registrado")
-        return dado
-    # code::end
-
-
-class DadoTerminador(DadoBasico):
-    """
-    Classe para implementação de campos com terminador.
-    """
-
-    def __init__(self, terminador: bytes):
-        DadoBasico.__init__(self)
-        self.terminador = terminador
-
-    @property
-    def terminador(self) -> bytes:
-        return self.__terminador
-
-    @terminador.setter
-    def terminador(self, terminador: bytes):
-        """
-        Determina o byte que será usado como terminador.
-
-        :param terminador: o byte terminador
-        """
-        if not isinstance(terminador, bytes) \
-                or len(terminador) != 1:
-            raise AttributeError("O terminador deve ter um byte")
-        self.__terminador = terminador
-
-    # code::start terminador_leitura_de_arquivo
-    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
-        """
-        Leitura de um único dado com terminador.
-
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        :return: os bytes do dado sem o terminador
-
-        Em caso de falha na leitura é lançada a exceção EOFError
-        """
-        achou_terminador = False
-        achou_enchimento = False
-        dado = b""
-        while not achou_terminador:
-            byte_lido = arquivo.read(1)  # byte a byte
-            if len(byte_lido) == 0:
-                raise EOFError
-            if byte_lido == self.terminador and not achou_enchimento:
-                achou_terminador = True
-            achou_enchimento = (byte_lido == self.byte_enchimento
-                                and not achou_enchimento)
-            dado += byte_lido
-        dado_limpo = self.remova_formatacao(dado)
-        return dado_limpo
-
-    # code::end
-
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
-        """
-        Recuperação de um dado individual de uma sequência de bytes,
-        retornando o dado até o terminador e o restante da sequência depois
-        do terminador.
-
-        :param sequencia: uma sequência de bytes
-        :return: o restante da sequência
-        """
-        bytes_dados, sequencia_restante = \
-            self.varredura_com_enchimento(sequencia, self.terminador)
-        return self.remova_formatacao(bytes_dados), sequencia_restante
-
-    # code::start terminador_formatacoes
-    def adicione_formatacao(self, dado: bytes) -> bytes:
-        """
-        Formatação do dado: acréscimo do byte terminador e uso de
-        'byte stuffing' para incluir o terminador como dado.
-
-        :param dado: valor do dado
-        :return: o dado formatado
-        """
-        dado_enchido = self.enchimento_de_bytes(dado, [self.terminador])
-        return dado_enchido + self.terminador
-
-    def remova_formatacao(self, sequencia: bytes) -> bytes:
-        """
-        Desformatação do dado: remoção de byte terminador.
-
-        :param sequencia: bytes de dados
-        :return: dado efetivo, sem terminador
-        """
-        sequencia = self.esvaziamento_de_bytes(sequencia)
-        if bytes([sequencia[-1]]) != self.terminador:
-            raise TypeError("A sequência de bytes não possui o terminador")
-        return sequencia[:-1]
-    # code::end

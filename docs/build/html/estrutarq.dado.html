@@ -84,6 +84,9 @@ o dado é repassado sem modificação.</p>
 <dt class="field-even">Retorna</dt>
 <dd class="field-even"><p>bytes do dado inalterados</p>
 </dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -97,7 +100,7 @@ dado bruto).</p>
 <dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
 </dd>
 <dt class="field-even">Levanta</dt>
-<dd class="field-even"><p><strong>NotImplemented</strong> – sempre que o método é chamado</p>
+<dd class="field-even"><p><strong>NotImplemented</strong> – se o método for acidentalmente chamado</p>
 </dd>
 </dl>
 </dd></dl>
@@ -112,7 +115,7 @@ para dado bruto).</p>
 <dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes</p>
 </dd>
 <dt class="field-even">Levanta</dt>
-<dd class="field-even"><p><strong>NotImplemented</strong> – sempre que o método é chamado</p>
+<dd class="field-even"><p><strong>NotImplemented</strong> – se o método for acidentalmente chamado</p>
 </dd>
 </dl>
 </dd></dl>
@@ -129,6 +132,9 @@ repassada sem modificação.</p>
 <dt class="field-even">Retorna</dt>
 <dd class="field-even"><p>a sequência inalterada</p>
 </dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -141,7 +147,11 @@ repassada sem modificação.</p>
 <dt class="sig sig-object py" id="estrutarq.dado.DadoTerminador">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.</span></span><span class="sig-name descname"><span class="pre">DadoTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoTerminador" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
-<p>Classe para implementação de campos com terminador.</p>
+<p>Classe para implementação de dados com terminador. O dado é tratado como
+uma sequência de bytes à qual um byte predefinido (<a href="#id1"><span class="problematic" id="id2">:var:`terminador`</span></a>) é
+acrescentado ao final para demarcar o fim dos dados. A existência do
+valor do byte terminador na sequência de dados é tratada com a técnica
+de enchimento de bytes (implementada em <a class="reference internal" href="#estrutarq.dado.DadoBasico" title="estrutarq.dado.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.DadoBasico</span></code></a>).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoTerminador.adicione_formatacao">
 <span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoTerminador.adicione_formatacao" title="Link permanente para esta definição">¶</a></dt>
@@ -458,7 +468,7 @@ de dados, e a sequência de bytes restante</p>
 <dt class="sig sig-object py" id="estrutarq.dado.DadoBasico.byte_enchimento">
 <span class="sig-name descname"><span class="pre">byte_enchimento</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x1b'</span></em><a class="headerlink" href="#estrutarq.dado.DadoBasico.byte_enchimento" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Contém o byte de escape usado para enchimento (<cite>byte stuffing</cite>). Valor
-padrão: <code class="docutils literal notranslate"><span class="pre">0x1B</span></code> (caractere <code class="docutils literal notranslate"><span class="pre">ESC</span></code>).</p>
+padrão: <code class="docutils literal notranslate"><span class="pre">ESC</span></code> (hexadecimal <code class="docutils literal notranslate"><span class="pre">0x1B</span></code>).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -560,19 +570,27 @@ de bytes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoBasico.varredura_com_enchimento">
-<span class="sig-name descname"><span class="pre">varredura_com_enchimento</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">referencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.varredura_com_enchimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoBasico.varredura_com_enchimento" title="Link permanente para esta definição">¶</a></dt>
+<span class="sig-name descname"><span class="pre">varredura_com_enchimento</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">referencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.varredura_com_enchimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoBasico.varredura_com_enchimento" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Recuperação de um dado individual de uma sequência de bytes,
 retornando o dado até um byte de referência (não “enchido”) e o
 restante da sequência depois desse byte.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sequencia</strong> – uma sequência de bytes</p></li>
-<li><p><strong>referencia</strong> – byte simples usado como sentinela (terminador)</p></li>
+<li><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – uma sequência de bytes</p></li>
+<li><p><strong>referencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – byte simples usado como sentinela (terminador)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>o restante da sequência</p>
+<dd class="field-even"><p>uma tupla contendo a sequência de bytes até <code class="docutils literal notranslate"><span class="pre">referencia</span></code>
+e o restante da sequência depois de <code class="docutils literal notranslate"><span class="pre">referencia</span></code></p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>]</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(em Python v3.10)"><strong>ValueError</strong></a> – se o byte de referência não estiver presente na
+sequência de bytes</p>
 </dd>
 </dl>
 </dd></dl>
