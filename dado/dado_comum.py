@@ -113,16 +113,16 @@ class DadoBasico(metaclass = ABCMeta):
         pass
 
     @abstractmethod
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
         """
-        Recuperação de um dado extraído de uma sequência de bytes,
-        retornando os bytes do dado em si e o restante da sequência
-        depois da extração do dado, observando a representação do dado
-        e a forma de organização.
+        Recuperação de um dado extraído de uma sequência de bytes, retornando
+        os bytes do dado em si e o restante da sequência depois da extração
+        do dado, observando a representação do dado e a forma de organização.
 
         :param sequencia: sequência de bytes
-        :return: tupla com os bytes do dado, removido os bytes de organização
-        de dados, a sequência de bytes restante
+        :type sequencia: bytes
+        :return: tupla com os bytes do dado, removido os bytes de organização de dados, a sequência de bytes restante
+        :rtype: tuple[bytes, bytes]
         """
         pass
 
@@ -344,7 +344,7 @@ class DadoFixo(DadoBasico):
 
         :param sequencia: uma sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de organização
-        de dados, e a sequência de bytes restante
+            de dados, e a sequência de bytes restante
         """
         sequencia_restante = sequencia[self._comprimento:]
         sequencia = sequencia[:self._comprimento] + self.preenchimento
