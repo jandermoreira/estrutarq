@@ -141,24 +141,27 @@
 <div class="viewcode-block" id="DadoBasico.leia_de_arquivo"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBasico.leia_de_arquivo">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">leia_de_arquivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Recuperação de um dado lido de um arquivo, observando a</span>
-<span class="sd">        representação do dado e a forma de organização.</span>
+<span class="sd">        Recuperação de um dado lido de um arquivo, observando a representação</span>
+<span class="sd">        do dado e a forma de organização. A forma de organização usada é</span>
+<span class="sd">        removida.</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :return: a sequência de bytes lida</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="DadoBasico.leia_de_bytes"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBasico.leia_de_bytes">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Recuperação de um dado extraído de uma sequência de bytes, retornando</span>
+<span class="sd">        Recuperação de um dado a partir de uma sequência de bytes, retornando</span>
 <span class="sd">        os bytes do dado em si e o restante da sequência depois da extração</span>
 <span class="sd">        do dado, observando a representação do dado e a forma de organização.</span>
+<span class="sd">        O dado é retornado sem a organização.</span>
 
-<span class="sd">        :param sequencia: sequência de bytes</span>
-<span class="sd">        :type sequencia: bytes</span>
-<span class="sd">        :return: tupla com os bytes do dado, removido os bytes de organização</span>
-<span class="sd">            de dados, a sequência de bytes restante</span>
+<span class="sd">        :param bytes sequencia: sequência de bytes</span>
+<span class="sd">        :return: tupla com os bytes do dado, removidos os bytes de organização</span>
+<span class="sd">            de dados, e a sequência de bytes restante</span>
 <span class="sd">        :rtype: tuple[bytes, bytes]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
@@ -166,21 +169,23 @@
 <div class="viewcode-block" id="DadoBasico.adicione_formatacao"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBasico.adicione_formatacao">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Acrescenta aos bytes do dado a organização de dados em uso.</span>
+<span class="sd">        Acréscimo da organização de dados em uso aos bytes do dado.</span>
 
-<span class="sd">        :param dado: bytes do dado</span>
-<span class="sd">        :return: bytes do dado acrescida da forma de organização</span>
+<span class="sd">        :param bytes dado: bytes do dado</span>
+<span class="sd">        :return: bytes do dado acrescido da forma de organização</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="DadoBasico.remova_formatacao"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBasico.remova_formatacao">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">remova_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Remove da sequência de bytes aqueles correspondentes à forma de</span>
-<span class="sd">        organização.</span>
+<span class="sd">        Remoção dos bytes correspondentes à forma de organização da sequência</span>
+<span class="sd">        de bytes.</span>
 
-<span class="sd">        :param sequencia: uma sequência de bytes</span>
+<span class="sd">        :param bytes sequencia: uma sequência de bytes</span>
 <span class="sd">        :return: a sequência após extraídos os bytes de organização</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 

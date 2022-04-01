@@ -102,24 +102,27 @@ class DadoBasico(metaclass = ABCMeta):
     @abstractmethod
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Recuperação de um dado lido de um arquivo, observando a
-        representação do dado e a forma de organização.
+        Recuperação de um dado lido de um arquivo, observando a representação
+        do dado e a forma de organização. A forma de organização usada é
+        removida.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
+        :return: a sequência de bytes lida
+        :rtype: bytes
         """
         pass
 
     @abstractmethod
     def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
         """
-        Recuperação de um dado extraído de uma sequência de bytes, retornando
+        Recuperação de um dado a partir de uma sequência de bytes, retornando
         os bytes do dado em si e o restante da sequência depois da extração
         do dado, observando a representação do dado e a forma de organização.
+        O dado é retornado sem a organização.
 
-        :param sequencia: sequência de bytes
-        :type sequencia: bytes
-        :return: tupla com os bytes do dado, removido os bytes de organização
-            de dados, a sequência de bytes restante
+        :param bytes sequencia: sequência de bytes
+        :return: tupla com os bytes do dado, removidos os bytes de organização
+            de dados, e a sequência de bytes restante
         :rtype: tuple[bytes, bytes]
         """
         pass
@@ -127,28 +130,34 @@ class DadoBasico(metaclass = ABCMeta):
     @abstractmethod
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Acrescenta aos bytes do dado a organização de dados em uso.
+        Acréscimo da organização de dados em uso aos bytes do dado.
 
-        :param dado: bytes do dado
-        :return: bytes do dado acrescida da forma de organização
+        :param bytes dado: bytes do dado
+        :return: bytes do dado acrescido da forma de organização
+        :rtype: bytes
         """
         pass
 
     @abstractmethod
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
-        Remove da sequência de bytes aqueles correspondentes à forma de
-        organização.
+        Remoção dos bytes correspondentes à forma de organização da sequência
+        de bytes.
 
-        :param sequencia: uma sequência de bytes
+        :param bytes sequencia: uma sequência de bytes
         :return: a sequência após extraídos os bytes de organização
+        :rtype: bytes
         """
         pass
 
 
 class DadoBruto(DadoBasico):
     """
-    Classe para dado bruto
+    Classe para dato em forma bruta, ou seja, sem acréscimo de qualquer forma
+    de organização de dados.
+
+    Campos brutos não possuem aplicação prática e são usados apenas para fins
+    didáticos.
     """
 
     def __init__(self):
