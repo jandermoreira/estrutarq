@@ -6,27 +6,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>estrutarq.campo.campo_tempo &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/translations.js"></script>
-    <link rel="index" title="Índice" href="../../../genindex.html" />
-    <link rel="search" title="Buscar" href="../../../search.html" /> 
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../../../../genindex/" />
+    <link rel="search" title="Buscar" href="../../../../search/" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegação</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="Índice Geral"
+          <a href="../../../../genindex/" title="Índice Geral"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Índice de Módulos Python"
+          <a href="../../../../py-modindex/" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../" accesskey="U">Código do módulo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">estrutarq.campo.campo_tempo</a></li> 
       </ul>
     </div>  
@@ -48,7 +48,7 @@
 <span class="kn">from</span> <span class="nn">.campo_comum</span> <span class="kn">import</span> <span class="n">CampoBasico</span>
 
 
-<div class="viewcode-block" id="CampoTempoBasico"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoBasico"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Classe básica para campo de tempo (data + horário), armazenado</span>
 <span class="sd">        internamente como o número de segundos desde 1/1/1970, 0h00min00s.</span>
@@ -108,7 +108,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">texto</span></div>
 
 
-<div class="viewcode-block" id="CampoTempoBasicoBinario"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasicoBinario</span><span class="p">(</span><span class="n">CampoTempoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoBasicoBinario"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasicoBinario</span><span class="p">(</span><span class="n">CampoTempoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementação das conversões tempo-&gt; binário e binário-&gt;tempo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -118,7 +118,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoTempoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CampoTempoBasicoBinario.bytes_para_valor"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoBasicoBinario.bytes_para_valor"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão da representação binária (8 bytes, big-endian, com sinal)</span>
 <span class="sd">        para valor inteiro de segundos</span>
@@ -126,7 +126,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">segundos</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">dado</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CampoTempoBasicoBinario.valor_para_bytes"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="CampoTempoBasicoBinario.valor_para_bytes"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão do valor do tempo em segundos para representação em</span>
 <span class="sd">        inteiro binário (8 bytes, big-endian, com sinal)</span>
@@ -135,7 +135,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">segundos</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="CampoTempoBasicoFixo"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasicoFixo</span><span class="p">(</span><span class="n">CampoTempoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoBasicoFixo"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasicoFixo</span><span class="p">(</span><span class="n">CampoTempoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementação das conversões tempo-&gt; binário e binário-&gt;tempo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -143,7 +143,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoTempoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CampoTempoBasicoFixo.bytes_para_valor"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoBasicoFixo.bytes_para_valor"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão da representação binária (8 bytes, big-endian, com sinal)</span>
 <span class="sd">        para valor inteiro de segundos</span>
@@ -151,7 +151,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">dado</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CampoTempoBasicoFixo.valor_para_bytes"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="CampoTempoBasicoFixo.valor_para_bytes"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão do valor do tempo em segundos para representação em</span>
 <span class="sd">        inteiro binário (8 bytes, big-endian, com sinal)</span>
@@ -162,7 +162,7 @@
 
 <span class="c1">########################################</span>
 
-<div class="viewcode-block" id="CampoDataBinario"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoDataBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoDataBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoDataBinario"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoDataBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoDataBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para armazenamento de data (dia, mês e ano) para armazenamento</span>
 <span class="sd">    em formato binário.</span>
@@ -182,7 +182,7 @@
     <span class="c1">#     return self.comprimento</span>
 
 
-<div class="viewcode-block" id="CampoDataFixo"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoDataFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoDataFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoTempoBasicoFixo</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoDataFixo"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoDataFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoDataFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoTempoBasicoFixo</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para data, em número de segundos desde 1/1/1970,</span>
 <span class="sd">    0h00min00s usando armazenamento em cadeia de caracteres no formato</span>
@@ -202,7 +202,7 @@
     <span class="c1">#     return self.comprimento</span>
 
 
-<div class="viewcode-block" id="CampoHoraBinario"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoHoraBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoHoraBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoHoraBinario"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoHoraBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoHoraBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para horário usando armazenamento em valor inteiro em binário,</span>
 <span class="sd">    com sinal, big-endian.</span>
@@ -222,7 +222,7 @@
     <span class="c1">#     return self.comprimento</span>
 
 
-<div class="viewcode-block" id="CampoHoraFixo"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoHoraFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoHoraFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoTempoBasicoFixo</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoHoraFixo"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoHoraFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoHoraFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoTempoBasicoFixo</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe horário usando armazenamento em cadeia de caracteres no formato</span>
 <span class="sd">    &#39;formato_hora&#39;.</span>
@@ -240,7 +240,7 @@
     <span class="c1">#     &quot;&quot;&quot;</span>
     <span class="c1">#     return self.comprimento</span>
 
-<div class="viewcode-block" id="CampoTempoBinario"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoBinario"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para tempo (data + horário), em número de segundos desde 1/1/1970,</span>
 <span class="sd">    0h00min00s usando armazenamento em valor inteiro em binário, com sinal,</span>
@@ -261,7 +261,7 @@
     <span class="c1">#     return self.comprimento</span>
 
 
-<div class="viewcode-block" id="CampoTempoFixo"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_tempo.CampoTempoFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoTempoBasicoFixo</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoTempoFixo"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_tempo.CampoTempoFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoTempoBasicoFixo</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para tempo (data + horário), em número de segundos desde 1/1/1970,</span>
 <span class="sd">    0h00min00s usando armazenamento em cadeia de caracteres no formato</span>
@@ -290,7 +290,7 @@
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Busca rápida</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
+    <form class="search" action="../../../../search/" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Ir" />
     </form>
@@ -305,13 +305,13 @@
       <h3>Navegação</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="Índice Geral"
+          <a href="../../../../genindex/" title="Índice Geral"
              >índice</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Índice de Módulos Python"
+          <a href="../../../../py-modindex/" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../" >Código do módulo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">estrutarq.campo.campo_tempo</a></li> 
       </ul>
     </div>

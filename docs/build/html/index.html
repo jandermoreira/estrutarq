@@ -1,6 +1,5 @@
 
-
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="pt_BR">
   <head>
@@ -9,20 +8,14 @@
 
     <title>Documentação para estrutarq &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/translations.js"></script>
-    <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
-    <link rel="search" title="Buscar" href="search.html" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <!--[if lt IE 9]>
-    <script src="_static/css3-mediaqueries.js"></script>
-    <![endif]-->
+    <link rel="search" title="Buscar" href="search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegação</h3>
@@ -51,9 +44,7 @@
 <section id="module-estrutarq.dado.dado_comum">
 <span id="modulo-dado"></span><h1>Módulo dado<a class="headerlink" href="#module-estrutarq.dado.dado_comum" title="Link permanente para este título">¶</a></h1>
 <p>Estruturação de dados para armazenamento e gravação, usando representações
-diversas.</p>
-<p>Uma classe básica <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a> define uma classe abstrata (ABC) com
-as propriedades e métodos gerais. Dela são derivadas classes para dados:</p>
+diversas:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Em representação bruta</p></li>
@@ -94,7 +85,8 @@ Valor padrão: <code class="docutils literal notranslate"><span class="pre">0x1B
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes">
 <span class="sig-name descname"><span class="pre">enchimento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lista_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.enchimento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Operação de enchimento de bytes (<cite>byte stuffing</cite>).</p>
+<dd><p>Operação de enchimento de bytes (<cite>byte stuffing</cite>). Antes de cada item
+de <a href="#id1"><span class="problematic" id="id2">:param:`lista_byte`</span></a> é acrescentado o byte <code class="docutils literal notranslate"><span class="pre">byte_enchimento</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
@@ -114,7 +106,8 @@ Valor padrão: <code class="docutils literal notranslate"><span class="pre">0x1B
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.esvaziamento_de_bytes">
 <span class="sig-name descname"><span class="pre">esvaziamento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.esvaziamento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico.esvaziamento_de_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Operação de esvaziamento de bytes (<cite>byte un-stuffing</cite>).</p>
+<dd><p>Operação de esvaziamento de bytes (<cite>byte un-stuffing</cite>). Todos os
+enchimentos feitos com <code class="docutils literal notranslate"><span class="pre">byte_enchimento</span></code> são removidos.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – a sequência de bytes a ser “esvaziada”</p>
@@ -151,7 +144,8 @@ do dado, observando a representação do dado e a forma de organização.</p>
 <dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>tupla com os bytes do dado, removido os bytes de organização de dados, a sequência de bytes restante</p>
+<dd class="field-even"><p>tupla com os bytes do dado, removido os bytes de organização
+de dados, a sequência de bytes restante</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>]</p>

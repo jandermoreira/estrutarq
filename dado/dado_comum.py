@@ -1,10 +1,6 @@
 """
-Estruturação de dados para armazenamento e gravação, usando representações
-diversas.
-
-Uma classe básica :class:`DadoBasico` define uma classe abstrata (ABC) com
-as propriedades e métodos gerais. Dela são derivadas classes para dados:
-
+Estruturação de dados para armazenamento interno, gravação e leitura, usando
+representações diversas:
     * Em representação bruta
     * Em formato binário
     * De comprimento fixo predefinido
@@ -41,7 +37,8 @@ class DadoBasico(metaclass = ABCMeta):
     def enchimento_de_bytes(self, sequencia: bytes,
                             lista_bytes: list[bytes]) -> bytes:
         """
-        Operação de enchimento de bytes (`byte stuffing`).
+        Operação de enchimento de bytes (`byte stuffing`). Antes de cada item
+        de :param:`lista_byte` é acrescentado o byte ``byte_enchimento``.
 
         :param sequencia: a sequência de bytes a ser "enchida"
         :type sequencia: bytes
@@ -61,7 +58,8 @@ class DadoBasico(metaclass = ABCMeta):
 
     def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
         """
-        Operação de esvaziamento de bytes (`byte un-stuffing`).
+        Operação de esvaziamento de bytes (`byte un-stuffing`). Todos os
+        enchimentos feitos com ``byte_enchimento`` são removidos.
 
         :param sequencia: a sequência de bytes a ser "esvaziada"
         :type sequencia: bytes
@@ -121,7 +119,8 @@ class DadoBasico(metaclass = ABCMeta):
 
         :param sequencia: sequência de bytes
         :type sequencia: bytes
-        :return: tupla com os bytes do dado, removido os bytes de organização de dados, a sequência de bytes restante
+        :return: tupla com os bytes do dado, removido os bytes de organização
+            de dados, a sequência de bytes restante
         :rtype: tuple[bytes, bytes]
         """
         pass

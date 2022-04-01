@@ -6,27 +6,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>estrutarq.campo.campo_comum &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/translations.js"></script>
-    <link rel="index" title="Índice" href="../../../genindex.html" />
-    <link rel="search" title="Buscar" href="../../../search.html" /> 
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../../../../genindex/" />
+    <link rel="search" title="Buscar" href="../../../../search/" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegação</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="Índice Geral"
+          <a href="../../../../genindex/" title="Índice Geral"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Índice de Módulos Python"
+          <a href="../../../../py-modindex/" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../" accesskey="U">Código do módulo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">estrutarq.campo.campo_comum</a></li> 
       </ul>
     </div>  
@@ -53,7 +53,7 @@
 <span class="n">terminador_de_campo</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span>
 
 
-<div class="viewcode-block" id="CampoBasico"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Estruturação básica do campo como menor unidade de informação.</span>
 
 <span class="sd">    :param tipo: cadeia de caracteres com o nome do tipo</span>
@@ -85,7 +85,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-<div class="viewcode-block" id="CampoBasico.bytes_para_valor"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.bytes_para_valor">[documentos]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="CampoBasico.bytes_para_valor"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.bytes_para_valor">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão de uma sequência de bytes para armazenamento no valor</span>
@@ -95,7 +95,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span></div>
 
-<div class="viewcode-block" id="CampoBasico.valor_para_bytes"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.valor_para_bytes">[documentos]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="CampoBasico.valor_para_bytes"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.valor_para_bytes">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão do valor do campo para sequência de bytes de acordo</span>
@@ -104,7 +104,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="CampoBasico.comprimento_fixo"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico.comprimento_fixo"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retorna se o comprimento é ou não fixo</span>
 
@@ -112,7 +112,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span></div>
 
-<div class="viewcode-block" id="CampoBasico.comprimento"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico.comprimento"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtém o comprimento atual do campo</span>
 
@@ -121,7 +121,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">()))</span></div>
 
     <span class="c1"># code::start leitura_escrita</span>
-<div class="viewcode-block" id="CampoBasico.leia"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico.leia"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão dos dado lidos para o valor do campo, obedecendo à</span>
 <span class="sd">        organização e formato de representação</span>
@@ -131,7 +131,7 @@
         <span class="n">dado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_arquivo</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bytes_para_valor</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CampoBasico.escreva"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico.escreva"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão do valor para sequência de bytes e armazenamento no</span>
 <span class="sd">        arquivo</span>
@@ -151,7 +151,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CampoBasico.copy"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico.copy"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cópia &quot;rasa&quot; deste campo</span>
 <span class="sd">        :return: outra instância com os mesmos valores</span>
@@ -159,7 +159,7 @@
         <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="CampoBruto"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBruto">[documentos]</a><span class="k">class</span> <span class="nc">CampoBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBruto"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBruto">[documentos]</a><span class="k">class</span> <span class="nc">CampoBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementação das funções de um campo bruto, ou seja, sem organização</span>
 <span class="sd">    de campo. O valor é sempre armazenado como cadeia de caracteres.</span>
@@ -183,7 +183,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
 
     <span class="c1"># code::start bruto_conversoes</span>
-<div class="viewcode-block" id="CampoBruto.bytes_para_valor"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBruto.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBruto.bytes_para_valor"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBruto.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão de sequência de bytes para valor o campo, considerando</span>
 <span class="sd">        uma cadeia de caracteres simples</span>
@@ -191,7 +191,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">dado</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CampoBruto.valor_para_bytes"><a class="viewcode-back" href="../../../index.html#estrutarq.campo.campo_comum.CampoBruto.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="CampoBruto.valor_para_bytes"><a class="viewcode-back" href="../../../../#estrutarq.campo.campo_comum.CampoBruto.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão do valor do campo (cadeia de caracteres) para uma</span>
 <span class="sd">        sequência de bytes, usando codificação UTF-8</span>
@@ -211,7 +211,7 @@
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Busca rápida</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
+    <form class="search" action="../../../../search/" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Ir" />
     </form>
@@ -226,13 +226,13 @@
       <h3>Navegação</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="Índice Geral"
+          <a href="../../../../genindex/" title="Índice Geral"
              >índice</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Índice de Módulos Python"
+          <a href="../../../../py-modindex/" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../" >Código do módulo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">estrutarq.campo.campo_comum</a></li> 
       </ul>
     </div>
