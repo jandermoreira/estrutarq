@@ -40,6 +40,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Estruturação de dados para armazenamento interno, gravação e leitura, usando</span>
 <span class="sd">representações diversas:</span>
+
 <span class="sd">    * Em representação bruta</span>
 <span class="sd">    * Em formato binário</span>
 <span class="sd">    * De comprimento fixo predefinido</span>
@@ -58,15 +59,15 @@
 
 <div class="viewcode-block" id="DadoBasico"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBasico">[documentos]</a><span class="k">class</span> <span class="nc">DadoBasico</span><span class="p">(</span><span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe básica para dados.</span>
+<span class="sd">    Classe básica para armazenamento e manipulação de dados.</span>
 
 <span class="sd">    Implementa as operações básicas e define os métodos abstratos.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">byte_enchimento</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">&quot;</span>  <span class="c1"># ESC</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Contém o byte de escape usado para enchimento (`byte stuffing`).</span>
-<span class="sd">    Valor padrão: ``0x1B`` (caractere ``ESC``).&quot;</span>
+<span class="sd">    Contém o byte de escape usado para enchimento (`byte stuffing`). Valor</span>
+<span class="sd">    padrão: ``0x1B`` (caractere ``ESC``).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -77,12 +78,10 @@
                             <span class="n">lista_bytes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bytes</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Operação de enchimento de bytes (`byte stuffing`). Antes de cada item</span>
-<span class="sd">        de :param:`lista_byte` é acrescentado o byte ``byte_enchimento``.</span>
+<span class="sd">        de ``lista_bytes`` é acrescentado o byte ``byte_enchimento``.</span>
 
-<span class="sd">        :param sequencia: a sequência de bytes a ser &quot;enchida&quot;</span>
-<span class="sd">        :type sequencia: bytes</span>
-<span class="sd">        :param lista_bytes: os bytes especiais que serão &quot;escapados&quot;</span>
-<span class="sd">        :type lista_bytes: list[bytes]</span>
+<span class="sd">        :param bytes sequencia: a sequência de bytes a ser &quot;enchida&quot;</span>
+<span class="sd">        :param list[bytes] lista_bytes: os bytes especiais que serão &quot;escapados&quot;</span>
 <span class="sd">        :return: a sequência original enchida</span>
 <span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -102,7 +101,7 @@
 
 <span class="sd">        :param sequencia: a sequência de bytes a ser &quot;esvaziada&quot;</span>
 <span class="sd">        :type sequencia: bytes</span>
-<span class="sd">        :return: a sequência sem o enchimento</span>
+<span class="sd">        :return: a sequência sem os enchimentos</span>
 <span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">padrao</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_enchimento</span> <span class="o">+</span> <span class="sa">rb</span><span class="s2">&quot;(.)&quot;</span>

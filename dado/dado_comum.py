@@ -1,6 +1,7 @@
 """
 Estruturação de dados para armazenamento interno, gravação e leitura, usando
 representações diversas:
+
     * Em representação bruta
     * Em formato binário
     * De comprimento fixo predefinido
@@ -19,15 +20,15 @@ from typing import BinaryIO
 
 class DadoBasico(metaclass = ABCMeta):
     """
-    Classe básica para dados.
+    Classe básica para armazenamento e manipulação de dados.
 
     Implementa as operações básicas e define os métodos abstratos.
     """
 
     byte_enchimento: bytes = b"\x1b"  # ESC
     """
-    Contém o byte de escape usado para enchimento (`byte stuffing`).
-    Valor padrão: ``0x1B`` (caractere ``ESC``)."
+    Contém o byte de escape usado para enchimento (`byte stuffing`). Valor
+    padrão: ``0x1B`` (caractere ``ESC``).
     """
 
     def __init__(self):
@@ -38,12 +39,10 @@ class DadoBasico(metaclass = ABCMeta):
                             lista_bytes: list[bytes]) -> bytes:
         """
         Operação de enchimento de bytes (`byte stuffing`). Antes de cada item
-        de :param:`lista_byte` é acrescentado o byte ``byte_enchimento``.
+        de ``lista_bytes`` é acrescentado o byte ``byte_enchimento``.
 
-        :param sequencia: a sequência de bytes a ser "enchida"
-        :type sequencia: bytes
-        :param lista_bytes: os bytes especiais que serão "escapados"
-        :type lista_bytes: list[bytes]
+        :param bytes sequencia: a sequência de bytes a ser "enchida"
+        :param list[bytes] lista_bytes: os bytes especiais que serão "escapados"
         :return: a sequência original enchida
         :rtype: bytes
         """
@@ -63,7 +62,7 @@ class DadoBasico(metaclass = ABCMeta):
 
         :param sequencia: a sequência de bytes a ser "esvaziada"
         :type sequencia: bytes
-        :return: a sequência sem o enchimento
+        :return: a sequência sem os enchimentos
         :rtype: bytes
         """
         padrao = self.byte_enchimento + rb"(.)"

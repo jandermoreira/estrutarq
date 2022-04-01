@@ -59,7 +59,7 @@ representações diversas:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.dado_comum.</span></span><span class="sig-name descname"><span class="pre">DadoBasico</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum/#DadoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Classe básica para dados.</p>
+<dd><p>Classe básica para armazenamento e manipulação de dados.</p>
 <p>Implementa as operações básicas e define os métodos abstratos.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.adicione_formatacao">
@@ -78,15 +78,15 @@ representações diversas:</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.byte_enchimento">
 <span class="sig-name descname"><span class="pre">byte_enchimento</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x1b'</span></em><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico.byte_enchimento" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Contém o byte de escape usado para enchimento (<cite>byte stuffing</cite>).
-Valor padrão: <code class="docutils literal notranslate"><span class="pre">0x1B</span></code> (caractere <code class="docutils literal notranslate"><span class="pre">ESC</span></code>).”</p>
+<dd><p>Contém o byte de escape usado para enchimento (<cite>byte stuffing</cite>). Valor
+padrão: <code class="docutils literal notranslate"><span class="pre">0x1B</span></code> (caractere <code class="docutils literal notranslate"><span class="pre">ESC</span></code>).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes">
 <span class="sig-name descname"><span class="pre">enchimento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lista_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum/#DadoBasico.enchimento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Operação de enchimento de bytes (<cite>byte stuffing</cite>). Antes de cada item
-de <a href="#id1"><span class="problematic" id="id2">:param:`lista_byte`</span></a> é acrescentado o byte <code class="docutils literal notranslate"><span class="pre">byte_enchimento</span></code>.</p>
+de <code class="docutils literal notranslate"><span class="pre">lista_bytes</span></code> é acrescentado o byte <code class="docutils literal notranslate"><span class="pre">byte_enchimento</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
@@ -113,7 +113,7 @@ enchimentos feitos com <code class="docutils literal notranslate"><span class="p
 <dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – a sequência de bytes a ser “esvaziada”</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>a sequência sem o enchimento</p>
+<dd class="field-even"><p>a sequência sem os enchimentos</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
