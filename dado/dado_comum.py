@@ -153,7 +153,7 @@ class DadoBasico(metaclass = ABCMeta):
 
 class DadoBruto(DadoBasico):
     """
-    Classe para dato em forma bruta, ou seja, sem acréscimo de qualquer forma
+    Classe para dado em forma bruta, ou seja, sem acréscimo de qualquer forma
     de organização de dados.
 
     Campos brutos não possuem aplicação prática e são usados apenas para fins
@@ -163,40 +163,42 @@ class DadoBruto(DadoBasico):
     def __init__(self):
         DadoBasico.__init__(self)
 
-    def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
+    def leia_de_arquivo(self, arquivo: BinaryIO):
         """
         Recuperação de um dado lido de um arquivo (inviável para
         dado bruto).
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
+        :raise NotImplemented: sempre que o método é chamado
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
 
     def leia_de_bytes(self, sequencia: bytes):
         """
-        Recuperação de um dado extraído de uma sequência de bytes
-        (inviável para dado bruto).
+        Recuperação de um dado extraído de uma sequência de bytes (inviável
+        para dado bruto).
 
-        :param sequencia: sequência de bytes
+        :param bytes sequencia: sequência de bytes
+        :raise NotImplemented: sempre que o método é chamado
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
 
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Acrescenta aos bytes do dado a organização de dados em uso.
-        Para dado bruto, apenas repassa o dado sem modificação.
+        Para dado bruto não há acréscimo de bytes de organização de dados e
+        o dado é repassado sem modificação.
 
-        :param dado: bytes do dado
+        :param bytes dado: bytes do dado
         :return: bytes do dado inalterados
         """
         return dado
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
-        Remove da sequência de bytes de organização. Para dado bruto,
-        apenas repassa a sequência sem modificação.
+        Para o dado bruto não há bytes de organização a sequência de bytes é
+        repassada sem modificação.
 
-        :param sequencia: uma sequência de bytes
+        :param bytes sequencia: uma sequência de bytes
         :return: a sequência inalterada
         """
         return sequencia
@@ -205,6 +207,9 @@ class DadoBruto(DadoBasico):
 class DadoBinario(DadoBasico):
     """
     Classe para dados binários com um determinado comprimento em bytes.
+    O comprimento é fixo.
+
+    :param int comprimento: comprimento em bytes do valor a ser armazenado
     """
 
     __comprimento = None

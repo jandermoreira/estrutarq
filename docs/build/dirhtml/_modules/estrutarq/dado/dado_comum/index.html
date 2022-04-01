@@ -192,34 +192,40 @@
 
 <div class="viewcode-block" id="DadoBruto"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBruto">[documentos]</a><span class="k">class</span> <span class="nc">DadoBruto</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para dado bruto</span>
+<span class="sd">    Classe para dato em forma bruta, ou seja, sem acréscimo de qualquer forma</span>
+<span class="sd">    de organização de dados.</span>
+
+<span class="sd">    Campos brutos não possuem aplicação prática e são usados apenas para fins</span>
+<span class="sd">    didáticos.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">DadoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DadoBruto.leia_de_arquivo"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBruto.leia_de_arquivo">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_arquivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="DadoBruto.leia_de_arquivo"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBruto.leia_de_arquivo">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_arquivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recuperação de um dado lido de um arquivo (inviável para</span>
 <span class="sd">        dado bruto).</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :raise NotImplemented: sempre que chamada</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">(</span><span class="s2">&quot;A leitura de dado bruto é inviável.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DadoBruto.leia_de_bytes"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBruto.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Recuperação de um dado extraído de uma sequência de bytes</span>
-<span class="sd">        (inviável para dado bruto).</span>
+<span class="sd">        Recuperação de um dado extraído de uma sequência de bytes (inviável</span>
+<span class="sd">        para dado bruto).</span>
 
 <span class="sd">        :param sequencia: sequência de bytes</span>
+<span class="sd">        :raise NotImplemented: sempre que chamada</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">(</span><span class="s2">&quot;A leitura de dado bruto é inviável.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DadoBruto.adicione_formatacao"><a class="viewcode-back" href="../../../../#estrutarq.dado.dado_comum.DadoBruto.adicione_formatacao">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Acrescenta aos bytes do dado a organização de dados em uso.</span>
-<span class="sd">        Para dado bruto, apenas repassa o dado sem modificação.</span>
+<span class="sd">        Para dado bruto não há acréscimo de bytes de organização de dados e</span>
+<span class="sd">        o dado é repassado sem modificação.</span>
 
 <span class="sd">        :param dado: bytes do dado</span>
 <span class="sd">        :return: bytes do dado inalterados</span>
