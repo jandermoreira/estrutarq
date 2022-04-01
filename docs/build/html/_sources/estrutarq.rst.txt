@@ -1,7 +1,7 @@
-estrutarq package
-=================
+Pacote ``estrutarq``
+====================
 
-Subpackages
+Sub-pacotes
 -----------
 
 .. toctree::

@@ -3,10 +3,10 @@ Estruturação de dados para armazenamento interno, gravação e leitura, usando
 representações diversas:
 
     * Em representação bruta
+    * Com terminador
+    * Prefixada pelo comprimento
     * Em formato binário
     * De comprimento fixo predefinido
-    * Prefixada pelo comprimento
-    * Com terminador
 
 Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
 
@@ -28,7 +28,7 @@ class DadoBasico(metaclass = ABCMeta):
     byte_enchimento: bytes = b"\x1b"  # ESC
     """
     Contém o byte de escape usado para enchimento (`byte stuffing`). Valor
-    padrão: ``0x1B`` (caractere ``ESC``).
+    padrão: ``ESC`` (hexadecimal ``0x1B``).
     """
 
     def __init__(self):
