@@ -212,10 +212,14 @@ class DadoBruto(DadoBasico):
 class DadoTerminador(DadoBasico):
     """
     Classe para implementação de dados com terminador. O dado é tratado como
-    uma sequência de bytes à qual um byte predefinido (:property:`terminador`) é
+    uma sequência de bytes à qual um byte predefinido
+    (:attr:`~.estrutarq.dado.DadoTerminador.terminador`) é
     acrescentado ao final para demarcar o fim dos dados. A existência do
     valor do byte terminador na sequência de dados é tratada com a técnica
-    de enchimento de bytes (implementada em :class:`estrutarq.dado.DadoBasico`).
+    de enchimento de bytes (implementada em
+    :class:`~.estrutarq.dado.DadoBasico`).
+
+    :param bytes terminador: um byte a ser usado como terminador
     """
 
     def __init__(self, terminador: bytes):
@@ -224,6 +228,9 @@ class DadoTerminador(DadoBasico):
 
     @property
     def terminador(self) -> bytes:
+        """
+        Byte simples usado como terminador.
+        """
         return self.__terminador
 
     @terminador.setter
@@ -235,18 +242,20 @@ class DadoTerminador(DadoBasico):
         """
         if not isinstance(terminador, bytes) \
                 or len(terminador) != 1:
-            raise AttributeError("O terminador deve ter um byte")
+            raise AttributeError("O terminador deve ser um único byte")
         self.__terminador = terminador
 
     # code::start terminador_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado com terminador.
+        Leitura de um único dado com terminador. A leitura é feita byte a
+        byte até que o byte terminador seja encontrado. Bytes terminadores
+        enchidos são restaurados, mas não determinam o fim da busca.
 
         :param arquivo: arquivo binário aberto com permissão de leitura
-        :return: os bytes do dado sem o terminador
-
-        Em caso de falha na leitura é lançada a exceção EOFError
+        :return: a sequência de bytes do dado sem o terminador
+        :raise EOFError: se o fim do arquivo for atingido antes de o byte
+            terminador ser encontrado
         """
         achou_terminador = False
         achou_enchimento = False
@@ -254,7 +263,7 @@ class DadoTerminador(DadoBasico):
         while not achou_terminador:
             byte_lido = arquivo.read(1)  # byte a byte
             if len(byte_lido) == 0:
-                raise EOFError
+                raise EOFError("Byte terminador não encontrado no arquivo")
             if byte_lido == self.terminador and not achou_enchimento:
                 achou_terminador = True
             achou_enchimento = (byte_lido == self.byte_enchimento
@@ -265,14 +274,16 @@ class DadoTerminador(DadoBasico):
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado até o terminador e o restante da sequência depois
         do terminador.
 
-        :param sequencia: uma sequência de bytes
-        :return: o restante da sequência
+        :param bytes sequencia: uma sequência de bytes
+        :return: uma tupla contendo os bytes dos dados e a sequência de bytes
+            restante
+        :rtype: tuple[bytes, bytes]
         """
         bytes_dados, sequencia_restante = \
             self.varredura_com_enchimento(sequencia, self.terminador)

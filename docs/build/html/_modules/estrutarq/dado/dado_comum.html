@@ -251,10 +251,14 @@
 <div class="viewcode-block" id="DadoTerminador"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoTerminador">[documentos]</a><span class="k">class</span> <span class="nc">DadoTerminador</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para implementação de dados com terminador. O dado é tratado como</span>
-<span class="sd">    uma sequência de bytes à qual um byte predefinido (:var:`terminador`) é</span>
+<span class="sd">    uma sequência de bytes à qual um byte predefinido</span>
+<span class="sd">    (:attr:`~.estrutarq.dado.DadoTerminador.terminador`) é</span>
 <span class="sd">    acrescentado ao final para demarcar o fim dos dados. A existência do</span>
 <span class="sd">    valor do byte terminador na sequência de dados é tratada com a técnica</span>
-<span class="sd">    de enchimento de bytes (implementada em :class:`estrutarq.dado.DadoBasico`).</span>
+<span class="sd">    de enchimento de bytes (implementada em</span>
+<span class="sd">    :class:`~.estrutarq.dado.DadoBasico`).</span>
+
+<span class="sd">    :param bytes terminador: um byte a ser usado como terminador</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
@@ -263,6 +267,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">terminador</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Byte simples usado como terminador.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__terminador</span>
 
     <span class="nd">@terminador</span><span class="o">.</span><span class="n">setter</span>
@@ -274,18 +281,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">terminador</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span> \
                 <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">terminador</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;O terminador deve ter um byte&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;O terminador deve ser um único byte&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__terminador</span> <span class="o">=</span> <span class="n">terminador</span>
 
     <span class="c1"># code::start terminador_leitura_de_arquivo</span>
 <div class="viewcode-block" id="DadoTerminador.leia_de_arquivo"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoTerminador.leia_de_arquivo">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_arquivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de um único dado com terminador.</span>
+<span class="sd">        Leitura de um único dado com terminador. A leitura é feita byte a</span>
+<span class="sd">        byte até que o byte terminador seja encontrado. Bytes terminadores</span>
+<span class="sd">        enchidos são restaurados, mas não determinam o fim da busca.</span>
 
 <span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
-<span class="sd">        :return: os bytes do dado sem o terminador</span>
-
-<span class="sd">        Em caso de falha na leitura é lançada a exceção EOFError</span>
+<span class="sd">        :return: a sequência de bytes do dado sem o terminador</span>
+<span class="sd">        :raise EOFError: se o fim do arquivo for atingido antes de o byte</span>
+<span class="sd">            terminador ser encontrado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">achou_terminador</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">achou_enchimento</span> <span class="o">=</span> <span class="kc">False</span>
@@ -293,7 +302,7 @@
         <span class="k">while</span> <span class="ow">not</span> <span class="n">achou_terminador</span><span class="p">:</span>
             <span class="n">byte_lido</span> <span class="o">=</span> <span class="n">arquivo</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># byte a byte</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">byte_lido</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">EOFError</span>
+                <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span><span class="s2">&quot;Byte terminador não encontrado no arquivo&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">byte_lido</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminador</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">achou_enchimento</span><span class="p">:</span>
                 <span class="n">achou_terminador</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">achou_enchimento</span> <span class="o">=</span> <span class="p">(</span><span class="n">byte_lido</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">byte_enchimento</span>
@@ -304,14 +313,16 @@
 
     <span class="c1"># code::end</span>
 
-<div class="viewcode-block" id="DadoTerminador.leia_de_bytes"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoTerminador.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="DadoTerminador.leia_de_bytes"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoTerminador.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recuperação de um dado individual de uma sequência de bytes,</span>
 <span class="sd">        retornando o dado até o terminador e o restante da sequência depois</span>
 <span class="sd">        do terminador.</span>
 
-<span class="sd">        :param sequencia: uma sequência de bytes</span>
-<span class="sd">        :return: o restante da sequência</span>
+<span class="sd">        :param bytes sequencia: uma sequência de bytes</span>
+<span class="sd">        :return: uma tupla contendo os bytes dos dados e a sequência de bytes</span>
+<span class="sd">            restante</span>
+<span class="sd">        :rtype: tuple[bytes, bytes]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bytes_dados</span><span class="p">,</span> <span class="n">sequencia_restante</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">varredura_com_enchimento</span><span class="p">(</span><span class="n">sequencia</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminador</span><span class="p">)</span>
