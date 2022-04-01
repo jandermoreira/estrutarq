@@ -3,20 +3,26 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Documentação para estrutarq
-***********************************************
+Documentação para ``estrutarq``
+*******************************
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+Módulo dado
+***********
+
+.. automodule:: estrutarq.dado.dado_comum
+   :members:
+
 Módulo campo
-***********************************************
+************
 .. automodule:: estrutarq.campo.campo_comum
    :members: 
 
 Cadeias de caracteres
-================================================
+=====================
 .. automodule:: estrutarq.campo.campo_cadeia
    :members: 
 
