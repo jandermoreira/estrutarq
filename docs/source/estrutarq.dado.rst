@@ -1,13 +1,12 @@
 Pacote ``estrutarq.dado``
 =========================
 
-Módulo ``estrutarq.dado_comum``
+Módulo ``dado_comum``
 -------------------------------
+Módulo ``estrutarq.dado.dado_comum``.
 
 .. automodule:: estrutarq.dado.dado_comum
 
-
-As classes providas pelo módulo, importadas direramente de :mod:`estrutarq.dado`, são a interface para a criação das organizações de dados disponíveis.
 
 Dado bruto
 ++++++++++

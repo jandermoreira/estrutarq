@@ -1,13 +1,20 @@
-estrutarq.campo package
-=======================
+Pacote ``estrutarq.campo``
+==========================
 
-Submodules
-----------
 
-estrutarq.campo.campo\_cadeia module
-------------------------------------
+.. automodule:: estrutarq.campo.dado_comum
 
-.. automodule:: estrutarq.campo.campo_cadeia
+
+
+Módulo ``campo_cadeia``
+-----------------------
+Módulo ``estrutarq.campo_cadeia``.
+
+Campo básico
+++++++++++++
+
+
+.. autoclass:: estrutarq.campo.campo_cadeia.
    :members:
    :undoc-members:
    :show-inheritance:
@@ -45,10 +52,15 @@ estrutarq.campo.campo\_tempo module
    :show-inheritance:
 
 
-Module contents
----------------
+Módulo ``estrutarq.campo_comum``
+-------------------------------
 
-.. automodule:: estrutarq.campo
+Campo básico
+++++++++++++
+
+Todas as demais classes do módulo são derivadas de uma classe básica.
+
+.. autoclass:: estrutarq.campo.CampoBasico
    :members:
    :undoc-members:
    :show-inheritance:
