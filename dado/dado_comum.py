@@ -497,8 +497,8 @@ class DadoBinario(DadoBasico):
         """
         Desformatação do dado: apenas repassa o dado binário.
 
-        :param bytes sequencia: sequencia de bytes do valor binário
-        :return: o a sequencia sem modificação
+        :param bytes sequencia: sequência de bytes do valor binário
+        :return: a sequência sem modificação
         :rtype: bytes
         :raise TypeError: se o comprimento do dado diferir do esperado
         """
