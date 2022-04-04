@@ -36,6 +36,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
+    'sphinxcontrib.restbuilder',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -76,3 +77,17 @@ html_static_path = ['_static']
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
 }
+
+# -- reST ---------------------------------
+rst_file_suffix = '.rst'
+rst_link_suffix = ''
+rst_line_width = 78
+rst_indent = 4
+def rst_file_transform(docname):
+    if docname == 'index':
+        docname = 'home'
+    return docname.title() + rst_file_suffix
+def rst_link_transform(docname):
+    if docname == 'index':
+        return 'wiki'
+    return 'wiki/' + docname.title()
