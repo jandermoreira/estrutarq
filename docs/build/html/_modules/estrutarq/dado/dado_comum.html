@@ -321,7 +321,7 @@
 
 <span class="sd">        :param bytes sequencia: uma sequência de bytes</span>
 <span class="sd">        :return: uma tupla contendo os bytes dos dados e a sequência de bytes</span>
-<span class="sd">            restante</span>
+<span class="sd">            restante, excluindo-se de ambas o terminador</span>
 <span class="sd">        :rtype: tuple[bytes, bytes]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bytes_dados</span><span class="p">,</span> <span class="n">sequencia_restante</span> <span class="o">=</span> \
@@ -331,21 +331,27 @@
     <span class="c1"># code::start terminador_formatacoes</span>
 <div class="viewcode-block" id="DadoTerminador.adicione_formatacao"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoTerminador.adicione_formatacao">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Formatação do dado: acréscimo do byte terminador e uso de</span>
-<span class="sd">        &#39;byte stuffing&#39; para incluir o terminador como dado.</span>
+<span class="sd">        Formatação do dado: uso de &#39;byte stuffing&#39; para permitir o byte</span>
+<span class="sd">        terminador como dado e acréscimo do byte terminador.</span>
 
-<span class="sd">        :param dado: valor do dado</span>
-<span class="sd">        :return: o dado formatado</span>
+<span class="sd">        :param bytes dado: sequência de bytes do dado</span>
+<span class="sd">        :return: a sequência de dados enchida e com o acréscimo do terminador</span>
+<span class="sd">            ao final</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dado_enchido</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enchimento_de_bytes</span><span class="p">(</span><span class="n">dado</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">terminador</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">dado_enchido</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminador</span></div>
 
 <div class="viewcode-block" id="DadoTerminador.remova_formatacao"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoTerminador.remova_formatacao">[documentos]</a>    <span class="k">def</span> <span class="nf">remova_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Desformatação do dado: remoção de byte terminador.</span>
+<span class="sd">        Desformatação do dado: remoção dos bytes de enchimento e também do</span>
+<span class="sd">        byte terminador.</span>
 
-<span class="sd">        :param sequencia: bytes de dados</span>
-<span class="sd">        :return: dado efetivo, sem terminador</span>
+<span class="sd">        :param sequencia: sequência de bytes de dados</span>
+<span class="sd">        :return: sequência de bytes de dados, esvaziada e sem terminador</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise TypeError: se o terminador não estiver presente na sequência</span>
+<span class="sd">            esvaziada</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sequencia</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">esvaziamento_de_bytes</span><span class="p">(</span><span class="n">sequencia</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">sequencia</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminador</span><span class="p">:</span>

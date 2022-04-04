@@ -250,7 +250,8 @@ class DadoTerminador(DadoBasico):
         """
         Leitura de um único dado com terminador. A leitura é feita byte a
         byte até que o byte terminador seja encontrado. Bytes terminadores
-        enchidos são restaurados, mas não determinam o fim da busca.
+        enchidos são restaurados, mas não determinam o fim da busca. O
+        enchimento de bytes é removido.
 
         :param arquivo: arquivo binário aberto com permissão de leitura
         :return: a sequência de bytes do dado sem o terminador
@@ -282,7 +283,7 @@ class DadoTerminador(DadoBasico):
 
         :param bytes sequencia: uma sequência de bytes
         :return: uma tupla contendo os bytes dos dados e a sequência de bytes
-            restante
+            restante, excluindo-se de ambas o terminador
         :rtype: tuple[bytes, bytes]
         """
         bytes_dados, sequencia_restante = \
@@ -292,21 +293,27 @@ class DadoTerminador(DadoBasico):
     # code::start terminador_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: acréscimo do byte terminador e uso de
-        'byte stuffing' para incluir o terminador como dado.
+        Formatação do dado: uso de 'byte stuffing' para permitir o byte
+        terminador como dado e acréscimo do byte terminador.
 
-        :param dado: valor do dado
-        :return: o dado formatado
+        :param bytes dado: sequência de bytes do dado
+        :return: a sequência de dados enchida e com o acréscimo do terminador
+            ao final
+        :rtype: bytes
         """
         dado_enchido = self.enchimento_de_bytes(dado, [self.terminador])
         return dado_enchido + self.terminador
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
-        Desformatação do dado: remoção de byte terminador.
+        Desformatação do dado: remoção dos bytes de enchimento e também do
+        byte terminador.
 
-        :param sequencia: bytes de dados
-        :return: dado efetivo, sem terminador
+        :param sequencia: sequência de bytes de dados
+        :return: sequência de bytes de dados, esvaziada e sem terminador
+        :rtype: bytes
+        :raise TypeError: se o terminador não estiver presente na sequência
+            esvaziada
         """
         sequencia = self.esvaziamento_de_bytes(sequencia)
         if bytes([sequencia[-1]]) != self.terminador:

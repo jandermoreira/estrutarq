@@ -1,0 +1,311 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{adicione\_campos()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{12}
+  \item \spxentry{adicione\_formatacao()}\spxextra{método estrutarq.dado.DadoBasico}, 
+		\hyperpage{5}
+  \item \spxentry{adicione\_formatacao()}\spxextra{método estrutarq.dado.DadoBinario}, 
+		\hyperpage{4}
+  \item \spxentry{adicione\_formatacao()}\spxextra{método estrutarq.dado.DadoBruto}, \hyperpage{2}
+  \item \spxentry{adicione\_formatacao()}\spxextra{método estrutarq.dado.DadoFixo}, \hyperpage{5}
+  \item \spxentry{adicione\_formatacao()}\spxextra{método estrutarq.dado.DadoPrefixado}, 
+		\hyperpage{3}
+  \item \spxentry{adicione\_formatacao()}\spxextra{método estrutarq.dado.DadoTerminador}, 
+		\hyperpage{2}
+  \item \spxentry{ArquivoBasico}\spxextra{classe em estrutarq.arquivo.arquivo\_comum}, 
+		\hyperpage{14}
+  \item \spxentry{ArquivoSimples}\spxextra{classe em estrutarq.arquivo.arquivo\_comum}, 
+		\hyperpage{14}
+
+  \indexspace
+  \bigletter B
+  \item \spxentry{byte\_enchimento}\spxextra{atributo estrutarq.dado.DadoBasico}, \hyperpage{5}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico}, 
+		\hyperpage{7}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, 
+		\hyperpage{8}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_comum.CampoBruto}, 
+		\hyperpage{9}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_inteiro.CampoIntBasico}, 
+		\hyperpage{9}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_inteiro.CampoIntBinario}, 
+		\hyperpage{9}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}, 
+		\hyperpage{10}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}, 
+		\hyperpage{10}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}, 
+		\hyperpage{11}
+  \item \spxentry{bytes\_para\_valor()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo}, 
+		\hyperpage{12}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{CampoBasico}\spxextra{classe em estrutarq.campo.campo\_comum}, \hyperpage{8}
+  \item \spxentry{CampoBruto}\spxextra{classe em estrutarq.campo.campo\_comum}, \hyperpage{9}
+  \item \spxentry{CampoCadeiaBasico}\spxextra{classe em estrutarq.campo.campo\_cadeia}, 
+		\hyperpage{7}
+  \item \spxentry{CampoCadeiaFixo}\spxextra{classe em estrutarq.campo.campo\_cadeia}, \hyperpage{7}
+  \item \spxentry{CampoCadeiaPrefixado}\spxextra{classe em estrutarq.campo.campo\_cadeia}, 
+		\hyperpage{8}
+  \item \spxentry{CampoCadeiaTerminador}\spxextra{classe em estrutarq.campo.campo\_cadeia}, 
+		\hyperpage{8}
+  \item \spxentry{CampoDataBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
+		\hyperpage{11}
+  \item \spxentry{CampoDataFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{11}
+  \item \spxentry{CampoHoraBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
+		\hyperpage{11}
+  \item \spxentry{CampoHoraFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{11}
+  \item \spxentry{CampoIntBasico}\spxextra{classe em estrutarq.campo.campo\_inteiro}, \hyperpage{9}
+  \item \spxentry{CampoIntBinario}\spxextra{classe em estrutarq.campo.campo\_inteiro}, 
+		\hyperpage{9}
+  \item \spxentry{CampoIntFixo}\spxextra{classe em estrutarq.campo.campo\_inteiro}, \hyperpage{9}
+  \item \spxentry{CampoIntPrefixado}\spxextra{classe em estrutarq.campo.campo\_inteiro}, 
+		\hyperpage{9}
+  \item \spxentry{CampoIntTerminador}\spxextra{classe em estrutarq.campo.campo\_inteiro}, 
+		\hyperpage{10}
+  \item \spxentry{CampoRealBasico}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{10}
+  \item \spxentry{CampoRealBinario}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{10}
+  \item \spxentry{CampoRealFixo}\spxextra{classe em estrutarq.campo.campo\_real}, \hyperpage{10}
+  \item \spxentry{CampoRealPrefixado}\spxextra{classe em estrutarq.campo.campo\_real}, 
+		\hyperpage{10}
+  \item \spxentry{CampoRealTerminador}\spxextra{classe em estrutarq.campo.campo\_real}, 
+		\hyperpage{10}
+  \item \spxentry{CampoTempoBasico}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
+		\hyperpage{11}
+  \item \spxentry{CampoTempoBasicoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
+		\hyperpage{11}
+  \item \spxentry{CampoTempoBasicoFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
+		\hyperpage{12}
+  \item \spxentry{CampoTempoBinario}\spxextra{classe em estrutarq.campo.campo\_tempo}, 
+		\hyperpage{12}
+  \item \spxentry{CampoTempoFixo}\spxextra{classe em estrutarq.campo.campo\_tempo}, \hyperpage{12}
+  \item \spxentry{comprimento()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, 
+		\hyperpage{8}
+  \item \spxentry{comprimento()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+  \item \spxentry{comprimento\_data}\spxextra{atributo estrutarq.campo.campo\_tempo.CampoTempoBasico}, 
+		\hyperpage{11}
+  \item \spxentry{comprimento\_de\_bloco()}\spxextra{no módulo estrutarq.utilitarios.disco}, 
+		\hyperpage{15}
+  \item \spxentry{comprimento\_de\_bloco()}\spxextra{no módulo estrutarq.utilitarios.dispositivo}, 
+		\hyperpage{15}
+  \item \spxentry{comprimento\_fixo()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, 
+		\hyperpage{8}
+  \item \spxentry{comprimento\_hora}\spxextra{atributo estrutarq.campo.campo\_tempo.CampoTempoBasico}, 
+		\hyperpage{11}
+  \item \spxentry{comprimento\_tempo}\spxextra{atributo estrutarq.campo.campo\_tempo.CampoTempoBasico}, 
+		\hyperpage{11}
+  \item \spxentry{copy()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, \hyperpage{8}
+  \item \spxentry{copy()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{DadoBasico}\spxextra{classe em estrutarq.dado}, \hyperpage{5}
+  \item \spxentry{DadoBinario}\spxextra{classe em estrutarq.dado}, \hyperpage{4}
+  \item \spxentry{DadoBruto}\spxextra{classe em estrutarq.dado}, \hyperpage{2}
+  \item \spxentry{DadoFixo}\spxextra{classe em estrutarq.dado}, \hyperpage{5}
+  \item \spxentry{DadoPrefixado}\spxextra{classe em estrutarq.dado}, \hyperpage{3}
+  \item \spxentry{DadoTerminador}\spxextra{classe em estrutarq.dado}, \hyperpage{2}
+  \item \spxentry{de\_bytes()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{enchimento\_de\_bytes()}\spxextra{método estrutarq.dado.DadoBasico}, 
+		\hyperpage{6}
+  \item \spxentry{escreva()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoBasico}, 
+		\hyperpage{14}
+  \item \spxentry{escreva()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoSimples}, 
+		\hyperpage{14}
+  \item \spxentry{escreva()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, 
+		\hyperpage{8}
+  \item \spxentry{escreva()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+  \item \spxentry{escreva\_fixo()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoSimples}, 
+		\hyperpage{14}
+  \item \spxentry{escreva\_variavel()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoSimples}, 
+		\hyperpage{14}
+  \item \spxentry{estrutarq.arquivo}
+    \subitem \spxentry{módulo}, \hyperpage{15}
+  \item \spxentry{estrutarq.arquivo.arquivo\_comum}
+    \subitem \spxentry{módulo}, \hyperpage{14}
+  \item \spxentry{estrutarq.campo}
+    \subitem \spxentry{módulo}, \hyperpage{12}
+  \item \spxentry{estrutarq.campo.campo\_cadeia}
+    \subitem \spxentry{módulo}, \hyperpage{7}
+  \item \spxentry{estrutarq.campo.campo\_comum}
+    \subitem \spxentry{módulo}, \hyperpage{8}
+  \item \spxentry{estrutarq.campo.campo\_inteiro}
+    \subitem \spxentry{módulo}, \hyperpage{9}
+  \item \spxentry{estrutarq.campo.campo\_real}
+    \subitem \spxentry{módulo}, \hyperpage{10}
+  \item \spxentry{estrutarq.campo.campo\_tempo}
+    \subitem \spxentry{módulo}, \hyperpage{11}
+  \item \spxentry{estrutarq.dado.dado\_comum}
+    \subitem \spxentry{módulo}, \hyperpage{1}
+  \item \spxentry{estrutarq.registro.registro\_comum}
+    \subitem \spxentry{módulo}, \hyperpage{12}
+  \item \spxentry{estrutarq.utilitarios}
+    \subitem \spxentry{módulo}, \hyperpage{16}
+  \item \spxentry{estrutarq.utilitarios.disco}
+    \subitem \spxentry{módulo}, \hyperpage{15}
+  \item \spxentry{estrutarq.utilitarios.dispositivo}
+    \subitem \spxentry{módulo}, \hyperpage{15}
+  \item \spxentry{estrutarq.utilitarios.geral}
+    \subitem \spxentry{módulo}, \hyperpage{16}
+  \item \spxentry{esvaziamento\_de\_bytes()}\spxextra{método estrutarq.dado.DadoBasico}, 
+		\hyperpage{6}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{feche()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoBasico}, 
+		\hyperpage{14}
+  \item \spxentry{formato\_data}\spxextra{atributo estrutarq.campo.campo\_tempo.CampoTempoBasico}, 
+		\hyperpage{11}
+  \item \spxentry{formato\_hora}\spxextra{atributo estrutarq.campo.campo\_tempo.CampoTempoBasico}, 
+		\hyperpage{11}
+  \item \spxentry{formato\_tempo}\spxextra{atributo estrutarq.campo.campo\_tempo.CampoTempoBasico}, 
+		\hyperpage{11}
+
+  \indexspace
+  \bigletter L
+  \item \spxentry{leia()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoBasico}, 
+		\hyperpage{14}
+  \item \spxentry{leia()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoSimples}, 
+		\hyperpage{14}
+  \item \spxentry{leia()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, \hyperpage{8}
+  \item \spxentry{leia()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+  \item \spxentry{leia\_de\_arquivo()}\spxextra{método estrutarq.dado.DadoBasico}, \hyperpage{6}
+  \item \spxentry{leia\_de\_arquivo()}\spxextra{método estrutarq.dado.DadoBinario}, \hyperpage{4}
+  \item \spxentry{leia\_de\_arquivo()}\spxextra{método estrutarq.dado.DadoBruto}, \hyperpage{2}
+  \item \spxentry{leia\_de\_arquivo()}\spxextra{método estrutarq.dado.DadoFixo}, \hyperpage{5}
+  \item \spxentry{leia\_de\_arquivo()}\spxextra{método estrutarq.dado.DadoPrefixado}, 
+		\hyperpage{3}
+  \item \spxentry{leia\_de\_arquivo()}\spxextra{método estrutarq.dado.DadoTerminador}, 
+		\hyperpage{2}
+  \item \spxentry{leia\_de\_bytes()}\spxextra{método estrutarq.dado.DadoBasico}, \hyperpage{6}
+  \item \spxentry{leia\_de\_bytes()}\spxextra{método estrutarq.dado.DadoBinario}, \hyperpage{4}
+  \item \spxentry{leia\_de\_bytes()}\spxextra{método estrutarq.dado.DadoBruto}, \hyperpage{2}
+  \item \spxentry{leia\_de\_bytes()}\spxextra{método estrutarq.dado.DadoFixo}, \hyperpage{5}
+  \item \spxentry{leia\_de\_bytes()}\spxextra{método estrutarq.dado.DadoPrefixado}, \hyperpage{3}
+  \item \spxentry{leia\_de\_bytes()}\spxextra{método estrutarq.dado.DadoTerminador}, \hyperpage{3}
+  \item \spxentry{leia\_fixo()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoSimples}, 
+		\hyperpage{15}
+  \item \spxentry{leia\_variavel()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoSimples}, 
+		\hyperpage{15}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{main()}\spxextra{no módulo estrutarq.utilitarios.disco}, \hyperpage{15}
+  \item \spxentry{main()}\spxextra{no módulo estrutarq.utilitarios.dispositivo}, \hyperpage{15}
+  \item \spxentry{módulo}
+    \subitem \spxentry{estrutarq.arquivo}, \hyperpage{15}
+    \subitem \spxentry{estrutarq.arquivo.arquivo\_comum}, \hyperpage{14}
+    \subitem \spxentry{estrutarq.campo}, \hyperpage{12}
+    \subitem \spxentry{estrutarq.campo.campo\_cadeia}, \hyperpage{7}
+    \subitem \spxentry{estrutarq.campo.campo\_comum}, \hyperpage{8}
+    \subitem \spxentry{estrutarq.campo.campo\_inteiro}, \hyperpage{9}
+    \subitem \spxentry{estrutarq.campo.campo\_real}, \hyperpage{10}
+    \subitem \spxentry{estrutarq.campo.campo\_tempo}, \hyperpage{11}
+    \subitem \spxentry{estrutarq.dado.dado\_comum}, \hyperpage{1}
+    \subitem \spxentry{estrutarq.registro.registro\_comum}, \hyperpage{12}
+    \subitem \spxentry{estrutarq.utilitarios}, \hyperpage{16}
+    \subitem \spxentry{estrutarq.utilitarios.disco}, \hyperpage{15}
+    \subitem \spxentry{estrutarq.utilitarios.dispositivo}, \hyperpage{15}
+    \subitem \spxentry{estrutarq.utilitarios.geral}, \hyperpage{16}
+
+  \indexspace
+  \bigletter N
+  \item \spxentry{numero\_bytes}\spxextra{atributo estrutarq.campo.campo\_inteiro.CampoIntBinario}, 
+		\hyperpage{9}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{para\_bytes()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+  \item \spxentry{posicao\_atual()}\spxextra{método estrutarq.arquivo.arquivo\_comum.ArquivoBasico}, 
+		\hyperpage{14}
+  \item \spxentry{preenchimento}\spxextra{propriedade estrutarq.dado.DadoFixo }, \hyperpage{5}
+
+  \indexspace
+  \bigletter R
+  \item \spxentry{RegistroBasico}\spxextra{classe em estrutarq.registro.registro\_comum}, 
+		\hyperpage{12}
+  \item \spxentry{RegistroBruto}\spxextra{classe em estrutarq.registro.registro\_comum}, 
+		\hyperpage{13}
+  \item \spxentry{RegistroFixo}\spxextra{classe em estrutarq.registro.registro\_comum}, 
+		\hyperpage{13}
+  \item \spxentry{RegistroPrefixado}\spxextra{classe em estrutarq.registro.registro\_comum}, 
+		\hyperpage{13}
+  \item \spxentry{RegistroTerminador}\spxextra{classe em estrutarq.registro.registro\_comum}, 
+		\hyperpage{13}
+  \item \spxentry{remova\_formatacao()}\spxextra{método estrutarq.dado.DadoBasico}, \hyperpage{6}
+  \item \spxentry{remova\_formatacao()}\spxextra{método estrutarq.dado.DadoBinario}, \hyperpage{4}
+  \item \spxentry{remova\_formatacao()}\spxextra{método estrutarq.dado.DadoBruto}, \hyperpage{2}
+  \item \spxentry{remova\_formatacao()}\spxextra{método estrutarq.dado.DadoFixo}, \hyperpage{5}
+  \item \spxentry{remova\_formatacao()}\spxextra{método estrutarq.dado.DadoPrefixado}, 
+		\hyperpage{4}
+  \item \spxentry{remova\_formatacao()}\spxextra{método estrutarq.dado.DadoTerminador}, 
+		\hyperpage{3}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{segundos}\spxextra{propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico }, 
+		\hyperpage{11}
+
+  \indexspace
+  \bigletter T
+  \item \spxentry{tem\_comprimento\_fixo()}\spxextra{método estrutarq.registro.registro\_comum.RegistroBasico}, 
+		\hyperpage{13}
+  \item \spxentry{terminador}\spxextra{propriedade estrutarq.dado.DadoTerminador }, \hyperpage{3}
+  \item \spxentry{tipo}\spxextra{propriedade estrutarq.campo.campo\_comum.CampoBasico }, 
+		\hyperpage{8}
+  \item \spxentry{tipo}\spxextra{propriedade estrutarq.registro.registro\_comum.RegistroBasico }, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter V
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_cadeia.CampoCadeiaBasico }, 
+		\hyperpage{7}
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_comum.CampoBasico }, 
+		\hyperpage{8}
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_comum.CampoBruto }, 
+		\hyperpage{9}
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_inteiro.CampoIntBasico }, 
+		\hyperpage{9}
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_real.CampoRealBasico }, 
+		\hyperpage{10}
+  \item \spxentry{valor}\spxextra{propriedade estrutarq.campo.campo\_tempo.CampoTempoBasico }, 
+		\hyperpage{11}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_cadeia.CampoCadeiaBasico}, 
+		\hyperpage{7}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_comum.CampoBasico}, 
+		\hyperpage{8}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_comum.CampoBruto}, 
+		\hyperpage{9}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_inteiro.CampoIntBasico}, 
+		\hyperpage{9}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_inteiro.CampoIntBinario}, 
+		\hyperpage{9}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBasico}, 
+		\hyperpage{10}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_real.CampoRealBinario}, 
+		\hyperpage{10}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoBinario}, 
+		\hyperpage{12}
+  \item \spxentry{valor\_para\_bytes()}\spxextra{método estrutarq.campo.campo\_tempo.CampoTempoBasicoFixo}, 
+		\hyperpage{12}
+  \item \spxentry{varredura\_com\_enchimento()}\spxextra{método estrutarq.dado.DadoBasico}, 
+		\hyperpage{6}
+  \item \spxentry{verifique\_versao()}\spxextra{no módulo estrutarq.utilitarios.geral}, 
+		\hyperpage{16}
+
+\end{sphinxtheindex}

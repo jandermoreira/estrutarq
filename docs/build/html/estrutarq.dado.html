@@ -162,14 +162,18 @@ de enchimento de bytes (implementada em
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoTerminador.adicione_formatacao">
 <span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoTerminador.adicione_formatacao" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Formatação do dado: acréscimo do byte terminador e uso de
-‘byte stuffing’ para incluir o terminador como dado.</p>
+<dd><p>Formatação do dado: uso de ‘byte stuffing’ para permitir o byte
+terminador como dado e acréscimo do byte terminador.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>dado</strong> – valor do dado</p>
+<dd class="field-odd"><p><strong>dado</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes do dado</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>o dado formatado</p>
+<dd class="field-even"><p>a sequência de dados enchida e com o acréscimo do terminador
+ao final</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -206,7 +210,7 @@ do terminador.</p>
 </dd>
 <dt class="field-even">Retorna</dt>
 <dd class="field-even"><p>uma tupla contendo os bytes dos dados e a sequência de bytes
-restante</p>
+restante, excluindo-se de ambas o terminador</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>]</p>
@@ -217,13 +221,21 @@ restante</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoTerminador.remova_formatacao">
 <span class="sig-name descname"><span class="pre">remova_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.remova_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoTerminador.remova_formatacao" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Desformatação do dado: remoção de byte terminador.</p>
+<dd><p>Desformatação do dado: remoção dos bytes de enchimento e também do
+byte terminador.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+<dd class="field-odd"><p><strong>sequencia</strong> – sequência de bytes de dados</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>dado efetivo, sem terminador</p>
+<dd class="field-even"><p>sequência de bytes de dados, esvaziada e sem terminador</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se o terminador não estiver presente na sequência
+esvaziada</p>
 </dd>
 </dl>
 </dd></dl>
