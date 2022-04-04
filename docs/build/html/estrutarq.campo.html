@@ -35,6 +35,8 @@
           <a href="estrutarq.dado.html" title="Pacote estrutarq.dado"
              accesskey="P">anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >Pacotes</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="estrutarq.html" accesskey="U">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a></li> 
       </ul>
     </div>  
@@ -156,6 +158,43 @@ de bytes usando codificação UTF-8.</p>
 
 </dd></dl>
 
+</section>
+</section>
+<section id="modulo-campo-inteiro">
+<h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_inteiro</span></code><a class="headerlink" href="#modulo-campo-inteiro" title="Link permanente para este título">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro</span></code></p>
+<span class="target" id="module-estrutarq.campo.campo_inteiro"></span><section id="campo-inteiro-com-terminador">
+<h3>Campo inteiro com terminador<a class="headerlink" href="#campo-inteiro-com-terminador" title="Link permanente para este título">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntTerminador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.</span></span><span class="sig-name descname"><span class="pre">CampoIntTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\x00'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntTerminador" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></p>
+<p>Classe para inteiro textual com terminador</p>
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-prefixado-pelo-comprimento">
+<h3>Campo inteiro prefixado pelo comprimento<a class="headerlink" href="#campo-inteiro-prefixado-pelo-comprimento" title="Link permanente para este título">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntPrefixado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.</span></span><span class="sig-name descname"><span class="pre">CampoIntPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntPrefixado" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.dado_comum.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoPrefixado</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></p>
+<p>Classe para inteiro textual com prefixo de comprimento_bloco</p>
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-de-comprimento-fixo">
+<h3>Campo inteiro de comprimento fixo<a class="headerlink" href="#campo-inteiro-de-comprimento-fixo" title="Link permanente para este título">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.</span></span><span class="sig-name descname"><span class="pre">CampoIntFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></p>
+<p>Classe para inteiro textual com tamanho fixo</p>
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-basico">
+<h3>Campo inteiro básico<a class="headerlink" href="#campo-inteiro-basico" title="Link permanente para este título">¶</a></h3>
 </section>
 </section>
 <section id="modulo-campo-comum">
@@ -280,6 +319,13 @@ com a representação de dados
 <li><a class="reference internal" href="#campo-cadeia-basico">Campo cadeia básico</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#modulo-campo-inteiro">Módulo <code class="docutils literal notranslate"><span class="pre">campo_inteiro</span></code></a><ul>
+<li><a class="reference internal" href="#campo-inteiro-com-terminador">Campo inteiro com terminador</a></li>
+<li><a class="reference internal" href="#campo-inteiro-prefixado-pelo-comprimento">Campo inteiro prefixado pelo comprimento</a></li>
+<li><a class="reference internal" href="#campo-inteiro-de-comprimento-fixo">Campo inteiro de comprimento fixo</a></li>
+<li><a class="reference internal" href="#campo-inteiro-basico">Campo inteiro básico</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#modulo-campo-comum">Módulo <code class="docutils literal notranslate"><span class="pre">campo_comum</span></code></a><ul>
 <li><a class="reference internal" href="#campo-basico">Campo básico</a></li>
 </ul>
@@ -336,6 +382,8 @@ com a representação de dados
           <a href="estrutarq.dado.html" title="Pacote estrutarq.dado"
              >anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >Pacotes</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a></li> 
       </ul>
     </div>

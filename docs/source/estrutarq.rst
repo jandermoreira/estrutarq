@@ -1,9 +1,6 @@
 Pacote ``estrutarq``
 ====================
 
-Sub-pacotes
------------
-
 .. toctree::
    :maxdepth: 4
 
