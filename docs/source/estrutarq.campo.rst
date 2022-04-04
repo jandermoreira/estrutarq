@@ -4,11 +4,34 @@ Pacote ``estrutarq.campo``
 .. automodule:: estrutarq.campo
 
 
+Módulo ``campo_comum``
+-------------------------------
+``estrutarq.comap.campo_comum``
+
+Campo básico
+++++++++++++
+
+Todas as demais classes do módulo são derivadas de uma classe básica.
+
+.. autoclass:: estrutarq.campo.CampoBasico
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+
 Módulo ``campo_cadeia``
 -----------------------
 ``estrutarq.campo.campo_cadeia``
 
 .. automodule:: estrutarq.campo.campo_cadeia
+
+Campo cadeia básico
++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoCadeiaBasico
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Campo cadeia com terminador
 +++++++++++++++++++++++++++
@@ -31,13 +54,6 @@ Campo cadeia de comprimento fixo
    :undoc-members:
    :show-inheritance:
 
-Campo cadeia básico
-+++++++++++++++++++
-.. autoclass:: estrutarq.campo.CampoCadeiaBasico
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 
 
 Módulo ``campo_inteiro``
@@ -45,6 +61,13 @@ Módulo ``campo_inteiro``
 ``estrutarq.campo.campo_inteiro``
 
 .. automodule:: estrutarq.campo.campo_inteiro
+
+Campo inteiro básico
+++++++++++++++++++++
+.. autoclass:: estrutarq.campo.campo_inteiro.CampoIntBasico
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Campo inteiro com terminador
 ++++++++++++++++++++++++++++
@@ -60,6 +83,13 @@ Campo inteiro prefixado pelo comprimento
    :undoc-members:
    :show-inheritance:
 
+Campo inteiro binário
++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoIntBinario
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Campo inteiro de comprimento fixo
 +++++++++++++++++++++++++++++++++
 .. autoclass:: estrutarq.campo.CampoIntFixo
@@ -67,23 +97,44 @@ Campo inteiro de comprimento fixo
    :undoc-members:
    :show-inheritance:
 
-Campo inteiro básico
-++++++++++++++++++++
-.. autoclass:: estrutarq.campo.CampoIntBasico
+
+Módulo ``campo_real``
+------------------------
+``estrutarq.campo.campo_real``
+
+.. automodule:: estrutarq.campo.campo_real
+
+Campo real básico
++++++++++++++++++
+.. autoclass:: estrutarq.campo.campo_real.CampoRealBasico
    :members:
    :undoc-members:
    :show-inheritance:
 
-Módulo ``campo_comum``
--------------------------------
-``estrutarq.comap.campo_comum``
+Campo real com terminador
++++++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoRealTerminador
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Campo básico
-++++++++++++
+Campo real prefixado pelo comprimento
++++++++++++++++++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoRealPrefixado
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Todas as demais classes do módulo são derivadas de uma classe básica.
+Campo real binário
+++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoRealBinario
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. autoclass:: estrutarq.campo.CampoBasico
+Campo real de comprimento fixo
+++++++++++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoRealFixo
    :members:
    :undoc-members:
    :show-inheritance:
