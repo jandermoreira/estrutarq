@@ -324,7 +324,9 @@ class DadoTerminador(DadoBasico):
 
 class DadoPrefixado(DadoBasico):
     """
-    Classe dado prefixados pelo seu comprimento
+    Classe para a implementação de dado prefixado pelo seu comprimento.
+    O prefixo é um valor inteiro binário de 2 bytes, sem sinal e com
+    ordenação de bytes `big-endian`.
     """
 
     def __init__(self):
@@ -333,37 +335,45 @@ class DadoPrefixado(DadoBasico):
     # code::start prefixado_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado prefixado pelo comprimento.
+        Leitura de um único dado prefixado pelo comprimento a partir de um
+        arquivo binário aberto. Os bytes de comprimento são removidos.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        :return: os bytes do dado
-
-        O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
-        Em caso de falha na leitura é lançada a exceção EOFError
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
+        :return: sequência com os bytes do dado, sem o prefixo
+        :rtype: bytes
+        :raise EOFError: se houver tentativa de leitura além do fim do arquivo
         """
         bytes_comprimento = arquivo.read(2)
         if len(bytes_comprimento) == 0:
-            raise EOFError
+            raise EOFError("Fim do arquivo encontrado ao ler comprimento.")
         else:
             comprimento = int.from_bytes(bytes_comprimento, "big",
                                          signed = False)
             dado = arquivo.read(comprimento)
             if len(dado) != comprimento:
-                raise EOFError
+                raise EOFError("Fim do arquivo encontrado ao ler dado" +
+                               f" prefixado. {len(dado) - comprimento}" +
+                               " bytes faltantes.")
             else:
                 return dado
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado sem o prefixo e o restante da sequência.
 
-        :param sequencia: uma sequência de bytes
-        :return: os bytes de dados e o restante da sequência
+        :param bytes sequencia: uma sequência de bytes
+        :return: uma tupla com a sequência de bytes de dados sem o prefixo e
+            o restante da sequência de entrada
+        :rtype: tuple[bytes, bytes]
+        :raise TypeError: se a sequência contiver menos bytes que o necessário
         """
-        comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
+        if len(sequencia) >= 2:
+            comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
+        else:
+            raise TypeError("A sequência de bytes não contém bytes suficientes")
         dado = sequencia[2:comprimento + 2]
         sequencia_restante = sequencia[comprimento + 2:]
         if len(dado) != comprimento:
@@ -374,10 +384,12 @@ class DadoPrefixado(DadoBasico):
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: acréscimo do prefixo binário com comprimento
-        (2 bytes, big-endian, sem sinal).
+        (2 bytes, `big-endian`, sem sinal).
 
-        :param dado: valor do dado
-        :return: o dado formatado
+        :param bytes dado: sequência de bytes do dado
+        :return: a sequência de bytes prefixada por dois bytes com o
+            comprimento
+        :rtype: bytes
         """
         bytes_comprimento = len(dado).to_bytes(2, "big", signed = False)
         return bytes_comprimento + dado
@@ -386,20 +398,24 @@ class DadoPrefixado(DadoBasico):
         """
         Desformatação do dado: remoção dos dois bytes do comprimento.
 
-        :param sequencia: bytes de dados
+        :param bytes sequencia: bytes de dados
         :return: dado efetivo, sem o prefixo de comprimento
+        :rtype: bytes
+        :raise TypeError: se a sequência de bytes passada contém quantidade de
+            bytes diferente do comprimento especificado
         """
         dado, sequencia_restante = self.leia_de_bytes(sequencia)
         if len(sequencia_restante) != 0:
-            raise TypeError("O sequência é mais longa que o tamanho registrado")
+            raise TypeError("O comprimento da sequência de bytes de dados" +
+                            " não contém é o tamanho especificado.")
         return dado
     # code::end
 
 
 class DadoBinario(DadoBasico):
     """
-    Classe para dados binários com um determinado comprimento em bytes.
-    O comprimento é fixo.
+    Classe para a implementação de dado como sequência de bytes (i.e., formato
+    binário) com um determinado comprimento fixo em bytes.
 
     :param int comprimento: comprimento em bytes do valor a ser armazenado
     """

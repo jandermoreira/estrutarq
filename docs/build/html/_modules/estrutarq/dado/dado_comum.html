@@ -289,7 +289,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Leitura de um único dado com terminador. A leitura é feita byte a</span>
 <span class="sd">        byte até que o byte terminador seja encontrado. Bytes terminadores</span>
-<span class="sd">        enchidos são restaurados, mas não determinam o fim da busca.</span>
+<span class="sd">        enchidos são restaurados, mas não determinam o fim da busca. O</span>
+<span class="sd">        enchimento de bytes é removido.</span>
 
 <span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        :return: a sequência de bytes do dado sem o terminador</span>
@@ -362,7 +363,9 @@
 
 <div class="viewcode-block" id="DadoPrefixado"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">DadoPrefixado</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe dado prefixados pelo seu comprimento</span>
+<span class="sd">    Classe para a implementação de dado prefixado pelo seu comprimento.</span>
+<span class="sd">    O prefixo é um valor inteiro binário de 2 bytes, sem sinal e com</span>
+<span class="sd">    ordenação de bytes `big-endian`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -371,37 +374,45 @@
     <span class="c1"># code::start prefixado_leitura_de_arquivo</span>
 <div class="viewcode-block" id="DadoPrefixado.leia_de_arquivo"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoPrefixado.leia_de_arquivo">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_arquivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de um único dado prefixado pelo comprimento.</span>
+<span class="sd">        Leitura de um único dado prefixado pelo comprimento a partir de um</span>
+<span class="sd">        arquivo binário aberto. Os bytes de comprimento são removidos.</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
-<span class="sd">        :return: os bytes do dado</span>
-
-<span class="sd">        O comprimento é armazenado como um inteiro de 2 bytes, big-endian.</span>
-<span class="sd">        Em caso de falha na leitura é lançada a exceção EOFError</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :return: sequência com os bytes do dado, sem o prefixo</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise EOFError: se houver tentativa de leitura além do fim do arquivo</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bytes_comprimento</span> <span class="o">=</span> <span class="n">arquivo</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bytes_comprimento</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">EOFError</span>
+            <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span><span class="s2">&quot;Fim do arquivo encontrado ao ler comprimento.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">comprimento</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">bytes_comprimento</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span>
                                          <span class="n">signed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
             <span class="n">dado</span> <span class="o">=</span> <span class="n">arquivo</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">comprimento</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span> <span class="o">!=</span> <span class="n">comprimento</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">EOFError</span>
+                <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span><span class="s2">&quot;Fim do arquivo encontrado ao ler dado&quot;</span> <span class="o">+</span>
+                               <span class="sa">f</span><span class="s2">&quot; prefixado. </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span> <span class="o">-</span> <span class="n">comprimento</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot; bytes faltantes.&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">dado</span></div>
 
     <span class="c1"># code::end</span>
 
-<div class="viewcode-block" id="DadoPrefixado.leia_de_bytes"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoPrefixado.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="DadoPrefixado.leia_de_bytes"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoPrefixado.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recuperação de um dado individual de uma sequência de bytes,</span>
 <span class="sd">        retornando o dado sem o prefixo e o restante da sequência.</span>
 
-<span class="sd">        :param sequencia: uma sequência de bytes</span>
-<span class="sd">        :return: os bytes de dados e o restante da sequência</span>
+<span class="sd">        :param bytes sequencia: uma sequência de bytes</span>
+<span class="sd">        :return: uma tupla com a sequência de bytes de dados sem o prefixo e</span>
+<span class="sd">            o restante da sequência de entrada</span>
+<span class="sd">        :rtype: tuple[bytes, bytes]</span>
+<span class="sd">        :raise TypeError: se a sequência contiver menos bytes que o necessário</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">comprimento</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">sequencia</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequencia</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">comprimento</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">sequencia</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A sequência de bytes não contém bytes suficientes&quot;</span><span class="p">)</span>
         <span class="n">dado</span> <span class="o">=</span> <span class="n">sequencia</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">comprimento</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
         <span class="n">sequencia_restante</span> <span class="o">=</span> <span class="n">sequencia</span><span class="p">[</span><span class="n">comprimento</span> <span class="o">+</span> <span class="mi">2</span><span class="p">:]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span> <span class="o">!=</span> <span class="n">comprimento</span><span class="p">:</span>
@@ -412,10 +423,12 @@
 <div class="viewcode-block" id="DadoPrefixado.adicione_formatacao"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoPrefixado.adicione_formatacao">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Formatação do dado: acréscimo do prefixo binário com comprimento</span>
-<span class="sd">        (2 bytes, big-endian, sem sinal).</span>
+<span class="sd">        (2 bytes, `big-endian`, sem sinal).</span>
 
-<span class="sd">        :param dado: valor do dado</span>
-<span class="sd">        :return: o dado formatado</span>
+<span class="sd">        :param bytes dado: sequência de bytes do dado</span>
+<span class="sd">        :return: a sequência de bytes prefixada por dois bytes com o</span>
+<span class="sd">            comprimento</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bytes_comprimento</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">bytes_comprimento</span> <span class="o">+</span> <span class="n">dado</span></div>
@@ -424,12 +437,16 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Desformatação do dado: remoção dos dois bytes do comprimento.</span>
 
-<span class="sd">        :param sequencia: bytes de dados</span>
+<span class="sd">        :param bytes sequencia: bytes de dados</span>
 <span class="sd">        :return: dado efetivo, sem o prefixo de comprimento</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise TypeError: se a sequência de bytes passada contém quantidade de</span>
+<span class="sd">            bytes diferente do comprimento especificado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dado</span><span class="p">,</span> <span class="n">sequencia_restante</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_bytes</span><span class="p">(</span><span class="n">sequencia</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequencia_restante</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;O sequência é mais longa que o tamanho registrado&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;O comprimento da sequência de bytes de dados&quot;</span> <span class="o">+</span>
+                            <span class="s2">&quot; não contém é o tamanho especificado.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dado</span></div></div>
     <span class="c1"># code::end</span>
 

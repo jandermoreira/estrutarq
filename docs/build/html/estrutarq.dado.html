@@ -183,7 +183,8 @@ ao final</p>
 <span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoTerminador.leia_de_arquivo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Leitura de um único dado com terminador. A leitura é feita byte a
 byte até que o byte terminador seja encontrado. Bytes terminadores
-enchidos são restaurados, mas não determinam o fim da busca.</p>
+enchidos são restaurados, mas não determinam o fim da busca. O
+enchimento de bytes é removido.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
@@ -255,18 +256,24 @@ esvaziada</p>
 <dt class="sig sig-object py" id="estrutarq.dado.DadoPrefixado">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.</span></span><span class="sig-name descname"><span class="pre">DadoPrefixado</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoPrefixado" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
-<p>Classe dado prefixados pelo seu comprimento</p>
+<p>Classe para a implementação de dado prefixado pelo seu comprimento.
+O prefixo é um valor inteiro binário de 2 bytes, sem sinal e com
+ordenação de bytes <cite>big-endian</cite>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoPrefixado.adicione_formatacao">
 <span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoPrefixado.adicione_formatacao" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Formatação do dado: acréscimo do prefixo binário com comprimento
-(2 bytes, big-endian, sem sinal).</p>
+(2 bytes, <cite>big-endian</cite>, sem sinal).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>dado</strong> – valor do dado</p>
+<dd class="field-odd"><p><strong>dado</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes do dado</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>o dado formatado</p>
+<dd class="field-even"><p>a sequência de bytes prefixada por dois bytes com o
+comprimento</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -274,30 +281,42 @@ esvaziada</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoPrefixado.leia_de_arquivo">
 <span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoPrefixado.leia_de_arquivo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Leitura de um único dado prefixado pelo comprimento.</p>
+<dd><p>Leitura de um único dado prefixado pelo comprimento a partir de um
+arquivo binário aberto. Os bytes de comprimento são removidos.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+<dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>os bytes do dado</p>
+<dd class="field-even"><p>sequência com os bytes do dado, sem o prefixo</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#EOFError" title="(em Python v3.10)"><strong>EOFError</strong></a> – se houver tentativa de leitura além do fim do arquivo</p>
 </dd>
 </dl>
-<p>O comprimento é armazenado como um inteiro de 2 bytes, big-endian.
-Em caso de falha na leitura é lançada a exceção EOFError</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoPrefixado.leia_de_bytes">
-<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoPrefixado.leia_de_bytes" title="Link permanente para esta definição">¶</a></dt>
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoPrefixado.leia_de_bytes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Recuperação de um dado individual de uma sequência de bytes,
 retornando o dado sem o prefixo e o restante da sequência.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>sequencia</strong> – uma sequência de bytes</p>
+<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – uma sequência de bytes</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>os bytes de dados e o restante da sequência</p>
+<dd class="field-even"><p>uma tupla com a sequência de bytes de dados sem o prefixo e
+o restante da sequência de entrada</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>]</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se a sequência contiver menos bytes que o necessário</p>
 </dd>
 </dl>
 </dd></dl>
@@ -308,10 +327,17 @@ retornando o dado sem o prefixo e o restante da sequência.</p>
 <dd><p>Desformatação do dado: remoção dos dois bytes do comprimento.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – bytes de dados</p>
 </dd>
 <dt class="field-even">Retorna</dt>
 <dd class="field-even"><p>dado efetivo, sem o prefixo de comprimento</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se a sequência de bytes passada contém quantidade de
+bytes diferente do comprimento especificado</p>
 </dd>
 </dl>
 </dd></dl>
