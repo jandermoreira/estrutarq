@@ -560,11 +560,11 @@
 <span class="sd">    O preenchimento e o truncamento são feitos depois do enchimento.</span>
 
 <span class="sd">    :param int comprimento: o comprimento em bytes fixado para o dado</span>
-<span class="sd">    :param bytes preenchimento: um byte usado para preenchimento do espaço</span>
-<span class="sd">        não usado para dado</span>
+<span class="sd">    :param bytes, opcional preenchimento: um byte usado para preenchimento</span>
+<span class="sd">        do espaço não usado para dado (valor padrão ``0xFF``)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">preenchimento</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xFF</span><span class="s1">&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">preenchimento</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xff</span><span class="s1">&#39;</span><span class="p">):</span>
         <span class="n">DadoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span> <span class="o">=</span> <span class="n">comprimento</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preenchimento</span> <span class="o">=</span> <span class="n">preenchimento</span>
@@ -579,11 +579,15 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comprimento</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;O comprimento deve ser inteiro&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">comprimento</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;O comprimento mínimo para é um byte&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;O comprimento mínimo para o dado é um byte&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__comprimento</span> <span class="o">=</span> <span class="n">comprimento</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preenchimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Um único byte usado para o preenchimento do espaço não usado dentro</span>
+<span class="sd">        do comprimento final do campo. Valor padrão ``0xFF``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__preenchimento</span>
 
     <span class="nd">@preenchimento</span><span class="o">.</span><span class="n">setter</span>

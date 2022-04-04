@@ -449,7 +449,7 @@ sequência de bytes restante</p>
 <h3>Dado de comprimento fixo<a class="headerlink" href="#dado-de-comprimento-fixo" title="Link permanente para este título">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoFixo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.</span></span><span class="sig-name descname"><span class="pre">DadoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preenchimento</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\xff'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoFixo" title="Link permanente para esta definição">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.</span></span><span class="sig-name descname"><span class="pre">DadoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preenchimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\xff'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoFixo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
 <p>Classe para a implementação de dado de comprimento fixo em representação
 textual (i.e., sequência de caracteres). Caso o comprimento do dado seja
@@ -463,8 +463,8 @@ O preenchimento e o truncamento são feitos depois do enchimento.</p>
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>comprimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a>) – o comprimento em bytes fixado para o dado</p></li>
-<li><p><strong>preenchimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – um byte usado para preenchimento do espaço
-não usado para dado</p></li>
+<li><p><strong>preenchimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a><em>, </em><em>opcional</em>) – um byte usado para preenchimento
+do espaço não usado para dado (valor padrão <code class="docutils literal notranslate"><span class="pre">0xFF</span></code>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -516,7 +516,9 @@ de dados, e a sequência de bytes restante</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoFixo.preenchimento">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preenchimento</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#estrutarq.dado.DadoFixo.preenchimento" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Um único byte usado para o preenchimento do espaço não usado dentro
+do comprimento final do campo. Valor padrão <code class="docutils literal notranslate"><span class="pre">0xFF</span></code>.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoFixo.remova_formatacao">

@@ -521,11 +521,11 @@ class DadoFixo(DadoBasico):
     O preenchimento e o truncamento são feitos depois do enchimento.
 
     :param int comprimento: o comprimento em bytes fixado para o dado
-    :param bytes preenchimento: um byte usado para preenchimento do espaço
-        não usado para dado
+    :param bytes, opcional preenchimento: um byte usado para preenchimento
+        do espaço não usado para dado (valor padrão ``0xFF``)
     """
 
-    def __init__(self, comprimento: int, preenchimento = b'\xFF'):
+    def __init__(self, comprimento: int, preenchimento: bytes = b'\xff'):
         DadoBasico.__init__(self)
         self._comprimento = comprimento
         self.preenchimento = preenchimento
@@ -540,11 +540,15 @@ class DadoFixo(DadoBasico):
         if not isinstance(comprimento, int):
             raise AttributeError("O comprimento deve ser inteiro")
         if comprimento <= 0:
-            raise AttributeError("O comprimento mínimo para é um byte")
+            raise AttributeError("O comprimento mínimo para o dado é um byte")
         self.__comprimento = comprimento
 
     @property
     def preenchimento(self) -> bytes:
+        """
+        Um único byte usado para o preenchimento do espaço não usado dentro
+        do comprimento final do campo. Valor padrão ``0xFF``.
+        """
         return self.__preenchimento
 
     @preenchimento.setter
