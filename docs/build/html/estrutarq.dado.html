@@ -351,8 +351,8 @@ bytes diferente do comprimento especificado</p>
 <dt class="sig sig-object py" id="estrutarq.dado.DadoBinario">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.</span></span><span class="sig-name descname"><span class="pre">DadoBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoBinario" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
-<p>Classe para dados binários com um determinado comprimento em bytes.
-O comprimento é fixo.</p>
+<p>Classe para a implementação de dado como sequência de bytes (i.e., formato
+binário) com um determinado comprimento fixo em bytes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>comprimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a>) – comprimento em bytes do valor a ser armazenado</p>
@@ -364,10 +364,16 @@ O comprimento é fixo.</p>
 <dd><p>Formatação do dado: apenas repassa o dado binário.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>dado</strong> – valor binário</p>
+<dd class="field-odd"><p><strong>dado</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – valor binário</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>o dado formatado</p>
+<dd class="field-even"><p>o dado sem modificação</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se o comprimento do dado diferir do esperado</p>
 </dd>
 </dl>
 </dd></dl>
@@ -375,29 +381,43 @@ O comprimento é fixo.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoBinario.leia_de_arquivo">
 <span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoBinario.leia_de_arquivo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação dos bytes do valor binário a partir de um arquivo.</p>
+<dd><p>Recuperação dos bytes do valor binário a partir de um arquivo dada a
+quantidade de bytes esperada.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+<dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
 </dd>
 <dt class="field-even">Retorna</dt>
 <dd class="field-even"><p>a sequência de bytes lidos</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#EOFError" title="(em Python v3.10)"><strong>EOFError</strong></a> – se o arquivo contiver menos bytes que a quantidade
+esperada</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoBinario.leia_de_bytes">
-<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoBinario.leia_de_bytes" title="Link permanente para esta definição">¶</a></dt>
+<span class="sig-name descname"><span class="pre">leia_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario.leia_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoBinario.leia_de_bytes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Recuperação de um dado binário de comprimento definido a partir de
 uma sequência de bytes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>sequencia</strong> – sequência de bytes</p>
+<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>tupla com os bytes do dado, removidos os bytes de organização
-de dados, e a sequência de bytes restante</p>
+<dd class="field-even"><p>tupla com os bytes do dado no comprimento esperado e a
+sequência de bytes restante</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a>]</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se a sequência contiver menos bytes que o esperado</p>
 </dd>
 </dl>
 </dd></dl>
@@ -408,10 +428,16 @@ de dados, e a sequência de bytes restante</p>
 <dd><p>Desformatação do dado: apenas repassa o dado binário.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>sequencia</strong> – bytes de dados</p>
+<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequencia de bytes do valor binário</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>o dado sem a formatação</p>
+<dd class="field-even"><p>o a sequencia sem modificação</p>
+</dd>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se o comprimento do dado diferir do esperado</p>
 </dd>
 </dl>
 </dd></dl>

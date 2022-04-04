@@ -453,8 +453,8 @@
 
 <div class="viewcode-block" id="DadoBinario"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoBinario">[documentos]</a><span class="k">class</span> <span class="nc">DadoBinario</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para dados binários com um determinado comprimento em bytes.</span>
-<span class="sd">    O comprimento é fixo.</span>
+<span class="sd">    Classe para a implementação de dado como sequência de bytes (i.e., formato</span>
+<span class="sd">    binário) com um determinado comprimento fixo em bytes.</span>
 
 <span class="sd">    :param int comprimento: comprimento em bytes do valor a ser armazenado</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -483,27 +483,34 @@
     <span class="c1"># code::start binario_leitura_de_arquivo</span>
 <div class="viewcode-block" id="DadoBinario.leia_de_arquivo"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoBinario.leia_de_arquivo">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_arquivo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Recuperação dos bytes do valor binário a partir de um arquivo.</span>
+<span class="sd">        Recuperação dos bytes do valor binário a partir de um arquivo dada a</span>
+<span class="sd">        quantidade de bytes esperada.</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        :return: a sequência de bytes lidos</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise EOFError: se o arquivo contiver menos bytes que a quantidade</span>
+<span class="sd">            esperada</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dado</span> <span class="o">=</span> <span class="n">arquivo</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">EOFError</span>
+            <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span>
+                <span class="s2">&quot;Quantidade de bytes inferior à esperada para o dado&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">dado</span></div>
 
     <span class="c1"># code::end</span>
 
-<div class="viewcode-block" id="DadoBinario.leia_de_bytes"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoBinario.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="DadoBinario.leia_de_bytes"><a class="viewcode-back" href="../../../estrutarq.dado.html#estrutarq.dado.DadoBinario.leia_de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequencia</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recuperação de um dado binário de comprimento definido a partir de</span>
 <span class="sd">        uma sequência de bytes.</span>
 
-<span class="sd">        :param sequencia: sequência de bytes</span>
-<span class="sd">        :return: tupla com os bytes do dado, removidos os bytes de organização</span>
-<span class="sd">            de dados, e a sequência de bytes restante</span>
+<span class="sd">        :param bytes sequencia: sequência de bytes</span>
+<span class="sd">        :return: tupla com os bytes do dado no comprimento esperado e a</span>
+<span class="sd">            sequência de bytes restante</span>
+<span class="sd">        :rtype: tuple[bytes, bytes]</span>
+<span class="sd">        :raise TypeError: se a sequência contiver menos bytes que o esperado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequencia</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A sequência não possui bytes suficientes&quot;</span><span class="p">)</span>
@@ -516,8 +523,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Formatação do dado: apenas repassa o dado binário.</span>
 
-<span class="sd">        :param dado: valor binário</span>
-<span class="sd">        :return: o dado formatado</span>
+<span class="sd">        :param bytes dado: valor binário</span>
+<span class="sd">        :return: o dado sem modificação</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise TypeError: se o comprimento do dado diferir do esperado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;O dado não possui o comprimento correto&quot;</span><span class="p">)</span>
@@ -527,8 +536,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Desformatação do dado: apenas repassa o dado binário.</span>
 
-<span class="sd">        :param sequencia: bytes de dados</span>
-<span class="sd">        :return: o dado sem a formatação</span>
+<span class="sd">        :param bytes sequencia: sequencia de bytes do valor binário</span>
+<span class="sd">        :return: o a sequencia sem modificação</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise TypeError: se o comprimento do dado diferir do esperado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequencia</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A sequência de dados não possui o &quot;</span>

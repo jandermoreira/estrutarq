@@ -444,27 +444,34 @@ class DadoBinario(DadoBasico):
     # code::start binario_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Recuperação dos bytes do valor binário a partir de um arquivo.
+        Recuperação dos bytes do valor binário a partir de um arquivo dada a
+        quantidade de bytes esperada.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         :return: a sequência de bytes lidos
+        :rtype: bytes
+        :raise EOFError: se o arquivo contiver menos bytes que a quantidade
+            esperada
         """
         dado = arquivo.read(self._comprimento)
         if len(dado) < self._comprimento:
-            raise EOFError
+            raise EOFError(
+                "Quantidade de bytes inferior à esperada para o dado")
         else:
             return dado
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
         """
         Recuperação de um dado binário de comprimento definido a partir de
         uma sequência de bytes.
 
-        :param sequencia: sequência de bytes
-        :return: tupla com os bytes do dado, removidos os bytes de organização
-            de dados, e a sequência de bytes restante
+        :param bytes sequencia: sequência de bytes
+        :return: tupla com os bytes do dado no comprimento esperado e a
+            sequência de bytes restante
+        :rtype: tuple[bytes, bytes]
+        :raise TypeError: se a sequência contiver menos bytes que o esperado
         """
         if len(sequencia) < self._comprimento:
             raise TypeError("A sequência não possui bytes suficientes")
@@ -477,8 +484,10 @@ class DadoBinario(DadoBasico):
         """
         Formatação do dado: apenas repassa o dado binário.
 
-        :param dado: valor binário
-        :return: o dado formatado
+        :param bytes dado: valor binário
+        :return: o dado sem modificação
+        :rtype: bytes
+        :raise TypeError: se o comprimento do dado diferir do esperado
         """
         if len(dado) != self._comprimento:
             raise TypeError("O dado não possui o comprimento correto")
@@ -488,8 +497,10 @@ class DadoBinario(DadoBasico):
         """
         Desformatação do dado: apenas repassa o dado binário.
 
-        :param sequencia: bytes de dados
-        :return: o dado sem a formatação
+        :param bytes sequencia: sequencia de bytes do valor binário
+        :return: o a sequencia sem modificação
+        :rtype: bytes
+        :raise TypeError: se o comprimento do dado diferir do esperado
         """
         if len(sequencia) != self._comprimento:
             raise TypeError("A sequência de dados não possui o "
