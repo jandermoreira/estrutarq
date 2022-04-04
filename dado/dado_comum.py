@@ -584,7 +584,7 @@ class DadoFixo(DadoBasico):
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> typle[bytes, bytes]:
+    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado sem os bytes de preenchimento e o restante da
@@ -593,11 +593,11 @@ class DadoFixo(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de enchimento
             e preenchimento, e a sequência de bytes restante
-        :rtype: typle[bytes, bytes]
+        :rtype: tuple[bytes, bytes]
         :raise TypeError: se o comprimento da sequência tem menos bytes
             que o definido para o comprimento do campo
         """
-        if len(sequencia < self._comprimento):
+        if len(sequencia) < self._comprimento:
             raise TypeError("A sequência de bytes contém menos bytes que" +
                             " o esperado.")
         else:
@@ -610,11 +610,16 @@ class DadoFixo(DadoBasico):
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
-        Formatação do dado: ajusta o dado para o comprimento definido,
-        truncando ou adicionando o byte de preenchimento.
+        Formatação do dado: ajusta o dado para o comprimento definido, com
+        uso de enchimento de bytes para as ocorrências do byte de preenchimento,
+        seguido do truncamento ou acréscimo o byte de preenchimento.
 
-        :param dado: valor do dado
-        :return: o dado formatado no comprimento especificado
+        :param bytes dado: valor do dado
+        :return: o dado enchido e formatado no comprimento especificado
+        :rtype: bytes
+        :raise ValueError: se a operação de truncamento causar corrupção no
+            dado armazenado (e.g., o truncamento ocorrer entre o byte de
+            enchimento e o próximo byte)
         """
         dado_enchimento = self.enchimento_de_bytes(dado, [self.preenchimento])
         dado_restrito = dado_enchimento[:self._comprimento]
@@ -622,22 +627,21 @@ class DadoFixo(DadoBasico):
                         (self._comprimento - len(dado_restrito)))
         dado_recuperado = self.remova_formatacao(dado_efetivo)
         if dado_recuperado != dado[:len(dado_recuperado)]:
-            print(self)
-            print(dado, 'dado')
-            print(dado_enchimento, 'enchimento')
-            print(dado_recuperado, 'recuperado')
             raise ValueError("Truncamento nos dados gerou corrupção.")
         return dado_efetivo
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:
         """
-        Desformatação do dado: remoção de caracteres de preenchimento.
+        Desformatação do dado: remoção do enchimento e de eventuais bytes de
+        preenchimento.
 
-        :param sequencia: bytes de dados
-        :return: dado efetivo, sem preenchimento
+        :param bytes sequencia: bytes de dados
+        :return: dado efetivo, sem enchimento ou preenchimento
+        :rtype: bytes
+        :raise TypeError: se o comprimento da sequência de bytes diferir do
+            comprimento especificado para o dado
         """
-        # if len(sequencia) != self.comprimento:
-        #     raise TypeError(
-        #     "A sequência de dados tem comprimento incorreto.")
+        if len(sequencia) != self._comprimento:
+            raise TypeError("A sequência de dados tem comprimento incorreto.")
         return self.leia_de_bytes(sequencia)[0]
         # code::end

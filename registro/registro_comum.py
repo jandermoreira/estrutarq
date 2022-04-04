@@ -26,7 +26,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
 
     def __init__(self, tipo: str, *lista_campos):
-        DadoBasico.__init__()
+        DadoBasico.__init__(self)
         self.__tipo = tipo
         self.lista_campos = {}
         self.adicione_campos(*lista_campos)
