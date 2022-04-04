@@ -1,16 +1,17 @@
 Pacote ``estrutarq.dado``
 =========================
 
+.. automodule:: estrutarq.dado
+
 Módulo ``dado_comum``
 -------------------------------
-Módulo ``estrutarq.dado.dado_comum``.
+``estrutarq.dado.dado_comum``
 
 .. automodule:: estrutarq.dado.dado_comum
 
 
 Dado bruto
 ++++++++++
-
 .. autoclass:: estrutarq.dado.DadoBruto
    :members:
    :undoc-members:
@@ -18,7 +19,6 @@ Dado bruto
 
 Dado com terminador
 +++++++++++++++++++
-
 .. autoclass:: estrutarq.dado.DadoTerminador
    :members:
    :undoc-members:
@@ -26,7 +26,6 @@ Dado com terminador
 
 Dado prefixado pelo comprimento
 +++++++++++++++++++++++++++++++
-
 .. autoclass:: estrutarq.dado.DadoPrefixado
    :members:
    :undoc-members:
@@ -34,7 +33,6 @@ Dado prefixado pelo comprimento
 
 Dado binário
 ++++++++++++
-
 .. autoclass:: estrutarq.dado.DadoBinario
    :members:
    :undoc-members:
@@ -42,7 +40,6 @@ Dado binário
 
 Dado de comprimento fixo
 ++++++++++++++++++++++++
-
 .. autoclass:: estrutarq.dado.DadoFixo
    :members:
    :undoc-members:
@@ -50,7 +47,6 @@ Dado de comprimento fixo
 
 Dado básico
 +++++++++++
-
 Todas as demais classes do módulo são derivadas de uma classe abstrata básica.
 
 .. autoclass:: estrutarq.dado.DadoBasico

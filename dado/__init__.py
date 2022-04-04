@@ -1,6 +1,5 @@
 """
-Todo o conteúdo de :mod:`estrutarq.dado.dado_comum` é disponibilizado
-diretamente por :mod:`estrutarq.dado`.
+Implementação de organizações de dados.
 """
 
 from .dado_comum import *

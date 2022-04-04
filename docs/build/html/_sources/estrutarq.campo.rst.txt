@@ -1,59 +1,47 @@
 Pacote ``estrutarq.campo``
 ==========================
 
-
-.. automodule:: estrutarq.campo.dado_comum
-
+.. automodule:: estrutarq.campo
 
 
 Módulo ``campo_cadeia``
 -----------------------
-Módulo ``estrutarq.campo_cadeia``.
+``estrutarq.campo.campo_cadeia``
 
-Campo básico
-++++++++++++
+.. automodule:: estrutarq.campo.campo_cadeia
 
-
-.. autoclass:: estrutarq.campo.campo_cadeia.
+Campo cadeia com terminador
++++++++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoCadeiaTerminador
    :members:
    :undoc-members:
    :show-inheritance:
 
-estrutarq.campo.campo\_comum module
------------------------------------
-
-.. automodule:: estrutarq.campo.campo_comum
+Campo cadeia prefixado pelo comprimento
++++++++++++++++++++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoCadeiaPrefixado
    :members:
    :undoc-members:
    :show-inheritance:
 
-estrutarq.campo.campo\_inteiro module
--------------------------------------
-
-.. automodule:: estrutarq.campo.campo_inteiro
+Campo cadeia de comprimento fixo
+++++++++++++++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoCadeiaFixo
    :members:
    :undoc-members:
    :show-inheritance:
 
-estrutarq.campo.campo\_real module
-----------------------------------
-
-.. automodule:: estrutarq.campo.campo_real
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-estrutarq.campo.campo\_tempo module
------------------------------------
-
-.. automodule:: estrutarq.campo.campo_tempo
+Campo cadeia básico
++++++++++++++++++++
+.. autoclass:: estrutarq.campo.CampoCadeiaBasico
    :members:
    :undoc-members:
    :show-inheritance:
 
 
-Módulo ``estrutarq.campo_comum``
+Módulo ``campo_comum``
 -------------------------------
+``estrutarq.comap.campo_comum``
 
 Campo básico
 ++++++++++++

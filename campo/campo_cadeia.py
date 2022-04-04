@@ -34,8 +34,8 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 
     :param tipo: nome do tipo (definido nas classes derivadas)
     :type tipo: str
-    :param valor: o valor a ser armazenado no campo (padrão: ``""``)
-    :type valor: str, opcional
+    :param str, opcional valor: o valor a ser armazenado no campo
+        (padrão: ``""``)
     """
 
     def __init__(self, tipo: str, valor: str = ""):
@@ -85,7 +85,6 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     def __init__(self, **kwargs):
         CampoCadeiaBasico.__init__(self, "cadeia terminador", **kwargs)
         DadoTerminador.__init__(self, terminador_de_campo)
-
 
 
 # cadeia de caracteres com prefixo de comprimento
