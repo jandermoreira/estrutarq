@@ -11,4 +11,4 @@ Conteúdo
 .. toctree::
    :maxdepth: 2
 
-   modules
+   estrutarq
