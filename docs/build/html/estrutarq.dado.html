@@ -428,10 +428,10 @@ sequência de bytes restante</p>
 <dd><p>Desformatação do dado: apenas repassa o dado binário.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequencia de bytes do valor binário</p>
+<dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes do valor binário</p>
 </dd>
 <dt class="field-even">Retorna</dt>
-<dd class="field-even"><p>o a sequencia sem modificação</p>
+<dd class="field-even"><p>a sequência sem modificação</p>
 </dd>
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
@@ -451,7 +451,23 @@ sequência de bytes restante</p>
 <dt class="sig sig-object py" id="estrutarq.dado.DadoFixo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.dado.</span></span><span class="sig-name descname"><span class="pre">DadoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preenchimento</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\xff'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoFixo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
-<p>Classe dado de comprimento fixo</p>
+<p>Classe para a implementação de dado de comprimento fixo em representação
+textual (i.e., sequência de caracteres). Caso o comprimento do dado seja
+inferior ao comprimento estabelecido para o campo, é feito o preenchimento
+dos bytes restantes com o valor
+<a class="reference internal" href="#estrutarq.dado.DadoFixo.preenchimento" title="estrutarq.dado.DadoFixo.preenchimento"><code class="xref py py-attr docutils literal notranslate"><span class="pre">preenchimento</span></code></a>. Caso o dado passado seja
+de comprimento superior ao definido, há o truncamento. Havendo a ocorrência
+do byte de preenchimento nos bytes de dados, é feito o enchimento de bytes.
+O preenchimento e o truncamento são feitos depois do enchimento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comprimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a>) – o comprimento em bytes fixado para o dado</p></li>
+<li><p><strong>preenchimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – um byte usado para preenchimento do espaço
+não usado para dado</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.DadoFixo.adicione_formatacao">
 <span class="sig-name descname"><span class="pre">adicione_formatacao</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo.adicione_formatacao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.DadoFixo.adicione_formatacao" title="Link permanente para esta definição">¶</a></dt>

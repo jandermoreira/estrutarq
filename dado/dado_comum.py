@@ -13,7 +13,7 @@ Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
 Jander Moreira, 2022
 """
 
-import re
+from re import sub as regex_sub
 from abc import ABCMeta, abstractmethod
 from typing import BinaryIO
 
@@ -65,7 +65,7 @@ class DadoBasico(metaclass = ABCMeta):
         :rtype: bytes
         """
         padrao = self.byte_enchimento + rb"(.)"
-        sequencia_esvaziada = re.sub(padrao, rb"\1", sequencia)
+        sequencia_esvaziada = regex_sub(padrao, rb"\1", sequencia)
         return sequencia_esvaziada
 
     # code::end
@@ -455,8 +455,8 @@ class DadoBinario(DadoBasico):
         """
         dado = arquivo.read(self._comprimento)
         if len(dado) < self._comprimento:
-            raise EOFError(
-                "Quantidade de bytes inferior à esperada para o dado")
+            raise EOFError("Quantidade de bytes inferior à esperada" +
+                           " para o dado")
         else:
             return dado
 
@@ -511,7 +511,18 @@ class DadoBinario(DadoBasico):
 
 class DadoFixo(DadoBasico):
     """
-    Classe dado de comprimento fixo
+    Classe para a implementação de dado de comprimento fixo em representação
+    textual (i.e., sequência de caracteres). Caso o comprimento do dado seja
+    inferior ao comprimento estabelecido para o campo, é feito o preenchimento
+    dos bytes restantes com o valor
+    :attr:`~.estrutarq.dado.DadoFixo.preenchimento`. Caso o dado passado seja
+    de comprimento superior ao definido, há o truncamento. Havendo a ocorrência
+    do byte de preenchimento nos bytes de dados, é feito o enchimento de bytes.
+    O preenchimento e o truncamento são feitos depois do enchimento.
+
+    :param int comprimento: o comprimento em bytes fixado para o dado
+    :param bytes preenchimento: um byte usado para preenchimento do espaço
+        não usado para dado
     """
 
     def __init__(self, comprimento: int, preenchimento = b'\xFF'):
