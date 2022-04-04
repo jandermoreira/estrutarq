@@ -554,10 +554,9 @@ class DadoFixo(DadoBasico):
     @preenchimento.setter
     def preenchimento(self, preenchimento: bytes):
         """
-        Determina o byte que será usado como preenchimento de
-        campo.
+        Determina o byte que será usado como preenchimento de campo.
 
-        :param preenchimento: um byte para preenchimento
+        :param bytes preenchimento: um byte para preenchimento
         """
         if not isinstance(preenchimento, bytes) \
                 or len(preenchimento) != 1:
@@ -567,36 +566,46 @@ class DadoFixo(DadoBasico):
     # code::start fixo_leitura_de_arquivo
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
-        Leitura de um único dado de comprimento fixo a partir do arquivo
-        :param arquivo: arquivo binário aberto com permissão de leitura.
+        Leitura de um único dado de comprimento fixo a partir do arquivo, com
+        remoção de bytes de enchimento e supressão do preenchimento.
 
-        :return: os bytes do campo
-
-        Os bytes de preenchimento que existirem são removidos.
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
+        :return: os bytes do dado, removidos o enchimento e preenchimento
+        :rtype: bytes
+        :raise EOFError: se o arquivo não contiver a quantidade de bytes
+            esperada definida pelo comprimento do dado
         """
         dado = arquivo.read(self._comprimento)
         if len(dado) != self._comprimento:
-            raise EOFError
+            raise EOFError("O comprimento da sequência de bytes de dados" +
+                           " não contém é o tamanho especificado.")
         else:
             return self.remova_formatacao(dado)
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> (bytes, bytes):
+    def leia_de_bytes(self, sequencia: bytes) -> typle[bytes, bytes]:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado sem os bytes de preenchimento e o restante da
         sequência.
 
         :param sequencia: uma sequência de bytes
-        :return: tupla com os bytes do dado, removidos os bytes de organização
-            de dados, e a sequência de bytes restante
+        :return: tupla com os bytes do dado, removidos os bytes de enchimento
+            e preenchimento, e a sequência de bytes restante
+        :rtype: typle[bytes, bytes]
+        :raise TypeError: se o comprimento da sequência tem menos bytes
+            que o definido para o comprimento do campo
         """
-        sequencia_restante = sequencia[self._comprimento:]
-        sequencia = sequencia[:self._comprimento] + self.preenchimento
-        dado_limpo = self.varredura_com_enchimento(sequencia,
-                                                   self.preenchimento)[0][:-1]
-        return self.esvaziamento_de_bytes(dado_limpo), sequencia_restante
+        if len(sequencia < self._comprimento):
+            raise TypeError("A sequência de bytes contém menos bytes que" +
+                            " o esperado.")
+        else:
+            sequencia_restante = sequencia[self._comprimento:]
+            sequencia = sequencia[:self._comprimento] + self.preenchimento
+            dado_limpo = self.varredura_com_enchimento(
+                sequencia, self.preenchimento)[0][:-1]
+            return self.esvaziamento_de_bytes(dado_limpo), sequencia_restante
 
     # code::start fixo_formatacoes
     def adicione_formatacao(self, dado: bytes) -> bytes:
