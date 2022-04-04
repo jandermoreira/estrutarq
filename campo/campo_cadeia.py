@@ -8,15 +8,15 @@ usa a codificação UTF-8.
 
 Uma classe básica :class:`CampoCadeiaBasico` define uma classe
 abstrata (ABC) com as propriedades e métodos gerais. Dela são
-derivadas campos:
+derivados campos:
 
-    * Com terminadores
-    * Prefixada pelo comprimento
-    * De comprimento fixo predefinido
+* Com terminador
+* Prefixado pelo comprimento
+* De comprimento fixo predefinido
 
-Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
-
-Jander Moreira, 2021-2022
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2021-2022
 """
 
 from abc import ABCMeta

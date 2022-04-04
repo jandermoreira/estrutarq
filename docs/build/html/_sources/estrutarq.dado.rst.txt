@@ -10,6 +10,15 @@ Módulo ``dado_comum``
 .. automodule:: estrutarq.dado.dado_comum
 
 
+Dado básico
++++++++++++
+Todas as demais classes do módulo são derivadas de uma classe abstrata básica.
+
+.. autoclass:: estrutarq.dado.DadoBasico
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Dado bruto
 ++++++++++
 .. autoclass:: estrutarq.dado.DadoBruto
@@ -41,15 +50,6 @@ Dado binário
 Dado de comprimento fixo
 ++++++++++++++++++++++++
 .. autoclass:: estrutarq.dado.DadoFixo
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Dado básico
-+++++++++++
-Todas as demais classes do módulo são derivadas de uma classe abstrata básica.
-
-.. autoclass:: estrutarq.dado.DadoBasico
    :members:
    :undoc-members:
    :show-inheritance:

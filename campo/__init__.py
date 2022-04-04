@@ -1,7 +1,9 @@
 """
-    Módulo: ``campo``
+    Implementação de organizações de campos.
 
-    Implementação de representações de campos.
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2021-2022
 """
 from .campo_cadeia import CampoBasico, CampoCadeiaBasico, CampoCadeiaFixo, \
     CampoCadeiaPrefixado, CampoCadeiaTerminador

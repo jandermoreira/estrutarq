@@ -47,15 +47,15 @@
 
 <span class="sd">Uma classe básica :class:`CampoCadeiaBasico` define uma classe</span>
 <span class="sd">abstrata (ABC) com as propriedades e métodos gerais. Dela são</span>
-<span class="sd">derivadas campos:</span>
+<span class="sd">derivados campos:</span>
 
-<span class="sd">    * Com terminadores</span>
-<span class="sd">    * Prefixada pelo comprimento</span>
-<span class="sd">    * De comprimento fixo predefinido</span>
+<span class="sd">* Com terminador</span>
+<span class="sd">* Prefixado pelo comprimento</span>
+<span class="sd">* De comprimento fixo predefinido</span>
 
-<span class="sd">Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</span>
-
-<span class="sd">Jander Moreira, 2021-2022</span>
+<span class="sd">..</span>
+<span class="sd">    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</span>
+<span class="sd">    Jander Moreira, 2021-2022</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span>
@@ -127,17 +127,17 @@
 
 
 <span class="c1"># cadeia de caracteres com prefixo de comprimento</span>
-<span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaPrefixado"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres prefixada pelo comprimento_bloco</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia prefixado&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">CampoCadeiaFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaFixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres com comprimento_bloco fixo e preenchimento</span>
 <span class="sd">    de dados inválidos</span>
@@ -145,7 +145,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia fixo&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">)</span>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">)</span></div>
 </pre></div>
 
             <div class="clearer"></div>

@@ -1,6 +1,8 @@
 Pacote ``estrutarq``
 ====================
 
+.. automodule:: estrutarq
+
 .. toctree::
    :maxdepth: 4
 
