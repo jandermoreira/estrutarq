@@ -1,5 +1,5 @@
 """
-    Implementação de organizações de campos.
+Implementação de organizações de campos.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007

@@ -58,8 +58,8 @@ def teste(tipo_campo):
         campo = tipo_campo(25)
     else:
         campo = tipo_campo()
-    imprima("fixo?", campo.comprimento_fixo())
-    compare(type(campo.comprimento_fixo()), bool)
+    imprima("fixo?", campo.tem_comprimento_fixo())
+    compare(type(campo.tem_comprimento_fixo()), bool)
     imprima("valor padrão do campo", campo.valor)
     info = [valor_campo[k] for k in valor_campo.keys() if k in campo.tipo][0]
     imprima("dado em uso", info)

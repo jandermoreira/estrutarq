@@ -88,7 +88,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         pass
 
-    def comprimento_fixo(self) -> bool:
+    def tem_comprimento_fixo(self) -> bool:
         """
         Retorna se o comprimento é ou não fixo.
 
@@ -154,7 +154,10 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 class CampoBruto(DadoBruto, CampoBasico):
     """
     Implementação das funções de um campo bruto, ou seja, sem organização
-    de campo. O valor é sempre armazenado como cadeia de caracteres.
+    de campo. O valor é sempre armazenado como cadeia de caracteres com
+    codificação de caracteres UTF-8.
+
+    :param str, opcional valor: valor do campo
     """
 
     def __init__(self, valor = ""):
@@ -163,9 +166,9 @@ class CampoBruto(DadoBruto, CampoBasico):
         self.valor = valor
 
     @property
-    def valor(self):
+    def valor(self) -> str:
         """
-        O valor armazenado no campo (:class:`str`).
+        O valor armazenado no campo (cadeia de caracteres).
 
         :return: o valor do campo
         :rtype: str
@@ -184,17 +187,20 @@ class CampoBruto(DadoBruto, CampoBasico):
     # code::start bruto_conversoes
     def bytes_para_valor(self, dado: bytes):
         """
-        Conversão de sequência de bytes para valor o campo, considerando
-        uma cadeia de caracteres simples
-        :param dado: a sequência de bytes
+        Atualização do valor do campo a partir de uma sequência de bytes
+        com codificação UTF-8.
+
+        :param bytes dado: a sequência de bytes
         """
         self.valor = dado.decode("utf-8")
 
     def valor_para_bytes(self) -> bytes:
         """
-        Conversão do valor do campo (cadeia de caracteres) para uma
-        sequência de bytes, usando codificação UTF-8
+        Retorno do valor do campo (cadeia de caracteres) convertido para uma
+        sequência de bytes, usando codificação UTF-8.
+
         :return: a sequência de bytes
+        :rtype: bytes
         """
         return bytes(self.valor, "utf-8")
 

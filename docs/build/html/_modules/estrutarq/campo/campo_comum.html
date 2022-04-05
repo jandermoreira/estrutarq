@@ -127,7 +127,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="CampoBasico.comprimento_fixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoBasico.comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="CampoBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retorna se o comprimento é ou não fixo.</span>
 
@@ -193,7 +193,10 @@
 <div class="viewcode-block" id="CampoBruto"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoBruto">[documentos]</a><span class="k">class</span> <span class="nc">CampoBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementação das funções de um campo bruto, ou seja, sem organização</span>
-<span class="sd">    de campo. O valor é sempre armazenado como cadeia de caracteres.</span>
+<span class="sd">    de campo. O valor é sempre armazenado como cadeia de caracteres com</span>
+<span class="sd">    codificação de caracteres UTF-8.</span>
+
+<span class="sd">    :param str, opcional valor: valor do campo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -202,9 +205,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        O valor armazenado no campo (:class:`str`).</span>
+<span class="sd">        O valor armazenado no campo (cadeia de caracteres).</span>
 
 <span class="sd">        :return: o valor do campo</span>
 <span class="sd">        :rtype: str</span>
@@ -223,17 +226,20 @@
     <span class="c1"># code::start bruto_conversoes</span>
 <div class="viewcode-block" id="CampoBruto.bytes_para_valor"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoBruto.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Conversão de sequência de bytes para valor o campo, considerando</span>
-<span class="sd">        uma cadeia de caracteres simples</span>
-<span class="sd">        :param dado: a sequência de bytes</span>
+<span class="sd">        Atualização do valor do campo a partir de uma sequência de bytes</span>
+<span class="sd">        com codificação UTF-8.</span>
+
+<span class="sd">        :param bytes dado: a sequência de bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">dado</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CampoBruto.valor_para_bytes"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoBruto.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Conversão do valor do campo (cadeia de caracteres) para uma</span>
-<span class="sd">        sequência de bytes, usando codificação UTF-8</span>
+<span class="sd">        Retorno do valor do campo (cadeia de caracteres) convertido para uma</span>
+<span class="sd">        sequência de bytes, usando codificação UTF-8.</span>
+
 <span class="sd">        :return: a sequência de bytes</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div></div>
 
