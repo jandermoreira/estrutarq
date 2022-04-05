@@ -1,9 +1,28 @@
-################################################################################
-################################################################################
-# Campos inteiros
+"""
+Campos para armazenamento de valores inteiros.
+
+Este arquivo provê classes para uso de campos cujo conteúdo é
+um valor inteiro com sinal. Internamente, o tipo :class:`int` é usado
+para armazenamento e a transformação para sequência de bytes podem ser
+textuais ou binária.
+
+Uma classe básica :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`
+define uma classe abstrata (ABC) com as propriedades e métodos gerais.
+Dela são derivados campos:
+
+* Com terminador
+* Prefixado pelo comprimento
+* Binário
+* De comprimento fixo predefinido
+
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2021-2022
+"""
+
 from abc import ABCMeta
 
-from estrutarq.dado import DadoBinario, DadoTerminador, DadoPrefixado, DadoFixo
+from estrutarq.dado import DadoBinario, DadoFixo, DadoPrefixado, DadoTerminador
 from .campo_comum import CampoBasico, terminador_de_campo
 
 
@@ -11,11 +30,15 @@ from .campo_comum import CampoBasico, terminador_de_campo
 ################################################################################
 class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
     """
-    Classe básica para campo inteiro
+    Classe básica para campo inteiro.
+
+    :param str tipo: o nome do tipo (definido em subclasses)
+    :param int, opcional valor: o valor a ser armazenado no campo
+        (padrão: 0)
     """
 
     def __init__(self, tipo: str, valor: int = 0):
-        super().__init__(tipo)
+        CampoBasico.__init__(self, tipo)
         self.valor = valor
 
     @property
@@ -78,23 +101,6 @@ class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
     #     return None
 
 
-class CampoIntFixo(DadoFixo, CampoIntBasico):
-    """Classe para inteiro textual com tamanho fixo"""
-
-    def __init__(self, comprimento: int, **kwargs):
-        """Construtor"""
-        CampoIntBasico.__init__(self, "int fixo", **kwargs)
-        DadoFixo.__init__(self, comprimento)
-        self._comprimento_fixo = True
-
-    # def comprimento_fixo(self):
-    #     """
-    #     Obtém o comprimento_bloco do campo, se ele for fixo
-    #     :return: o comprimento_bloco do campo se for fixo ou None se for variável
-    #     """
-    #     return self.comprimento
-
-
 class CampoIntBinario(DadoBinario, CampoIntBasico):
     """
     Classe para inteiro em formato binário (big endian) com 8 bytes
@@ -129,6 +135,23 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
         return self.valor.to_bytes(self.numero_bytes, "big", signed = True)
 
     # code::end
+
+    # def comprimento_fixo(self):
+    #     """
+    #     Obtém o comprimento_bloco do campo, se ele for fixo
+    #     :return: o comprimento_bloco do campo se for fixo ou None se for variável
+    #     """
+    #     return self.comprimento
+
+
+class CampoIntFixo(DadoFixo, CampoIntBasico):
+    """Classe para inteiro textual com tamanho fixo"""
+
+    def __init__(self, comprimento: int, **kwargs):
+        """Construtor"""
+        CampoIntBasico.__init__(self, "int fixo", **kwargs)
+        DadoFixo.__init__(self, comprimento)
+        self._comprimento_fixo = True
 
     # def comprimento_fixo(self):
     #     """

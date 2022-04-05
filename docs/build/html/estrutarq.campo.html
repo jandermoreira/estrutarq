@@ -258,7 +258,20 @@ de dados inválidos</p>
 <section id="modulo-campo-inteiro">
 <h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_inteiro</span></code><a class="headerlink" href="#modulo-campo-inteiro" title="Link permanente para este título">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro</span></code></p>
-<span class="target" id="module-estrutarq.campo.campo_inteiro"></span><section id="campo-inteiro-basico">
+<span class="target" id="module-estrutarq.campo.campo_inteiro"></span><p>Campos para armazenamento de valores inteiros.</p>
+<p>Este arquivo provê classes para uso de campos cujo conteúdo é
+uma um valor inteiro com sinal. Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> é usado
+para armazenamento e a transformação para sequência de bytes
+usa a codificação UTF-8.</p>
+<p>Uma classe básica <code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code> define uma classe
+abstrata (ABC) com as propriedades e métodos gerais. Dela são
+derivados campos:</p>
+<ul class="simple">
+<li><p>Com terminador</p></li>
+<li><p>Prefixado pelo comprimento</p></li>
+<li><p>De comprimento fixo predefinido</p></li>
+</ul>
+<section id="campo-inteiro-basico">
 <h3>Campo inteiro básico<a class="headerlink" href="#campo-inteiro-basico" title="Link permanente para este título">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico">

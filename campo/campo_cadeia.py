@@ -2,13 +2,13 @@
 Campos para armazenamento de cadeias de caracteres.
 
 Este arquivo provê classes para uso de campos cujo conteúdo é
-uma cadeia de caracteres. Internamente, o tipo `str` é usado
+uma cadeia de caracteres. Internamente, o tipo :class:`str` é usado
 para armazenamento e a transformação para sequência de bytes
 usa a codificação UTF-8.
 
-Uma classe básica :class:`CampoCadeiaBasico` define uma classe
-abstrata (ABC) com as propriedades e métodos gerais. Dela são
-derivados campos:
+Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`
+define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
+são derivados campos:
 
 * Com terminador
 * Prefixado pelo comprimento
@@ -32,8 +32,7 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     """
     Classe básica para cadeias de caracteres.
 
-    :param tipo: nome do tipo (definido nas classes derivadas)
-    :type tipo: str
+    :param str tipo: nome do tipo (definido nas subclasses)
     :param str, opcional valor: o valor a ser armazenado no campo
         (padrão: ``""``)
     """
