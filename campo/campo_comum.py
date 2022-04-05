@@ -180,6 +180,7 @@ class CampoBruto(DadoBruto, CampoBasico):
         """
         O valor armazenado para o campo básico (i.e., bruto) é sempre uma
         cadeia de caracteres
+
         :param valor: um valor qualquer
         """
         self.__valor = str(valor)
