@@ -59,14 +59,12 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span>
-<span class="kn">import</span> <span class="nn">typing</span>
 
 <span class="kn">from</span> <span class="nn">estrutarq.dado</span> <span class="kn">import</span> <span class="n">DadoFixo</span><span class="p">,</span> <span class="n">DadoPrefixado</span><span class="p">,</span> \
     <span class="n">DadoTerminador</span>
 <span class="kn">from</span> <span class="nn">.campo_comum</span> <span class="kn">import</span> <span class="n">CampoBasico</span><span class="p">,</span> <span class="n">terminador_de_campo</span>
 
 
-<span class="c1"># cadeia de caracteres básica</span>
 <div class="viewcode-block" id="CampoCadeiaBasico"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para cadeias de caracteres.</span>
@@ -111,13 +109,12 @@
     <span class="c1"># code::end</span>
 
 
-<span class="c1"># cadeia de caracteres com terminador</span>
 <div class="viewcode-block" id="CampoCadeiaTerminador"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para cadeia de caracteres com terminador</span>
+<span class="sd">    Classe para cadeia de caracteres com terminador. O terminador de campo é</span>
+<span class="sd">    definido por :attr:`~.estrutarq.campo.campo_comum.terminador_de_campo`.</span>
 
-<span class="sd">    :param kwargs: parâmetros nomeados a serem repassados</span>
-<span class="sd">    :type kwargs: :class:dict</span>
+<span class="sd">    :param dict kwargs: lista de parâmetros nomeados para superclasses</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -125,7 +122,6 @@
         <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador_de_campo</span><span class="p">)</span></div>
 
 
-<span class="c1"># cadeia de caracteres com prefixo de comprimento</span>
 <div class="viewcode-block" id="CampoCadeiaPrefixado"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres prefixada pelo comprimento_bloco</span>

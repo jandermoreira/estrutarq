@@ -20,14 +20,12 @@ são derivados campos:
 """
 
 from abc import ABCMeta
-import typing
 
 from estrutarq.dado import DadoFixo, DadoPrefixado, \
     DadoTerminador
 from .campo_comum import CampoBasico, terminador_de_campo
 
 
-# cadeia de caracteres básica
 class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     """
     Classe básica para cadeias de caracteres.
@@ -72,13 +70,12 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     # code::end
 
 
-# cadeia de caracteres com terminador
 class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres com terminador
+    Classe para cadeia de caracteres com terminador. O terminador de campo é
+    definido por :attr:`~.estrutarq.campo.campo_comum.terminador_de_campo`.
 
-    :param kwargs: parâmetros nomeados a serem repassados
-    :type kwargs: :class:dict
+    :param dict kwargs: lista de parâmetros nomeados para superclasses
     """
 
     def __init__(self, **kwargs):
@@ -86,7 +83,6 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
         DadoTerminador.__init__(self, terminador_de_campo)
 
 
-# cadeia de caracteres com prefixo de comprimento
 class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     """
     Classe para cadeia de caracteres prefixada pelo comprimento_bloco
