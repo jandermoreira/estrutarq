@@ -6,7 +6,9 @@ Pacote ``estrutarq.campo``
 
 Módulo ``campo_comum``
 -------------------------------
-``estrutarq.comap.campo_comum``
+``estrutarq.campo.campo_comum``
+
+.. automodule:: estrutarq.campo.campo_comum
 
 Campo básico
 ++++++++++++
@@ -14,6 +16,14 @@ Campo básico
 Todas as demais classes do módulo são derivadas de uma classe básica.
 
 .. autoclass:: estrutarq.campo.CampoBasico
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Campo bruto
+++++++++++++
+
+.. autoclass:: estrutarq.campo.CampoBruto
    :members:
    :undoc-members:
    :show-inheritance:

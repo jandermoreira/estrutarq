@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>estrutarq.utilitarios package &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <title>Pacote estrutarq.utilitarios &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
              accesskey="P">anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" accesskey="U">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">estrutarq.utilitarios package</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Pacote estrutarq.utilitarios</a></li> 
       </ul>
     </div>  
 
@@ -41,70 +41,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="estrutarq-utilitarios-package">
-<h1>estrutarq.utilitarios package<a class="headerlink" href="#estrutarq-utilitarios-package" title="Link permanente para este título">¶</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link permanente para este título">¶</a></h2>
-</section>
-<section id="module-estrutarq.utilitarios.disco">
-<span id="estrutarq-utilitarios-disco-module"></span><h2>estrutarq.utilitarios.disco module<a class="headerlink" href="#module-estrutarq.utilitarios.disco" title="Link permanente para este título">¶</a></h2>
-<p>Rotinas utilitárias gerais</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="estrutarq.utilitarios.disco.comprimento_de_bloco">
-<span class="sig-prename descclassname"><span class="pre">estrutarq.utilitarios.disco.</span></span><span class="sig-name descname"><span class="pre">comprimento_de_bloco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diretorio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(em Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/utilitarios/disco.html#comprimento_de_bloco"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.utilitarios.disco.comprimento_de_bloco" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Determina o comprimento_bloco de um bloco de disco, tendo como referência
-o disco onde está o diretório temporário do sistema; para outro
-disco, é preciso informar um diretório nesse disco em que haja direito
-de criação de arquivos.
-:param diretorio: um diretório no disco a ser verificado
-:return: o tamanho do bloco no disco</p>
-<p>Efeitos colaterais: é criado um arquivo temporário, que em seguida
-é removido.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="estrutarq.utilitarios.disco.main">
-<span class="sig-prename descclassname"><span class="pre">estrutarq.utilitarios.disco.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/utilitarios/disco.html#main"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.utilitarios.disco.main" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-estrutarq.utilitarios.dispositivo">
-<span id="estrutarq-utilitarios-dispositivo-module"></span><h2>estrutarq.utilitarios.dispositivo module<a class="headerlink" href="#module-estrutarq.utilitarios.dispositivo" title="Link permanente para este título">¶</a></h2>
-<p>Rotinas utilitárias gerais</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="estrutarq.utilitarios.dispositivo.comprimento_de_bloco">
-<span class="sig-prename descclassname"><span class="pre">estrutarq.utilitarios.dispositivo.</span></span><span class="sig-name descname"><span class="pre">comprimento_de_bloco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diretorio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(em Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/utilitarios/dispositivo.html#comprimento_de_bloco"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.utilitarios.dispositivo.comprimento_de_bloco" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Determina o comprimento_bloco de um bloco do dispositivo externo, tendo como
-referência aquele onde está o diretório temporário do sistema (parãmetro
-igual a None); se um diretório em que haja direito de criação de arquivos
-for informado, então o dispostivo em que ele está será utilizado.
-:param diretorio: um diretório no disco a ser verificado
-:return: o tamanho do bloco no disco</p>
-<p>Efeitos colaterais: é criado um arquivo temporário, que em seguida
-é removido.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="estrutarq.utilitarios.dispositivo.main">
-<span class="sig-prename descclassname"><span class="pre">estrutarq.utilitarios.dispositivo.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/utilitarios/dispositivo.html#main"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.utilitarios.dispositivo.main" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-estrutarq.utilitarios.geral">
-<span id="estrutarq-utilitarios-geral-module"></span><h2>estrutarq.utilitarios.geral module<a class="headerlink" href="#module-estrutarq.utilitarios.geral" title="Link permanente para este título">¶</a></h2>
-<p>Funções gerais</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="estrutarq.utilitarios.geral.verifique_versao">
-<span class="sig-prename descclassname"><span class="pre">estrutarq.utilitarios.geral.</span></span><span class="sig-name descname"><span class="pre">verifique_versao</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/utilitarios/geral.html#verifique_versao"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.utilitarios.geral.verifique_versao" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="estrutarq-utilitarios-interpretador-module">
-<h2>estrutarq.utilitarios.interpretador module<a class="headerlink" href="#estrutarq-utilitarios-interpretador-module" title="Link permanente para este título">¶</a></h2>
-</section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link permanente para este título">¶</a></h2>
-</section>
+  <section id="pacote-estrutarq-utilitarios">
+<h1>Pacote estrutarq.utilitarios<a class="headerlink" href="#pacote-estrutarq-utilitarios" title="Link permanente para este título">¶</a></h1>
 </section>
 
 
@@ -114,21 +52,6 @@ for informado, então o dispostivo em que ele está será utilizado.
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="index.html">Tabela de Conteúdo</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">estrutarq.utilitarios package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-estrutarq.utilitarios.disco">estrutarq.utilitarios.disco module</a></li>
-<li><a class="reference internal" href="#module-estrutarq.utilitarios.dispositivo">estrutarq.utilitarios.dispositivo module</a></li>
-<li><a class="reference internal" href="#module-estrutarq.utilitarios.geral">estrutarq.utilitarios.geral module</a></li>
-<li><a class="reference internal" href="#estrutarq-utilitarios-interpretador-module">estrutarq.utilitarios.interpretador module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
   <div>
     <h4>Tópico anterior</h4>
     <p class="topless"><a href="estrutarq.arquivo.html"
@@ -169,7 +92,7 @@ for informado, então o dispostivo em que ele está será utilizado.
              >anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">estrutarq.utilitarios package</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Pacote estrutarq.utilitarios</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

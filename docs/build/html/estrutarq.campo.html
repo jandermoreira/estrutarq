@@ -49,7 +49,14 @@
 <h1>Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code><a class="headerlink" href="#pacote-estrutarq-campo" title="Link permanente para este título">¶</a></h1>
 <section id="modulo-campo-comum">
 <h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_comum</span></code><a class="headerlink" href="#modulo-campo-comum" title="Link permanente para este título">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">estrutarq.comap.campo_comum</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum</span></code></p>
+<span class="target" id="module-estrutarq.campo.campo_comum"></span><p>Implementação de campos.</p>
+<p>Este arquivo provê a classe básica para definição de campos.</p>
+<p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBasico</span></code></a>
+define uma classe abstrata (ABC) com as propriedades e métodos gerais.
+Dela são derivados os demais campos.</p>
+<p>A classe <a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a> estrutura um
+campo sem organização que utiliza <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> (UTF-8) como valor.</p>
 <section id="campo-basico">
 <h3>Campo básico<a class="headerlink" href="#campo-basico" title="Link permanente para este título">¶</a></h3>
 <p>Todas as demais classes do módulo são derivadas de uma classe básica.</p>
@@ -108,13 +115,13 @@ bytes, o que inclui a organização do dado.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBasico.copy">
 <span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico.copy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBasico.copy" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Cópia “rasa” deste campo.</p>
+<dd><p>Cópia “rasa” do objeto.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>outra instância com os mesmos valores</p>
+<dd class="field-odd"><p>outra instância de <code class="docutils literal notranslate"><span class="pre">self</span></code></p>
 </dd>
 <dt class="field-even">Tipo de retorno</dt>
-<dd class="field-even"><p><a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico">CampoBasico</a>, ou subclasse</p>
+<dd class="field-even"><p><a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico">CampoBasico</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -178,6 +185,47 @@ com a representação de dados.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="campo-bruto">
+<h3>Campo bruto<a class="headerlink" href="#campo-bruto" title="Link permanente para este título">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoBruto">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.</span></span><span class="sig-name descname"><span class="pre">CampoBruto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBruto" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.DadoBruto" title="estrutarq.dado.dado_comum.DadoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBruto</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
+<p>Implementação das funções de um campo bruto, ou seja, sem organização
+de campo. O valor é sempre armazenado como cadeia de caracteres.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoBruto.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBruto.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBruto.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão de sequência de bytes para valor o campo, considerando
+uma cadeia de caracteres simples
+:param dado: a sequência de bytes</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoBruto.valor">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.CampoBruto.valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>O valor armazenado no campo (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>o valor do campo</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoBruto.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBruto.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBruto.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão do valor do campo (cadeia de caracteres) para uma
+sequência de bytes, usando codificação UTF-8
+:return: a sequência de bytes</p>
 </dd></dl>
 
 </dd></dl>
@@ -515,6 +563,7 @@ IEEE 754 de precisão dupla
 <li><a class="reference internal" href="#">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a><ul>
 <li><a class="reference internal" href="#modulo-campo-comum">Módulo <code class="docutils literal notranslate"><span class="pre">campo_comum</span></code></a><ul>
 <li><a class="reference internal" href="#campo-basico">Campo básico</a></li>
+<li><a class="reference internal" href="#campo-bruto">Campo bruto</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#modulo-campo-cadeia">Módulo <code class="docutils literal notranslate"><span class="pre">campo_cadeia</span></code></a><ul>

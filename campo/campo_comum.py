@@ -1,9 +1,19 @@
-################################################################################
-################################################################################
-#  Implementação de campos
+"""
+Implementação de campos.
 
-################################################################################
-################################################################################
+Este arquivo provê a classe básica para definição de campos.
+
+Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoBasico`
+define uma classe abstrata (ABC) com as propriedades e métodos gerais.
+Dela são derivados os demais campos.
+
+A classe :class:`~.estrutarq.campo.campo_comum.CampoBruto` estrutura um
+campo sem organização que utiliza :class:`str` (UTF-8) como valor.
+
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2021-2022
+"""
 
 from abc import ABCMeta, abstractmethod
 from copy import copy
@@ -131,10 +141,10 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     def copy(self) -> "CampoBasico":
         """
-        Cópia "rasa" deste campo.
+        Cópia "rasa" do objeto.
 
-        :return: outra instância com os mesmos valores
-        :rtype: CampoBasico, ou subclasse
+        :return: outra instância de ``self``
+        :rtype: CampoBasico
         """
         return copy(self)
 
