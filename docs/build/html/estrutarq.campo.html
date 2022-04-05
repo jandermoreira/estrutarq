@@ -54,8 +54,8 @@
 <p>Este arquivo provê a classe básica para definição de campos.</p>
 <p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBasico</span></code></a>
 define uma classe abstrata (ABC) com as propriedades e métodos gerais.
-Dela são derivados os demais campos.</p>
-<p>A classe <a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a> estrutura um
+Dela são derivados os demais campos. A classe
+<a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a> define um
 campo sem organização que utiliza <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> (UTF-8) como valor.</p>
 <section id="campo-basico">
 <h3>Campo básico<a class="headerlink" href="#campo-basico" title="Link permanente para este título">¶</a></h3>
@@ -64,10 +64,12 @@ campo sem organização que utiliza <a class="reference external" href="https://
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">estrutarq.campo.</span></span><span class="sig-name descname"><span class="pre">CampoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBasico" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
-<p>Estruturação básica do campo como menor unidade de informação.</p>
+<p>Classe básica para campo, a menor unidade de informação.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – cadeia de caracteres com o nome do tipo</p>
+<dd class="field-odd"><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – cadeia de caracteres com o nome do tipo; possíveis valores
+são, por exemplo, <code class="docutils literal notranslate"><span class="pre">&quot;cadeia</span> <span class="pre">fixo&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;real</span> <span class="pre">terminador&quot;</span></code> ou
+<code class="docutils literal notranslate"><span class="pre">&quot;int</span> <span class="pre">prefixado&quot;</span></code></p>
 </dd>
 </dl>
 <dl class="py method">
@@ -157,8 +159,6 @@ O <a class="reference internal" href="#estrutarq.campo.CampoBasico.valor" title=
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tipo</span></span><a class="headerlink" href="#estrutarq.campo.CampoBasico.tipo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Nome do campo, sendo um valor puramente ornamental (i.e., não é usado
 internamente com nenhum fim).</p>
-<p>Os valores deste campo são, por exemplo, <code class="docutils literal notranslate"><span class="pre">&quot;cadeia</span> <span class="pre">fixo&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;real</span> <span class="pre">terminador&quot;</span></code> ou <code class="docutils literal notranslate"><span class="pre">&quot;int</span> <span class="pre">prefixado&quot;</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)">str</a></p>

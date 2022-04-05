@@ -59,73 +59,99 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.adicione_campos">
 <span class="sig-name descname"><span class="pre">adicione_campos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.adicione_campos"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.adicione_campos" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Inclusão de uma sequência de campos ao registro
-:param lista_campos: uma sequência de um ou mais campos, cada um</p>
-<blockquote>
-<div><p>especificado pela tupla (nome_arquivo, campo), com
+<dd><p>Inclusão de uma sequência de campos ao registro</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>lista_campos</strong> – uma sequência de um ou mais campos, cada um
+especificado pela tupla (nome_arquivo, campo), com
 nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo
 uma instância de um campo válido</p>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.comprimento">
 <span class="sig-name descname"><span class="pre">comprimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.comprimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.comprimento" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Retorna o comprimento do registro em bytes caso ele tenha comprimento
-total fixo
-:return: o comprimento do registro em bytes ou None se tiver
-comprimento variável</p>
+total fixo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>o comprimento do registro em bytes ou None se tiver</p>
+</dd>
+</dl>
+<p>comprimento variável</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.copy">
 <span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.copy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.copy" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Cópia “profunda” deste campo
-:return: outra instância com os mesmos valores</p>
+<dd><p>Cópia “profunda” deste campo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>outra instância com os mesmos valores</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.de_bytes">
 <span class="sig-name descname"><span class="pre">de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dados_registro</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.de_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro
-:param dados_registro: sequência de bytes do registro</p>
+<dd><p>Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dados_registro</strong> – sequência de bytes do registro</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.escreva">
 <span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.escreva" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Escrita do registro no arquivo
-:param arquivo:</p>
+<dd><p>Escrita do registro no arquivo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.leia">
 <span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.leia" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Obtenção de um registro a partir do arquivo
-:param arquivo: arquivo binário aberto com permissão de leitura</p>
+<dd><p>Obtenção de um registro a partir do arquivo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.para_bytes">
 <span class="sig-name descname"><span class="pre">para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.para_bytes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Criação dos bytes do registro pela concatenação dos bytes dos campos,
-sucessivamente
-:return: sequência dos bytes dos campos</p>
+sucessivamente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>sequência dos bytes dos campos</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo">
 <span class="sig-name descname"><span class="pre">tem_comprimento_fixo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.tem_comprimento_fixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Verifica se o registro tem comprimento fixo
-:return: True se o comprimento for fixo</p>
+<dd><p>Verifica se o registro tem comprimento fixo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>True se o comprimento for fixo</p>
+</dd>
+</dl>
 <p>O registro é considerado de tamanho fixo se qualquer uma das
-propriedades foram verdadeiras:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>o registro tem é marcado com _comprimento_fixo == True</p></li>
-<li><p>todos os campos tiverem comprimento fixo</p></li>
-</ol>
-</div></blockquote>
+propriedades foram verdadeiras:
+# o registro tem é marcado com _comprimento_fixo == True
+# todos os campos tiverem comprimento fixo</p>
 </dd></dl>
 
 <dl class="py property">

@@ -40,6 +40,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Acréscimo de um campo a registro, com criação de um atributo e
         inclusão na lista de campos
+
         :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str)
             sendo o nome_arquivo do campo e campo sendo uma instância de um
             campo válido
@@ -61,6 +62,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def adicione_campos(self, *lista_campos):
         """
         Inclusão de uma sequência de campos ao registro
+
         :param lista_campos: uma sequência de um ou mais campos, cada um
             especificado pela tupla (nome_arquivo, campo), com
             nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo
@@ -72,6 +74,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def de_bytes(self, dados_registro: bytes):
         """
         Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro
+
         :param dados_registro: sequência de bytes do registro
         """
         dados_restantes = dados_registro
@@ -83,6 +86,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Criação dos bytes do registro pela concatenação dos bytes dos campos,
         sucessivamente
+
         :return: sequência dos bytes dos campos
         """
         dado_campos = bytes()
@@ -93,12 +97,13 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def tem_comprimento_fixo(self):
         """
         Verifica se o registro tem comprimento fixo
+
         :return: True se o comprimento for fixo
 
         O registro é considerado de tamanho fixo se qualquer uma das
         propriedades foram verdadeiras:
-            1) o registro tem é marcado com _comprimento_fixo == True
-            2) todos os campos tiverem comprimento fixo
+        # o registro tem é marcado com _comprimento_fixo == True
+        # todos os campos tiverem comprimento fixo
         """
         return self._comprimento_fixo or all(
             campo._comprimento_fixo for campo in self.lista_campos.values())
@@ -107,6 +112,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Retorna o comprimento do registro em bytes caso ele tenha comprimento
         total fixo
+
         :return: o comprimento do registro em bytes ou None se tiver
         comprimento variável
         """
@@ -120,6 +126,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         Leitura genérica de um registro usando a forma de organização de
         dados atual, preenchendo os campos
+
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         bytes_arquivo = self.leia_de_arquivo(arquivo)
@@ -129,6 +136,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def leia(self, arquivo):
         """
         Obtenção de um registro a partir do arquivo
+
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         self._leia_registro(arquivo)
@@ -138,6 +146,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def escreva(self, arquivo):
         """
         Escrita do registro no arquivo
+
         :param arquivo:
         """
         bytes_dados = self.para_bytes()
@@ -156,6 +165,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def copy(self):
         """
         Cópia "profunda" deste campo
+
         :return: outra instância com os mesmos valores
         """
         return deepcopy(self)
@@ -177,6 +187,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
     def _leia_registro(self, arquivo):
         """
         Leitura de registro bruto, campo a campo
+
         :param arquivo: arquivo binário aberto com permissão de leitura
         """
         for campo in self.lista_campos.values():

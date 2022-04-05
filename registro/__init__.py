@@ -1,5 +1,5 @@
 """
-    Implementação de organizações de registros.
+Implementação de organizações de registros.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007

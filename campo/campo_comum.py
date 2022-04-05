@@ -5,9 +5,8 @@ Este arquivo provê a classe básica para definição de campos.
 
 Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais.
-Dela são derivados os demais campos.
-
-A classe :class:`~.estrutarq.campo.campo_comum.CampoBruto` estrutura um
+Dela são derivados os demais campos. A classe
+:class:`~.estrutarq.campo.campo_comum.CampoBruto` define um
 campo sem organização que utiliza :class:`str` (UTF-8) como valor.
 
 ..
@@ -22,13 +21,19 @@ from typing import BinaryIO
 from estrutarq.dado import DadoBasico, DadoBruto
 
 terminador_de_campo = b"\x00"
+"""
+O terminador de campo é um byte único usado como delimitador para o
+fim do campo. O valor padrão é ``0x00``.
+"""
 
 
 class CampoBasico(DadoBasico, metaclass = ABCMeta):
-    """Estruturação básica do campo como menor unidade de informação.
+    """
+    Classe básica para campo, a menor unidade de informação.
 
-    :param tipo: cadeia de caracteres com o nome do tipo
-    :type tipo: str
+    :param str tipo: cadeia de caracteres com o nome do tipo; possíveis valores
+        são, por exemplo, ``"cadeia fixo"``, ``"real terminador"`` ou
+        ``"int prefixado"``
     """
 
     def __init__(self, tipo: str):
@@ -40,9 +45,6 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         Nome do campo, sendo um valor puramente ornamental (i.e., não é usado
         internamente com nenhum fim).
-
-        Os valores deste campo são, por exemplo, ``"cadeia fixo"``,
-        ``"real terminador"`` ou ``"int prefixado"``.
 
         :rtype: str
         """
