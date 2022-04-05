@@ -59,7 +59,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         Conversão de uma sequência de bytes para armazenamento para valor
         do campo, de acordo com a representação de dados.
-        O atributo :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.
+        O :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.
 
         :param bytes dado: sequência de bytes
         """
@@ -95,15 +95,13 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         return len(self.adicione_formatacao(self.valor_para_bytes()))
 
-    teste: int = 0
-
     # code::start leitura_escrita
     def leia(self, arquivo: BinaryIO):
         """
         Leitura da sequência de bytes que representa o campo e sua conversão
         para o valor do campo, obedecendo à organização e formato de
         representação.
-        O atributo :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.
+        O :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
@@ -122,20 +120,21 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     # code::end
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
-        Valor padrão do campo para um 'print'
+        Retorno do valor textual do campo.
 
         :return: o valor do campo
+        :rtype: str
         """
         return str(self.valor)
 
-    def copy(self):
+    def copy(self) -> "CampoBasico":
         """
         Cópia "rasa" deste campo.
 
         :return: outra instância com os mesmos valores
-        :rtype: self
+        :rtype: CampoBasico, ou subclasse
         """
         return copy(self)
 
@@ -147,11 +146,18 @@ class CampoBruto(DadoBruto, CampoBasico):
     """
 
     def __init__(self, valor = ""):
-        super().__init__("bruto")
+        CampoBasico.__init__(self, "bruto")
+        DadoBruto.__init__(self)
         self.valor = valor
 
     @property
     def valor(self):
+        """
+        O valor armazenado no campo (:class:`str`).
+
+        :return: o valor do campo
+        :rtype: str
+        """
         return self.__valor
 
     @valor.setter
