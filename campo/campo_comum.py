@@ -50,19 +50,18 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     @abstractmethod
     def valor(self, valor):
         """
-        Atribuição do valor ao campo
+        Atribuição do valor ao campo.
         """
         pass
 
     @abstractmethod
     def bytes_para_valor(self, dado: bytes):
         """
-        Conversão de uma sequência de bytes para armazenamento no valor
+        Conversão de uma sequência de bytes para armazenamento para valor
         do campo, de acordo com a representação de dados.
+        O atributo :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.
 
         :param bytes dado: sequência de bytes
-        :return: o valor do campo
-        :rtype: de acordo com seu tipo
         """
         pass
 
@@ -88,21 +87,23 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     def comprimento(self) -> int:
         """
-        Obtém o comprimento atual do campo depois de convertido para
-        sequência de bytes, o que inclui a organização do dado.
+        Obtém o comprimento atual do campo após convertido para sequência de
+        bytes, o que inclui a organização do dado.
 
         :return: o comprimento do campo com a organização
         :rtype: int
         """
         return len(self.adicione_formatacao(self.valor_para_bytes()))
 
+    teste: int = 0
+
     # code::start leitura_escrita
     def leia(self, arquivo: BinaryIO):
         """
         Leitura da sequência de bytes que representa o campo e sua conversão
-        da para o valor do campo, obedecendo à organização e formato de
+        para o valor do campo, obedecendo à organização e formato de
         representação.
-        O :attr:~.estrutarq.campo.campo_comum.CampoBasico.valor é atualizado.
+        O atributo :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
@@ -111,10 +112,10 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     def escreva(self, arquivo: BinaryIO):
         """
-        Conversão do valor para sequência de bytes e armazenamento no
-        arquivo
+        Conversão do valor do campo para sequência de bytes e armazenamento no
+        arquivo, incluindo a organização de dados.
 
-        :param arquivo: arquivo binário aberto com permissão de escrita
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de escrita
         """
         dado = self.valor_para_bytes()
         arquivo.write(self.adicione_formatacao(dado))
@@ -131,8 +132,10 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     def copy(self):
         """
-        Cópia "rasa" deste campo
+        Cópia "rasa" deste campo.
+
         :return: outra instância com os mesmos valores
+        :rtype: self
         """
         return copy(self)
 
