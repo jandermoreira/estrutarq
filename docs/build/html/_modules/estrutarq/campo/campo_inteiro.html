@@ -41,16 +41,17 @@
 <span class="sd">Campos para armazenamento de valores inteiros.</span>
 
 <span class="sd">Este arquivo provê classes para uso de campos cujo conteúdo é</span>
-<span class="sd">uma um valor inteiro com sinal. Internamente, o tipo :class:`int` é usado</span>
-<span class="sd">para armazenamento e a transformação para sequência de bytes</span>
-<span class="sd">usa a codificação UTF-8.</span>
+<span class="sd">um valor inteiro com sinal. Internamente, o tipo :class:`int` é usado</span>
+<span class="sd">para armazenamento e a transformação para sequência de bytes podem ser</span>
+<span class="sd">textuais ou binária.</span>
 
-<span class="sd">Uma classe básica :class:`CampoCadeiaBasico` define uma classe</span>
-<span class="sd">abstrata (ABC) com as propriedades e métodos gerais. Dela são</span>
-<span class="sd">derivados campos:</span>
+<span class="sd">Uma classe básica :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`</span>
+<span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais.</span>
+<span class="sd">Dela são derivados campos:</span>
 
 <span class="sd">* Com terminador</span>
 <span class="sd">* Prefixado pelo comprimento</span>
+<span class="sd">* Binário</span>
 <span class="sd">* De comprimento fixo predefinido</span>
 
 <span class="sd">..</span>
@@ -68,15 +69,22 @@
 <span class="c1">################################################################################</span>
 <div class="viewcode-block" id="CampoIntBasico"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe básica para campo inteiro</span>
+<span class="sd">    Classe básica para campo inteiro.</span>
+
+<span class="sd">    :param str tipo: o nome do tipo (definido em subclasses)</span>
+<span class="sd">    :param int, opcional valor: o valor a ser armazenado no campo</span>
+<span class="sd">        (padrão: 0)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">valor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tipo</span><span class="p">)</span>
+        <span class="n">CampoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Valor inteiro armazenado no campo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span>
 
     <span class="nd">@valor</span><span class="o">.</span><span class="n">setter</span>
@@ -135,23 +143,6 @@
     <span class="c1">#     return None</span>
 
 
-<div class="viewcode-block" id="CampoIntFixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe para inteiro textual com tamanho fixo&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construtor&quot;&quot;&quot;</span>
-        <span class="n">CampoIntBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;int fixo&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">True</span></div>
-
-    <span class="c1"># def comprimento_fixo(self):</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     Obtém o comprimento_bloco do campo, se ele for fixo</span>
-    <span class="c1">#     :return: o comprimento_bloco do campo se for fixo ou None se for variável</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     return self.comprimento</span>
-
-
 <div class="viewcode-block" id="CampoIntBinario"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para inteiro em formato binário (big endian) com 8 bytes</span>
@@ -186,6 +177,23 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numero_bytes</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div></div>
 
     <span class="c1"># code::end</span>
+
+    <span class="c1"># def comprimento_fixo(self):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Obtém o comprimento_bloco do campo, se ele for fixo</span>
+    <span class="c1">#     :return: o comprimento_bloco do campo se for fixo ou None se for variável</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     return self.comprimento</span>
+
+
+<div class="viewcode-block" id="CampoIntFixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classe para inteiro textual com tamanho fixo&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construtor&quot;&quot;&quot;</span>
+        <span class="n">CampoIntBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;int fixo&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">True</span></div>
 
     <span class="c1"># def comprimento_fixo(self):</span>
     <span class="c1">#     &quot;&quot;&quot;</span>

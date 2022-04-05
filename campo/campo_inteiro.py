@@ -43,6 +43,9 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
 
     @property
     def valor(self) -> int:
+        """
+        Valor inteiro armazenado no campo.
+        """
         return self.__valor
 
     @valor.setter

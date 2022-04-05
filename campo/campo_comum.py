@@ -27,14 +27,22 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     @property
     def tipo(self):
+        """
+        Nome do campo, sendo um valor puramente ornamental (i.e., não é usado
+        internamente com nenhum fim).
+
+        Os valores deste campo são, por exemplo, ``"cadeia fixo"``,
+        ``"real terminador"`` ou ``"int prefixado"``.
+
+        :rtype: str
+        """
         return self.__tipo
 
     @property
     @abstractmethod
     def valor(self):
         """
-        Recuperação, com as devidas conversões, do atributo ``__valor``
-        :return: o valor de ``__valor``
+        Valor do campo, usando sua representação interna.
         """
         pass
 
@@ -42,7 +50,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     @abstractmethod
     def valor(self, valor):
         """
-        Atribuição, com as devidas conversões, para o atributo __valor
+        Atribuição do valor ao campo
         """
         pass
 
@@ -50,44 +58,53 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     def bytes_para_valor(self, dado: bytes):
         """
         Conversão de uma sequência de bytes para armazenamento no valor
-        do campo, de acordo com a representação de dados
-        :param dado: sequência de bytes
-        :return: o valor do campo de acordo com seu tipo
+        do campo, de acordo com a representação de dados.
+
+        :param bytes dado: sequência de bytes
+        :return: o valor do campo
+        :rtype: de acordo com seu tipo
         """
-        return self._comprimento
+        pass
 
     @abstractmethod
     def valor_para_bytes(self) -> bytes:
         """
         Conversão do valor do campo para sequência de bytes de acordo
-        com a representação de dados
-        :return:
+        com a representação de dados.
+
+        :return: sequência de bytes
+        :rtype: bytes
         """
         pass
 
-    def comprimento_fixo(self):
+    def comprimento_fixo(self) -> bool:
         """
-        Retorna se o comprimento é ou não fixo
+        Retorna se o comprimento é ou não fixo.
 
         :return: `True` para comprimento fixo ou `False` para variável
+        :rtype: bool
         """
         return self._comprimento_fixo
 
-    def comprimento(self):
+    def comprimento(self) -> int:
         """
-        Obtém o comprimento atual do campo
+        Obtém o comprimento atual do campo depois de convertido para
+        sequência de bytes, o que inclui a organização do dado.
 
-        :return: o comprimento do campo
+        :return: o comprimento do campo com a organização
+        :rtype: int
         """
         return len(self.adicione_formatacao(self.valor_para_bytes()))
 
     # code::start leitura_escrita
     def leia(self, arquivo: BinaryIO):
         """
-        Conversão dos dado lidos para o valor do campo, obedecendo à
-        organização e formato de representação
+        Leitura da sequência de bytes que representa o campo e sua conversão
+        da para o valor do campo, obedecendo à organização e formato de
+        representação.
+        O :attr:~.estrutarq.campo.campo_comum.CampoBasico.valor é atualizado.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
         dado = self.leia_de_arquivo(arquivo)
         self.bytes_para_valor(dado)

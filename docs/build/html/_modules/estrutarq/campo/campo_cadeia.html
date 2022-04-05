@@ -41,13 +41,13 @@
 <span class="sd">Campos para armazenamento de cadeias de caracteres.</span>
 
 <span class="sd">Este arquivo provê classes para uso de campos cujo conteúdo é</span>
-<span class="sd">uma cadeia de caracteres. Internamente, o tipo `str` é usado</span>
+<span class="sd">uma cadeia de caracteres. Internamente, o tipo :class:`str` é usado</span>
 <span class="sd">para armazenamento e a transformação para sequência de bytes</span>
 <span class="sd">usa a codificação UTF-8.</span>
 
-<span class="sd">Uma classe básica :class:`CampoCadeiaBasico` define uma classe</span>
-<span class="sd">abstrata (ABC) com as propriedades e métodos gerais. Dela são</span>
-<span class="sd">derivados campos:</span>
+<span class="sd">Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`</span>
+<span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela</span>
+<span class="sd">são derivados campos:</span>
 
 <span class="sd">* Com terminador</span>
 <span class="sd">* Prefixado pelo comprimento</span>
@@ -71,8 +71,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para cadeias de caracteres.</span>
 
-<span class="sd">    :param tipo: nome do tipo (definido nas classes derivadas)</span>
-<span class="sd">    :type tipo: str</span>
+<span class="sd">    :param str tipo: nome do tipo (definido nas subclasses)</span>
 <span class="sd">    :param str, opcional valor: o valor a ser armazenado no campo</span>
 <span class="sd">        (padrão: ``&quot;&quot;``)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
