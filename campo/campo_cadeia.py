@@ -73,7 +73,7 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     """
     Classe para cadeia de caracteres com terminador. O terminador de campo é
-    definido por :var:`~.estrutarq.campo.campo_comum.terminador_de_campo`.
+    definido por :attr:`estrutarq.campo.campo_comum.terminador_de_campo`.
 
     :param dict, opcional kwargs: lista de parâmetros opcionais passados para
         :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
