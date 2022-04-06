@@ -112,9 +112,9 @@
 <div class="viewcode-block" id="CampoCadeiaTerminador"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres com terminador. O terminador de campo é</span>
-<span class="sd">    definido por :attr:`~.estrutarq.campo.campo_comum.terminador_de_campo`.</span>
+<span class="sd">    definido por :var:`~.estrutarq.campo.campo_comum.terminador_de_campo`.</span>
 
-<span class="sd">    :param dict kwargs: lista de parâmetros nomeados para</span>
+<span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
 <span class="sd">        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -125,18 +125,29 @@
 
 <div class="viewcode-block" id="CampoCadeiaPrefixado"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para cadeia de caracteres prefixada pelo comprimento</span>
+<span class="sd">    Classe para cadeia de caracteres prefixada pelo comprimento. O prefixo é</span>
+<span class="sd">    o adotado em</span>
+<span class="sd">    :class:`~.estrutarq.dado.DadoPrefixado`.</span>
+
+
+<span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia prefixado&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">CampoCadeiaBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cadeia prefixado&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CampoCadeiaFixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para cadeia de caracteres com comprimento fixo e preenchimento</span>
-<span class="sd">    de dados inválidos.</span>
+<span class="sd">    Classe para cadeia de caracteres com comprimento fixo, com enchimento de</span>
+<span class="sd">    bytes e preenchimento de bytes inválidos. O byte de prenchimento é o</span>
+<span class="sd">    padrão de :class:`~.estrutarq.dado.DadoFixo`.</span>
+
+<span class="sd">    :param int comprimento: o comprimento do campo em bytes</span>
+<span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

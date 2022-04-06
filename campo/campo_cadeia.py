@@ -73,9 +73,9 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     """
     Classe para cadeia de caracteres com terminador. O terminador de campo é
-    definido por :attr:`~.estrutarq.campo.campo_comum.terminador_de_campo`.
+    definido por :var:`~.estrutarq.campo.campo_comum.terminador_de_campo`.
 
-    :param dict kwargs: lista de parâmetros nomeados para
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
         :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
     """
 
@@ -86,9 +86,13 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
 
 class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres prefixada pelo comprimento
+    Classe para cadeia de caracteres prefixada pelo comprimento. O prefixo é
+    o adotado em
+    :class:`~.estrutarq.dado.DadoPrefixado`.
 
 
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
     """
 
     def __init__(self, **kwargs):
@@ -98,8 +102,13 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
 
 class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres com comprimento fixo e preenchimento
-    de dados inválidos.
+    Classe para cadeia de caracteres com comprimento fixo, com enchimento de
+    bytes e preenchimento de bytes inválidos. O byte de prenchimento é o
+    padrão de :class:`~.estrutarq.dado.DadoFixo`.
+
+    :param int comprimento: o comprimento do campo em bytes
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
     """
 
     def __init__(self, comprimento: int, **kwargs):
