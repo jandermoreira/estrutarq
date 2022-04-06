@@ -69,7 +69,7 @@ html_theme = 'sphinxdoc'
 html_static_path = ['_static']
 
 autodoc_default_options = {
-    'members': True,
+    # 'members': True,
     'member-order': 'bysource',
     'undoc-members': True,
     # 'inherited-members': True,

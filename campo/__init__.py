@@ -7,8 +7,7 @@ Implementação de organizações de campos.
 """
 from .campo_cadeia import CampoBasico, CampoCadeiaBasico, CampoCadeiaFixo, \
     CampoCadeiaPrefixado, CampoCadeiaTerminador
-from .campo_comum import \
-    CampoBruto
+from .campo_comum import CampoBruto, CampoBasico, terminador_de_campo
 from .campo_inteiro import CampoIntBinario, CampoIntFixo, CampoIntPrefixado, \
     CampoIntTerminador
 from .campo_real import CampoRealBinario, CampoRealFixo, CampoRealPrefixado, \
