@@ -75,7 +75,8 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     Classe para cadeia de caracteres com terminador. O terminador de campo é
     definido por :attr:`~.estrutarq.campo.campo_comum.terminador_de_campo`.
 
-    :param dict kwargs: lista de parâmetros nomeados para superclasses
+    :param dict kwargs: lista de parâmetros nomeados para
+        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
     """
 
     def __init__(self, **kwargs):
@@ -85,7 +86,7 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
 
 class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres prefixada pelo comprimento_bloco
+    Classe para cadeia de caracteres prefixada pelo comprimento
     """
 
     def __init__(self, *args, **kwargs):
@@ -95,8 +96,8 @@ class CampoCadeiaPrefixado(DadoPrefixado, CampoCadeiaBasico):
 
 class CampoCadeiaFixo(DadoFixo, CampoCadeiaBasico):
     """
-    Classe para cadeia de caracteres com comprimento_bloco fixo e preenchimento
-    de dados inválidos
+    Classe para cadeia de caracteres com comprimento fixo e preenchimento
+    de dados inválidos.
     """
 
     def __init__(self, comprimento: int, **kwargs):
