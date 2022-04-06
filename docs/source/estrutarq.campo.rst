@@ -2,6 +2,7 @@ Pacote ``estrutarq.campo``
 ==========================
 
 .. automodule:: estrutarq.campo
+   :noindex:
 
 
 Módulo ``campo_comum``
@@ -9,19 +10,15 @@ Módulo ``campo_comum``
 ``estrutarq.campo.campo_comum``
 
 .. automodule:: estrutarq.campo.campo_comum
-   :noindex:
+   :members: False
 
-Referência: :class:`estrutarq.campo.CampoBruto`...
-
-Outra: :attr:`estrutarq.campo.campo_comum.terminador_de_campo`...
+Ignore
+-------
 
 Campo básico
 ++++++++++++
 
 Todas as demais classes do módulo são derivadas de uma classe básica.
-
-.. autodata:: terminador_de_campo
-   :annotation:
 
 .. autoclass:: estrutarq.campo.CampoBasico
 

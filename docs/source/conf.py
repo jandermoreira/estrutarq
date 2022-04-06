@@ -72,11 +72,10 @@ autodoc_default_options = {
     'members': True,
     'member-order': 'bysource',
     'undoc-members': True,
-    'inherited-members': True,
-    'undoc-members': True,
+    # 'inherited-members': True,
     'show-inheritance': True,
 }
-
+add_module_names = False
 
 # -- Extension configuration -------------------------------------------------
 
