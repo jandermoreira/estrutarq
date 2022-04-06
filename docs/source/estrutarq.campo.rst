@@ -17,8 +17,12 @@ Todas as demais classes do módulo são derivadas de uma classe básica.
 
 .. autoclass:: estrutarq.campo.CampoBasico
    :members:
+   :inherited-members:
    :undoc-members:
    :show-inheritance:
+
+.. autodata:: terminador_de_campo
+   :annotation:
 
 Campo bruto
 ++++++++++++

@@ -20,7 +20,7 @@ from typing import BinaryIO
 
 from estrutarq.dado import DadoBasico, DadoBruto
 
-terminador_de_campo = b"\x00"
+terminador_de_campo: bytes = b"\x00"
 """
 O terminador de campo é um byte único usado como delimitador para o
 fim do campo. O valor padrão é ``0x00``.
@@ -141,12 +141,11 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         return str(self.valor)
 
-    def copy(self) -> "CampoBasico":
+    def copy(self):
         """
         Cópia "rasa" do objeto.
 
-        :return: outra instância de ``self``
-        :rtype: CampoBasico
+        :return: uma instância copiada de ``self``
         """
         return copy(self)
 
