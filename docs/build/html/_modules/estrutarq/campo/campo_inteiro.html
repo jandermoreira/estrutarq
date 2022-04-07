@@ -70,8 +70,8 @@
 <span class="sd">    a representação textual do valor inteiro (i.e., conversão para</span>
 <span class="sd">    sequência de dígitos); outras representações devem sobrescrever os</span>
 <span class="sd">    métodos de conversão</span>
-<span class="sd">    :meth:`~.estrutarq.campo.CampoBasico.bytes_para_valor` e</span>
-<span class="sd">    :meth:`~.estrutarq.campo.CampoBasico.valor_para_bytes`.</span>
+<span class="sd">    :meth:`~.estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor` e</span>
+<span class="sd">    :meth:`~.estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes`.</span>
 
 <span class="sd">    :param str tipo: o nome do tipo (definido em subclasses)</span>
 <span class="sd">    :param int, opcional valor: o valor a ser armazenado no campo</span>
@@ -86,11 +86,18 @@
     <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Valor inteiro armazenado no campo.</span>
+
+<span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span>
 
     <span class="nd">@valor</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Armazenamento de valor inteiro no campo.</span>
+
+<span class="sd">        :param int valor: valor inteiro a ser armazenado</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;O valor deve ser inteiro&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span> <span class="o">=</span> <span class="n">valor</span>
@@ -98,17 +105,21 @@
     <span class="c1"># code::start textual_conversoes</span>
 <div class="viewcode-block" id="CampoIntBasico.bytes_para_valor"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Conversão de uma sequência de bytes (representação textual)</span>
-<span class="sd">        para inteiro</span>
-<span class="sd">        :param dado: sequência de bytes</span>
+<span class="sd">        Conversão de uma sequência de bytes (representação textual) para</span>
+<span class="sd">        inteiro. O atributo :attr:`~.estrutarq.campo.CampoInteiro.valor` é</span>
+<span class="sd">        atualizado.</span>
+
+<span class="sd">        :param bytes dado: sequência de bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CampoIntBasico.valor_para_bytes"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão do valor inteiro para sequência de bytes usando</span>
-<span class="sd">        representação textual e codificação UTF-8</span>
+<span class="sd">        representação textual e codificação UTF-8.</span>
+
 <span class="sd">        :return: sequência de bytes</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div></div>
     <span class="c1"># code::end</span>
@@ -116,7 +127,12 @@
 
 <div class="viewcode-block" id="CampoIntTerminador"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para inteiro textual com terminador</span>
+<span class="sd">    Classe para campo inteiro textual com terminador.</span>
+
+<span class="sd">    :param bytes, opcional terminador: um byte único com o valor do terminador</span>
+<span class="sd">        (padrão :attr:`estrutarq.campo.campo_comum.terminador_de_campo`)</span>
+<span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :attr:`~.estrutarq.campo.campo_cadeia.CampoIntBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">terminador_de_campo</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
