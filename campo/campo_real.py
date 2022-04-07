@@ -58,7 +58,7 @@ class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
         """
         Atribuição de valor ao campo.
         
-        :param float valor: valor a ser armazenado no campo
+        :param float, int valor: valor a ser armazenado no campo
         """
         if not isinstance(valor, (float, int)):
             raise TypeError("O valor deve ser real ou inteiro")
@@ -155,7 +155,13 @@ class CampoRealBinario(DadoBinario, CampoRealBasico):
 
 class CampoRealFixo(DadoFixo, CampoRealBasico):
     """
-    Classe para campo real com representação textual de comprimento fixo
+    Classe para campo real com representação textual com comprimento fixo
+    predefinido. Os bytes que não correspondem aos dados são preenchidos
+    conforme definido em :class:`~.estrutarq.dado.DadoFixo`.
+
+    :param int comprimento: comprimento em bytes fixado para o campo.
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_real.CampoRealBasico`
     """
 
     def __init__(self, comprimento: int, **kwargs):

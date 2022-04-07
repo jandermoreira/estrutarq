@@ -163,7 +163,9 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
 
 class CampoIntFixo(DadoFixo, CampoIntBasico):
     """
-    Classe para inteiro textual com comprimento fixo predefinido.
+    Classe para inteiro textual com comprimento fixo predefinido. Os bytes
+    que não correspondem aos dados são preenchidos conforme definido em
+    :class:`~.estrutarq.dado.DadoFixo`.
 
     :param int comprimento: o comprimento em bytes fixado para o campo
     :param dict, opcional kwargs: lista de parâmetros opcionais passados para

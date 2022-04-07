@@ -63,7 +63,7 @@
 <span class="kn">from</span> <span class="nn">.campo_comum</span> <span class="kn">import</span> <span class="n">CampoBasico</span><span class="p">,</span> <span class="n">terminador_de_campo</span>
 
 
-<div class="viewcode-block" id="CampoCadeiaBasico"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaBasico"><a class="viewcode-back" href="../../../campo_cadeia.html#estrutarq.campo.CampoCadeiaBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaBasico</span><span class="p">(</span><span class="n">CampoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para cadeias de caracteres.</span>
 
@@ -87,7 +87,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span> <span class="o">=</span> <span class="n">valor</span>
 
     <span class="c1"># code::start conversoes</span>
-<div class="viewcode-block" id="CampoCadeiaBasico.bytes_para_valor"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaBasico.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaBasico.bytes_para_valor"><a class="viewcode-back" href="../../../campo_cadeia.html#estrutarq.campo.CampoCadeiaBasico.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Armazenamento da sequência de bytes de ``dado`` como valor</span>
 <span class="sd">        do campo.</span>
 <span class="sd">        </span>
@@ -96,7 +96,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">dado</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CampoCadeiaBasico.valor_para_bytes"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaBasico.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="CampoCadeiaBasico.valor_para_bytes"><a class="viewcode-back" href="../../../campo_cadeia.html#estrutarq.campo.CampoCadeiaBasico.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retorno do valor do campo convertido para sequência</span>
 <span class="sd">        de bytes usando codificação UTF-8.</span>
 <span class="sd">        </span>
@@ -107,7 +107,7 @@
     <span class="c1"># code::end</span>
 
 
-<div class="viewcode-block" id="CampoCadeiaTerminador"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaTerminador"><a class="viewcode-back" href="../../../campo_cadeia.html#estrutarq.campo.CampoCadeiaTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres com terminador. O terminador de campo é</span>
 <span class="sd">    definido por :attr:`estrutarq.campo.terminador_de_campo`.</span>
@@ -121,7 +121,7 @@
         <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador_de_campo</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="CampoCadeiaPrefixado"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaPrefixado"><a class="viewcode-back" href="../../../campo_cadeia.html#estrutarq.campo.CampoCadeiaPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres prefixada pelo comprimento. O prefixo é</span>
 <span class="sd">    o adotado em</span>
@@ -137,7 +137,7 @@
         <span class="n">DadoPrefixado</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="CampoCadeiaFixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.CampoCadeiaFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoCadeiaFixo"><a class="viewcode-back" href="../../../campo_cadeia.html#estrutarq.campo.CampoCadeiaFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoCadeiaFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoCadeiaBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para cadeia de caracteres com comprimento fixo, com enchimento de</span>
 <span class="sd">    bytes e preenchimento de bytes inválidos. O byte de prenchimento é o</span>

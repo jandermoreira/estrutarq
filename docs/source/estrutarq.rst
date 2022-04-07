@@ -6,9 +6,9 @@ Pacote ``estrutarq``
 .. toctree::
    :maxdepth: 3
 
-   estrutarq.dado
-   estrutarq.campo
-   estrutarq.registro
-   estrutarq.arquivo
-   estrutarq.utilitarios
+   dado
+   campo
+   registro
+   arquivo
+   utilitarios
 

@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Valores inteiros &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="next" title="Valores reais" href="campo_real.html" />
+    <link rel="prev" title="Cadeias de caracteres" href="campo_cadeia.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice Geral"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="right" >
+          <a href="campo_real.html" title="Valores reais"
+             accesskey="N">próximo</a> |</li>
+        <li class="right" >
+          <a href="campo_cadeia.html" title="Cadeias de caracteres"
+             accesskey="P">anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="campo.html" accesskey="U">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Valores inteiros</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-estrutarq.campo.campo_inteiro">
+<span id="valores-inteiros"></span><h1>Valores inteiros<a class="headerlink" href="#module-estrutarq.campo.campo_inteiro" title="Link permanente para este título">¶</a></h1>
+<p>Campos para armazenamento de valores inteiros, provendo classes para
+uso de campos cujo conteúdo é um valor inteiro com sinal. Internamente,
+o tipo <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> é usado para armazenamento e a transformação para
+sequência de bytes podem ser textuais ou binária.</p>
+<p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoIntBasico</span></code></a>
+define uma classe abstrata (ABC) com as propriedades e métodos gerais.
+Dela são derivados campos:</p>
+<ul class="simple">
+<li><p>Com terminador</p></li>
+<li><p>Prefixado pelo comprimento</p></li>
+<li><p>Binário</p></li>
+<li><p>De comprimento fixo predefinido</p></li>
+</ul>
+<section id="campo-inteiro-basico">
+<h2>Campo inteiro básico<a class="headerlink" href="#campo-inteiro-basico" title="Link permanente para este título">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoIntBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
+<p>Classe básica para campo inteiro. O armazenamento interno usa o tipo
+<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>. A conversão para sequência de bytes assume, por padrão,
+a representação textual do valor inteiro (i.e., conversão para
+sequência de dígitos); outras representações devem sobrescrever os
+métodos de conversão
+<a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor" title="estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes_para_valor()</span></code></a> e
+<a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes" title="estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">valor_para_bytes()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – o nome do tipo (definido em subclasses)</p></li>
+<li><p><strong>valor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>opcional</em>) – o valor a ser armazenado no campo
+(padrão: 0)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico.valor">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico.valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Valor inteiro armazenado no campo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBasico.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão de uma sequência de bytes (representação textual) para
+inteiro. O atributo <code class="xref py py-attr docutils literal notranslate"><span class="pre">valor</span></code> é
+atualizado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBasico.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão do valor inteiro para sequência de bytes usando
+representação textual e codificação UTF-8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>sequência de bytes</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-com-terminador">
+<h2>Campo inteiro com terminador<a class="headerlink" href="#campo-inteiro-com-terminador" title="Link permanente para este título">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntTerminador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoIntTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\x00'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntTerminador" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></a></p>
+<p>Classe para campo inteiro textual com uso de terminador para indicar o
+término dos dados.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>terminador</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a><em>, </em><em>opcional</em>) – um byte único com o valor do terminador
+(valor padrão <a class="reference internal" href="campo.html#estrutarq.campo.campo_comum.terminador_de_campo" title="estrutarq.campo.campo_comum.terminador_de_campo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.terminador_de_campo</span></code></a>)</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>, </em><em>opcional</em>) – lista de parâmetros opcionais passados para
+<a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoIntBasico</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-prefixado-pelo-comprimento">
+<h2>Campo inteiro prefixado pelo comprimento<a class="headerlink" href="#campo-inteiro-prefixado-pelo-comprimento" title="Link permanente para este título">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntPrefixado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoIntPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntPrefixado" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.dado_comum.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoPrefixado</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></a></p>
+<p>Classe para inteiro textual com prefixo de comprimento, conforme definido
+em <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.DadoPrefixado</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>opcional</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>,</em>) – lista de parâmetros opcionais passados para
+<a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoIntBasico</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-binario">
+<h2>Campo inteiro binário<a class="headerlink" href="#campo-inteiro-binario" title="Link permanente para este título">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoIntBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntBinario" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBinario" title="estrutarq.dado.dado_comum.DadoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBinario</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></a></p>
+<p>Classe para inteiro em formato binário (com sinal, <em>big endian</em>) com
+8 bytes de comprimento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>, </em><em>opcional</em>) – lista de parâmetros opcionais passados para
+<a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoIntBasico</span></code></a></p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntBinario.numero_bytes">
+<span class="sig-name descname"><span class="pre">numero_bytes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#estrutarq.campo.CampoIntBinario.numero_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Comprimento do valor binário em bytes. O padrão são 8 bytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntBinario.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBinario.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntBinario.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão de uma sequência de bytes (binária big-endian com sinal)
+para inteiro com armazenamento interno do valor convertido.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>dado</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes</p>
+</dd>
+<dt class="field-even">Levanta</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(em Python v3.10)"><strong>TypeError</strong></a> – se o comprimento não for o especificado em
+<a class="reference internal" href="#estrutarq.campo.CampoIntBinario.numero_bytes" title="estrutarq.campo.CampoIntBinario.numero_bytes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">numero_bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntBinario.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBinario.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntBinario.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão do valor inteiro interno para sequência de bytes usando
+representação binária <em>big-endian</em> com sinal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>sequência de bytes</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="campo-inteiro-de-comprimento-fixo">
+<h2>Campo inteiro de comprimento fixo<a class="headerlink" href="#campo-inteiro-de-comprimento-fixo" title="Link permanente para este título">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.CampoIntFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoIntFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoIntFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro.CampoIntBasico</span></code></a></p>
+<p>Classe para inteiro textual com comprimento fixo predefinido. Os bytes
+que não correspondem aos dados são preenchidos conforme definido em
+<a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoFixo</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comprimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a>) – o comprimento em bytes fixado para o campo</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>, </em><em>opcional</em>) – lista de parâmetros opcionais passados para
+<a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoIntBasico</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Tabela de Conteúdo</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Valores inteiros</a><ul>
+<li><a class="reference internal" href="#campo-inteiro-basico">Campo inteiro básico</a></li>
+<li><a class="reference internal" href="#campo-inteiro-com-terminador">Campo inteiro com terminador</a></li>
+<li><a class="reference internal" href="#campo-inteiro-prefixado-pelo-comprimento">Campo inteiro prefixado pelo comprimento</a></li>
+<li><a class="reference internal" href="#campo-inteiro-binario">Campo inteiro binário</a></li>
+<li><a class="reference internal" href="#campo-inteiro-de-comprimento-fixo">Campo inteiro de comprimento fixo</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Tópico anterior</h4>
+    <p class="topless"><a href="campo_cadeia.html"
+                          title="capítulo anterior">Cadeias de caracteres</a></p>
+  </div>
+  <div>
+    <h4>Próximo tópico</h4>
+    <p class="topless"><a href="campo_real.html"
+                          title="próximo capítulo">Valores reais</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Essa Página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/campo_inteiro.rst.txt"
+            rel="nofollow">Exibir Fonte</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice Geral"
+             >índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="right" >
+          <a href="campo_real.html" title="Valores reais"
+             >próximo</a> |</li>
+        <li class="right" >
+          <a href="campo_cadeia.html" title="Cadeias de caracteres"
+             >anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="campo.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Valores inteiros</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Jander Moreira.
+      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
