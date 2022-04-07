@@ -46,9 +46,7 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
     @property
     def valor(self) -> int:
         """
-        Valor inteiro armazenado no campo.
-
-        :rtype: int
+        Valor inteiro armazenado no campo. Recebe e retorna um valor inteiro.
         """
         return self.__valor
 

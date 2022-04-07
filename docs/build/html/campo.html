@@ -82,8 +82,8 @@ são, por exemplo, <code class="docutils literal notranslate"><span class="pre">
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBasico.tipo">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tipo</span></span><a class="headerlink" href="#estrutarq.campo.CampoBasico.tipo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Nome do campo, sendo um valor puramente ornamental (i.e., não é usado
-internamente com nenhum fim).</p>
+<dd><p>Nome do tipo do campo. É um valor puramente ornamental (i.e., não
+é usado internamente com nenhum fim) e pode ser consultado externamente.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Tipo de retorno</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)">str</a></p>
@@ -94,7 +94,8 @@ internamente com nenhum fim).</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBasico.valor">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.CampoBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Valor do campo, usando sua representação interna.</p>
+<dd><p>Valor do campo, usando sua representação interna. Recebe e retorna o
+valor armazenado.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -211,13 +212,10 @@ codificação de caracteres UTF-8.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBruto.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#estrutarq.campo.CampoBruto.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>O valor armazenado no campo (cadeia de caracteres).</p>
+<dd><p>O valor armazenado no campo. Recebe e retorna uma cadeia de caracteres.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o valor do campo</p>
-</dd>
-<dt class="field-even">Tipo de retorno</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)">str</a></p>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

@@ -38,7 +38,10 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
         self.valor = valor
 
     @property
-    def valor(self):
+    def valor(self) -> str:
+        """
+        O valor do campo. Recebe e retorna uma cadeia de caracteres.
+        """
         return self.__valor
 
     @valor.setter

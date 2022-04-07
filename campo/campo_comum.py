@@ -43,8 +43,8 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     @property
     def tipo(self):
         """
-        Nome do campo, sendo um valor puramente ornamental (i.e., não é usado
-        internamente com nenhum fim).
+        Nome do tipo do campo. É um valor puramente ornamental (i.e., não
+        é usado internamente com nenhum fim) e pode ser consultado externamente.
 
         :rtype: str
         """
@@ -54,7 +54,8 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     @abstractmethod
     def valor(self):
         """
-        Valor do campo, usando sua representação interna.
+        Valor do campo, usando sua representação interna. Recebe e retorna o
+        valor armazenado.
         """
         pass
 
@@ -167,9 +168,8 @@ class CampoBruto(DadoBruto, CampoBasico):
     @property
     def valor(self) -> str:
         """
-        O valor armazenado no campo (cadeia de caracteres).
+        O valor armazenado no campo. Recebe e retorna uma cadeia de caracteres.
 
-        :return: o valor do campo
         :rtype: str
         """
         return self.__valor

@@ -97,7 +97,11 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     @property
     def segundos(self) -> int:
         """
-        O valor em segundos desde a época. Recebe e retorna um valor inteiro.
+        O valor em segundos desde a época.
+
+        :Recebe: Recebe o tempo em segundos
+        :return: Retorna o tempo em segundos
+        :type: int
         """
         return self.__valor
 
