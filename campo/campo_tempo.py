@@ -3,9 +3,9 @@ Campos para armazenamento de valores temporais, provendo
 classes para uso de campos cujo conteúdo representa uma data, uma hora ou
 ambos. Internamente, o valor temporal é armazenado em um valor :class:`int`
 que contém o número de segundos desde 1/1/1970, 0h00min00s, momento conhecido
-como *a época*.
+como *época* Unix.
 
-O padrão pelo número de segundos deste a *época*
+
 
 Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
