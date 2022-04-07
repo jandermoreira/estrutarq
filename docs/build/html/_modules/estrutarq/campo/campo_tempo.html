@@ -75,12 +75,14 @@
 
 <span class="sd">    :param str tipo: o tipo do campo (passado por subclasses)</span>
 <span class="sd">    :param str formato: O formato de interpretação e geração textual</span>
-<span class="sd">        (são esperados, usualmente, ``formato_tempo``, ``formato_data``</span>
-<span class="sd">        ou ``formato_hora``)</span>
+<span class="sd">        (são esperados, ``formato_tempo``, ``formato_data`` ou ``formato_hora``)</span>
 <span class="sd">    :param bool apenas_data: se `True`, o tempo é tratado apenas como</span>
 <span class="sd">        data; se `False` a parte do horário é também considerada</span>
 <span class="sd">    :param str, opcional valor: o valor textual da data ou horário, de acordo</span>
 <span class="sd">        com o ``formato`` especificado</span>
+
+<span class="sd">    .. warning:: O uso de outros valores para o parâmetro ``formato`` não</span>
+<span class="sd">       estão suportados e as consequências são imprevisíveis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">formato_tempo</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
@@ -103,6 +105,12 @@
 <span class="sd">    (exemplo: ``00:00:00``).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">comprimento_hora</span> <span class="o">=</span> <span class="mi">8</span>
+
+    <span class="c1"># todo:: Calcular o comprimento da data de forma automática</span>
+    <span class="c1"># warning:: TESTE</span>
+    <span class="c1"># .. warning:: TESTE</span>
+    <span class="c1">#warning:: TESTE</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">formato</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">apenas_data</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                  <span class="n">valor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -170,7 +178,8 @@
 <span class="sd">    :attr:`~estrutarq.campo.campo_tempo.CampoTempoBasico.segundos`</span>
 <span class="sd">    para binário e vice-versa.</span>
 
-<span class="sd">    A representação é feita em um valor binário inteiro de 8 bytes.</span>
+<span class="sd">    A representação é feita em um valor binário inteiro de 8 bytes,</span>
+<span class="sd">    ordenação *big-endian* e com bit de sinal.</span>
 
 <span class="sd">    :param list args: lista de parâmetros posicionais para serem passados para</span>
 <span class="sd">        :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`</span>
@@ -185,24 +194,28 @@
 
 <div class="viewcode-block" id="CampoTempoBasicoBinario.bytes_para_valor"><a class="viewcode-back" href="../../../campo_tempo.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Conversão da representação binária (8 bytes, big-endian, com sinal)</span>
-<span class="sd">        para valor inteiro de segundos</span>
-<span class="sd">        :param dado: bytes da representação do inteiro em binário</span>
+<span class="sd">        Conversão da representação binária para valor interno do campo</span>
+<span class="sd">        de segundos.</span>
+
+<span class="sd">        :param bytes dado: bytes da representação do tempo em binário</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">segundos</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">dado</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CampoTempoBasicoBinario.valor_para_bytes"><a class="viewcode-back" href="../../../campo_tempo.html#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Conversão do valor do tempo em segundos para representação em</span>
-<span class="sd">        inteiro binário (8 bytes, big-endian, com sinal)</span>
-<span class="sd">        :return: a sequência de bytes</span>
+<span class="sd">        Conversão do valor do tempo interno em segundos para representação em</span>
+<span class="sd">        inteiro binário.</span>
+
+<span class="sd">        :return: a sequência de bytes do tempo em binário</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">segundos</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="CampoTempoBasicoFixo"><a class="viewcode-back" href="../../../campo_tempo.html#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBasicoFixo</span><span class="p">(</span><span class="n">CampoTempoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Implementação das conversões tempo-&gt; binário e binário-&gt;tempo</span>
+<span class="sd">    Classe para a representação do tempo (data e horário) como um campo</span>
+<span class="sd">    textual de comprimento fixo.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

@@ -36,12 +36,14 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
 
     :param str tipo: o tipo do campo (passado por subclasses)
     :param str formato: O formato de interpretação e geração textual
-        (são esperados, usualmente, ``formato_tempo``, ``formato_data``
-        ou ``formato_hora``)
+        (são esperados, ``formato_tempo``, ``formato_data`` ou ``formato_hora``)
     :param bool apenas_data: se `True`, o tempo é tratado apenas como
         data; se `False` a parte do horário é também considerada
     :param str, opcional valor: o valor textual da data ou horário, de acordo
         com o ``formato`` especificado
+
+    .. warning:: O uso de outros valores para o parâmetro ``formato`` não
+       estão suportados e as consequências são imprevisíveis.
     """
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"
@@ -64,6 +66,12 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     (exemplo: ``00:00:00``).
     """
     comprimento_hora = 8
+
+    # todo:: Calcular o comprimento da data de forma automática
+    # warning:: TESTE
+    # .. warning:: TESTE
+    #warning:: TESTE
+    a = 10
 
     def __init__(self, tipo: str, formato: str, apenas_data: bool,
                  valor: str = ""):
@@ -131,7 +139,8 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
     :attr:`~estrutarq.campo.campo_tempo.CampoTempoBasico.segundos`
     para binário e vice-versa.
 
-    A representação é feita em um valor binário inteiro de 8 bytes.
+    A representação é feita em um valor binário inteiro de 8 bytes,
+    ordenação *big-endian* e com bit de sinal.
 
     :param list args: lista de parâmetros posicionais para serem passados para
         :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
@@ -146,24 +155,28 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
 
     def bytes_para_valor(self, dado: bytes):
         """
-        Conversão da representação binária (8 bytes, big-endian, com sinal)
-        para valor inteiro de segundos
-        :param dado: bytes da representação do inteiro em binário
+        Conversão da representação binária para valor interno do campo
+        de segundos.
+
+        :param bytes dado: bytes da representação do tempo em binário
         """
         self.segundos = int.from_bytes(dado, "big", signed = True)
 
     def valor_para_bytes(self) -> bytes:
         """
-        Conversão do valor do tempo em segundos para representação em
-        inteiro binário (8 bytes, big-endian, com sinal)
-        :return: a sequência de bytes
+        Conversão do valor do tempo interno em segundos para representação em
+        inteiro binário.
+
+        :return: a sequência de bytes do tempo em binário
+        :rtype: bytes
         """
         return self.segundos.to_bytes(self._comprimento, "big", signed = True)
 
 
 class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
     """
-    Implementação das conversões tempo-> binário e binário->tempo
+    Classe para a representação do tempo (data e horário) como um campo
+    textual de comprimento fixo.
     """
 
     def __init__(self, *args, **kwargs):
