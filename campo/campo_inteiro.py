@@ -92,7 +92,7 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
     término dos dados.
 
     :param bytes, opcional terminador: um byte único com o valor do terminador
-        (padrão :attr:`estrutarq.campo.campo_comum.terminador_de_campo`)
+        (valor padrão :attr:`estrutarq.campo.campo_comum.terminador_de_campo`)
     :param dict, opcional kwargs: lista de parâmetros opcionais passados para
         :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`
     """
