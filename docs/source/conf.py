@@ -37,7 +37,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
     'sphinxcontrib.restbuilder',
-    'myst_parser',
+    'sphinx_markdown_builder',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -53,7 +53,9 @@ language = 'pt_BR'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['__pycache__']
+exclude_patterns = [
+    'build/*'
+]
 
 
 # -- Options for HTML output -------------------------------------------------
