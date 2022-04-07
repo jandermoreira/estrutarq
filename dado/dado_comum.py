@@ -8,9 +8,9 @@ representações diversas:
     * Em formato binário
     * De comprimento fixo predefinido
 
-Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
-
-Jander Moreira, 2022
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2022
 """
 
 from re import sub as regex_sub
