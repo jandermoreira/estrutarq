@@ -62,27 +62,44 @@ comprimento fixo, como <code class="docutils literal notranslate"><span class="p
 ou <code class="docutils literal notranslate"><span class="pre">1500-04-22</span> <span class="pre">08:22:31</span></code> para um momento genérico no tempo.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">formato</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">apenas_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico" title="Link permanente para esta definição">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">formato</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">apenas_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
 <p>Classe básica para campo de tempo (data + horário), armazenado
 internamente como o número de segundos desde 1/1/1970, 0h00min00s.</p>
 <p>Quando apenas a data é armazenada, o horário é ajustado para
 12h00min00s, para tentar evitar problemas com fuso horário.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – o tipo do campo (passado por subclasses)</p></li>
+<li><p><strong>formato</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – O formato de interpretação e geração textual
+(são esperados, usualmente, <code class="docutils literal notranslate"><span class="pre">formato_tempo</span></code>, <code class="docutils literal notranslate"><span class="pre">formato_data</span></code>
+ou <code class="docutils literal notranslate"><span class="pre">formato_hora</span></code>)</p></li>
+<li><p><strong>apenas_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><em>bool</em></a>) – se <cite>True</cite>, o tempo é tratado apenas como
+data; se <cite>False</cite> a parte do horário é também considerada</p></li>
+<li><p><strong>valor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><em>opcional</em>) – o valor textual da data ou horário, de acordo
+com o <code class="docutils literal notranslate"><span class="pre">formato</span></code> especificado</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.formato_tempo">
 <span class="sig-name descname"><span class="pre">formato_tempo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%Y-%m-%d</span> <span class="pre">%H:%M:%S'</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.formato_tempo" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Formato de tempo genérico em modo textual, com comprimento de 19 bytes
+(exemplo: <code class="docutils literal notranslate"><span class="pre">1500-04-22</span> <span class="pre">00:00:00</span></code>).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_tempo">
 <span class="sig-name descname"><span class="pre">comprimento_tempo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_tempo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Formato de tempo genérico em modo textual, com comprimento de 19 bytes</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.formato_data">
 <span class="sig-name descname"><span class="pre">formato_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%Y-%m-%d'</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.formato_data" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Formato de data em modo textual, com comprimento de 10 bytes
+(exemplo: <code class="docutils literal notranslate"><span class="pre">1500-04-22</span></code>).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_data">
@@ -92,7 +109,9 @@ internamente como o número de segundos desde 1/1/1970, 0h00min00s.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.formato_hora">
 <span class="sig-name descname"><span class="pre">formato_hora</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%H:%M:%S'</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.formato_hora" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Formato de horário em modo textual, com comprimento de 8 bytes
+(exemplo: <code class="docutils literal notranslate"><span class="pre">00:00:00</span></code>).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_hora">
@@ -102,13 +121,16 @@ internamente como o número de segundos desde 1/1/1970, 0h00min00s.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.valor">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.valor" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Valor do campo, usando sua representação interna.</p>
+<dd><p>Interface no modo textual, usando o formato do tempo especificado,
+para <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.segundos" title="estrutarq.campo.campo_tempo.CampoTempoBasico.segundos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">segundos</span></code></a>.
+Recebe e retorna o tempo formatado.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.segundos">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">segundos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.segundos" title="Link permanente para esta definição">¶</a></dt>
-<dd></dd></dl>
+<dd><p>O valor em segundos desde a época. Recebe e retorna um valor inteiro.</p>
+</dd></dl>
 
 </dd></dl>
 

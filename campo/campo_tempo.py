@@ -45,38 +45,40 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     """
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"
-    comprimento_tempo = 19
     """
     Formato de tempo genérico em modo textual, com comprimento de 19 bytes
     (exemplo: ``1500-04-22 00:00:00``).
     """
+    comprimento_tempo = 19
 
     formato_data = "%Y-%m-%d"
-    comprimento_data = 10
     """
     Formato de data em modo textual, com comprimento de 10 bytes
     (exemplo: ``1500-04-22``).
     """
+    comprimento_data = 10
 
     formato_hora = "%H:%M:%S"
-    comprimento_hora = 8
     """
     Formato de horário em modo textual, com comprimento de 8 bytes
     (exemplo: ``00:00:00``).
     """
+    comprimento_hora = 8
 
     def __init__(self, tipo: str, formato: str, apenas_data: bool,
                  valor: str = ""):
         CampoBasico.__init__(self, tipo)
         self.__formato_tempo = formato
         self.__apenas_data = apenas_data
-        if valor == "":
-            self.segundos = 0
-        else:
-            self.valor = valor
+        self.valor = valor
 
     @property
     def valor(self) -> str:
+        """
+        Interface no modo textual, usando o formato do tempo especificado,
+        para :attr:`~.estrutarq.campo.campo_tempo.CampoTempoBasico.segundos`.
+        Recebe e retorna o tempo formatado.
+        """
         return strftime(self.__formato_tempo, localtime(self.segundos))
 
     @valor.setter
@@ -84,14 +86,19 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         if not isinstance(valor, str):
             raise TypeError("O tempo deve ser uma cadeia de caracteres no" +
                             f" formato {self.__formato_tempo}.")
-        if self.__apenas_data:
-            self.segundos = int(
-                mktime(strptime(valor + " 12:00:00", self.formato_tempo)))
+        elif valor == "":
+            self.segundos = 0
+        elif self.__apenas_data:
+            self.segundos = int(mktime(strptime(valor + " 12:00:00",
+                                                self.formato_tempo)))
         else:
             self.segundos = int(mktime(strptime(valor, self.__formato_tempo)))
 
     @property
     def segundos(self) -> int:
+        """
+        O valor em segundos desde a época. Recebe e retorna um valor inteiro.
+        """
         return self.__valor
 
     @segundos.setter
