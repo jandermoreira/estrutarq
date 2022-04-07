@@ -1,1 +1,0 @@
-# Pacote estrutarq.utilitarios

@@ -1,10 +1,8 @@
 """
-Campos para armazenamento de cadeias de caracteres.
-
-Este arquivo provê classes para uso de campos cujo conteúdo é
-uma cadeia de caracteres. Internamente, o tipo :class:`str` é usado
-para armazenamento e a transformação para sequência de bytes
-usa a codificação UTF-8.
+Campos para armazenamento de cadeias de caracteres, provendo classes
+para uso de campos cujo conteúdo é uma cadeia de caracteres.
+Internamente, o tipo :class:`str` é usado para armazenamento e a
+transformação para sequência de bytes usa a codificação UTF-8.
 
 Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
@@ -16,7 +14,7 @@ são derivados campos:
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
-    Jander Moreira, 2021-2022
+    Jander Moreira, 2021, 2022
 """
 
 from abc import ABCMeta

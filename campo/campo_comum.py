@@ -1,17 +1,16 @@
 """
-Implementação de campos.
-
-Este arquivo provê a classe básica para definição de campos.
+Implementação de campos, provendo a classe básica para definição de campos.
 
 Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais.
-Dela são derivados os demais campos. A classe
-:class:`~.estrutarq.campo.campo_comum.CampoBruto` define um
-campo sem organização que utiliza :class:`str` (UTF-8) como valor.
+Dela são derivados os demais campos.
+A classe :class:`~.estrutarq.campo.campo_comum.CampoBruto`, também
+disponibilizada, define um campo sem organização que utiliza
+:class:`str` (UTF-8) como valor.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
-    Jander Moreira, 2021-2022
+    Jander Moreira, 2021, 2022
 """
 
 from abc import ABCMeta, abstractmethod
@@ -37,6 +36,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
     """
 
     def __init__(self, tipo: str):
+        DadoBasico.__init__(self)
         self.__tipo = tipo
         self._comprimento_fixo = False
 

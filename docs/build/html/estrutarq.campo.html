@@ -50,13 +50,13 @@
 <p>Implementação de organizações de campos.</p>
 <section id="module-estrutarq.campo.campo_comum">
 <span id="organizacao-basica"></span><h2>Organização básica<a class="headerlink" href="#module-estrutarq.campo.campo_comum" title="Link permanente para este título">¶</a></h2>
-<p>Implementação de campos.</p>
-<p>Este arquivo provê a classe básica para definição de campos.</p>
+<p>Implementação de campos, provendo a classe básica para definição de campos.</p>
 <p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBasico</span></code></a>
 define uma classe abstrata (ABC) com as propriedades e métodos gerais.
-Dela são derivados os demais campos. A classe
-<a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a> define um
-campo sem organização que utiliza <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> (UTF-8) como valor.</p>
+Dela são derivados os demais campos.
+A classe <a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a>, também
+disponibilizada, define um campo sem organização que utiliza
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> (UTF-8) como valor.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.terminador_de_campo">
 <span class="sig-name descname"><span class="pre">terminador_de_campo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x00'</span></em><a class="headerlink" href="#estrutarq.campo.campo_comum.terminador_de_campo" title="Link permanente para esta definição">¶</a></dt>
@@ -255,11 +255,10 @@ sequência de bytes, usando codificação UTF-8.</p>
 </section>
 <section id="module-estrutarq.campo.campo_cadeia">
 <span id="cadeias-de-caracteres"></span><h2>Cadeias de caracteres<a class="headerlink" href="#module-estrutarq.campo.campo_cadeia" title="Link permanente para este título">¶</a></h2>
-<p>Campos para armazenamento de cadeias de caracteres.</p>
-<p>Este arquivo provê classes para uso de campos cujo conteúdo é
-uma cadeia de caracteres. Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> é usado
-para armazenamento e a transformação para sequência de bytes
-usa a codificação UTF-8.</p>
+<p>Campos para armazenamento de cadeias de caracteres, provendo classes
+para uso de campos cujo conteúdo é uma cadeia de caracteres.
+Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> é usado para armazenamento e a
+transformação para sequência de bytes usa a codificação UTF-8.</p>
 <p>Uma classe básica <code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code>
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
 são derivados campos:</p>
@@ -379,11 +378,10 @@ padrão de <a class="reference internal" href="estrutarq.dado.html#estrutarq.dad
 </section>
 <section id="module-estrutarq.campo.campo_inteiro">
 <span id="valores-inteiros"></span><h2>Valores inteiros<a class="headerlink" href="#module-estrutarq.campo.campo_inteiro" title="Link permanente para este título">¶</a></h2>
-<p>Campos para armazenamento de valores inteiros.</p>
-<p>Este arquivo provê classes para uso de campos cujo conteúdo é
-um valor inteiro com sinal. Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> é usado
-para armazenamento e a transformação para sequência de bytes podem ser
-textuais ou binária.</p>
+<p>Campos para armazenamento de valores inteiros, provendo classes para
+uso de campos cujo conteúdo é um valor inteiro com sinal. Internamente,
+o tipo <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> é usado para armazenamento e a transformação para
+sequência de bytes podem ser textuais ou binária.</p>
 <p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="estrutarq.campo.campo_inteiro.CampoIntBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoIntBasico</span></code></a>
 define uma classe abstrata (ABC) com as propriedades e métodos gerais.
 Dela são derivados campos:</p>
@@ -399,7 +397,13 @@ Dela são derivados campos:</p>
 <dt class="sig sig-object py" id="estrutarq.campo.campo_inteiro.CampoIntBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoIntBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_inteiro.html#CampoIntBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_inteiro.CampoIntBasico" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
-<p>Classe básica para campo inteiro.</p>
+<p>Classe básica para campo inteiro. O armazenamento interno usa o tipo
+<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>. A conversão para sequência de bytes assume, por padrão,
+a representação textual do valor inteiro (i.e., conversão para
+sequência de dígitos); outras representações devem sobrescrever os
+métodos de conversão
+<a class="reference internal" href="#estrutarq.campo.CampoBasico.bytes_para_valor" title="estrutarq.campo.CampoBasico.bytes_para_valor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes_para_valor()</span></code></a> e
+<a class="reference internal" href="#estrutarq.campo.CampoBasico.valor_para_bytes" title="estrutarq.campo.CampoBasico.valor_para_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">valor_para_bytes()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
