@@ -28,25 +28,47 @@ from .campo_comum import CampoBasico
 
 class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     """
-        Classe básica para campo de tempo (data + horário), armazenado
-        internamente como o número de segundos desde 1/1/1970, 0h00min00s.
+    Classe básica para campo de tempo (data + horário), armazenado
+    internamente como o número de segundos desde 1/1/1970, 0h00min00s.
 
-        Quando apenas a data é armazenada, o horário é ajustado para
-        12h00min00s, para tentar evitar problemas com fuso horário.
+    Quando apenas a data é armazenada, o horário é ajustado para
+    12h00min00s, para tentar evitar problemas com fuso horário.
+
+    :param str tipo: o tipo do campo (passado por subclasses)
+    :param str formato: O formato de interpretação e geração textual
+        (são esperados, usualmente, ``formato_tempo``, ``formato_data``
+        ou ``formato_hora``)
+    :param bool apenas_data: se `True`, o tempo é tratado apenas como
+        data; se `False` a parte do horário é também considerada
+    :param str, opcional valor: o valor textual da data ou horário, de acordo
+        com o ``formato`` especificado
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :attr:`~.estrutarq.campo.campo_comum.CampoBasico`
     """
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"
     comprimento_tempo = 19
     """
     Formato de tempo genérico em modo textual, com comprimento de 19 bytes
+    (exemplo: ``1500-04-22 00:00:00``).
     """
+
     formato_data = "%Y-%m-%d"
-    comprimento_data = 10  # 1500-04-22
+    comprimento_data = 10
+    """
+    Formato de data em modo textual, com comprimento de 10 bytes
+    (exemplo: ``1500-04-22``).
+    """
+
     formato_hora = "%H:%M:%S"
-    comprimento_hora = 8  # 00:00:00
+    comprimento_hora = 8
+    """
+    Formato de horário em modo textual, com comprimento de 8 bytes
+    (exemplo: ``00:00:00``).
+    """
 
     def __init__(self, tipo: str, formato: str, apenas_data: bool,
-                 valor: str = "", **kwargs):
+                 valor: str = ""):
         CampoBasico.__init__(self, tipo)
         self.__formato_tempo = formato
         self.__apenas_data = apenas_data
