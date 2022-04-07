@@ -77,7 +77,10 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         """
         Interface no modo textual, usando o formato do tempo especificado,
         para :attr:`~.estrutarq.campo.campo_tempo.CampoTempoBasico.segundos`.
-        Recebe e retorna o tempo formatado.
+
+        :Recebe: Recebe o tempo em uma cadeia formatada
+        :return: Retorna o tempo em uma cadeia formatada
+        :type: str
         """
         return strftime(self.__formato_tempo, localtime(self.segundos))
 
@@ -123,7 +126,17 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
 
 class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
     """
-    Implementação das conversões tempo → binário e binário->tempo
+    Classe extensão de :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
+    para incluir as rotinas de conversão de
+    :attr:`~estrutarq.campo.campo_tempo.CampoTempoBasico.segundos`
+    para binário e vice-versa.
+
+    A representação é feita em um valor binário inteiro de 8 bytes.
+
+    :param list args: lista de parâmetros posicionais para serem passados para
+        :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasico`
     """
 
     _comprimento = 8  # 8 bytes

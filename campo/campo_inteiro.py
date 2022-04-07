@@ -46,7 +46,11 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
     @property
     def valor(self) -> int:
         """
-        Valor inteiro armazenado no campo. Recebe e retorna um valor inteiro.
+        Valor inteiro armazenado no campo.
+
+        :Recebe: Recebe um valor para ser armazenado
+        :return: Retorna o valor atual do campo
+        :type: int
         """
         return self.__valor
 

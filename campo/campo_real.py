@@ -49,8 +49,11 @@ class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
     @property
     def valor(self) -> float:
         """
-        Valor numérico real armazenado no campo. Recebe e retorna um valor
-        em ponto flutuante.
+        Valor numérico real armazenado no campo.
+
+        :Recebe: Recebe um valor para ser armazenado
+        :return: Retorna o valor atual do campo
+        :type: float
         """
         return self.__valor
 

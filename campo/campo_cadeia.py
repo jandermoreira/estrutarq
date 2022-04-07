@@ -41,6 +41,10 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
     def valor(self) -> str:
         """
         O valor do campo. Recebe e retorna uma cadeia de caracteres.
+
+        :Recebe: Recebe um valor para ser armazenado
+        :return: Retorna o valor atual do campo
+        :type: str
         """
         return self.__valor
 
@@ -55,8 +59,7 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
         """Armazenamento da sequência de bytes de ``dado`` como valor
         do campo.
         
-        :param dado: sequência de bytes com codificação UTF-8
-        :type dado: bytes
+        :param bytes dado: sequência de bytes com codificação UTF-8
         """
         self.valor = dado.decode("utf-8")
 
