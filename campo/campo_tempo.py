@@ -43,9 +43,6 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         data; se `False` a parte do horário é também considerada
     :param str, opcional valor: o valor textual da data ou horário, de acordo
         com o ``formato`` especificado
-
-    .. warning:: O uso de outros valores para o parâmetro ``formato`` não
-       estão suportados e as consequências são imprevisíveis.
     """
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"

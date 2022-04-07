@@ -6,5 +6,6 @@ Implementação de organizações de registros.
     Jander Moreira, 2021-2022
 """
 
-from .registro_comum import RegistroBasico, RegistroBruto, RegistroFixo, \
-    RegistroPrefixado, RegistroTerminador
+from .registro_comum import preenchimento_de_registro, RegistroBasico, \
+    RegistroBruto, RegistroFixo, RegistroPrefixado, RegistroTerminador, \
+    terminador_de_registro

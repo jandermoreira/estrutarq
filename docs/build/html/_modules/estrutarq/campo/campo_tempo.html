@@ -82,35 +82,25 @@
 <span class="sd">        data; se `False` a parte do horário é também considerada</span>
 <span class="sd">    :param str, opcional valor: o valor textual da data ou horário, de acordo</span>
 <span class="sd">        com o ``formato`` especificado</span>
-
-<span class="sd">    .. warning:: O uso de outros valores para o parâmetro ``formato`` não</span>
-<span class="sd">       estão suportados e as consequências são imprevisíveis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">formato_tempo</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Formato de tempo genérico em modo textual, com comprimento de 19 bytes</span>
-<span class="sd">    (exemplo: ``1500-04-22 00:00:00``).</span>
+<span class="sd">    Formato de tempo genérico em modo textual (exemplo:</span>
+<span class="sd">    ``1500-04-22 00:00:00``).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">comprimento_tempo</span> <span class="o">=</span> <span class="mi">19</span>
 
     <span class="n">formato_data</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Formato de data em modo textual, com comprimento de 10 bytes</span>
-<span class="sd">    (exemplo: ``1500-04-22``).</span>
+<span class="sd">    Formato de data em modo textual (exemplo: ``1500-04-22``).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">comprimento_data</span> <span class="o">=</span> <span class="mi">10</span>
 
     <span class="n">formato_hora</span> <span class="o">=</span> <span class="s2">&quot;%H:%M:%S&quot;</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Formato de horário em modo textual, com comprimento de 8 bytes</span>
-<span class="sd">    (exemplo: ``00:00:00``).</span>
+<span class="sd">    Formato de horário em modo textual (exemplo: ``00:00:00``).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">comprimento_hora</span> <span class="o">=</span> <span class="mi">8</span>
 
     <span class="n">__valor</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="c1"># todo:: Calcular o comprimento da data de forma automática</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">formato</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">apenas_data</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                  <span class="n">valor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -277,7 +267,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoTempoBasicoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;data fixo&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">formato_data</span><span class="p">,</span>
                                       <span class="n">apenas_data</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comprimento_data</span><span class="p">)</span></div>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="CampoHoraBinario"><a class="viewcode-back" href="../../../campo_tempo.html#estrutarq.campo.campo_tempo.CampoHoraBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoHoraBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
@@ -307,12 +297,12 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoTempoBasicoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;hora fixo&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">formato_hora</span><span class="p">,</span>
                                       <span class="n">apenas_data</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comprimento_hora</span><span class="p">)</span></div>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="CampoTempoBinario"><a class="viewcode-back" href="../../../campo_tempo.html#estrutarq.campo.campo_tempo.CampoTempoBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoTempoBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoTempoBasicoBinario</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para tempo (data + horário) valor em binário.</span>
+<span class="sd">    Classe para tempo (data + horário) em binário.</span>
 
 <span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
 <span class="sd">        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoBinario`</span>
@@ -331,13 +321,13 @@
 <span class="sd">    :attr:`~.estrutarq.campo.campo_tempo.CampoTempoBasico.formato_tempo`.</span>
 
 <span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
-<span class="sd">        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoBinario`</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoFixo`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoTempoBasicoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;tempo fixo&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">formato_tempo</span><span class="p">,</span>
                                       <span class="n">apenas_data</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comprimento_tempo</span><span class="p">)</span></div>
+        <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">))</span></div>
 </pre></div>
 
             <div class="clearer"></div>

@@ -1,5 +1,18 @@
 """
-Registros
+Registros como coleção de campos.
+
+Uma classe básica :class:`~.estrutarq.registro.registro_comum.RegistroBasico`
+define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
+são derivados registros:
+
+* Brutos (i.e., sem organização para o registro)
+* Com terminador
+* Prefixado pelo comprimento
+* De comprimento fixo predefinido
+
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2021, 2022
 """
 
 from abc import ABCMeta
@@ -195,16 +208,6 @@ class RegistroBruto(DadoBruto, RegistroBasico):
     # code::end
 
 
-class RegistroPrefixado(DadoPrefixado, RegistroBasico):
-    """
-    Classe para registros prefixados pelo comprimento
-    """
-
-    def __init__(self, *lista_campos):
-        RegistroBasico.__init__(self, "prefixado", *lista_campos)
-        DadoPrefixado.__init__(self)
-
-
 class RegistroTerminador(DadoTerminador, RegistroBasico):
     """
     Classe para registros com terminador
@@ -213,6 +216,16 @@ class RegistroTerminador(DadoTerminador, RegistroBasico):
     def __init__(self, *lista_campos):
         RegistroBasico.__init__(self, "terminador", *lista_campos)
         DadoTerminador.__init__(self, terminador_de_registro)
+
+
+class RegistroPrefixado(DadoPrefixado, RegistroBasico):
+    """
+    Classe para registros prefixados pelo comprimento
+    """
+
+    def __init__(self, *lista_campos):
+        RegistroBasico.__init__(self, "prefixado", *lista_campos)
+        DadoPrefixado.__init__(self)
 
 
 class RegistroFixo(DadoFixo, RegistroBasico):
