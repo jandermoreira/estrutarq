@@ -5,15 +5,14 @@ ambos. Internamente, o valor temporal é armazenado em um valor :class:`int`
 que contém o número de segundos desde 1/1/1970, 0h00min00s, momento conhecido
 como *época* Unix.
 
+Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoTempoBasico`
+define uma classe abstrata (ABC) com as propriedades e métodos gerais e
+aplicáveis tanto a datas, horários ou ambos.
 
-
-Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`
-define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
-são derivados campos:
-
-* Com terminador
-* Prefixado pelo comprimento
-* De comprimento fixo predefinido
+Para o armazenamento são considerados os formatos binário (usando o número de
+segundos) ou textual. Para textos são usadas bytes com caracteres de
+comprimento fixo, como ``1500-04-22`` para datas, ``08:22:31`` para horários
+ou ``1500-04-22 08:22:31`` para um momento genérico no tempo.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
@@ -33,11 +32,14 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         internamente como o número de segundos desde 1/1/1970, 0h00min00s.
 
         Quando apenas a data é armazenada, o horário é ajustado para
-        12h00min00s, para evitar problemas com fuso horário.
+        12h00min00s, para tentar evitar problemas com fuso horário.
     """
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"
-    comprimento_tempo = 19  # 1500-04-22 00:00:00
+    comprimento_tempo = 19
+    """
+    Formato de tempo genérico em modo textual, com comprimento de 19 bytes
+    """
     formato_data = "%Y-%m-%d"
     comprimento_data = 10  # 1500-04-22
     formato_hora = "%H:%M:%S"

@@ -42,17 +42,16 @@
 <span class="sd">classes para uso de campos cujo conteúdo representa uma data, uma hora ou</span>
 <span class="sd">ambos. Internamente, o valor temporal é armazenado em um valor :class:`int`</span>
 <span class="sd">que contém o número de segundos desde 1/1/1970, 0h00min00s, momento conhecido</span>
-<span class="sd">como *a época*.</span>
+<span class="sd">como *época* Unix.</span>
 
-<span class="sd">O padrão pelo número de segundos deste a *época*</span>
+<span class="sd">Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoTempoBasico`</span>
+<span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais e</span>
+<span class="sd">aplicáveis tanto a datas, horários ou ambos.</span>
 
-<span class="sd">Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`</span>
-<span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela</span>
-<span class="sd">são derivados campos:</span>
-
-<span class="sd">* Com terminador</span>
-<span class="sd">* Prefixado pelo comprimento</span>
-<span class="sd">* De comprimento fixo predefinido</span>
+<span class="sd">Para o armazenamento são considerados os formatos binário (usando o número de</span>
+<span class="sd">segundos) ou textual. Para textos são usadas bytes com caracteres de</span>
+<span class="sd">comprimento fixo, como ``1500-04-22`` para datas, ``08:22:31`` para horários</span>
+<span class="sd">ou ``1500-04-22 08:22:31`` para um momento genérico no tempo.</span>
 
 <span class="sd">..</span>
 <span class="sd">    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</span>
@@ -72,11 +71,14 @@
 <span class="sd">        internamente como o número de segundos desde 1/1/1970, 0h00min00s.</span>
 
 <span class="sd">        Quando apenas a data é armazenada, o horário é ajustado para</span>
-<span class="sd">        12h00min00s, para evitar problemas com fuso horário.</span>
+<span class="sd">        12h00min00s, para tentar evitar problemas com fuso horário.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">formato_tempo</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
-    <span class="n">comprimento_tempo</span> <span class="o">=</span> <span class="mi">19</span>  <span class="c1"># 1500-04-22 00:00:00</span>
+    <span class="n">comprimento_tempo</span> <span class="o">=</span> <span class="mi">19</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formato de tempo genérico em modo textual, com comprimento de 19 bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">formato_data</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span>
     <span class="n">comprimento_data</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># 1500-04-22</span>
     <span class="n">formato_hora</span> <span class="o">=</span> <span class="s2">&quot;%H:%M:%S&quot;</span>
