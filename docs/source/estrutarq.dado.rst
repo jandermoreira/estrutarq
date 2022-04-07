@@ -35,3 +35,6 @@ Dado binário
 Dado de comprimento fixo
 ++++++++++++++++++++++++
 .. autoclass:: estrutarq.dado.DadoFixo
+   :members:
+   :undoc-members:
+   :show-inheritance:

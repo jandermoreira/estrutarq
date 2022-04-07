@@ -48,38 +48,25 @@
   <section id="module-estrutarq.campo">
 <span id="pacote-estrutarq-campo"></span><h1>Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code><a class="headerlink" href="#module-estrutarq.campo" title="Link permanente para este título">¶</a></h1>
 <p>Implementação de organizações de campos.</p>
-<section id="modulo-campo-comum">
-<h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_comum</span></code><a class="headerlink" href="#modulo-campo-comum" title="Link permanente para este título">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum</span></code></p>
-<span class="target" id="module-estrutarq.campo.campo_comum"></span><p>Implementação de campos.</p>
+<section id="module-estrutarq.campo.campo_comum">
+<span id="organizacao-basica"></span><h2>Organização básica<a class="headerlink" href="#module-estrutarq.campo.campo_comum" title="Link permanente para este título">¶</a></h2>
+<p>Implementação de campos.</p>
 <p>Este arquivo provê a classe básica para definição de campos.</p>
 <p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBasico</span></code></a>
 define uma classe abstrata (ABC) com as propriedades e métodos gerais.
 Dela são derivados os demais campos. A classe
 <a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a> define um
 campo sem organização que utiliza <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> (UTF-8) como valor.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_comum.terminador_de_campo">
+<span class="sig-name descname"><span class="pre">terminador_de_campo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x00'</span></em><a class="headerlink" href="#estrutarq.campo.campo_comum.terminador_de_campo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>O terminador de campo é um byte único usado como delimitador para o
+fim do campo. O valor padrão é <code class="docutils literal notranslate"><span class="pre">0x00</span></code>.</p>
+</dd></dl>
+
 <section id="campo-basico">
 <h3>Campo básico<a class="headerlink" href="#campo-basico" title="Link permanente para este título">¶</a></h3>
 <p>Todas as demais classes do módulo são derivadas de uma classe básica.</p>
-<dl class="py data">
-<dt class="sig sig-object py" id="estrutarq.campo.terminador_de_campo">
-<span class="sig-name descname"><span class="pre">terminador_de_campo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x00'</span></em><a class="headerlink" href="#estrutarq.campo.terminador_de_campo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>bytes(iterable_of_ints) -&gt; bytes
-bytes(string, encoding[, errors]) -&gt; bytes
-bytes(bytes_or_buffer) -&gt; immutable copy of bytes_or_buffer
-bytes(int) -&gt; bytes object of size given by the parameter initialized with null bytes
-bytes() -&gt; empty bytes object</p>
-<dl class="simple">
-<dt>Construct an immutable array of bytes from:</dt><dd><ul class="simple">
-<li><p>an iterable yielding integers in range(256)</p></li>
-<li><p>a text string encoded using the specified encoding</p></li>
-<li><p>any object implementing the buffer API.</p></li>
-<li><p>an integer</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBasico" title="Link permanente para esta definição">¶</a></dt>
@@ -266,10 +253,9 @@ sequência de bytes, usando codificação UTF-8.</p>
 
 </section>
 </section>
-<section id="modulo-campo-cadeia">
-<h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_cadeia</span></code><a class="headerlink" href="#modulo-campo-cadeia" title="Link permanente para este título">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia</span></code></p>
-<span class="target" id="module-estrutarq.campo.campo_cadeia"></span><p>Campos para armazenamento de cadeias de caracteres.</p>
+<section id="module-estrutarq.campo.campo_cadeia">
+<span id="cadeias-de-caracteres"></span><h2>Cadeias de caracteres<a class="headerlink" href="#module-estrutarq.campo.campo_cadeia" title="Link permanente para este título">¶</a></h2>
+<p>Campos para armazenamento de cadeias de caracteres.</p>
 <p>Este arquivo provê classes para uso de campos cujo conteúdo é
 uma cadeia de caracteres. Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> é usado
 para armazenamento e a transformação para sequência de bytes
@@ -341,7 +327,7 @@ de bytes usando codificação UTF-8.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaTerminador" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="estrutarq.dado.html#estrutarq.dado.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
 <p>Classe para cadeia de caracteres com terminador. O terminador de campo é
-definido por <a class="reference internal" href="#estrutarq.campo.terminador_de_campo" title="estrutarq.campo.terminador_de_campo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">estrutarq.campo.terminador_de_campo</span></code></a>.</p>
+definido por <code class="xref py py-attr docutils literal notranslate"><span class="pre">estrutarq.campo.terminador_de_campo</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>, </em><em>opcional</em>) – lista de parâmetros opcionais passados para
@@ -391,10 +377,9 @@ padrão de <a class="reference internal" href="estrutarq.dado.html#estrutarq.dad
 
 </section>
 </section>
-<section id="modulo-campo-inteiro">
-<h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_inteiro</span></code><a class="headerlink" href="#modulo-campo-inteiro" title="Link permanente para este título">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_inteiro</span></code></p>
-<span class="target" id="module-estrutarq.campo.campo_inteiro"></span><p>Campos para armazenamento de valores inteiros.</p>
+<section id="module-estrutarq.campo.campo_inteiro">
+<span id="valores-inteiros"></span><h2>Valores inteiros<a class="headerlink" href="#module-estrutarq.campo.campo_inteiro" title="Link permanente para este título">¶</a></h2>
+<p>Campos para armazenamento de valores inteiros.</p>
 <p>Este arquivo provê classes para uso de campos cujo conteúdo é
 um valor inteiro com sinal. Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> é usado
 para armazenamento e a transformação para sequência de bytes podem ser
@@ -512,10 +497,9 @@ representação binária big-endian com sinal
 
 </section>
 </section>
-<section id="modulo-campo-real">
-<h2>Módulo <code class="docutils literal notranslate"><span class="pre">campo_real</span></code><a class="headerlink" href="#modulo-campo-real" title="Link permanente para este título">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">estrutarq.campo.campo_real</span></code></p>
-<span class="target" id="module-estrutarq.campo.campo_real"></span><section id="campo-real-basico">
+<section id="module-estrutarq.campo.campo_real">
+<span id="valores-reais"></span><h2>Valores reais<a class="headerlink" href="#module-estrutarq.campo.campo_real" title="Link permanente para este título">¶</a></h2>
+<section id="campo-real-basico">
 <h3>Campo real básico<a class="headerlink" href="#campo-real-basico" title="Link permanente para este título">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBasico">
@@ -615,19 +599,19 @@ IEEE 754 de precisão dupla
     <h3><a href="index.html">Tabela de Conteúdo</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a><ul>
-<li><a class="reference internal" href="#modulo-campo-comum">Módulo <code class="docutils literal notranslate"><span class="pre">campo_comum</span></code></a><ul>
+<li><a class="reference internal" href="#module-estrutarq.campo.campo_comum">Organização básica</a><ul>
 <li><a class="reference internal" href="#campo-basico">Campo básico</a></li>
 <li><a class="reference internal" href="#campo-bruto">Campo bruto</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#modulo-campo-cadeia">Módulo <code class="docutils literal notranslate"><span class="pre">campo_cadeia</span></code></a><ul>
+<li><a class="reference internal" href="#module-estrutarq.campo.campo_cadeia">Cadeias de caracteres</a><ul>
 <li><a class="reference internal" href="#campo-cadeia-basico">Campo cadeia básico</a></li>
 <li><a class="reference internal" href="#campo-cadeia-com-terminador">Campo cadeia com terminador</a></li>
 <li><a class="reference internal" href="#campo-cadeia-prefixado-pelo-comprimento">Campo cadeia prefixado pelo comprimento</a></li>
 <li><a class="reference internal" href="#campo-cadeia-de-comprimento-fixo">Campo cadeia de comprimento fixo</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#modulo-campo-inteiro">Módulo <code class="docutils literal notranslate"><span class="pre">campo_inteiro</span></code></a><ul>
+<li><a class="reference internal" href="#module-estrutarq.campo.campo_inteiro">Valores inteiros</a><ul>
 <li><a class="reference internal" href="#campo-inteiro-basico">Campo inteiro básico</a></li>
 <li><a class="reference internal" href="#campo-inteiro-com-terminador">Campo inteiro com terminador</a></li>
 <li><a class="reference internal" href="#campo-inteiro-prefixado-pelo-comprimento">Campo inteiro prefixado pelo comprimento</a></li>
@@ -635,7 +619,7 @@ IEEE 754 de precisão dupla
 <li><a class="reference internal" href="#campo-inteiro-de-comprimento-fixo">Campo inteiro de comprimento fixo</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#modulo-campo-real">Módulo <code class="docutils literal notranslate"><span class="pre">campo_real</span></code></a><ul>
+<li><a class="reference internal" href="#module-estrutarq.campo.campo_real">Valores reais</a><ul>
 <li><a class="reference internal" href="#campo-real-basico">Campo real básico</a></li>
 <li><a class="reference internal" href="#campo-real-com-terminador">Campo real com terminador</a></li>
 <li><a class="reference internal" href="#campo-real-prefixado-pelo-comprimento">Campo real prefixado pelo comprimento</a></li>

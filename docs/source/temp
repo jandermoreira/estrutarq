@@ -4,18 +4,18 @@ Pacote ``estrutarq.campo``
 .. automodule:: estrutarq.campo
 
 
-Organização básica
-------------------
+Módulo ``campo_comum``
+-------------------------------
+``estrutarq.campo.campo_comum``
 
 .. automodule:: estrutarq.campo.campo_comum
-
-.. autodata:: estrutarq.campo.campo_comum.terminador_de_campo
-
 
 Campo básico
 ++++++++++++
 
 Todas as demais classes do módulo são derivadas de uma classe básica.
+
+.. autodata:: estrutarq.campo.terminador_de_campo
 
 .. autoclass:: estrutarq.campo.CampoBasico
    :members:
@@ -28,8 +28,9 @@ Campo bruto
    :members:
 
 
-Cadeias de caracteres
----------------------
+Módulo ``campo_cadeia``
+-----------------------
+``estrutarq.campo.campo_cadeia``
 
 .. automodule:: estrutarq.campo.campo_cadeia
 
@@ -56,8 +57,9 @@ Campo cadeia de comprimento fixo
 
 
 
-Valores inteiros
-----------------
+Módulo ``campo_inteiro``
+------------------------
+``estrutarq.campo.campo_inteiro``
 
 .. automodule:: estrutarq.campo.campo_inteiro
 
@@ -87,8 +89,9 @@ Campo inteiro de comprimento fixo
    :members:
 
 
-Valores reais
--------------
+Módulo ``campo_real``
+------------------------
+``estrutarq.campo.campo_real``
 
 .. automodule:: estrutarq.campo.campo_real
 
