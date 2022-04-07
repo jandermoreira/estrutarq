@@ -38,7 +38,11 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinxcontrib.restbuilder',
     'sphinx_markdown_builder',
+    'recommonmark',
 ]
+
+source_suffix = ['.rst']
+master_doc = 'home'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
