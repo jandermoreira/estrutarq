@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Cadeias de caracteres &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <title>Campos com cadeias de caracteres &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <script src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="campo_inteiro.html" />
+    <link rel="next" title="Campos com valores inteiros" href="campo_inteiro.html" />
     <link rel="prev" title="Pacote estrutarq.campo" href="campo.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -29,7 +29,7 @@
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="campo_inteiro.html" title="&lt;no title&gt;"
+          <a href="campo_inteiro.html" title="Campos com valores inteiros"
              accesskey="N">próximo</a> |</li>
         <li class="right" >
           <a href="campo.html" title="Pacote estrutarq.campo"
@@ -37,7 +37,7 @@
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="campo.html" accesskey="U">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Cadeias de caracteres</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Campos com cadeias de caracteres</a></li> 
       </ul>
     </div>  
 
@@ -47,7 +47,7 @@
           <div class="body" role="main">
             
   <section id="module-estrutarq.campo.campo_cadeia">
-<span id="cadeias-de-caracteres"></span><h1>Cadeias de caracteres<a class="headerlink" href="#module-estrutarq.campo.campo_cadeia" title="Link permanente para este título">¶</a></h1>
+<span id="campos-com-cadeias-de-caracteres"></span><h1>Campos com cadeias de caracteres<a class="headerlink" href="#module-estrutarq.campo.campo_cadeia" title="Link permanente para este título">¶</a></h1>
 <p>Campos para armazenamento de cadeias de caracteres, provendo classes
 para uso de campos cujo conteúdo é uma cadeia de caracteres.
 Internamente, o tipo <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> é usado para armazenamento e a
@@ -60,11 +60,9 @@ são derivados campos:</p>
 <li><p>Prefixado pelo comprimento</p></li>
 <li><p>De comprimento fixo predefinido</p></li>
 </ul>
-<section id="campo-cadeia-basico">
-<h2>Campo cadeia básico<a class="headerlink" href="#campo-cadeia-basico" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaBasico">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaBasico" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
 <p>Classe básica para cadeias de caracteres.</p>
 <dl class="field-list simple">
@@ -77,14 +75,14 @@ são derivados campos:</p>
 </dd>
 </dl>
 <dl class="py property">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaBasico.valor">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.CampoCadeiaBasico.valor" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Valor do campo, usando sua representação interna.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaBasico.bytes_para_valor">
-<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaBasico.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Armazenamento da sequência de bytes de <code class="docutils literal notranslate"><span class="pre">dado</span></code> como valor
 do campo.</p>
 <dl class="field-list simple">
@@ -95,8 +93,8 @@ do campo.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaBasico.valor_para_bytes">
-<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaBasico.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaBasico.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Retorno do valor do campo convertido para sequência
 de bytes usando codificação UTF-8.</p>
 <dl class="field-list simple">
@@ -111,13 +109,10 @@ de bytes usando codificação UTF-8.</p>
 
 </dd></dl>
 
-</section>
-<section id="campo-cadeia-com-terminador">
-<h2>Campo cadeia com terminador<a class="headerlink" href="#campo-cadeia-com-terminador" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaTerminador">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaTerminador" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaTerminador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaTerminador" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
 <p>Classe para cadeia de caracteres com terminador. O terminador de campo é
 definido por <code class="xref py py-attr docutils literal notranslate"><span class="pre">estrutarq.campo.terminador_de_campo</span></code>.</p>
 <dl class="field-list simple">
@@ -128,31 +123,25 @@ definido por <code class="xref py py-attr docutils literal notranslate"><span cl
 </dl>
 </dd></dl>
 
-</section>
-<section id="campo-cadeia-prefixado-pelo-comprimento">
-<h2>Campo cadeia prefixado pelo comprimento<a class="headerlink" href="#campo-cadeia-prefixado-pelo-comprimento" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaPrefixado">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaPrefixado" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.dado_comum.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoPrefixado</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaPrefixado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaPrefixado" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.dado_comum.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoPrefixado</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
 <p>Classe para cadeia de caracteres prefixada pelo comprimento. O prefixo é
 o adotado em
 <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoPrefixado</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>, </em><em>opcional</em>) – lista de parâmetros opcionais passados para
-<a class="reference internal" href="#estrutarq.campo.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code></a></p>
+<a class="reference internal" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="campo-cadeia-de-comprimento-fixo">
-<h2>Campo cadeia de comprimento fixo<a class="headerlink" href="#campo-cadeia-de-comprimento-fixo" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoCadeiaFixo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoCadeiaFixo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_cadeia.CampoCadeiaFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoCadeiaFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_cadeia.html#CampoCadeiaFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_cadeia.CampoCadeiaFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_cadeia.CampoCadeiaBasico</span></code></a></p>
 <p>Classe para cadeia de caracteres com comprimento fixo, com enchimento de
 bytes e preenchimento de bytes inválidos. O byte de prenchimento é o
 padrão de <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoFixo</span></code></a>.</p>
@@ -161,13 +150,12 @@ padrão de <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>comprimento</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a>) – o comprimento do campo em bytes</p></li>
 <li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(em Python v3.10)"><em>dict</em></a><em>, </em><em>opcional</em>) – lista de parâmetros opcionais passados para
-<a class="reference internal" href="#estrutarq.campo.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code></a></p></li>
+<a class="reference internal" href="#estrutarq.campo.campo_cadeia.CampoCadeiaBasico" title="estrutarq.campo.campo_cadeia.CampoCadeiaBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
 </section>
 
 
@@ -178,19 +166,6 @@ padrão de <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
-    <h3><a href="index.html">Tabela de Conteúdo</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Cadeias de caracteres</a><ul>
-<li><a class="reference internal" href="#campo-cadeia-basico">Campo cadeia básico</a></li>
-<li><a class="reference internal" href="#campo-cadeia-com-terminador">Campo cadeia com terminador</a></li>
-<li><a class="reference internal" href="#campo-cadeia-prefixado-pelo-comprimento">Campo cadeia prefixado pelo comprimento</a></li>
-<li><a class="reference internal" href="#campo-cadeia-de-comprimento-fixo">Campo cadeia de comprimento fixo</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div>
     <h4>Tópico anterior</h4>
     <p class="topless"><a href="campo.html"
                           title="capítulo anterior">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a></p>
@@ -198,7 +173,7 @@ padrão de <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo
   <div>
     <h4>Próximo tópico</h4>
     <p class="topless"><a href="campo_inteiro.html"
-                          title="próximo capítulo">&lt;no title&gt;</a></p>
+                          title="próximo capítulo">Campos com valores inteiros</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>Essa Página</h3>
@@ -231,7 +206,7 @@ padrão de <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="campo_inteiro.html" title="&lt;no title&gt;"
+          <a href="campo_inteiro.html" title="Campos com valores inteiros"
              >próximo</a> |</li>
         <li class="right" >
           <a href="campo.html" title="Pacote estrutarq.campo"
@@ -239,7 +214,7 @@ padrão de <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="campo.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Cadeias de caracteres</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Campos com cadeias de caracteres</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

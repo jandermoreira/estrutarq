@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>tempo &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <title>Campos com valores temporais &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
     <link rel="next" title="Pacote estrutarq.registro" href="registro.html" />
-    <link rel="prev" title="real" href="campo_real.html" /> 
+    <link rel="prev" title="Campo com valores reais" href="campo_real.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegação</h3>
@@ -32,12 +32,12 @@
           <a href="registro.html" title="Pacote estrutarq.registro"
              accesskey="N">próximo</a> |</li>
         <li class="right" >
-          <a href="campo_real.html" title="real"
+          <a href="campo_real.html" title="Campo com valores reais"
              accesskey="P">anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="campo.html" accesskey="U">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">tempo</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Campos com valores temporais</a></li> 
       </ul>
     </div>  
 
@@ -46,8 +46,170 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="tempo">
-<h1>tempo<a class="headerlink" href="#tempo" title="Link permanente para este título">¶</a></h1>
+  <section id="module-estrutarq.campo.campo_tempo">
+<span id="campos-com-valores-temporais"></span><h1>Campos com valores temporais<a class="headerlink" href="#module-estrutarq.campo.campo_tempo" title="Link permanente para este título">¶</a></h1>
+<p>Campos para armazenamento de valores temporais, provendo
+classes para uso de campos cujo conteúdo representa uma data, uma hora ou
+ambos. Internamente, o valor temporal é armazenado em um valor <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>
+que contém o número de segundos desde 1/1/1970, 0h00min00s, momento conhecido
+como <em>a época</em>.</p>
+<p>O padrão pelo número de segundos deste a <em>época</em></p>
+<p>Uma classe básica <code class="xref py py-class docutils literal notranslate"><span class="pre">CampoCadeiaBasico</span></code>
+define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
+são derivados campos:</p>
+<ul class="simple">
+<li><p>Com terminador</p></li>
+<li><p>Prefixado pelo comprimento</p></li>
+<li><p>De comprimento fixo predefinido</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">formato</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">apenas_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
+<p>Classe básica para campo de tempo (data + horário), armazenado
+internamente como o número de segundos desde 1/1/1970, 0h00min00s.</p>
+<p>Quando apenas a data é armazenada, o horário é ajustado para
+12h00min00s, para evitar problemas com fuso horário.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.formato_tempo">
+<span class="sig-name descname"><span class="pre">formato_tempo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%Y-%m-%d</span> <span class="pre">%H:%M:%S'</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.formato_tempo" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_tempo">
+<span class="sig-name descname"><span class="pre">comprimento_tempo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_tempo" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.formato_data">
+<span class="sig-name descname"><span class="pre">formato_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%Y-%m-%d'</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.formato_data" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_data">
+<span class="sig-name descname"><span class="pre">comprimento_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_data" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.formato_hora">
+<span class="sig-name descname"><span class="pre">formato_hora</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%H:%M:%S'</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.formato_hora" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_hora">
+<span class="sig-name descname"><span class="pre">comprimento_hora</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.comprimento_hora" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.valor">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Valor do campo, usando sua representação interna.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasico.segundos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">segundos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasico.segundos" title="Link permanente para esta definição">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasicoBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoBasicoBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasicoBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasico" title="estrutarq.campo.campo_tempo.CampoTempoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasico</span></code></a></p>
+<p>Implementação das conversões tempo → binário e binário-&gt;tempo</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasicoBinario.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão da representação binária (8 bytes, big-endian, com sinal)
+para valor inteiro de segundos
+:param dado: bytes da representação do inteiro em binário</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasicoBinario.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão do valor do tempo em segundos para representação em
+inteiro binário (8 bytes, big-endian, com sinal)
+:return: a sequência de bytes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasicoFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoBasicoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasicoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasico" title="estrutarq.campo.campo_tempo.CampoTempoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasico</span></code></a></p>
+<p>Implementação das conversões tempo-&gt; binário e binário-&gt;tempo</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasicoFixo.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão da representação binária (8 bytes, big-endian, com sinal)
+para valor inteiro de segundos
+:param dado: bytes da representação do inteiro em binário</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBasicoFixo.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Conversão do valor do tempo em segundos para representação em
+inteiro binário (8 bytes, big-endian, com sinal)
+:return: a sequência de bytes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoDataBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoDataBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoDataBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoDataBinario" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBinario" title="estrutarq.dado.dado_comum.DadoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBinario</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario" title="estrutarq.campo.campo_tempo.CampoTempoBasicoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasicoBinario</span></code></a></p>
+<p>Classe para armazenamento de data (dia, mês e ano) para armazenamento
+em formato binário.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoDataFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoDataFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoDataFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoDataFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo" title="estrutarq.campo.campo_tempo.CampoTempoBasicoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasicoFixo</span></code></a></p>
+<p>Classe para data, em número de segundos desde 1/1/1970,
+0h00min00s usando armazenamento em cadeia de caracteres no formato
+‘formato_data’.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoHoraBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoHoraBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoHoraBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoHoraBinario" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBinario" title="estrutarq.dado.dado_comum.DadoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBinario</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario" title="estrutarq.campo.campo_tempo.CampoTempoBasicoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasicoBinario</span></code></a></p>
+<p>Classe para horário usando armazenamento em valor inteiro em binário,
+com sinal, big-endian.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoHoraFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoHoraFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoHoraFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoHoraFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo" title="estrutarq.campo.campo_tempo.CampoTempoBasicoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasicoFixo</span></code></a></p>
+<p>Classe horário usando armazenamento em cadeia de caracteres no formato
+‘formato_hora’.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoBinario" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBinario" title="estrutarq.dado.dado_comum.DadoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBinario</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoBinario" title="estrutarq.campo.campo_tempo.CampoTempoBasicoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasicoBinario</span></code></a></p>
+<p>Classe para tempo (data + horário), em número de segundos desde 1/1/1970,
+0h00min00s usando armazenamento em valor inteiro em binário, com sinal,
+big-endian.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="estrutarq.campo.campo_tempo.CampoTempoFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoTempoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_tempo.html#CampoTempoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_tempo.CampoTempoFixo" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_tempo.CampoTempoBasicoFixo" title="estrutarq.campo.campo_tempo.CampoTempoBasicoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_tempo.CampoTempoBasicoFixo</span></code></a></p>
+<p>Classe para tempo (data + horário), em número de segundos desde 1/1/1970,
+0h00min00s usando armazenamento em cadeia de caracteres no formato
+‘formato_tempo’.</p>
+</dd></dl>
+
 </section>
 
 
@@ -60,7 +222,7 @@
   <div>
     <h4>Tópico anterior</h4>
     <p class="topless"><a href="campo_real.html"
-                          title="capítulo anterior">real</a></p>
+                          title="capítulo anterior">Campo com valores reais</a></p>
   </div>
   <div>
     <h4>Próximo tópico</h4>
@@ -101,12 +263,12 @@
           <a href="registro.html" title="Pacote estrutarq.registro"
              >próximo</a> |</li>
         <li class="right" >
-          <a href="campo_real.html" title="real"
+          <a href="campo_real.html" title="Campo com valores reais"
              >anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="campo.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">tempo</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Campos com valores temporais</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

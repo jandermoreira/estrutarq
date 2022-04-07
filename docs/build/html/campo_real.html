@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Valores reais &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <title>Campo com valores reais &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script src="_static/translations.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Buscar" href="search.html" />
-    <link rel="next" title="tempo" href="campo_tempo.html" />
-    <link rel="prev" title="Valores inteiros" href="campo_inteiro.html" /> 
+    <link rel="next" title="Campos com valores temporais" href="campo_tempo.html" />
+    <link rel="prev" title="Campos com valores inteiros" href="campo_inteiro.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegação</h3>
@@ -29,15 +29,15 @@
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="campo_tempo.html" title="tempo"
+          <a href="campo_tempo.html" title="Campos com valores temporais"
              accesskey="N">próximo</a> |</li>
         <li class="right" >
-          <a href="campo_inteiro.html" title="Valores inteiros"
+          <a href="campo_inteiro.html" title="Campos com valores inteiros"
              accesskey="P">anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="campo.html" accesskey="U">Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Valores reais</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Campo com valores reais</a></li> 
       </ul>
     </div>  
 
@@ -47,7 +47,7 @@
           <div class="body" role="main">
             
   <section id="module-estrutarq.campo.campo_real">
-<span id="valores-reais"></span><h1>Valores reais<a class="headerlink" href="#module-estrutarq.campo.campo_real" title="Link permanente para este título">¶</a></h1>
+<span id="campo-com-valores-reais"></span><h1>Campo com valores reais<a class="headerlink" href="#module-estrutarq.campo.campo_real" title="Link permanente para este título">¶</a></h1>
 <p>Campos para armazenamento de valores reais, provendo classes para
 uso de campos cujo conteúdo é um valor em ponto flutuante. Internamente,
 o tipo <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> é usado para armazenamento e a transformação para
@@ -61,8 +61,6 @@ Dela são derivados campos:</p>
 <li><p>Binário</p></li>
 <li><p>De comprimento fixo predefinido</p></li>
 </ul>
-<section id="campo-real-basico">
-<h2>Campo real básico<a class="headerlink" href="#campo-real-basico" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(em Python v3.10)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealBasico" title="Link permanente para esta definição">¶</a></dt>
@@ -117,12 +115,9 @@ Python.</p>
 
 </dd></dl>
 
-</section>
-<section id="campo-real-com-terminador">
-<h2>Campo real com terminador<a class="headerlink" href="#campo-real-com-terminador" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoRealTerminador">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\x00'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoRealTerminador" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealTerminador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\x00'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealTerminador" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoTerminador" title="estrutarq.dado.dado_comum.DadoTerminador"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoTerminador</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_real.CampoRealBasico" title="estrutarq.campo.campo_real.CampoRealBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_real.CampoRealBasico</span></code></a></p>
 <p>Classe para campo real com representação textual com um byte terminador
 que indica o fim da sequência.</p>
@@ -138,12 +133,9 @@ que indica o fim da sequência.</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="campo-real-prefixado-pelo-comprimento">
-<h2>Campo real prefixado pelo comprimento<a class="headerlink" href="#campo-real-prefixado-pelo-comprimento" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoRealPrefixado">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoRealPrefixado" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealPrefixado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealPrefixado" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.dado_comum.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoPrefixado</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_real.CampoRealBasico" title="estrutarq.campo.campo_real.CampoRealBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_real.CampoRealBasico</span></code></a></p>
 <p>Classe para campo real com representação textual com prefixo de comprimento,
 conforme definido em <a class="reference internal" href="dado.html#estrutarq.dado.DadoPrefixado" title="estrutarq.dado.DadoPrefixado"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.DadoPrefixado</span></code></a>.</p>
@@ -155,12 +147,9 @@ conforme definido em <a class="reference internal" href="dado.html#estrutarq.dad
 </dl>
 </dd></dl>
 
-</section>
-<section id="campo-real-binario">
-<h2>Campo real binário<a class="headerlink" href="#campo-real-binario" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoRealBinario">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoRealBinario" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBinario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealBinario" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBinario" title="estrutarq.dado.dado_comum.DadoBinario"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBinario</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_real.CampoRealBasico" title="estrutarq.campo.campo_real.CampoRealBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_real.CampoRealBasico</span></code></a></p>
 <p>Classe para real em formato binário. A conversão para sequência de bytes
 é feita segundo padrão IEEE 754 de precisão dupla.</p>
@@ -171,8 +160,8 @@ conforme definido em <a class="reference internal" href="dado.html#estrutarq.dad
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoRealBinario.bytes_para_valor">
-<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBinario.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoRealBinario.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBinario.bytes_para_valor">
+<span class="sig-name descname"><span class="pre">bytes_para_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBinario.bytes_para_valor"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealBinario.bytes_para_valor" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Conversão de sequência de bytes com representação IEEE 754 de
 precisão dupla para real, com armazenamento do valor convertido como
 valor do campo.</p>
@@ -184,8 +173,8 @@ valor do campo.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoRealBinario.valor_para_bytes">
-<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBinario.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoRealBinario.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealBinario.valor_para_bytes">
+<span class="sig-name descname"><span class="pre">valor_para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealBinario.valor_para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealBinario.valor_para_bytes" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Conversão do valor do campo para sequência de bytes no padrão
 IEEE 754 de precisão dupla.</p>
 <dl class="field-list simple">
@@ -200,12 +189,9 @@ IEEE 754 de precisão dupla.</p>
 
 </dd></dl>
 
-</section>
-<section id="campo-real-de-comprimento-fixo">
-<h2>Campo real de comprimento fixo<a class="headerlink" href="#campo-real-de-comprimento-fixo" title="Link permanente para este título">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="estrutarq.campo.CampoRealFixo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoRealFixo" title="Link permanente para esta definição">¶</a></dt>
+<dt class="sig sig-object py" id="estrutarq.campo.campo_real.CampoRealFixo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoRealFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_real.html#CampoRealFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.campo_real.CampoRealFixo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoFixo" title="estrutarq.dado.dado_comum.DadoFixo"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoFixo</span></code></a>, <a class="reference internal" href="#estrutarq.campo.campo_real.CampoRealBasico" title="estrutarq.campo.campo_real.CampoRealBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_real.CampoRealBasico</span></code></a></p>
 <p>Classe para campo real com representação textual com comprimento fixo
 predefinido. Os bytes que não correspondem aos dados são preenchidos
@@ -222,7 +208,6 @@ conforme definido em <a class="reference internal" href="dado.html#estrutarq.dad
 </dd></dl>
 
 </section>
-</section>
 
 
             <div class="clearer"></div>
@@ -232,28 +217,14 @@ conforme definido em <a class="reference internal" href="dado.html#estrutarq.dad
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
-    <h3><a href="index.html">Tabela de Conteúdo</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Valores reais</a><ul>
-<li><a class="reference internal" href="#campo-real-basico">Campo real básico</a></li>
-<li><a class="reference internal" href="#campo-real-com-terminador">Campo real com terminador</a></li>
-<li><a class="reference internal" href="#campo-real-prefixado-pelo-comprimento">Campo real prefixado pelo comprimento</a></li>
-<li><a class="reference internal" href="#campo-real-binario">Campo real binário</a></li>
-<li><a class="reference internal" href="#campo-real-de-comprimento-fixo">Campo real de comprimento fixo</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div>
     <h4>Tópico anterior</h4>
     <p class="topless"><a href="campo_inteiro.html"
-                          title="capítulo anterior">Valores inteiros</a></p>
+                          title="capítulo anterior">Campos com valores inteiros</a></p>
   </div>
   <div>
     <h4>Próximo tópico</h4>
     <p class="topless"><a href="campo_tempo.html"
-                          title="próximo capítulo">tempo</a></p>
+                          title="próximo capítulo">Campos com valores temporais</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>Essa Página</h3>
@@ -286,15 +257,15 @@ conforme definido em <a class="reference internal" href="dado.html#estrutarq.dad
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="campo_tempo.html" title="tempo"
+          <a href="campo_tempo.html" title="Campos com valores temporais"
              >próximo</a> |</li>
         <li class="right" >
-          <a href="campo_inteiro.html" title="Valores inteiros"
+          <a href="campo_inteiro.html" title="Campos com valores inteiros"
              >anterior</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="estrutarq.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq</span></code></a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="campo.html" >Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code></a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Valores reais</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Campo com valores reais</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
