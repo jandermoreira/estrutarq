@@ -28,11 +28,13 @@ from .campo_comum import CampoBasico
 
 class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     """
-    Classe básica para campo de tempo (data + horário), armazenado
-    internamente como o número de segundos desde 1/1/1970, 0h00min00s.
+    Classe básica para campo de tempo (data + horário, somente data e
+    somente horário), armazenado internamente como o número de segundos
+    desde 1/1/1970, 0h00min00s.
 
     Quando apenas a data é armazenada, o horário é ajustado para
-    12h00min00s, para tentar evitar problemas com fuso horário.
+    12h00min00s, para tentar evitar incompatibilidade do horário interno
+    frente ao fuso horário.
 
     :param str tipo: o tipo do campo (passado por subclasses)
     :param str formato: O formato de interpretação e geração textual
@@ -68,16 +70,13 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     comprimento_hora = 8
 
     # todo:: Calcular o comprimento da data de forma automática
-    # warning:: TESTE
-    # .. warning:: TESTE
-    #warning:: TESTE
-    a = 10
 
     def __init__(self, tipo: str, formato: str, apenas_data: bool,
                  valor: str = ""):
         CampoBasico.__init__(self, tipo)
         self.__formato_tempo = formato
         self.__apenas_data = apenas_data
+        self.__valor = None  # para ser reescrito pela propriedade valor
         self.valor = valor
 
     @property
@@ -142,7 +141,7 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
     A representação é feita em um valor binário inteiro de 8 bytes,
     ordenação *big-endian* e com bit de sinal.
 
-    :param list args: lista de parâmetros posicionais para serem passados para
+    :param list* args: lista de parâmetros posicionais para serem passados para
         :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
     :param dict, opcional kwargs: lista de parâmetros opcionais passados para
         :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasico`
@@ -175,8 +174,14 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
 
 class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
     """
-    Classe para a representação do tempo (data e horário) como um campo
-    textual de comprimento fixo.
+    Classe extensão de :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
+    para suporte às conversões de representação interna para valor textual e
+    vice-versa.
+
+    :param list* args: lista de parâmetros posicionais para serem passados para
+        :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasico`
     """
 
     def __init__(self, *args, **kwargs):
@@ -184,17 +189,20 @@ class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
 
     def bytes_para_valor(self, dado: bytes):
         """
-        Conversão da representação binária (8 bytes, big-endian, com sinal)
-        para valor inteiro de segundos
-        :param dado: bytes da representação do inteiro em binário
+        Conversão da sequência de bytes com a representação textual para o valor
+        interno de segundos.
+
+        :param bytes dado: bytes da representação do tempo em cadeia formatada
         """
         self.valor = dado.decode("utf-8")
 
     def valor_para_bytes(self) -> bytes:
         """
-        Conversão do valor do tempo em segundos para representação em
-        inteiro binário (8 bytes, big-endian, com sinal)
-        :return: a sequência de bytes
+        Conversão do valor do tempo interno de segundos para representação em
+        sequência de bytes com caracteres no formato especificado.
+
+        :return: a sequência de bytes do tempo formatado
+        :rtype: bytes
         """
         return bytes(self.valor, "utf-8")
 
@@ -203,8 +211,7 @@ class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
 
 class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
     """
-    Classe para armazenamento de data (dia, mês e ano) para armazenamento
-    em formato binário.
+    Classe para armazenamento de data (dia, mês e ano) em formato binário.
     """
 
     def __init__(self, **kwargs):
