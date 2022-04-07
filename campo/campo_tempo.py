@@ -42,8 +42,6 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         data; se `False` a parte do horário é também considerada
     :param str, opcional valor: o valor textual da data ou horário, de acordo
         com o ``formato`` especificado
-    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
-        :attr:`~.estrutarq.campo.campo_comum.CampoBasico`
     """
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"
@@ -84,7 +82,8 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
     @valor.setter
     def valor(self, valor: str):
         if not isinstance(valor, str):
-            raise TypeError("O tempo deve ser uma cadeia de caracteres.")
+            raise TypeError("O tempo deve ser uma cadeia de caracteres no" +
+                            f" formato {self.__formato_tempo}.")
         if self.__apenas_data:
             self.segundos = int(
                 mktime(strptime(valor + " 12:00:00", self.formato_tempo)))
