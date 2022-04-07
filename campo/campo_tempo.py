@@ -50,33 +50,27 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
 
     formato_tempo = "%Y-%m-%d %H:%M:%S"
     """
-    Formato de tempo genérico em modo textual, com comprimento de 19 bytes
-    (exemplo: ``1500-04-22 00:00:00``).
+    Formato de tempo genérico em modo textual (exemplo:
+    ``1500-04-22 00:00:00``).
     """
-    comprimento_tempo = 19
 
     formato_data = "%Y-%m-%d"
     """
-    Formato de data em modo textual, com comprimento de 10 bytes
-    (exemplo: ``1500-04-22``).
+    Formato de data em modo textual (exemplo: ``1500-04-22``).
     """
-    comprimento_data = 10
 
     formato_hora = "%H:%M:%S"
     """
-    Formato de horário em modo textual, com comprimento de 8 bytes
-    (exemplo: ``00:00:00``).
+    Formato de horário em modo textual (exemplo: ``00:00:00``).
     """
-    comprimento_hora = 8
 
-    # todo:: Calcular o comprimento da data de forma automática
+    __valor = None
 
     def __init__(self, tipo: str, formato: str, apenas_data: bool,
                  valor: str = ""):
         CampoBasico.__init__(self, tipo)
         self.__formato_tempo = formato
         self.__apenas_data = apenas_data
-        self.__valor = None  # para ser reescrito pela propriedade valor
         self.valor = valor
 
     @property
@@ -212,32 +206,40 @@ class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
 class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
     """
     Classe para armazenamento de data (dia, mês e ano) em formato binário.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoBinario`
     """
 
     def __init__(self, **kwargs):
         CampoTempoBasicoBinario.__init__(self, "data binário",
-                                         self.formato_data, apenas_data = True,
+                                         self.formato_data,
+                                         apenas_data = True,
                                          **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
 
 class CampoDataFixo(DadoFixo, CampoTempoBasicoFixo):
     """
-    Classe para data, em número de segundos desde 1/1/1970,
-    0h00min00s usando armazenamento em cadeia de caracteres no formato
-    'formato_data'.
+    Classe para data com armazenamento em cadeia de caracteres no formato
+    :attr:`~.estrutarq.campo.campo_tempo.CampoTempoBasico.formato_data`.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoFixo`
     """
 
     def __init__(self, **kwargs):
         CampoTempoBasicoFixo.__init__(self, "data fixo", self.formato_data,
                                       apenas_data = True, **kwargs)
-        DadoFixo.__init__(self, self.comprimento_data)
+        DadoFixo.__init__(self, len(self.valor))
 
 
 class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
     """
-    Classe para horário usando armazenamento em valor inteiro em binário,
-    com sinal, big-endian.
+    Classe para horário usando armazenamento em formato binário.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoBinario`
     """
 
     def __init__(self, **kwargs):
@@ -249,21 +251,25 @@ class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
 
 class CampoHoraFixo(DadoFixo, CampoTempoBasicoFixo):
     """
-    Classe horário usando armazenamento em cadeia de caracteres no formato
-    'formato_hora'.
+    Classe para horário com armazenamento em cadeia de caracteres no formato
+    :attr:`~.estrutarq.campo.campo_tempo.CampoTempoBasico.formato_hora`.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoFixo`
     """
 
     def __init__(self, **kwargs):
         CampoTempoBasicoFixo.__init__(self, "hora fixo", self.formato_hora,
                                       apenas_data = False, **kwargs)
-        DadoFixo.__init__(self, self.comprimento_hora)
+        DadoFixo.__init__(self, len(self.valor))
 
 
 class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
     """
-    Classe para tempo (data + horário), em número de segundos desde 1/1/1970,
-    0h00min00s usando armazenamento em valor inteiro em binário, com sinal,
-    big-endian.
+    Classe para tempo (data + horário) em binário.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoBinario`
     """
 
     def __init__(self, **kwargs):
@@ -275,12 +281,14 @@ class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
 
 class CampoTempoFixo(DadoFixo, CampoTempoBasicoFixo):
     """
-    Classe para tempo (data + horário), em número de segundos desde 1/1/1970,
-    0h00min00s usando armazenamento em cadeia de caracteres no formato
-    'formato_tempo'.
+    Classe para horário com armazenamento em cadeia de caracteres no formato
+    :attr:`~.estrutarq.campo.campo_tempo.CampoTempoBasico.formato_tempo`.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_tempo.CampoTempoBasicoFixo`
     """
 
     def __init__(self, **kwargs):
         CampoTempoBasicoFixo.__init__(self, "tempo fixo", self.formato_tempo,
                                       apenas_data = False, **kwargs)
-        DadoFixo.__init__(self, self.comprimento_tempo)
+        DadoFixo.__init__(self, len(self.valor))
