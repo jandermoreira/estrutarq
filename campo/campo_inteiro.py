@@ -88,12 +88,13 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
 
 class CampoIntTerminador(DadoTerminador, CampoIntBasico):
     """
-    Classe para campo inteiro textual com terminador.
+    Classe para campo inteiro textual com uso de terminador para indicar o
+    término dos dados.
 
     :param bytes, opcional terminador: um byte único com o valor do terminador
         (padrão :attr:`estrutarq.campo.campo_comum.terminador_de_campo`)
     :param dict, opcional kwargs: lista de parâmetros opcionais passados para
-        :attr:`~.estrutarq.campo.campo_cadeia.CampoIntBasico`
+        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`
     """
 
     def __init__(self, terminador: bytes = terminador_de_campo, **kwargs):
@@ -102,7 +103,13 @@ class CampoIntTerminador(DadoTerminador, CampoIntBasico):
 
 
 class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
-    """Classe para inteiro textual com prefixo de comprimento_bloco"""
+    """
+    Classe para inteiro textual com prefixo de comprimento, conforme definido
+    em :class:`estrutarq.dado.DadoPrefixado`.
+
+    :param dict, opcional: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`
+    """
 
     def __init__(self, **kwargs):
         CampoIntBasico.__init__(self, "int prefixado", **kwargs)
@@ -110,11 +117,17 @@ class CampoIntPrefixado(DadoPrefixado, CampoIntBasico):
 
 class CampoIntBinario(DadoBinario, CampoIntBasico):
     """
-    Classe para inteiro em formato binário (big endian) com 8 bytes
-    e complemento para 2 para valores negativos
+    Classe para inteiro em formato binário (com sinal, *big endian*) com
+    8 bytes de comprimento.
+
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`
     """
 
-    numero_bytes = 8  # 8 bytes
+    numero_bytes = 8
+    """
+    Comprimento do valor binário em bytes. O padrão são 8 bytes.
+    """
 
     def __init__(self, **kwargs):
         CampoIntBasico.__init__(self, "inteiro binário", **kwargs)
@@ -125,19 +138,23 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
     def bytes_para_valor(self, dado: bytes):
         """
         Conversão de uma sequência de bytes (binária big-endian com sinal)
-        para inteiro
-        :param dado: sequência de bytes
+        para inteiro com armazenamento interno do valor convertido.
+
+        :param bytes dado: sequência de bytes
+        :raise TypeError: se o comprimento não for o especificado em
+            :attr:`~.estrutarq.campo.CampoIntBinario.numero_bytes`
         """
         if len(dado) != self.numero_bytes:
-            raise TypeError(
-                "Sequência de bytes com comprimento_bloco inesperado.")
+            raise TypeError("Sequência de bytes com comprimento inesperado.")
         self.valor = int.from_bytes(dado, "big", signed = True)
 
     def valor_para_bytes(self) -> bytes:
         """
-        Conversão do valor inteiro para sequência de bytes usando
-        representação binária big-endian com sinal
+        Conversão do valor inteiro interno para sequência de bytes usando
+        representação binária *big-endian* com sinal.
+
         :return: sequência de bytes
+        :rtype: bytes
         """
         return self.valor.to_bytes(self.numero_bytes, "big", signed = True)
 
@@ -145,10 +162,15 @@ class CampoIntBinario(DadoBinario, CampoIntBasico):
 
 
 class CampoIntFixo(DadoFixo, CampoIntBasico):
-    """Classe para inteiro textual com tamanho fixo"""
+    """
+    Classe para inteiro textual com comprimento fixo predefinido.
+
+    :param int comprimento: o comprimento em bytes fixado para o campo
+    :param dict, opcional kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`
+    """
 
     def __init__(self, comprimento: int, **kwargs):
-        """Construtor"""
         CampoIntBasico.__init__(self, "int fixo", **kwargs)
         DadoFixo.__init__(self, comprimento)
         self._comprimento_fixo = True

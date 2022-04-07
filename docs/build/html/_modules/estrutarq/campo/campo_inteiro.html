@@ -127,12 +127,13 @@
 
 <div class="viewcode-block" id="CampoIntTerminador"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntTerminador">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para campo inteiro textual com terminador.</span>
+<span class="sd">    Classe para campo inteiro textual com uso de terminador para indicar o</span>
+<span class="sd">    término dos dados.</span>
 
 <span class="sd">    :param bytes, opcional terminador: um byte único com o valor do terminador</span>
 <span class="sd">        (padrão :attr:`estrutarq.campo.campo_comum.terminador_de_campo`)</span>
 <span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
-<span class="sd">        :attr:`~.estrutarq.campo.campo_cadeia.CampoIntBasico`</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">terminador_de_campo</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -141,7 +142,13 @@
 
 
 <div class="viewcode-block" id="CampoIntPrefixado"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe para inteiro textual com prefixo de comprimento_bloco&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para inteiro textual com prefixo de comprimento, conforme definido</span>
+<span class="sd">    em :class:`estrutarq.dado.DadoPrefixado`.</span>
+
+<span class="sd">    :param dict, opcional: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoIntBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;int prefixado&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
@@ -149,11 +156,17 @@
 
 <div class="viewcode-block" id="CampoIntBinario"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBinario">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntBinario</span><span class="p">(</span><span class="n">DadoBinario</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe para inteiro em formato binário (big endian) com 8 bytes</span>
-<span class="sd">    e complemento para 2 para valores negativos</span>
+<span class="sd">    Classe para inteiro em formato binário (com sinal, *big endian*) com</span>
+<span class="sd">    8 bytes de comprimento.</span>
+
+<span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">numero_bytes</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># 8 bytes</span>
+    <span class="n">numero_bytes</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Comprimento do valor binário em bytes. O padrão são 8 bytes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">CampoIntBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;inteiro binário&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -164,19 +177,23 @@
 <div class="viewcode-block" id="CampoIntBinario.bytes_para_valor"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBinario.bytes_para_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conversão de uma sequência de bytes (binária big-endian com sinal)</span>
-<span class="sd">        para inteiro</span>
-<span class="sd">        :param dado: sequência de bytes</span>
+<span class="sd">        para inteiro com armazenamento interno do valor convertido.</span>
+
+<span class="sd">        :param bytes dado: sequência de bytes</span>
+<span class="sd">        :raise TypeError: se o comprimento não for o especificado em</span>
+<span class="sd">            :attr:`~.estrutarq.campo.CampoIntBinario.numero_bytes`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numero_bytes</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;Sequência de bytes com comprimento_bloco inesperado.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Sequência de bytes com comprimento inesperado.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">dado</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CampoIntBinario.valor_para_bytes"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntBinario.valor_para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Conversão do valor inteiro para sequência de bytes usando</span>
-<span class="sd">        representação binária big-endian com sinal</span>
+<span class="sd">        Conversão do valor inteiro interno para sequência de bytes usando</span>
+<span class="sd">        representação binária *big-endian* com sinal.</span>
+
 <span class="sd">        :return: sequência de bytes</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numero_bytes</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div></div>
 
@@ -184,10 +201,15 @@
 
 
 <div class="viewcode-block" id="CampoIntFixo"><a class="viewcode-back" href="../../../estrutarq.campo.html#estrutarq.campo.campo_inteiro.CampoIntFixo">[documentos]</a><span class="k">class</span> <span class="nc">CampoIntFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">CampoIntBasico</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Classe para inteiro textual com tamanho fixo&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe para inteiro textual com comprimento fixo predefinido.</span>
+
+<span class="sd">    :param int comprimento: o comprimento em bytes fixado para o campo</span>
+<span class="sd">    :param dict, opcional kwargs: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :class:`~.estrutarq.campo.campo_inteiro.CampoIntBasico`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construtor&quot;&quot;&quot;</span>
         <span class="n">CampoIntBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;int fixo&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">True</span></div>
