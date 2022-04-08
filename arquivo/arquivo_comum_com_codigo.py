@@ -75,10 +75,10 @@ class Arquivo:
     #         # cria arquivo a partir de especificação textual
     #         ""
     #     elif isinstance(RegistroBasico):
-    #         # cria arquivo a partir de um registro pré-existente
+    #         # cria arquivo a partir de um registro_teste pré-existente
     #         ""
     #     else:
-    #         raise TypeError("Esperado um registro ou uma especificação.")
+    #         raise TypeError("Esperado um registro_teste ou uma especificação.")
 
     def feche(self):
         """

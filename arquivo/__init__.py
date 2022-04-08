@@ -1,5 +1,5 @@
 """
-    Implementação de organizações de arquivos.
+Implementação de organizações de arquivos.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007

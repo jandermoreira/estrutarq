@@ -8,7 +8,7 @@ from pypeg2 import *
 abreviacoes_comandos = {
     "ca": "crie arquivo",
     "ci": "crie índice",
-    "ir": "insira registro"
+    "ir": "insira registro_teste"
 }
 
 
@@ -94,7 +94,7 @@ class CrieIndice(str):
 
 class InsiraRegistro(str):
     grammar = (
-        attr("comando", re.compile("insira registro|ir")),
+        attr("comando", re.compile("insira registro_teste|ir")),
     )
 
 
@@ -133,7 +133,7 @@ for comando in [
     ci a fixo;""",
     "# nada aqui...",
     "ci a fixo; # nothing",
-    "insira registro;",
+    "insira registro_teste;",
     "ir;"
 ]:
     # print(">", comando)

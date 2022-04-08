@@ -1,10 +1,25 @@
-#
-#  Arquivos
-#
+"""
+Campos para armazenamento de cadeias de caracteres, provendo classes
+para uso de campos cujo conteúdo é uma cadeia de caracteres.
+Internamente, o tipo :class:`str` é usado para armazenamento e a
+transformação para sequência de bytes usa a codificação UTF-8.
 
-# from os import fstat
+Uma classe básica :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
+define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
+são derivados campos:
+
+* Com terminador
+* Prefixado pelo comprimento
+* De comprimento fixo predefinido
+
+..
+    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
+    Jander Moreira, 2021, 2022
+"""
+
 from abc import ABCMeta, abstractmethod
 from os.path import exists
+
 from estrutarq.registro import RegistroBasico
 
 
@@ -97,12 +112,13 @@ class ArquivoBasico(metaclass = ABCMeta):
 class ArquivoSimples(ArquivoBasico):
     """
     Gerenciador de arquivo simples (como fluxo de dados) com registros de
-    comprimento fixo.
+    comprimento fixo. Nenhuma consideração sobre blocos ou outro aspecto de
+    acesso ao dispositivo de armazenamento secundário é feita.
     """
 
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
-        super().__init__(nome_arquivo, "simples fixo", **kwargs)
+        ArquivoBasico.__init__(self, nome_arquivo, "simples fixo", **kwargs)
         self.esquema_registro = esquema_registro.copia()
         if esquema_registro.tem_comprimento_fixo():
             self.comprimento_registro = esquema_registro.comprimento()

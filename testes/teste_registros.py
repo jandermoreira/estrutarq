@@ -64,16 +64,16 @@ def crie_registro():
 # def mainx():
 #     from os import system
 #     arquivo = open("/tmp/dados", "wb")
-#     registro = RegistroTerminador(
+#     registro_teste = RegistroTerminador(
 #         ("campo", CampoCadeiaTerminador())
 #     )
-#     registro.campo.valor = "abacate \x00 berinjela, ébano"
-#     registro.escreva(arquivo)
+#     registro_teste.campo.valor = "abacate \x00 berinjela, ébano"
+#     registro_teste.escreva(arquivo)
 #     arquivo.close()
 #     system("hd /tmp/dados")
 #     arquivo = open("/tmp/dados", "rb")
-#     registro.leia(arquivo)
-#     print("***\n", registro)
+#     registro_teste.leia(arquivo)
+#     print("***\n", registro_teste)
 #     arquivo.close()
 
 
@@ -90,7 +90,7 @@ def main():
             stdout.flush()
 
         reg, reg_base = crie_registro()
-        dados.append(reg_base.copia())  # salva estrutura de cada registro
+        dados.append(reg_base.copia())  # salva estrutura de cada registro_teste
 
         reg.rrn.valor = i
         # print("**************\n", reg)

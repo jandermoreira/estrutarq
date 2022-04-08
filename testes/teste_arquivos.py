@@ -1,10 +1,9 @@
-from os import system
+from random import sample, shuffle
 from time import process_time
+
 from estrutarq.arquivo import ArquivoSimples
 from estrutarq.campo import *
 from estrutarq.registro import *
-
-from random import sample, shuffle
 
 nomes = ["jander", "jonatan", "jurandir", "zilda", "olivia", "elisa"]
 sobrenomes = ["moreira", "caseli", "lima", "medeiros", "anversa"]
@@ -22,9 +21,10 @@ def igual(valor1, valor2):
         exit(1)
 
 
-def teste(registro):
-    print(registro.tipo)
-    arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro, novo = True)
+def teste(registro_teste):
+    relatorio = "\n*** " + registro_teste.tipo + '\n'
+    print(registro_teste.tipo)
+    arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro_teste, novo = True)
 
     numero_registros = 500
     while len(dados) < numero_registros:
@@ -33,38 +33,46 @@ def teste(registro):
 
     print("Escrevendo registros: ", end = "")
     contador = 0
+    inicio = process_time()
     for nome, sobrenome, endereco in sample(dados, numero_registros):
-        registro.numero.valor = contador
-        registro.nome.valor = nome
-        registro.sobrenome.valor = sobrenome
-        registro.endereco.valor = endereco
-        # print(f"({contador}, {registro.numero})", end = "")
-        arquivo.escreva(registro)
+        registro_teste.numero.valor = contador
+        registro_teste.nome.valor = nome
+        registro_teste.sobrenome.valor = sobrenome
+        registro_teste.endereco.valor = endereco
+        # print(".", end = "")
+        # print(f"({contador}, {registro_teste.numero})", end = "")
+        arquivo.escreva(registro_teste)
         contador += 1
+    fim = process_time()
     print()
     arquivo.feche()
+    relatorio += f"Criado em {(fim - inicio):.3f} segundos\n"
 
     # system("ls -l /tmp/arq-teste.dat")
     # system("hd /tmp/arq-teste.dat")
 
-    arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro)
+    arquivo = ArquivoSimples("/tmp/arq-teste.dat", registro_teste)
     fim_de_arquivo = False
     print("Lendo registros sequencialmente: ", end = "")
     contador = 0
+    inicio = process_time()
     while not fim_de_arquivo:
         # print("p", arquivo.arquivo.tell())
         try:
-            registro = arquivo.leia()
+            registro_teste = arquivo.leia()
         except EOFError:
             fim_de_arquivo = True
         else:
-            # print(f"({contador}, {registro.numero})", end = "")
-            igual(contador, registro.numero.valor)
+            # print(".", end = "")
+            # print(f"({contador}, {registro_teste.numero})", end = "")
+            igual(contador, registro_teste.numero.valor)
             contador += 1
         if contador > numero_registros + 1:
             print("Algo errado aqui com o número de leituras...")
             exit(1)
+    fim = process_time()
     print()
+    relatorio += f"Acesso sequencial em {(fim - inicio):.3f} segundos\n"
 
     print("Leituras aleatórias: ", end = "")
     inicio = process_time()
@@ -72,27 +80,28 @@ def teste(registro):
     shuffle(consultas)
     for posicao in consultas:
         try:
-            registro = arquivo.leia(posicao_relativa = posicao)
+            registro_teste = arquivo.leia(posicao_relativa = posicao)
         except IOError as erro:
             print(erro)
             raise IOError("Fora do intervalo")
         else:
-            # print(f"({posicao}, {registro.numero})", end = "")
-            igual(posicao, registro.numero.valor)
+            # print(f"({posicao}, {registro_teste.numero})", end = "")
+            # print(".", end = "")
+            igual(posicao, registro_teste.numero.valor)
     fim = process_time()
     arquivo.feche()
+    relatorio += f"Acesso aleatório em {(fim - inicio):.3f} segundos\n"
 
     print()
+    return relatorio
 
-    return f"Tempo para registro {registro.tipo}: " + \
-           f"{(fim - inicio):.3f} segundos\n"
     # system("hd /tmp/arq.dat")
 
 
 def main():
     lista_testes = [
         RegistroFixo(
-            500,
+            60,
             ("numero", CampoIntBinario()),
             ("nome", CampoCadeiaTerminador()),
             ("sobrenome", CampoCadeiaPrefixado()),
