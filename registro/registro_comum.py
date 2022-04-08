@@ -42,9 +42,14 @@ do preenchimento de campo. (valor padrão ``0xFE``)
 
 class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
-    Classe básica para registros
+    Classe básica para registros, o qual é estruturado pela adiçõo de campos.
 
-    **Utiliza @DynamicAttrs**
+    Os campos ficam acessíveis como atributos da classe e, assim, podem ser
+    manipulados individualmente.
+
+    :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)
+    :param list[CampoBasico, ...], opcional lista_campos: lista ou tupla com
+        instanciação de campos
     """
 
     def __init__(self, tipo: str, *lista_campos):
@@ -81,7 +86,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         setattr(self, nome_campo, tipo_campo.copy())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
 
-    def adicione_campos(self, *lista_campos):
+    def adicione_campos(self, *lista_campos: list[CampoBasico, ...]):
         """
         Inclusão de uma sequência de campos ao registro
 
@@ -137,7 +142,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         total fixo
 
         :return: o comprimento do registro em bytes ou None se tiver
-        comprimento variável
+            comprimento variável
         """
         if self._comprimento_fixo:
             return self._comprimento

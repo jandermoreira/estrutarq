@@ -76,8 +76,18 @@ do preenchimento de campo. (valor padrão <code class="docutils literal notransl
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
-<p>Classe básica para registros</p>
-<p><strong>Utiliza &#64;DynamicAttrs</strong></p>
+<p>Classe básica para registros, o qual é estruturado pela adiçõo de campos.</p>
+<p>Os campos ficam acessíveis como atributos da classe e, assim, podem ser
+manipulados individualmente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – o nome do tipo do parâmetro (definido pelas subclasses)</p></li>
+<li><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>, </em><em>...</em><em>]</em><em>, </em><em>opcional</em>) – lista ou tupla com
+instanciação de campos</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.tipo">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tipo</span></span><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.tipo" title="Link permanente para esta definição">¶</a></dt>
@@ -142,10 +152,10 @@ propriedades foram verdadeiras:
 total fixo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o comprimento do registro em bytes ou None se tiver</p>
+<dd class="field-odd"><p>o comprimento do registro em bytes ou None se tiver
+comprimento variável</p>
 </dd>
 </dl>
-<p>comprimento variável</p>
 </dd></dl>
 
 <dl class="py method">
