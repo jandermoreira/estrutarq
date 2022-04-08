@@ -112,7 +112,7 @@ class ArquivoBasico(metaclass = ABCMeta):
         """
         O arquivo associado é aberto novamente, preservando o conteúdo.
 
-        :raise FileNotFound: se 
+        :raise FileNotFoundError: se o arquivo não existir
         """
         if exists(self.nome_arquivo):
             self._abra_arquivo_existente()
@@ -122,14 +122,15 @@ class ArquivoBasico(metaclass = ABCMeta):
 
     def posicao_atual(self):
         """
-        Posição atual do arquivo
+        Posição atual do arquivo.
+
         :return:
         """
         return self.arquivo.tell()
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
-        Descrição textual do arquivo
+        Descrição textual do arquivo.
         """
         return f"Nome do arquivo: {self.nome_arquivo}"
 
@@ -149,7 +150,6 @@ class ArquivoSimples(ArquivoBasico):
             self.comprimento_registro = esquema_registro.comprimento()
             self.leia_efetivo = self.leia_fixo
             self.escreva_efetivo = self.escreva_fixo
-            print("> comprimento do registro fixo:", self.comprimento_registro)
         else:
             self.leia_efetivo = self.leia_variavel
             self.escreva_efetivo = self.escreva_variavel
@@ -186,7 +186,15 @@ class ArquivoSimples(ArquivoBasico):
     def escreva_fixo(self, registro: RegistroBasico,
                      posicao_relativa: int = None):
         """
-        Gravação de um registro no arquivo
+        Gravação de um registro de comprimento fixo no arquivo. A gravação é
+        feita a partir da posição corrente, a menos que especificada outra
+        posição. As posições são relativas aos registros (e não ao deslocamento
+        de bytes), sendo que o primeiro registro o de posição 0, o segundo de
+        posição 1 e assim sucessivamente.
+
+        Ao final, a posição corrente é a do próximo byte depois do último byte
+        lido.
+
         :param registro: o registro a ser escrito
         :param posicao_relativa: posição relativa do registro no arquivo,
             com o primeiro registro sendo o registro 0
@@ -197,12 +205,20 @@ class ArquivoSimples(ArquivoBasico):
 
     def leia_variavel(self, posicao_relativa: int = None) -> RegistroBasico:
         """
-        Leitura de um registro de comprimento variavel
+        Leitura de um registro de comprimento variavel. A leitura é feita a
+        partir da posição corrente, a menos que seja especificada outra posição.
+        As posições são relativas aos registros (e não ao deslocamento
+        de bytes), sendo que o primeiro registro o de posição 0, o segundo de
+        posição 1 e assim sucessivamente. Neste caso, a 
+
+        Ao final, a posição corrente é a do próximo byte depois do último byte
+        lido.
+
+        A determinação da posição relativa é feita por busca sequencial
+
         :param posicao_relativa: posição relativa do registro no arquivo,
             com o primeiro registro sendo o registro 0
         :return: o registro lido
-
-        A determinação da posição relativa é feita por busca sequencial
         """
         registro = self.esquema_registro.copia()
         if posicao_relativa is not None:
