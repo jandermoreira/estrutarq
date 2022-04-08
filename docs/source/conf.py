@@ -81,6 +81,7 @@ autodoc_default_options = {
     'autodoc_inherit_docstrings': False,
     # 'inherited-members': True,
     'show-inheritance': True,
+    'autodoc_class_signature': "separated",
 }
 add_module_names = False
 

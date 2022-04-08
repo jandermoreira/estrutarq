@@ -17,7 +17,7 @@ Campo básico
 
 Todas as demais classes do módulo são derivadas de uma classe básica.
 
-.. autoclass:: estrutarq.campo.CampoBasico
+.. autoclass:: campo.CampoBasico
    :members:
 
 

@@ -19,10 +19,10 @@ from abc import ABCMeta
 from copy import deepcopy
 from re import compile
 
-from estrutarq.campo import CampoBasico
-from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
+from campo import CampoBasico
+from dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
-from estrutarq.utilitarios.geral import verifique_versao
+from utilitarios.geral import verifique_versao
 
 # Verificação de versão necessária para uso de registros
 verifique_versao()

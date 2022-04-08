@@ -19,8 +19,7 @@ são derivados campos:
 
 from abc import ABCMeta
 
-from estrutarq.dado import DadoFixo, DadoPrefixado, \
-    DadoTerminador
+from dado import DadoFixo, DadoPrefixado, DadoTerminador
 from .campo_comum import CampoBasico, terminador_de_campo
 
 

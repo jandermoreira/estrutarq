@@ -15,10 +15,12 @@ dados = [[nome, sobrenome, endereco]
          for sobrenome in sobrenomes
          for endereco in enderecos]
 
+
 def igual(valor1, valor2):
     if valor1 != valor2:
         print("**", valor1, "!=", valor2)
         exit(1)
+
 
 def teste(registro):
     print(registro.tipo)
@@ -36,7 +38,7 @@ def teste(registro):
         registro.nome.valor = nome
         registro.sobrenome.valor = sobrenome
         registro.endereco.valor = endereco
-        print(f"({contador}, {registro.numero})", end = "")
+        # print(f"({contador}, {registro.numero})", end = "")
         arquivo.escreva(registro)
         contador += 1
     print()
@@ -56,7 +58,7 @@ def teste(registro):
         except EOFError:
             fim_de_arquivo = True
         else:
-            print(f"({contador}, {registro.numero})", end = "")
+            # print(f"({contador}, {registro.numero})", end = "")
             igual(contador, registro.numero.valor)
             contador += 1
         if contador > numero_registros + 1:
@@ -75,16 +77,15 @@ def teste(registro):
             print(erro)
             raise IOError("Fora do intervalo")
         else:
-            print(f"({posicao}, {registro.numero})", end = "")
+            # print(f"({posicao}, {registro.numero})", end = "")
             igual(posicao, registro.numero.valor)
     fim = process_time()
-    print()
-    print(f"Tempo para registro {registro.tipo}: {(fim - inicio):.3f} segundos")
     arquivo.feche()
 
-    input("ENTER... ")
-
     print()
+
+    return f"Tempo para registro {registro.tipo}: " + \
+           f"{(fim - inicio):.3f} segundos\n"
     # system("hd /tmp/arq.dat")
 
 
@@ -116,8 +117,10 @@ def main():
             ("endereco", CampoCadeiaTerminador()),
         ),
     ]
+    msg = ""
     for registro in lista_testes:
-        teste(registro)
+        msg += teste(registro)
+    print(msg)
 
 
 if __name__ == '__main__':

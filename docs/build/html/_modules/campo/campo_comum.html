@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>campo.campo_comum &#8212; documentação Estruturas de arquivos: estrutarq 0.1</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Índice Geral"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">campo.campo_comum</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fonte para campo.campo_comum</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Implementação de campos, provendo a classe básica para definição de campos.</span>
+
+<span class="sd">Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoBasico`</span>
+<span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais.</span>
+<span class="sd">Dela são derivados os demais campos.</span>
+<span class="sd">A classe :class:`~.estrutarq.campo.campo_comum.CampoBruto`, também</span>
+<span class="sd">disponibilizada, define um campo sem organização que utiliza</span>
+<span class="sd">:class:`str` (UTF-8) como valor.</span>
+
+<span class="sd">..</span>
+<span class="sd">    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</span>
+<span class="sd">    Jander Moreira, 2021, 2022</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">BinaryIO</span>
+
+<span class="kn">from</span> <span class="nn">estrutarq.dado</span> <span class="kn">import</span> <span class="n">DadoBasico</span><span class="p">,</span> <span class="n">DadoBruto</span>
+
+<span class="n">terminador_de_campo</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">O terminador de campo é um byte único usado como delimitador para o</span>
+<span class="sd">fim do campo. O valor padrão é ``0x00``.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="CampoBasico"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico">[documentos]</a><span class="k">class</span> <span class="nc">CampoBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe básica para campo, a menor unidade de informação.</span>
+
+<span class="sd">    :param str tipo: cadeia de caracteres com o nome do tipo; possíveis valores</span>
+<span class="sd">        são, por exemplo, ``&quot;cadeia fixo&quot;``, ``&quot;real terminador&quot;`` ou</span>
+<span class="sd">        ``&quot;int prefixado&quot;``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">DadoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span> <span class="o">=</span> <span class="n">tipo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tipo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Nome do tipo do campo. É um valor puramente ornamental (i.e., não</span>
+<span class="sd">        é usado internamente com nenhum fim) e pode ser consultado externamente.</span>
+
+<span class="sd">        :return: Retorna o tipo do campo</span>
+<span class="sd">        :type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Valor do campo, usando sua representação interna. Recebe e retorna o</span>
+<span class="sd">        valor armazenado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@valor</span><span class="o">.</span><span class="n">setter</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Atribuição do valor ao campo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="CampoBasico.bytes_para_valor"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.bytes_para_valor">[documentos]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conversão de uma sequência de bytes para armazenamento para valor</span>
+<span class="sd">        do campo, de acordo com a representação de dados.</span>
+<span class="sd">        O :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.</span>
+
+<span class="sd">        :param bytes dado: sequência de bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CampoBasico.valor_para_bytes"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.valor_para_bytes">[documentos]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conversão do valor do campo para sequência de bytes de acordo</span>
+<span class="sd">        com a representação de dados.</span>
+
+<span class="sd">        :return: sequência de bytes</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CampoBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna se o comprimento é ou não fixo.</span>
+
+<span class="sd">        :return: `True` para comprimento fixo ou `False` para variável</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span></div>
+
+<div class="viewcode-block" id="CampoBasico.comprimento"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtém o comprimento atual do campo após convertido para sequência de</span>
+<span class="sd">        bytes, o que inclui a organização do dado.</span>
+
+<span class="sd">        :return: o comprimento do campo com a organização</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">()))</span></div>
+
+    <span class="c1"># code::start leitura_escrita</span>
+<div class="viewcode-block" id="CampoBasico.leia"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Leitura da sequência de bytes que representa o campo e sua conversão</span>
+<span class="sd">        para o valor do campo, obedecendo à organização e formato de</span>
+<span class="sd">        representação.</span>
+<span class="sd">        O :attr:`~.estrutarq.campo.CampoBasico.valor` é atualizado.</span>
+
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_arquivo</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_para_valor</span><span class="p">(</span><span class="n">dado</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CampoBasico.escreva"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conversão do valor do campo para sequência de bytes e armazenamento no</span>
+<span class="sd">        arquivo, incluindo a organização de dados.</span>
+
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de escrita</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">()</span>
+        <span class="n">arquivo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">dado</span><span class="p">))</span></div>
+
+    <span class="c1"># code::end</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorno do valor textual do campo.</span>
+
+<span class="sd">        :return: o valor do campo</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CampoBasico.copy"><a class="viewcode-back" href="../../campo.html#campo.CampoBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cópia &quot;rasa&quot; do objeto.</span>
+
+<span class="sd">        :return: uma instância copiada de ``self``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">CampoBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implementação das funções de um campo bruto, ou seja, sem organização</span>
+<span class="sd">    de campo. O valor é sempre armazenado como cadeia de caracteres com</span>
+<span class="sd">    codificação de caracteres UTF-8.</span>
+
+<span class="sd">    :param str, opcional valor: valor do campo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">CampoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bruto&quot;</span><span class="p">)</span>
+        <span class="n">DadoBruto</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        O valor armazenado no campo. Recebe e retorna uma cadeia de caracteres.</span>
+
+<span class="sd">        :Recebe: Recebe uma cadeia de caracteres</span>
+<span class="sd">        :return: Retorna uma cadeia de caracteres</span>
+<span class="sd">        :type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span>
+
+    <span class="nd">@valor</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        O valor armazenado para o campo básico (i.e., bruto) é sempre uma</span>
+<span class="sd">        cadeia de caracteres</span>
+
+<span class="sd">        :param valor: um valor qualquer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+
+    <span class="c1"># code::start bruto_conversoes</span>
+    <span class="k">def</span> <span class="nf">bytes_para_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dado</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Atualização do valor do campo a partir de uma sequência de bytes</span>
+<span class="sd">        com codificação UTF-8.</span>
+
+<span class="sd">        :param bytes dado: a sequência de bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">dado</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">valor_para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorno do valor do campo (cadeia de caracteres) convertido para uma</span>
+<span class="sd">        sequência de bytes, usando codificação UTF-8.</span>
+
+<span class="sd">        :return: a sequência de bytes</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+    <span class="c1"># code::end</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Índice Geral"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">documentação Estruturas de arquivos: estrutarq 0.1</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Código do módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">campo.campo_comum</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Jander Moreira.
+      Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
