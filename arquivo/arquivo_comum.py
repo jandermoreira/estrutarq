@@ -8,7 +8,7 @@ são derivados arquivos:
 * Simples (sem considerar blocos*)
 * Estruturados (considerando o blocos*)
 
-* O termo *blocos* é usado no contexto do acesso aos dispositivos de
+(*) O termo *blocos* é usado no contexto do acesso aos dispositivos de
 arqmazenamento em memória secundária.
 
 ..
@@ -240,7 +240,8 @@ class ArquivoSimples(ArquivoBasico):
     def escreva_variavel(self, registro: RegistroBasico,
                          deslocamento: int = None):
         """
-        Gravação de um registro no arquivo
+        Gravação de um registro no arquivo.
+
         :param registro: o registro a ser escrito
         :param deslocamento: posição absoluta (byte offset) da posição
             de escrita
@@ -251,20 +252,29 @@ class ArquivoSimples(ArquivoBasico):
 
     def leia(self, **kwargs) -> RegistroBasico:
         """
-        Leitura de um registro do arquivo
-        :return: o registro lido
+        Método de interface para chamar a leitura de registros de comprimento
+        fixo ou de comprimento variável. Durante a instanciação do objeto é
+        feita a associação a
+        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo` ou a
+        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel`.
 
         self.leia_efetivo chama leia_fixo ou leia_variável, conforme
         o registro tenha comprimento fixo ou variável
+
+        :return: o registro lido
+        :rtype: RegistroBasico
         """
         return self.leia_efetivo(**kwargs)
 
     def escreva(self, registro: RegistroBasico, **kwargs):
         """
-        Gravação de um registro no arquivo
+        Método de interface para chamar a escrita de registros de comprimento
+        fixo ou de comprimento variável. Durante a instanciação do objeto é
+        feita a associação a
+        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo`
+        ou a
+        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel`.
 
-        self.escreva_efetivo chama escreva_fixo ou escreva_variável, conforme
-        o registro tenha comprimento fixo ou variável
         """
         self.escreva_efetivo(registro, **kwargs)
 

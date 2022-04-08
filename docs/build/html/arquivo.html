@@ -55,9 +55,9 @@ são derivados arquivos:</p>
 <ul class="simple">
 <li><p>Simples (sem considerar blocos*)</p></li>
 <li><p>Estruturados (considerando o blocos*)</p></li>
-<li><p>O termo <em>blocos</em> é usado no contexto do acesso aos dispositivos de</p></li>
 </ul>
-<p>arqmazenamento em memória secundária.</p>
+<p>(*) O termo <em>blocos</em> é usado no contexto do acesso aos dispositivos de
+arqmazenamento em memória secundária.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ArquivoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nome_arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">novo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoBasico" title="Link permanente para esta definição">¶</a></dt>
@@ -112,13 +112,22 @@ escrito.</p>
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoBasico.reabra">
 <span class="sig-name descname"><span class="pre">reabra</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoBasico.reabra"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoBasico.reabra" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>O arquivo associado é aberto novamente, preservando o conteúdo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Levanta</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(em Python v3.10)"><strong>FileNotFoundError</strong></a> – se o arquivo não existir</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoBasico.posicao_atual">
 <span class="sig-name descname"><span class="pre">posicao_atual</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoBasico.posicao_atual"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoBasico.posicao_atual" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Posição atual do arquivo
-:return:</p>
+<dd><p>Posição atual do arquivo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -150,56 +159,95 @@ com o primeiro registro sendo o registro 0</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo">
 <span class="sig-name descname"><span class="pre">escreva_fixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registro</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">posicao_relativa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(em Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoSimples.escreva_fixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Gravação de um registro no arquivo
-:param registro: o registro a ser escrito
-:param posicao_relativa: posição relativa do registro no arquivo,</p>
-<blockquote>
-<div><p>com o primeiro registro sendo o registro 0</p>
-</div></blockquote>
+<dd><p>Gravação de um registro de comprimento fixo no arquivo. A gravação é
+feita a partir da posição corrente, a menos que especificada outra
+posição. As posições são relativas aos registros (e não ao deslocamento
+de bytes), sendo que o primeiro registro o de posição 0, o segundo de
+posição 1 e assim sucessivamente.</p>
+<p>Ao final, a posição corrente é a do próximo byte depois do último byte
+lido.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>registro</strong> – o registro a ser escrito</p></li>
+<li><p><strong>posicao_relativa</strong> – posição relativa do registro no arquivo,
+com o primeiro registro sendo o registro 0</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel">
 <span class="sig-name descname"><span class="pre">leia_variavel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">posicao_relativa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(em Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></a></span></span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoSimples.leia_variavel"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Leitura de um registro de comprimento variavel
-:param posicao_relativa: posição relativa do registro no arquivo,</p>
-<blockquote>
-<div><p>com o primeiro registro sendo o registro 0</p>
-</div></blockquote>
+<dd><p>Leitura de um registro de comprimento variavel. A leitura é feita a
+partir da posição corrente, a menos que seja especificada outra posição.
+As posições são relativas aos registros (e não ao deslocamento
+de bytes), sendo que o primeiro registro o de posição 0, o segundo de
+posição 1 e assim sucessivamente.</p>
+<p>A determinação da posição relativa é feita por busca sequencial a
+partir do início do arquivo.</p>
+<p>Ao final, a posição corrente é a do próximo byte depois do último byte
+lido.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o registro lido</p>
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>posicao_relativa</strong> – posição relativa do registro no arquivo,
+com o primeiro registro sendo o registro 0</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o registro lido</p>
+</dd>
+<dt class="field-odd">Levanta</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#EOFError" title="(em Python v3.10)"><strong>EOFError</strong></a> – se houver uma tentativa de leitura além do fim do
+arquivo</p>
 </dd>
 </dl>
-<p>A determinação da posição relativa é feita por busca sequencial</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel">
 <span class="sig-name descname"><span class="pre">escreva_variavel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registro</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">deslocamento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(em Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoSimples.escreva_variavel"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Gravação de um registro no arquivo
-:param registro: o registro a ser escrito
-:param deslocamento: posição absoluta (byte offset) da posição</p>
-<blockquote>
-<div><p>de escrita</p>
-</div></blockquote>
+<dd><p>Gravação de um registro no arquivo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>registro</strong> – o registro a ser escrito</p></li>
+<li><p><strong>deslocamento</strong> – posição absoluta (byte offset) da posição
+de escrita</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia">
 <span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></a></span></span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoSimples.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Leitura de um registro do arquivo
-:return: o registro lido</p>
+<dd><p>Método de interface para chamar a leitura de registros de comprimento
+fixo ou de comprimento variável. Durante a instanciação do objeto é
+feita a associação a
+<a class="reference internal" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo" title="estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">leia_fixo</span></code></a> ou a
+<a class="reference internal" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel" title="estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">leia_variavel</span></code></a>.</p>
 <p>self.leia_efetivo chama leia_fixo ou leia_variável, conforme
 o registro tenha comprimento fixo ou variável</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>o registro lido</p>
+</dd>
+<dt class="field-even">Tipo de retorno</dt>
+<dd class="field-even"><p><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico">RegistroBasico</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva">
 <span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registro</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoSimples.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Gravação de um registro no arquivo</p>
-<p>self.escreva_efetivo chama escreva_fixo ou escreva_variável, conforme
-o registro tenha comprimento fixo ou variável</p>
+<dd><p>Método de interface para chamar a escrita de registros de comprimento
+fixo ou de comprimento variável. Durante a instanciação do objeto é
+feita a associação a
+<a class="reference internal" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo" title="estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">escreva_fixo</span></code></a>
+ou a
+<a class="reference internal" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel" title="estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">escreva_variavel</span></code></a>.</p>
 </dd></dl>
 
 </dd></dl>

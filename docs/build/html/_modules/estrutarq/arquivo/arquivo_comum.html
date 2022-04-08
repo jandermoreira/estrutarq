@@ -47,7 +47,7 @@
 <span class="sd">* Simples (sem considerar blocos*)</span>
 <span class="sd">* Estruturados (considerando o blocos*)</span>
 
-<span class="sd">* O termo *blocos* é usado no contexto do acesso aos dispositivos de</span>
+<span class="sd">(*) O termo *blocos* é usado no contexto do acesso aos dispositivos de</span>
 <span class="sd">arqmazenamento em memória secundária.</span>
 
 <span class="sd">..</span>
@@ -150,19 +150,26 @@
 <div class="viewcode-block" id="ArquivoBasico.reabra"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoBasico.reabra">[documentos]</a>    <span class="k">def</span> <span class="nf">reabra</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        O arquivo associado é aberto novamente, preservando o conteúdo.</span>
+
+<span class="sd">        :raise FileNotFoundError: se o arquivo não existir</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_abra_arquivo_existente</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Arquivo não encontrado: &quot;</span> <span class="o">+</span>
+                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ArquivoBasico.posicao_atual"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoBasico.posicao_atual">[documentos]</a>    <span class="k">def</span> <span class="nf">posicao_atual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Posição atual do arquivo</span>
+<span class="sd">        Posição atual do arquivo.</span>
+
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Descrição textual do arquivo</span>
+<span class="sd">        Descrição textual do arquivo.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Nome do arquivo: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="si">}</span><span class="s2">&quot;</span></div>
 
@@ -182,7 +189,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">comprimento_registro</span> <span class="o">=</span> <span class="n">esquema_registro</span><span class="o">.</span><span class="n">comprimento</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">leia_efetivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_fixo</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">escreva_efetivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">escreva_fixo</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; comprimento do registro fixo:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comprimento_registro</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">leia_efetivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_variavel</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">escreva_efetivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">escreva_variavel</span>
@@ -219,7 +225,15 @@
 <div class="viewcode-block" id="ArquivoSimples.escreva_fixo"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registro</span><span class="p">:</span> <span class="n">RegistroBasico</span><span class="p">,</span>
                      <span class="n">posicao_relativa</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Gravação de um registro no arquivo</span>
+<span class="sd">        Gravação de um registro de comprimento fixo no arquivo. A gravação é</span>
+<span class="sd">        feita a partir da posição corrente, a menos que especificada outra</span>
+<span class="sd">        posição. As posições são relativas aos registros (e não ao deslocamento</span>
+<span class="sd">        de bytes), sendo que o primeiro registro o de posição 0, o segundo de</span>
+<span class="sd">        posição 1 e assim sucessivamente.</span>
+
+<span class="sd">        Ao final, a posição corrente é a do próximo byte depois do último byte</span>
+<span class="sd">        lido.</span>
+
 <span class="sd">        :param registro: o registro a ser escrito</span>
 <span class="sd">        :param posicao_relativa: posição relativa do registro no arquivo,</span>
 <span class="sd">            com o primeiro registro sendo o registro 0</span>
@@ -230,28 +244,43 @@
 
 <div class="viewcode-block" id="ArquivoSimples.leia_variavel"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_variavel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posicao_relativa</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegistroBasico</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de um registro de comprimento variavel</span>
+<span class="sd">        Leitura de um registro de comprimento variavel. A leitura é feita a</span>
+<span class="sd">        partir da posição corrente, a menos que seja especificada outra posição.</span>
+<span class="sd">        As posições são relativas aos registros (e não ao deslocamento</span>
+<span class="sd">        de bytes), sendo que o primeiro registro o de posição 0, o segundo de</span>
+<span class="sd">        posição 1 e assim sucessivamente.</span>
+
+<span class="sd">        A determinação da posição relativa é feita por busca sequencial a</span>
+<span class="sd">        partir do início do arquivo.</span>
+
+<span class="sd">        Ao final, a posição corrente é a do próximo byte depois do último byte</span>
+<span class="sd">        lido.</span>
+
 <span class="sd">        :param posicao_relativa: posição relativa do registro no arquivo,</span>
 <span class="sd">            com o primeiro registro sendo o registro 0</span>
 <span class="sd">        :return: o registro lido</span>
-
-<span class="sd">        A determinação da posição relativa é feita por busca sequencial</span>
+<span class="sd">        :raise EOFError: se houver uma tentativa de leitura além do fim do</span>
+<span class="sd">            arquivo</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">registro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">esquema_registro</span><span class="o">.</span><span class="n">copia</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">posicao_relativa</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># busca sequencial a partir do início do arquivo</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">posicao_relativa</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">posicao_relativa</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># busca sequencial a partir do início do arquivo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">posicao_relativa</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">registro</span><span class="o">.</span><span class="n">leia</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># leitura da posição atual</span>
                 <span class="n">registro</span><span class="o">.</span><span class="n">leia</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># leitura do próximo</span>
-            <span class="n">registro</span><span class="o">.</span><span class="n">leia</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">EOFError</span> <span class="k">as</span> <span class="n">erro</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fim de arquivo encontrado na leitura. </span><span class="si">{</span><span class="n">erro</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">registro</span></div>
 
 <div class="viewcode-block" id="ArquivoSimples.escreva_variavel"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva_variavel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registro</span><span class="p">:</span> <span class="n">RegistroBasico</span><span class="p">,</span>
                          <span class="n">deslocamento</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Gravação de um registro no arquivo</span>
+<span class="sd">        Gravação de um registro no arquivo.</span>
+
 <span class="sd">        :param registro: o registro a ser escrito</span>
 <span class="sd">        :param deslocamento: posição absoluta (byte offset) da posição</span>
 <span class="sd">            de escrita</span>
@@ -262,20 +291,29 @@
 
 <div class="viewcode-block" id="ArquivoSimples.leia"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegistroBasico</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de um registro do arquivo</span>
-<span class="sd">        :return: o registro lido</span>
+<span class="sd">        Método de interface para chamar a leitura de registros de comprimento</span>
+<span class="sd">        fixo ou de comprimento variável. Durante a instanciação do objeto é</span>
+<span class="sd">        feita a associação a</span>
+<span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo` ou a</span>
+<span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel`.</span>
 
 <span class="sd">        self.leia_efetivo chama leia_fixo ou leia_variável, conforme</span>
 <span class="sd">        o registro tenha comprimento fixo ou variável</span>
+
+<span class="sd">        :return: o registro lido</span>
+<span class="sd">        :rtype: RegistroBasico</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_efetivo</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ArquivoSimples.escreva"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registro</span><span class="p">:</span> <span class="n">RegistroBasico</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Gravação de um registro no arquivo</span>
+<span class="sd">        Método de interface para chamar a escrita de registros de comprimento</span>
+<span class="sd">        fixo ou de comprimento variável. Durante a instanciação do objeto é</span>
+<span class="sd">        feita a associação a</span>
+<span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_fixo`</span>
+<span class="sd">        ou a</span>
+<span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel`.</span>
 
-<span class="sd">        self.escreva_efetivo chama escreva_fixo ou escreva_variável, conforme</span>
-<span class="sd">        o registro tenha comprimento fixo ou variável</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">escreva_efetivo</span><span class="p">(</span><span class="n">registro</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 
