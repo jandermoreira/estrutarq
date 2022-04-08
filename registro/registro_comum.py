@@ -18,11 +18,10 @@ são derivados registros:
 from abc import ABCMeta
 from copy import deepcopy
 from re import compile
-
 from typing import BinaryIO
 
-from campo import CampoBasico
-from dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
+from estrutarq.campo import CampoBasico
+from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
 from utilitarios.geral import verifique_versao
 
@@ -50,7 +49,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     manipulados individualmente.
 
     :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)
-    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: sequência com
         tuplas ``("nome_campo", Campo())``.
     """
 
@@ -87,7 +86,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         identificador = compile(r"^\w[_\w\d]+$")
         if not isinstance(nome_campo, str) or \
                 not identificador.match(campo[0]):
-            raise AttributeError("O nome_arquivo do campo deve ser " + \
+            raise AttributeError("O nome_arquivo do campo deve ser " +
                                  f"um identificador válido ('{nome_campo}').")
         setattr(self, nome_campo, tipo_campo.copia())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
@@ -106,7 +105,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def de_bytes(self, dados_registro: bytes):
         """
-        Varredura da sequência de bytes que formam um registros para a obtenção
+        Varredura da sequência de bytes que formam um registro para a obtenção
         dos dados de cada campo individual, atualizando cada um deles.
 
         :param bytes dados_registro: sequência de bytes do registro
@@ -143,7 +142,8 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :rtype: bool
         """
         return self._comprimento_fixo or all(
-            campo._comprimento_fixo for campo in self.lista_campos.values())
+            campo.tem_comprimento_fixo() for campo in
+            self.lista_campos.values())
 
     def comprimento(self) -> int:
         """
@@ -199,7 +199,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
     Classe para registros brutos, ou seja, sem organização de dados adiconal e
     com controle exclusivamente pelo número de campos definido.
 
-    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: sequência com
         tuplas ``("nome_campo", Campo())``.
     """
 
@@ -224,22 +224,21 @@ class RegistroTerminador(DadoTerminador, RegistroBasico):
     """
     Classe para registros com terminador
 
-    :param bytes terminador: um byte único para ser usado como terminador
-      (valor padrão ``terminaddr_de_registro``).
-    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: sequência com
         tuplas ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, terminador = terminador_de_registro, *lista_campos):
+    def __init__(self, *lista_campos):
         RegistroBasico.__init__(self, "terminador", *lista_campos)
-        DadoTerminador.__init__(self, terminador)
+        DadoTerminador.__init__(self, terminador_de_registro)
 
 
 class RegistroPrefixado(DadoPrefixado, RegistroBasico):
     """
-    Classe para registros prefixados pelo comprimento
+    Classe para registros prefixados pelo comprimento, usando a estruturação de
+    :class:`~.estrutarq.dado.dado_comum.DadoPrefixado`.
 
-    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: sequência com
         tuplas ``("nome_campo", Campo())``.
     """
 
@@ -250,9 +249,10 @@ class RegistroPrefixado(DadoPrefixado, RegistroBasico):
 
 class RegistroFixo(DadoFixo, RegistroBasico):
     """
-    Classe para registros com terminador
+    Classe para registros com comprimento fixo.
 
-    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+    :param int comprimento: o comprimento prefixado para o campo em bytes
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: sequência com
         tuplas ``("nome_campo", Campo())``.
     """
 
