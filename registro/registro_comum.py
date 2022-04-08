@@ -39,6 +39,8 @@ Byte usado no preenchimento de registros de comprimento fixo. Deve diferir
 do preenchimento de campo. (valor padrão ``0xFE``)
 """
 
+EspecificacaoCampo = tuple[str, CampoBasico]
+
 class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
     Classe básica para registros, o qual é estruturado pela adiçõo de campos.
@@ -47,11 +49,11 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     manipulados individualmente.
 
     :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)
-    :param list[CampoBasico, ...], opcional lista_campos: lista ou tupla com
-        instanciação de campos
+    :param list[EspecificacaoCampo], opcional lista_campos: lista com tuplas
+        ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, tipo: str, *lista_campos):
+    def __init__(self, tipo: str, *lista_campos: EspecificacaoCampo):
         DadoBasico.__init__(self)
         self.__tipo = tipo
         self.lista_campos = {}
@@ -62,14 +64,14 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def tipo(self):
         return self.__tipo
 
-    def __adicione_um_campo(self, campo: (str, CampoBasico)):
+    def __adicione_um_campo(self, campo: EspecificacaoCampo):
         """
         Acréscimo de um campo a registro, com criação de um atributo e
         inclusão na lista de campos
 
-        :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str)
-            sendo o nome_arquivo do campo e campo sendo uma instância de um
-            campo válido
+        :param Especificcao_campo campo: uma tupla (nome_arquivo, campo), com
+            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo uma
+            instância de um campo válido
         """
         nome_campo = campo[0]
         tipo_campo = campo[1]
@@ -252,12 +254,3 @@ class RegistroFixo(DadoFixo, RegistroBasico):
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)
         self._comprimento_fixo = True
-
-from typing import NewType
-
-UserId = NewType('UserId', int)
-
-def n(v: UserId):
-    return v
-
-some_id = n(654654)
