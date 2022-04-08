@@ -19,6 +19,8 @@ from abc import ABCMeta
 from copy import deepcopy
 from re import compile
 
+from typing import BinaryIO
+
 from campo import CampoBasico
 from dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
@@ -40,12 +42,6 @@ do preenchimento de campo. (valor padrão ``0xFE``)
 """
 
 
-# EspecificacaoCampo = tuple[str, CampoBasico]
-# """
-# Para os registros, cada campo é especificado por uma tupla contendo o nome do
-# campo e uma instância de um campo.
-# """
-
 class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
     Classe básica para registros, o qual é estruturado pela adiçõo de campos.
@@ -54,8 +50,8 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     manipulados individualmente.
 
     :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)
-    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com tuplas
-        ``("nome_campo", Campo())``.
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+        tuplas ``("nome_campo", Campo())``.
     """
 
     def __init__(self, tipo: str, *lista_campos: tuple[str, CampoBasico]):
@@ -156,43 +152,30 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :return: o comprimento do registro em bytes
         :rtype: int
         """
-        if self._comprimento_fixo:
-            return self._comprimento
-        else:
-            return sum(
-                campo.comprimento() for campo in self.lista_campos.values())
+        return sum(campo.comprimento() for campo in self.lista_campos.values())
 
-    def _leia_registro(self, arquivo):
+    # code::start basico_leia
+    def leia(self, arquivo: BinaryIO):
         """
-        Leitura genérica de um registro usando a forma de organização de
-        dados atual, preenchendo os campos
+        Obtenção de um registro a partir do arquivo, considerando a organização
+        de registro em uso.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
         bytes_arquivo = self.leia_de_arquivo(arquivo)
         self.de_bytes(bytes_arquivo)
 
-    # code::start basico_leia
-    def leia(self, arquivo):
-        """
-        Obtenção de um registro a partir do arquivo
-
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        """
-        self._leia_registro(arquivo)
-
     # code::end
 
-    def escreva(self, arquivo):
+    def escreva(self, arquivo: BinaryIO):
         """
-        Escrita do registro no arquivo
+        Escrita dos bytes do registro no arquivo, usando a organização
+        definida.
 
-        :param arquivo:
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de escrita
         """
-        bytes_dados = self.para_bytes()
-        # if hasattr(self, "comprimento") and len(bytes_dados) > self.comprimento:
-        #     raise ValueError("Comprimento dos dados excede máximo do registro.")
-        arquivo.write(self.adicione_formatacao(bytes_dados))
+        bytes_dados = self.adicione_formatacao(self.para_bytes())
+        arquivo.write(bytes_dados)
 
     def __str__(self):
         texto = f"Registro: {self.tipo}\n"
@@ -202,34 +185,36 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
                      f"({em_bytes})\n"
         return texto[:-1]
 
-    def copy(self):
+    def copia(self):
         """
-        Cópia "profunda" deste campo
+        Cópia "profunda" do registro.
 
-        :return: outra instância com os mesmos valores
+        :return: outra instância com os mesmos valores.
         """
         return deepcopy(self)
 
 
 class RegistroBruto(DadoBruto, RegistroBasico):
     """
-    Classe básica para registro, com controle exclusivamente pelo número
-    de campos
+    Classe para registros brutos, ou seja, sem organização de dados adiconal e
+    com controle exclusivamente pelo número de campos definido.
 
-    Utiliza @DynamicAttrs
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+        tuplas ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, *lista_campos):
+    def __init__(self, *lista_campos: tuple[str, CampoBasico]):
         RegistroBasico.__init__(self, "bruto", *lista_campos)
         DadoBruto.__init__(self)
 
     # code::start bruto_leia_registro
-    def _leia_registro(self, arquivo):
+    def leia(self, arquivo):
         """
-        Leitura de registro bruto, campo a campo
+        Leitura de registro bruto, feita campo a campo.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
+
         for campo in self.lista_campos.values():
             campo.leia(arquivo)
     # code::end
@@ -238,16 +223,24 @@ class RegistroBruto(DadoBruto, RegistroBasico):
 class RegistroTerminador(DadoTerminador, RegistroBasico):
     """
     Classe para registros com terminador
+
+    :param bytes terminador: um byte único para ser usado como terminador
+      (valor padrão ``terminaddr_de_registro``).
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+        tuplas ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, *lista_campos):
+    def __init__(self, terminador = terminador_de_registro, *lista_campos):
         RegistroBasico.__init__(self, "terminador", *lista_campos)
-        DadoTerminador.__init__(self, terminador_de_registro)
+        DadoTerminador.__init__(self, terminador)
 
 
 class RegistroPrefixado(DadoPrefixado, RegistroBasico):
     """
     Classe para registros prefixados pelo comprimento
+
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+        tuplas ``("nome_campo", Campo())``.
     """
 
     def __init__(self, *lista_campos):
@@ -258,6 +251,9 @@ class RegistroPrefixado(DadoPrefixado, RegistroBasico):
 class RegistroFixo(DadoFixo, RegistroBasico):
     """
     Classe para registros com terminador
+
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com
+        tuplas ``("nome_campo", Campo())``.
     """
 
     def __init__(self, comprimento: int, *lista_campos):

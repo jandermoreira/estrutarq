@@ -58,6 +58,8 @@
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="nb">compile</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">BinaryIO</span>
+
 <span class="kn">from</span> <span class="nn">campo</span> <span class="kn">import</span> <span class="n">CampoBasico</span>
 <span class="kn">from</span> <span class="nn">dado</span> <span class="kn">import</span> <span class="n">DadoBasico</span><span class="p">,</span> <span class="n">DadoBruto</span><span class="p">,</span> <span class="n">DadoFixo</span><span class="p">,</span> <span class="n">DadoPrefixado</span><span class="p">,</span> \
     <span class="n">DadoTerminador</span>
@@ -79,12 +81,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<span class="c1"># EspecificacaoCampo = tuple[str, CampoBasico]</span>
-<span class="c1"># &quot;&quot;&quot;</span>
-<span class="c1"># Para os registros, cada campo é especificado por uma tupla contendo o nome do</span>
-<span class="c1"># campo e uma instância de um campo.</span>
-<span class="c1"># &quot;&quot;&quot;</span>
-
 <div class="viewcode-block" id="RegistroBasico"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe básica para registros, o qual é estruturado pela adiçõo de campos.</span>
@@ -93,8 +89,8 @@
 <span class="sd">    manipulados individualmente.</span>
 
 <span class="sd">    :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)</span>
-<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com tuplas</span>
-<span class="sd">        ``(&quot;nome_campo&quot;, Campo())``.</span>
+<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com</span>
+<span class="sd">        tuplas ``(&quot;nome_campo&quot;, Campo())``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
@@ -195,43 +191,30 @@
 <span class="sd">        :return: o comprimento do registro em bytes</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
-                <span class="n">campo</span><span class="o">.</span><span class="n">comprimento</span><span class="p">()</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
-
-    <span class="k">def</span> <span class="nf">_leia_registro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura genérica de um registro usando a forma de organização de</span>
-<span class="sd">        dados atual, preenchendo os campos</span>
-
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">bytes_arquivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_arquivo</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">de_bytes</span><span class="p">(</span><span class="n">bytes_arquivo</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">comprimento</span><span class="p">()</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
     <span class="c1"># code::start basico_leia</span>
-<div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Obtenção de um registro a partir do arquivo</span>
+<span class="sd">        Obtenção de um registro a partir do arquivo, considerando a organização</span>
+<span class="sd">        de registro em uso.</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_leia_registro</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span></div>
+        <span class="n">bytes_arquivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_arquivo</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">de_bytes</span><span class="p">(</span><span class="n">bytes_arquivo</span><span class="p">)</span></div>
 
     <span class="c1"># code::end</span>
 
-<div class="viewcode-block" id="RegistroBasico.escreva"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.escreva"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Escrita do registro no arquivo</span>
+<span class="sd">        Escrita dos bytes do registro no arquivo, usando a organização</span>
+<span class="sd">        definida.</span>
 
-<span class="sd">        :param arquivo:</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de escrita</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">bytes_dados</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_bytes</span><span class="p">()</span>
-        <span class="c1"># if hasattr(self, &quot;comprimento&quot;) and len(bytes_dados) &gt; self.comprimento:</span>
-        <span class="c1">#     raise ValueError(&quot;Comprimento dos dados excede máximo do registro.&quot;)</span>
-        <span class="n">arquivo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">bytes_dados</span><span class="p">))</span></div>
+        <span class="n">bytes_dados</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">para_bytes</span><span class="p">())</span>
+        <span class="n">arquivo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bytes_dados</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">texto</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Registro: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tipo</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -241,52 +224,62 @@
                      <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">em_bytes</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">texto</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-<div class="viewcode-block" id="RegistroBasico.copy"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.copia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.copia">[documentos]</a>    <span class="k">def</span> <span class="nf">copia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cópia &quot;profunda&quot; deste campo</span>
+<span class="sd">        Cópia &quot;profunda&quot; do registro.</span>
 
-<span class="sd">        :return: outra instância com os mesmos valores</span>
+<span class="sd">        :return: outra instância com os mesmos valores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="RegistroBruto"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBruto">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBruto</span><span class="p">(</span><span class="n">DadoBruto</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe básica para registro, com controle exclusivamente pelo número</span>
-<span class="sd">    de campos</span>
+<span class="sd">    Classe para registros brutos, ou seja, sem organização de dados adiconal e</span>
+<span class="sd">    com controle exclusivamente pelo número de campos definido.</span>
 
-<span class="sd">    Utiliza @DynamicAttrs</span>
+<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com</span>
+<span class="sd">        tuplas ``(&quot;nome_campo&quot;, Campo())``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bruto&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
         <span class="n">DadoBruto</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="c1"># code::start bruto_leia_registro</span>
-    <span class="k">def</span> <span class="nf">_leia_registro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBruto.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBruto.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de registro bruto, campo a campo</span>
+<span class="sd">        Leitura de registro bruto, feita campo a campo.</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">campo</span><span class="o">.</span><span class="n">leia</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span></div>
+            <span class="n">campo</span><span class="o">.</span><span class="n">leia</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span></div></div>
     <span class="c1"># code::end</span>
 
 
 <div class="viewcode-block" id="RegistroTerminador"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroTerminador">[documentos]</a><span class="k">class</span> <span class="nc">RegistroTerminador</span><span class="p">(</span><span class="n">DadoTerminador</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para registros com terminador</span>
+
+<span class="sd">    :param bytes terminador: um byte único para ser usado como terminador</span>
+<span class="sd">      (valor padrão ``terminaddr_de_registro``).</span>
+<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com</span>
+<span class="sd">        tuplas ``(&quot;nome_campo&quot;, Campo())``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador</span> <span class="o">=</span> <span class="n">terminador_de_registro</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
         <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;terminador&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
-        <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador_de_registro</span><span class="p">)</span></div>
+        <span class="n">DadoTerminador</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminador</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="RegistroPrefixado"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroPrefixado">[documentos]</a><span class="k">class</span> <span class="nc">RegistroPrefixado</span><span class="p">(</span><span class="n">DadoPrefixado</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para registros prefixados pelo comprimento</span>
+
+<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com</span>
+<span class="sd">        tuplas ``(&quot;nome_campo&quot;, Campo())``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
@@ -297,6 +290,9 @@
 <div class="viewcode-block" id="RegistroFixo"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroFixo">[documentos]</a><span class="k">class</span> <span class="nc">RegistroFixo</span><span class="p">(</span><span class="n">DadoFixo</span><span class="p">,</span> <span class="n">RegistroBasico</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe para registros com terminador</span>
+
+<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com</span>
+<span class="sd">        tuplas ``(&quot;nome_campo&quot;, Campo())``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>

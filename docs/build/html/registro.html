@@ -83,8 +83,8 @@ manipulados individualmente.</p>
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – o nome do tipo do parâmetro (definido pelas subclasses)</p></li>
-<li><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em><em>]</em><em>, </em><em>opcional</em>) – lista com tuplas
-<code class="docutils literal notranslate"><span class="pre">(&quot;nome_campo&quot;,</span> <span class="pre">Campo())</span></code>.</p></li>
+<li><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em><em>]</em><em>, </em><em>opcional</em>) – lista com
+tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_campo&quot;,</span> <span class="pre">Campo())</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -175,33 +175,35 @@ propriedades foram verdadeiras:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.leia">
-<span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.leia" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Obtenção de um registro a partir do arquivo</p>
+<span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.leia" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Obtenção de um registro a partir do arquivo, considerando a organização
+de registro em uso.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+<dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.escreva">
-<span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.escreva" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Escrita do registro no arquivo</p>
+<span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.escreva" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Escrita dos bytes do registro no arquivo, usando a organização
+definida.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>arquivo</strong> – </p>
+<dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de escrita</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.copy">
-<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.copy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.copy" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Cópia “profunda” deste campo</p>
+<dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.copia">
+<span class="sig-name descname"><span class="pre">copia</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.copia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.copia" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Cópia “profunda” do registro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>outra instância com os mesmos valores</p>
+<dd class="field-odd"><p>outra instância com os mesmos valores.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -210,18 +212,44 @@ propriedades foram verdadeiras:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBruto">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroBruto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBruto" title="Link permanente para esta definição">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroBruto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><span class="pre">campo.campo_comum.CampoBasico</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBruto" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">dado.dado_comum.DadoBruto</span></code>, <a class="reference internal" href="#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></code></a></p>
-<p>Classe básica para registro, com controle exclusivamente pelo número
-de campos</p>
-<p>Utiliza &#64;DynamicAttrs</p>
+<p>Classe para registros brutos, ou seja, sem organização de dados adiconal e
+com controle exclusivamente pelo número de campos definido.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em><em>]</em><em>, </em><em>opcional</em>) – lista com
+tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_campo&quot;,</span> <span class="pre">Campo())</span></code>.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBruto.leia">
+<span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBruto.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBruto.leia" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Leitura de registro bruto, feita campo a campo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroTerminador">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroTerminador" title="Link permanente para esta definição">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b'\x01'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroTerminador" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">dado.dado_comum.DadoTerminador</span></code>, <a class="reference internal" href="#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></code></a></p>
 <p>Classe para registros com terminador</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>terminador</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – um byte único para ser usado como terminador
+(valor padrão <code class="docutils literal notranslate"><span class="pre">terminaddr_de_registro</span></code>).</p></li>
+<li><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em><em>]</em><em>, </em><em>opcional</em>) – lista com
+tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_campo&quot;,</span> <span class="pre">Campo())</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -229,6 +257,12 @@ de campos</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroPrefixado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroPrefixado" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">dado.dado_comum.DadoPrefixado</span></code>, <a class="reference internal" href="#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></code></a></p>
 <p>Classe para registros prefixados pelo comprimento</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em><em>]</em><em>, </em><em>opcional</em>) – lista com
+tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_campo&quot;,</span> <span class="pre">Campo())</span></code>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -236,6 +270,12 @@ de campos</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegistroFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroFixo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">dado.dado_comum.DadoFixo</span></code>, <a class="reference internal" href="#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.registro.registro_comum.RegistroBasico</span></code></a></p>
 <p>Classe para registros com terminador</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em><em>]</em><em>, </em><em>opcional</em>) – lista com
+tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_campo&quot;,</span> <span class="pre">Campo())</span></code>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

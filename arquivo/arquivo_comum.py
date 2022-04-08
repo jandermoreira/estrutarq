@@ -103,7 +103,7 @@ class ArquivoSimples(ArquivoBasico):
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
         super().__init__(nome_arquivo, "simples fixo", **kwargs)
-        self.esquema_registro = esquema_registro.copy()
+        self.esquema_registro = esquema_registro.copia()
         if esquema_registro.tem_comprimento_fixo():
             self.comprimento_registro = esquema_registro.comprimento()
             self.leia_efetivo = self.leia_fixo
