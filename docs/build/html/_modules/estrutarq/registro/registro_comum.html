@@ -40,11 +40,11 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Registros como coleção de campos.</span>
 
-<span class="sd">Uma classe básica :class:`~.estrutarq.registro.registro_comum.RegistroBasico`</span>
+<span class="sd">Uma classe básica :class:`~.estrutarq.registro_teste.registro_comum.RegistroBasico`</span>
 <span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela</span>
 <span class="sd">são derivados registros:</span>
 
-<span class="sd">* Brutos (i.e., sem organização para o registro)</span>
+<span class="sd">* Brutos (i.e., sem organização para o registro_teste)</span>
 <span class="sd">* Com terminador</span>
 <span class="sd">* Prefixado pelo comprimento</span>
 <span class="sd">* De comprimento fixo predefinido</span>
@@ -69,7 +69,7 @@
 
 <span class="n">terminador_de_registro</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Byte terminador de registro. Deve diferir do terminador de campo.</span>
+<span class="sd">Byte terminador de registro_teste. Deve diferir do terminador de campo.</span>
 <span class="sd">(valor padrão ``0x01``)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -102,16 +102,16 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tipo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        O nome do tipo do registro, usado apenas para consulta. São exemplos</span>
-<span class="sd">        ``registro fixo`` e ``registro terminador``.</span>
+<span class="sd">        O nome do tipo do registro_teste, usado apenas para consulta. São exemplos</span>
+<span class="sd">        ``registro_teste fixo`` e ``registro_teste terminador``.</span>
 
-<span class="sd">        :return: o nome do tipo do registro</span>
+<span class="sd">        :return: o nome do tipo do registro_teste</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span>
 
     <span class="k">def</span> <span class="nf">__adicione_um_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Acréscimo de um campo a registro, com criação de um atributo e</span>
+<span class="sd">        Acréscimo de um campo a registro_teste, com criação de um atributo e</span>
 <span class="sd">        inclusão na lista de campos.</span>
 
 <span class="sd">        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo),</span>
@@ -132,7 +132,7 @@
 
 <div class="viewcode-block" id="RegistroBasico.adicione_campos"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.adicione_campos">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Inclusão de uma sequência de campos ao registro</span>
+<span class="sd">        Inclusão de uma sequência de campos ao registro_teste</span>
 
 <span class="sd">        :param list[tuple[str, CampoBasico] lista_campos: uma sequência de um ou</span>
 <span class="sd">            mais campos, cada um especificado pela tupla (nome_do_campo, campo),</span>
@@ -144,10 +144,10 @@
 
 <div class="viewcode-block" id="RegistroBasico.de_bytes"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dados_registro</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Varredura da sequência de bytes que formam um registro para a obtenção</span>
+<span class="sd">        Varredura da sequência de bytes que formam um registro_teste para a obtenção</span>
 <span class="sd">        dos dados de cada campo individual, atualizando cada um deles.</span>
 
-<span class="sd">        :param bytes dados_registro: sequência de bytes do registro</span>
+<span class="sd">        :param bytes dados_registro: sequência de bytes do registro_teste</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dados_restantes</span> <span class="o">=</span> <span class="n">dados_registro</span>
         <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
@@ -156,10 +156,10 @@
 
 <div class="viewcode-block" id="RegistroBasico.para_bytes"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Criação dos bytes do registro pela concatenação dos bytes dos campos,</span>
+<span class="sd">        Criação dos bytes do registro_teste pela concatenação dos bytes dos campos,</span>
 <span class="sd">        sucessivamente.</span>
 
-<span class="sd">        :return: sequência dos bytes do registro</span>
+<span class="sd">        :return: sequência dos bytes do registro_teste</span>
 <span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dado_do_registro</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
@@ -170,11 +170,11 @@
 
 <div class="viewcode-block" id="RegistroBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Verifica se o registro tem comprimento fixo.</span>
+<span class="sd">        Verifica se o registro_teste tem comprimento fixo.</span>
 
-<span class="sd">        O registro é considerado de tamanho fixo se qualquer uma das</span>
+<span class="sd">        O registro_teste é considerado de tamanho fixo se qualquer uma das</span>
 <span class="sd">        propriedades foram verdadeiras:</span>
-<span class="sd">        * o registro tem é marcado com _comprimento_fixo == True</span>
+<span class="sd">        * o registro_teste tem é marcado com _comprimento_fixo == True</span>
 <span class="sd">        * todos os campos tiverem comprimento fixo</span>
 
 <span class="sd">        :return: `True` se o comprimento for fixo, `False` caso contrário</span>
@@ -186,9 +186,9 @@
 
 <div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retorna o comprimento atual do registro em bytes.</span>
+<span class="sd">        Retorna o comprimento atual do registro_teste em bytes.</span>
 
-<span class="sd">        :return: o comprimento do registro em bytes</span>
+<span class="sd">        :return: o comprimento do registro_teste em bytes</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -198,8 +198,8 @@
 
 <div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Obtenção de um registro a partir do arquivo, considerando a organização</span>
-<span class="sd">        de registro em uso.</span>
+<span class="sd">        Obtenção de um registro_teste a partir do arquivo, considerando a organização</span>
+<span class="sd">        de registro_teste em uso.</span>
 
 <span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -211,7 +211,7 @@
 
 <div class="viewcode-block" id="RegistroBasico.escreva"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.escreva">[documentos]</a>    <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Escrita dos bytes do registro no arquivo, usando a organização</span>
+<span class="sd">        Escrita dos bytes do registro_teste no arquivo, usando a organização</span>
 <span class="sd">        definida.</span>
 
 <span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de escrita</span>
@@ -229,7 +229,7 @@
 
 <div class="viewcode-block" id="RegistroBasico.copia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.copia">[documentos]</a>    <span class="k">def</span> <span class="nf">copia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cópia &quot;profunda&quot; do registro.</span>
+<span class="sd">        Cópia &quot;profunda&quot; do registro_teste.</span>
 
 <span class="sd">        :return: outra instância com os mesmos valores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -252,7 +252,7 @@
     <span class="c1"># code::start bruto_leia_registro</span>
 <div class="viewcode-block" id="RegistroBruto.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBruto.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de registro bruto, feita campo a campo.</span>
+<span class="sd">        Leitura de registro_teste bruto, feita campo a campo.</span>
 
 <span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -307,9 +307,9 @@
 
 <div class="viewcode-block" id="RegistroFixo.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroFixo.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retorna o comprimento do registro em bytes.</span>
+<span class="sd">        Retorna o comprimento do registro_teste em bytes.</span>
 
-<span class="sd">        :return: o comprimento do registro em bytes</span>
+<span class="sd">        :return: o comprimento do registro_teste em bytes</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_registro</span></div></div>

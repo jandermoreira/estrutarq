@@ -49,11 +49,11 @@
 <span id="pacote-estrutarq-registro"></span><h1>Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.registro</span></code><a class="headerlink" href="#module-estrutarq.registro" title="Link permanente para este título">¶</a></h1>
 <p>Implementação de organizações de registros.</p>
 <span class="target" id="module-estrutarq.registro.registro_comum"></span><p>Registros como coleção de campos.</p>
-<p>Uma classe básica <a class="reference internal" href="#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegistroBasico</span></code></a>
+<p>Uma classe básica <code class="xref py py-class docutils literal notranslate"><span class="pre">RegistroBasico</span></code>
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
 são derivados registros:</p>
 <ul class="simple">
-<li><p>Brutos (i.e., sem organização para o registro)</p></li>
+<li><p>Brutos (i.e., sem organização para o registro_teste)</p></li>
 <li><p>Com terminador</p></li>
 <li><p>Prefixado pelo comprimento</p></li>
 <li><p>De comprimento fixo predefinido</p></li>
@@ -61,7 +61,7 @@ são derivados registros:</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.terminador_de_registro">
 <span class="sig-name descname"><span class="pre">terminador_de_registro</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x01'</span></em><a class="headerlink" href="#estrutarq.registro.registro_comum.terminador_de_registro" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Byte terminador de registro. Deve diferir do terminador de campo.
+<dd><p>Byte terminador de registro_teste. Deve diferir do terminador de campo.
 (valor padrão <code class="docutils literal notranslate"><span class="pre">0x01</span></code>)</p>
 </dd></dl>
 
@@ -91,11 +91,11 @@ tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.tipo">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tipo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.tipo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>O nome do tipo do registro, usado apenas para consulta. São exemplos
-<code class="docutils literal notranslate"><span class="pre">registro</span> <span class="pre">fixo</span></code> e <code class="docutils literal notranslate"><span class="pre">registro</span> <span class="pre">terminador</span></code>.</p>
+<dd><p>O nome do tipo do registro_teste, usado apenas para consulta. São exemplos
+<code class="docutils literal notranslate"><span class="pre">registro_teste</span> <span class="pre">fixo</span></code> e <code class="docutils literal notranslate"><span class="pre">registro_teste</span> <span class="pre">terminador</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o nome do tipo do registro</p>
+<dd class="field-odd"><p>o nome do tipo do registro_teste</p>
 </dd>
 </dl>
 </dd></dl>
@@ -103,7 +103,7 @@ tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.adicione_campos">
 <span class="sig-name descname"><span class="pre">adicione_campos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lista_campos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.adicione_campos"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.adicione_campos" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Inclusão de uma sequência de campos ao registro</p>
+<dd><p>Inclusão de uma sequência de campos ao registro_teste</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>lista_campos</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(em Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="campo.html#estrutarq.campo.CampoBasico" title="estrutarq.campo.CampoBasico"><em>CampoBasico</em></a><em>]</em>) – uma sequência de um ou
@@ -117,11 +117,11 @@ uma instância de um campo válido</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.de_bytes">
 <span class="sig-name descname"><span class="pre">de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dados_registro</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.de_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Varredura da sequência de bytes que formam um registro para a obtenção
+<dd><p>Varredura da sequência de bytes que formam um registro_teste para a obtenção
 dos dados de cada campo individual, atualizando cada um deles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>dados_registro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes do registro</p>
+<dd class="field-odd"><p><strong>dados_registro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – sequência de bytes do registro_teste</p>
 </dd>
 </dl>
 </dd></dl>
@@ -129,11 +129,11 @@ dos dados de cada campo individual, atualizando cada um deles.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.para_bytes">
 <span class="sig-name descname"><span class="pre">para_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.para_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.para_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Criação dos bytes do registro pela concatenação dos bytes dos campos,
+<dd><p>Criação dos bytes do registro_teste pela concatenação dos bytes dos campos,
 sucessivamente.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>sequência dos bytes do registro</p>
+<dd class="field-odd"><p>sequência dos bytes do registro_teste</p>
 </dd>
 <dt class="field-even">Tipo de retorno</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
@@ -144,10 +144,10 @@ sucessivamente.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo">
 <span class="sig-name descname"><span class="pre">tem_comprimento_fixo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.tem_comprimento_fixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Verifica se o registro tem comprimento fixo.</p>
-<p>O registro é considerado de tamanho fixo se qualquer uma das
+<dd><p>Verifica se o registro_teste tem comprimento fixo.</p>
+<p>O registro_teste é considerado de tamanho fixo se qualquer uma das
 propriedades foram verdadeiras:
-* o registro tem é marcado com _comprimento_fixo == True
+* o registro_teste tem é marcado com _comprimento_fixo == True
 * todos os campos tiverem comprimento fixo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
@@ -162,10 +162,10 @@ propriedades foram verdadeiras:
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.comprimento">
 <span class="sig-name descname"><span class="pre">comprimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.comprimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.comprimento" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Retorna o comprimento atual do registro em bytes.</p>
+<dd><p>Retorna o comprimento atual do registro_teste em bytes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o comprimento do registro em bytes</p>
+<dd class="field-odd"><p>o comprimento do registro_teste em bytes</p>
 </dd>
 <dt class="field-even">Tipo de retorno</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)">int</a></p>
@@ -176,8 +176,8 @@ propriedades foram verdadeiras:
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.leia">
 <span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.leia" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Obtenção de um registro a partir do arquivo, considerando a organização
-de registro em uso.</p>
+<dd><p>Obtenção de um registro_teste a partir do arquivo, considerando a organização
+de registro_teste em uso.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
@@ -188,7 +188,7 @@ de registro em uso.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.escreva">
 <span class="sig-name descname"><span class="pre">escreva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.escreva"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.escreva" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Escrita dos bytes do registro no arquivo, usando a organização
+<dd><p>Escrita dos bytes do registro_teste no arquivo, usando a organização
 definida.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
@@ -200,7 +200,7 @@ definida.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBasico.copia">
 <span class="sig-name descname"><span class="pre">copia</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBasico.copia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBasico.copia" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Cópia “profunda” do registro.</p>
+<dd><p>Cópia “profunda” do registro_teste.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
 <dd class="field-odd"><p>outra instância com os mesmos valores.</p>
@@ -225,7 +225,7 @@ tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroBruto.leia">
 <span class="sig-name descname"><span class="pre">leia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroBruto.leia"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroBruto.leia" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Leitura de registro bruto, feita campo a campo.</p>
+<dd><p>Leitura de registro_teste bruto, feita campo a campo.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
@@ -279,10 +279,10 @@ tuplas <code class="docutils literal notranslate"><span class="pre">(&quot;nome_
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.registro.registro_comum.RegistroFixo.comprimento">
 <span class="sig-name descname"><span class="pre">comprimento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></span><a class="reference internal" href="_modules/estrutarq/registro/registro_comum.html#RegistroFixo.comprimento"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.registro.registro_comum.RegistroFixo.comprimento" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Retorna o comprimento do registro em bytes.</p>
+<dd><p>Retorna o comprimento do registro_teste em bytes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o comprimento do registro em bytes</p>
+<dd class="field-odd"><p>o comprimento do registro_teste em bytes</p>
 </dd>
 <dt class="field-even">Tipo de retorno</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)">int</a></p>

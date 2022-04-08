@@ -25,10 +25,18 @@ from estrutarq.registro import RegistroBasico
 
 class ArquivoBasico(metaclass = ABCMeta):
     """
-    Gerenciador dedicado a um único arquivo aberto
+    Classe básica para um gerenciador de dedicado a um único arquivo.
+
+    Se o arquivo não existir, ele é criado. Se já existir, ele é aberto para
+    acesso.
+
+    :param str tipo: nome do tipo (passado pela subclasse)
+    :param str nome_arquivo: nome do arquivo binário
+    :param bool, opcional novo: se `True`, o arquivo é tornado vazio, mesmo
+        que já preexistente (valor padrão: `False`)
     """
 
-    def __init__(self, nome_arquivo: str, tipo: str, novo: bool = False):
+    def __init__(self, tipo: str, nome_arquivo: str, novo: bool = False):
         self.tipo = tipo
         self.nome_arquivo = nome_arquivo
         if not exists(self.nome_arquivo) or novo:
@@ -63,35 +71,47 @@ class ArquivoBasico(metaclass = ABCMeta):
     @abstractmethod
     def _inicie_arquivo_novo(self):
         """
-        Iniciação necessária depois da criação de um novo arquivo
+        Iniciação necessária depois da criação de um novo arquivo.
         """
         pass
 
     @abstractmethod
     def _inicie_arquivo_existente(self):
         """
-        Iniciação necessária depois da abertura de um arquivo já existente
+        Iniciação necessária depois da abertura de um arquivo já existente.
         """
         pass
 
     @abstractmethod
     def leia(self) -> RegistroBasico:
         """
-        Leitura de um registro do arquivo
+        Leitura de um registro do arquivo a partir da posição corrente. Ao
+        final da leitura, a posição corrente é o próximo byte depois do último
+        escrito.
+
         :return: o registro lido
+        :rtype: RegistroBasico
         """
         pass
 
     @abstractmethod
     def escreva(self, registro: RegistroBasico):
         """
-        Gravação de um registro no arquivo
+        Gravação de um registro no arquivo.
+
+        :param RegistroBasico registro: um registro para ser gravado
         """
         pass
 
     def feche(self):
         """
-        Fechamento do arquivo associado
+        Fechamento do arquivo associado.
+        """
+        self.arquivo.close()
+
+    def reabra(self):
+        """
+        O arquivo associado é aberto novamente, preservando o conteúdo.
         """
         self.arquivo.close()
 
@@ -112,13 +132,13 @@ class ArquivoBasico(metaclass = ABCMeta):
 class ArquivoSimples(ArquivoBasico):
     """
     Gerenciador de arquivo simples (como fluxo de dados) com registros de
-    comprimento fixo. Nenhuma consideração sobre blocos ou outro aspecto de
-    acesso ao dispositivo de armazenamento secundário é feita.
+    comprimento fixo ou variável. Nenhuma consideração sobre blocos ou
+    outro aspecto de acesso ao dispositivo de armazenamento secundário é feita.
     """
 
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
                  **kwargs):
-        ArquivoBasico.__init__(self, nome_arquivo, "simples fixo", **kwargs)
+        ArquivoBasico.__init__(self, "simples", nome_arquivo, **kwargs)
         self.esquema_registro = esquema_registro.copia()
         if esquema_registro.tem_comprimento_fixo():
             self.comprimento_registro = esquema_registro.comprimento()
@@ -143,7 +163,10 @@ class ArquivoSimples(ArquivoBasico):
 
     def leia_fixo(self, posicao_relativa: int = None) -> RegistroBasico:
         """
-        Leitura de um registro de comprimento fixo
+        Leitura de um registro de comprimento, usando a posição corrente do
+        arquivo. Ao final da escrita, a posição corrente é o próximo byte
+        depois do último escrito.
+
         :param posicao_relativa: posição relativa do registro no arquivo,
             com o primeiro registro sendo o registro 0
         :return: o registro lido
