@@ -1,16 +1,15 @@
 """
-Campos para armazenamento de cadeias de caracteres, provendo classes
-para uso de campos cujo conteúdo é uma cadeia de caracteres.
-Internamente, o tipo :class:`str` é usado para armazenamento e a
-transformação para sequência de bytes usa a codificação UTF-8.
+Arquivos para o armazenamento de registros.
 
-Uma classe básica :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
+Uma classe básica :class:`~.estrutarq.arquivo.arquivo_comum.ArquivoBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
-são derivados campos:
+são derivados arquivos:
 
-* Com terminador
-* Prefixado pelo comprimento
-* De comprimento fixo predefinido
+* Simples (sem considerar blocos*)
+* Estruturados (considerando o blocos*)
+
+* O termo *blocos* é usado no contexto do acesso aos dispositivos de
+arqmazenamento em memória secundária.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
@@ -112,8 +111,14 @@ class ArquivoBasico(metaclass = ABCMeta):
     def reabra(self):
         """
         O arquivo associado é aberto novamente, preservando o conteúdo.
+
+        :raise FileNotFound: se 
         """
-        self.arquivo.close()
+        if exists(self.nome_arquivo):
+            self._abra_arquivo_existente()
+        else:
+            raise FileNotFoundError(f"Arquivo não encontrado: " +
+                                    f"{self.nome_arquivo}.")
 
     def posicao_atual(self):
         """

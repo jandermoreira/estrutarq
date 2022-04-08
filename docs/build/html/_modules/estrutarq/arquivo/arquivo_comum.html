@@ -38,18 +38,17 @@
             
   <h1>Código fonte para estrutarq.arquivo.arquivo_comum</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Campos para armazenamento de cadeias de caracteres, provendo classes</span>
-<span class="sd">para uso de campos cujo conteúdo é uma cadeia de caracteres.</span>
-<span class="sd">Internamente, o tipo :class:`str` é usado para armazenamento e a</span>
-<span class="sd">transformação para sequência de bytes usa a codificação UTF-8.</span>
+<span class="sd">Arquivos para o armazenamento de registros.</span>
 
-<span class="sd">Uma classe básica :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`</span>
+<span class="sd">Uma classe básica :class:`~.estrutarq.arquivo.arquivo_comum.ArquivoBasico`</span>
 <span class="sd">define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela</span>
-<span class="sd">são derivados campos:</span>
+<span class="sd">são derivados arquivos:</span>
 
-<span class="sd">* Com terminador</span>
-<span class="sd">* Prefixado pelo comprimento</span>
-<span class="sd">* De comprimento fixo predefinido</span>
+<span class="sd">* Simples (sem considerar blocos*)</span>
+<span class="sd">* Estruturados (considerando o blocos*)</span>
+
+<span class="sd">* O termo *blocos* é usado no contexto do acesso aos dispositivos de</span>
+<span class="sd">arqmazenamento em memória secundária.</span>
 
 <span class="sd">..</span>
 <span class="sd">    Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007</span>
@@ -136,9 +135,7 @@
 <div class="viewcode-block" id="ArquivoBasico.escreva"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoBasico.escreva">[documentos]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">escreva</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registro</span><span class="p">:</span> <span class="n">RegistroBasico</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Gravação de um registro no arquivo, usando a posição corrente do</span>
-<span class="sd">        arquivo. Ao final da escrita, a posição corrente é o próximo byte</span>
-<span class="sd">        depois do último escrito.</span>
+<span class="sd">        Gravação de um registro no arquivo.</span>
 
 <span class="sd">        :param RegistroBasico registro: um registro para ser gravado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -147,6 +144,12 @@
 <div class="viewcode-block" id="ArquivoBasico.feche"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoBasico.feche">[documentos]</a>    <span class="k">def</span> <span class="nf">feche</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fechamento do arquivo associado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ArquivoBasico.reabra"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoBasico.reabra">[documentos]</a>    <span class="k">def</span> <span class="nf">reabra</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        O arquivo associado é aberto novamente, preservando o conteúdo.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
@@ -198,7 +201,10 @@
 
 <div class="viewcode-block" id="ArquivoSimples.leia_fixo"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">leia_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">posicao_relativa</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegistroBasico</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Leitura de um registro de comprimento fixo</span>
+<span class="sd">        Leitura de um registro de comprimento, usando a posição corrente do</span>
+<span class="sd">        arquivo. Ao final da escrita, a posição corrente é o próximo byte</span>
+<span class="sd">        depois do último escrito.</span>
+
 <span class="sd">        :param posicao_relativa: posição relativa do registro no arquivo,</span>
 <span class="sd">            com o primeiro registro sendo o registro 0</span>
 <span class="sd">        :return: o registro lido</span>
