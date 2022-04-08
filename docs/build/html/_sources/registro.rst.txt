@@ -1,6 +1,7 @@
 Pacote ``estrutarq.registro``
 =============================
 
-Módulo ``estrutarq.registro.registro_comum``
---------------------------------------------
+.. automodule:: estrutarq.registro
 
+.. automodule:: estrutarq.registro.registro_comum
+   :members:

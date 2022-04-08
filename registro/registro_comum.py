@@ -24,11 +24,20 @@ from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
 from estrutarq.utilitarios.geral import verifique_versao
 
-#######
+# Verificação de versão necessária para uso de registros
 verifique_versao()
 
 terminador_de_registro = b"\x01"
+"""
+Byte terminador de registro. Deve diferir do terminador de campo.
+(valor padrão ``0x01``)
+"""
+
 preenchimento_de_registro = b"\xfe"
+"""
+Byte usado no preenchimento de registros de comprimento fixo. Deve diferir
+do preenchimento de campo. (valor padrão ``0xFE``)
+"""
 
 
 class RegistroBasico(DadoBasico, metaclass = ABCMeta):
@@ -109,14 +118,15 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def tem_comprimento_fixo(self):
         """
-        Verifica se o registro tem comprimento fixo
-
-        :return: True se o comprimento for fixo
+        Verifica se o registro tem comprimento fixo.
 
         O registro é considerado de tamanho fixo se qualquer uma das
         propriedades foram verdadeiras:
         # o registro tem é marcado com _comprimento_fixo == True
         # todos os campos tiverem comprimento fixo
+
+        :return: True se o comprimento for fixo
+
         """
         return self._comprimento_fixo or all(
             campo._comprimento_fixo for campo in self.lista_campos.values())
