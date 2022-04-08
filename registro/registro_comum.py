@@ -39,7 +39,11 @@ Byte usado no preenchimento de registros de comprimento fixo. Deve diferir
 do preenchimento de campo. (valor padrão ``0xFE``)
 """
 
-EspecificacaoCampo = tuple[str, CampoBasico]
+# EspecificacaoCampo = tuple[str, CampoBasico]
+# """
+# Para os registros, cada campo é especificado por uma tupla contendo o nome do
+# campo e uma instância de um campo.
+# """
 
 class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
@@ -49,11 +53,11 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     manipulados individualmente.
 
     :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)
-    :param list[EspecificacaoCampo], opcional lista_campos: lista com tuplas
+    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com tuplas
         ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, tipo: str, *lista_campos: EspecificacaoCampo):
+    def __init__(self, tipo: str, *lista_campos: tuple[str, CampoBasico]):
         DadoBasico.__init__(self)
         self.__tipo = tipo
         self.lista_campos = {}
@@ -64,12 +68,12 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def tipo(self):
         return self.__tipo
 
-    def __adicione_um_campo(self, campo: EspecificacaoCampo):
+    def __adicione_um_campo(self, campo: tuple[str, CampoBasico]):
         """
         Acréscimo de um campo a registro, com criação de um atributo e
         inclusão na lista de campos
 
-        :param Especificcao_campo campo: uma tupla (nome_arquivo, campo), com
+        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo), com
             nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo uma
             instância de um campo válido
         """
@@ -87,13 +91,13 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         setattr(self, nome_campo, tipo_campo.copy())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
 
-    def adicione_campos(self, *lista_campos: list[CampoBasico, ...]):
+    def adicione_campos(self, *lista_campos: tuple[str, CampoBasico]):
         """
         Inclusão de uma sequência de campos ao registro
 
-        :param lista_campos: uma sequência de um ou mais campos, cada um
-            especificado pela tupla (nome_arquivo, campo), com
-            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo
+        :param list[tuple[str, CampoBasico] lista_campos: uma sequência de um ou
+            mais campos, cada um especificado pela tupla (nome_do_campo, campo),
+            com nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo
             uma instância de um campo válido
         """
         for campo in lista_campos:

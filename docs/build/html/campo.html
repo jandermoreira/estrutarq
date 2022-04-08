@@ -47,19 +47,11 @@
             
   <section id="module-estrutarq.campo">
 <span id="pacote-estrutarq-campo"></span><h1>Pacote <code class="docutils literal notranslate"><span class="pre">estrutarq.campo</span></code><a class="headerlink" href="#module-estrutarq.campo" title="Link permanente para este título">¶</a></h1>
-<p>Implementação de organizações de campos.</p>
 <section id="module-estrutarq.campo.campo_comum">
 <span id="organizacao-basica"></span><h2>Organização básica<a class="headerlink" href="#module-estrutarq.campo.campo_comum" title="Link permanente para este título">¶</a></h2>
-<p>Implementação de campos, provendo a classe básica para definição de campos.</p>
-<p>Uma classe básica <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBasico</span></code></a>
-define uma classe abstrata (ABC) com as propriedades e métodos gerais.
-Dela são derivados os demais campos.
-A classe <a class="reference internal" href="#estrutarq.campo.CampoBruto" title="estrutarq.campo.campo_comum.CampoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">CampoBruto</span></code></a>, também
-disponibilizada, define um campo sem organização que utiliza
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> (UTF-8) como valor.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="estrutarq.campo.campo_comum.terminador_de_campo">
-<span class="sig-name descname"><span class="pre">terminador_de_campo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">b'\x00'</span></em><a class="headerlink" href="#estrutarq.campo.campo_comum.terminador_de_campo" title="Link permanente para esta definição">¶</a></dt>
+<span class="sig-name descname"><span class="pre">terminador_de_campo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#estrutarq.campo.campo_comum.terminador_de_campo" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>O terminador de campo é um byte único usado como delimitador para o
 fim do campo. O valor padrão é <code class="docutils literal notranslate"><span class="pre">0x00</span></code>.</p>
 </dd></dl>
@@ -70,7 +62,7 @@ fim do campo. O valor padrão é <code class="docutils literal notranslate"><spa
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBasico">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoBasico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBasico"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBasico" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
 <p>Classe básica para campo, a menor unidade de informação.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
@@ -203,7 +195,7 @@ arquivo, incluindo a organização de dados.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.campo.CampoBruto">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CampoBruto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/campo/campo_comum.html#CampoBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.campo.CampoBruto" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.DadoBruto" title="estrutarq.dado.dado_comum.DadoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBruto</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="dado.html#estrutarq.dado.dado_comum.DadoBruto" title="estrutarq.dado.dado_comum.DadoBruto"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBruto</span></code></a>, <a class="reference internal" href="#estrutarq.campo.CampoBasico" title="estrutarq.campo.campo_comum.CampoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.campo.campo_comum.CampoBasico</span></code></a></p>
 <p>Implementação das funções de um campo bruto, ou seja, sem organização
 de campo. O valor é sempre armazenado como cadeia de caracteres com
 codificação de caracteres UTF-8.</p>

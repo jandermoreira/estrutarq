@@ -78,6 +78,11 @@
 <span class="sd">do preenchimento de campo. (valor padrão ``0xFE``)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="c1"># EspecificacaoCampo = tuple[str, CampoBasico]</span>
+<span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1"># Para os registros, cada campo é especificado por uma tupla contendo o nome do</span>
+<span class="c1"># campo e uma instância de um campo.</span>
+<span class="c1"># &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="RegistroBasico"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico">[documentos]</a><span class="k">class</span> <span class="nc">RegistroBasico</span><span class="p">(</span><span class="n">DadoBasico</span><span class="p">,</span> <span class="n">metaclass</span> <span class="o">=</span> <span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -87,11 +92,11 @@
 <span class="sd">    manipulados individualmente.</span>
 
 <span class="sd">    :param str tipo: o nome do tipo do parâmetro (definido pelas subclasses)</span>
-<span class="sd">    :param list[CampoBasico, ...], opcional lista_campos: lista ou tupla com</span>
-<span class="sd">        instanciação de campos</span>
+<span class="sd">    :param list[tuple[str, CampoBasico]], opcional lista_campos: lista com tuplas</span>
+<span class="sd">        ``(&quot;nome_campo&quot;, Campo())``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tipo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="n">DadoBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span> <span class="o">=</span> <span class="n">tipo</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span> <span class="o">=</span> <span class="p">{}</span>
@@ -102,14 +107,14 @@
     <span class="k">def</span> <span class="nf">tipo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span>
 
-    <span class="k">def</span> <span class="nf">__adicione_um_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">)):</span>
+    <span class="k">def</span> <span class="nf">__adicione_um_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Acréscimo de um campo a registro, com criação de um atributo e</span>
 <span class="sd">        inclusão na lista de campos</span>
 
-<span class="sd">        :param campo: uma tupla (nome_arquivo, campo), com nome_arquivo (str)</span>
-<span class="sd">            sendo o nome_arquivo do campo e campo sendo uma instância de um</span>
-<span class="sd">            campo válido</span>
+<span class="sd">        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo), com</span>
+<span class="sd">            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo uma</span>
+<span class="sd">            instância de um campo válido</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">nome_campo</span> <span class="o">=</span> <span class="n">campo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">tipo_campo</span> <span class="o">=</span> <span class="n">campo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -125,13 +130,13 @@
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">,</span> <span class="n">tipo_campo</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="p">[</span><span class="n">nome_campo</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RegistroBasico.adicione_campos"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.adicione_campos">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.adicione_campos"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.adicione_campos">[documentos]</a>    <span class="k">def</span> <span class="nf">adicione_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inclusão de uma sequência de campos ao registro</span>
 
-<span class="sd">        :param lista_campos: uma sequência de um ou mais campos, cada um</span>
-<span class="sd">            especificado pela tupla (nome_arquivo, campo), com</span>
-<span class="sd">            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo</span>
+<span class="sd">        :param list[tuple[str, CampoBasico] lista_campos: uma sequência de um ou</span>
+<span class="sd">            mais campos, cada um especificado pela tupla (nome_do_campo, campo),</span>
+<span class="sd">            com nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo</span>
 <span class="sd">            uma instância de um campo válido</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="n">lista_campos</span><span class="p">:</span>
