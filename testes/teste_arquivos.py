@@ -98,24 +98,24 @@ def main():
             ("sobrenome", CampoCadeiaPrefixado()),
             ("endereco", CampoCadeiaTerminador()),
         ),
-        # RegistroBruto(
-        #     ("numero", CampoIntBinario()),
-        #     ("nome", CampoCadeiaFixo(12)),
-        #     ("sobrenome", CampoCadeiaTerminador()),
-        #     ("endereco", CampoCadeiaTerminador()),
-        # ),
-        # RegistroTerminador(
-        #     ("numero", CampoIntBinario()),
-        #     ("nome", CampoCadeiaTerminador()),
-        #     ("sobrenome", CampoCadeiaPrefixado()),
-        #     ("endereco", CampoCadeiaPrefixado()),
-        # ),
-        # RegistroPrefixado(
-        #     ("numero", CampoIntBinario()),
-        #     ("nome", CampoCadeiaFixo(12)),
-        #     ("sobrenome", CampoCadeiaTerminador()),
-        #     ("endereco", CampoCadeiaTerminador()),
-        # ),
+        RegistroBruto(
+            ("numero", CampoIntBinario()),
+            ("nome", CampoCadeiaFixo(12)),
+            ("sobrenome", CampoCadeiaTerminador()),
+            ("endereco", CampoCadeiaTerminador()),
+        ),
+        RegistroTerminador(
+            ("numero", CampoIntBinario()),
+            ("nome", CampoCadeiaTerminador()),
+            ("sobrenome", CampoCadeiaPrefixado()),
+            ("endereco", CampoCadeiaPrefixado()),
+        ),
+        RegistroPrefixado(
+            ("numero", CampoIntBinario()),
+            ("nome", CampoCadeiaFixo(12)),
+            ("sobrenome", CampoCadeiaTerminador()),
+            ("endereco", CampoCadeiaTerminador()),
+        ),
     ]
     msg = ""
     for registro in lista_testes:

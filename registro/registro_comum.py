@@ -142,7 +142,8 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :rtype: bool
         """
         return self._comprimento_fixo or all(
-            campo._comprimento_fixo for campo in self.lista_campos.values())
+            campo.tem_comprimento_fixo() for campo
+            in self.lista_campos.values())
 
     def comprimento(self) -> int:
         """
@@ -151,11 +152,9 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :return: o comprimento do registro em bytes
         :rtype: int
         """
-       if self._comprimento_fixo:
-            return self._comprimento
-        else:
-            return sum(
-                campo.comprimento() for campo in self.lista_campos.values())
+
+        return sum(campo.comprimento() for campo in self.lista_campos.values())
+
     # code::start basico_leia
 
     def leia(self, arquivo: BinaryIO):
@@ -265,3 +264,13 @@ class RegistroFixo(DadoFixo, RegistroBasico):
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)
         self._comprimento_fixo = True
+        self._comprimento_registro = comprimento
+
+    def comprimento(self) -> int:
+        """
+        Retorna o comprimento do registro em bytes.
+
+        :return: o comprimento do registro em bytes
+        :rtype: int
+        """
+        return self._comprimento_registro

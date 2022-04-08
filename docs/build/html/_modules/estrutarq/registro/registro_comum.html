@@ -181,8 +181,8 @@
 <span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span>
-            <span class="n">campo</span><span class="o">.</span><span class="n">tem_comprimento_fixo</span><span class="p">()</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+            <span class="n">campo</span><span class="o">.</span><span class="n">tem_comprimento_fixo</span><span class="p">()</span> <span class="k">for</span> <span class="n">campo</span>
+            <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -191,9 +191,11 @@
 <span class="sd">        :return: o comprimento do registro em bytes</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">comprimento</span><span class="p">()</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
     <span class="c1"># code::start basico_leia</span>
+
 <div class="viewcode-block" id="RegistroBasico.leia"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.leia">[documentos]</a>    <span class="k">def</span> <span class="nf">leia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arquivo</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtenção de um registro a partir do arquivo, considerando a organização</span>
@@ -201,6 +203,7 @@
 
 <span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">bytes_arquivo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_de_arquivo</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">de_bytes</span><span class="p">(</span><span class="n">bytes_arquivo</span><span class="p">)</span></div>
 
@@ -299,7 +302,17 @@
         <span class="n">RegistroBasico</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;fixo&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">lista_campos</span><span class="p">)</span>
         <span class="n">DadoFixo</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comprimento</span><span class="p">,</span>
                           <span class="n">preenchimento</span> <span class="o">=</span> <span class="n">preenchimento_de_registro</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">True</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_registro</span> <span class="o">=</span> <span class="n">comprimento</span>
+
+<div class="viewcode-block" id="RegistroFixo.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroFixo.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna o comprimento do registro em bytes.</span>
+
+<span class="sd">        :return: o comprimento do registro em bytes</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_registro</span></div></div>
 </pre></div>
 
             <div class="clearer"></div>
