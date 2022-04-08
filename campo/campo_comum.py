@@ -47,7 +47,6 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         é usado internamente com nenhum fim) e pode ser consultado externamente.
 
         :return: Retorna o tipo do campo
-        :tipo: str
         """
         return self.__tipo
 
@@ -173,7 +172,6 @@ class CampoBruto(DadoBruto, CampoBasico):
 
         :Recebe: Recebe uma cadeia de caracteres
         :return: Retorna o valor armazenado no campo
-        :tipo: str
         """
         return self.__valor
 

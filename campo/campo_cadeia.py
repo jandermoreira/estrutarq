@@ -43,7 +43,6 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 
         :Recebe: Recebe um valor para ser armazenado
         :return: Retorna o valor atual do campo
-        :tipo: str
         """
         return self.__valor
 

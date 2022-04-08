@@ -39,6 +39,7 @@ Byte usado no preenchimento de registros de comprimento fixo. Deve diferir
 do preenchimento de campo. (valor padrão ``0xFE``)
 """
 
+
 # EspecificacaoCampo = tuple[str, CampoBasico]
 # """
 # Para os registros, cada campo é especificado por uma tupla contendo o nome do
@@ -65,29 +66,33 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         self._comprimento_fixo = False
 
     @property
-    def tipo(self):
+    def tipo(self) -> str:
+        """
+        O nome do tipo do registro, usado apenas para consulta. São exemplos
+        ``registro fixo`` e ``registro terminador``.
+
+        :return: o nome do tipo do registro
+        """
         return self.__tipo
 
     def __adicione_um_campo(self, campo: tuple[str, CampoBasico]):
         """
         Acréscimo de um campo a registro, com criação de um atributo e
-        inclusão na lista de campos
+        inclusão na lista de campos.
 
-        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo), com
-            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo uma
-            instância de um campo válido
+        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo),
+            com nome_arquivo (str) sendo o nome_arquivo do campo e campo
+            sendo uma instância de um campo válido
+        :raise AttributeError: se o nome do campo não for um identificador
+            válido
         """
         nome_campo = campo[0]
         tipo_campo = campo[1]
         identificador = compile(r"^\w[_\w\d]+$")
         if not isinstance(nome_campo, str) or \
                 not identificador.match(campo[0]):
-            mensagem = "O nome_arquivo do campo deve ser " + \
-                       f"um identificador válido ('{nome_campo}')."
-            raise TypeError(mensagem)
-        # if not isinstance(tipo_campo, str):
-        #     print("************", type(tipo_campo))
-        #     raise TypeError("Esperado um campo valido para o registro.")
+            raise AttributeError("O nome_arquivo do campo deve ser " + \
+                                 f"um identificador válido ('{nome_campo}').")
         setattr(self, nome_campo, tipo_campo.copia())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
 
@@ -105,9 +110,10 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def de_bytes(self, dados_registro: bytes):
         """
-        Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro
+        Varredura da sequência de bytes que formam um registros para a obtenção
+        dos dados de cada campo individual, atualizando cada um deles.
 
-        :param dados_registro: sequência de bytes do registro
+        :param bytes dados_registro: sequência de bytes do registro
         """
         dados_restantes = dados_registro
         for campo in self.lista_campos.values():
@@ -117,37 +123,38 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     def para_bytes(self) -> bytes:
         """
         Criação dos bytes do registro pela concatenação dos bytes dos campos,
-        sucessivamente
+        sucessivamente.
 
-        :return: sequência dos bytes dos campos
+        :return: sequência dos bytes do registro
+        :rtype: bytes
         """
-        dado_campos = bytes()
+        dado_do_registro = bytes()
         for campo in self.lista_campos.values():
-            dado_campos += campo.adicione_formatacao(campo.valor_para_bytes())
-        return dado_campos
+            dado_do_registro += \
+                campo.adicione_formatacao(campo.valor_para_bytes())
+        return dado_do_registro
 
-    def tem_comprimento_fixo(self):
+    def tem_comprimento_fixo(self) -> bool:
         """
         Verifica se o registro tem comprimento fixo.
 
         O registro é considerado de tamanho fixo se qualquer uma das
         propriedades foram verdadeiras:
-        # o registro tem é marcado com _comprimento_fixo == True
-        # todos os campos tiverem comprimento fixo
+        * o registro tem é marcado com _comprimento_fixo == True
+        * todos os campos tiverem comprimento fixo
 
-        :return: True se o comprimento for fixo
-
+        :return: `True` se o comprimento for fixo, `False` caso contrário
+        :rtype: bool
         """
         return self._comprimento_fixo or all(
             campo._comprimento_fixo for campo in self.lista_campos.values())
 
-    def comprimento(self):
+    def comprimento(self) -> int:
         """
-        Retorna o comprimento do registro em bytes caso ele tenha comprimento
-        total fixo
+        Retorna o comprimento atual do registro em bytes.
 
-        :return: o comprimento do registro em bytes ou None se tiver
-            comprimento variável
+        :return: o comprimento do registro em bytes
+        :rtype: int
         """
         if self._comprimento_fixo:
             return self._comprimento

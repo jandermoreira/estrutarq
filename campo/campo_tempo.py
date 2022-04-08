@@ -78,7 +78,6 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
 
         :Recebe: Recebe o tempo em uma cadeia formatada
         :return: Retorna o tempo em uma cadeia formatada
-        :tipo: str
         """
         return strftime(self.__formato_tempo, localtime(self.segundos))
 
@@ -102,7 +101,6 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
 
         :Recebe: Recebe o tempo em segundos
         :return: Retorna o tempo em segundos
-        :tipo: int
         """
         return self.__valor
 

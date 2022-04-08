@@ -78,6 +78,7 @@
 <span class="sd">do preenchimento de campo. (valor padrão ``0xFE``)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+
 <span class="c1"># EspecificacaoCampo = tuple[str, CampoBasico]</span>
 <span class="c1"># &quot;&quot;&quot;</span>
 <span class="c1"># Para os registros, cada campo é especificado por uma tupla contendo o nome do</span>
@@ -104,29 +105,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tipo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">tipo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        O nome do tipo do registro, usado apenas para consulta. São exemplos</span>
+<span class="sd">        ``registro fixo`` e ``registro terminador``.</span>
+
+<span class="sd">        :return: o nome do tipo do registro</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span>
 
     <span class="k">def</span> <span class="nf">__adicione_um_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CampoBasico</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Acréscimo de um campo a registro, com criação de um atributo e</span>
-<span class="sd">        inclusão na lista de campos</span>
+<span class="sd">        inclusão na lista de campos.</span>
 
-<span class="sd">        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo), com</span>
-<span class="sd">            nome_arquivo (str) sendo o nome_arquivo do campo e campo sendo uma</span>
-<span class="sd">            instância de um campo válido</span>
+<span class="sd">        :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo),</span>
+<span class="sd">            com nome_arquivo (str) sendo o nome_arquivo do campo e campo</span>
+<span class="sd">            sendo uma instância de um campo válido</span>
+<span class="sd">        :raise AttributeError: se o nome do campo não for um identificador</span>
+<span class="sd">            válido</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">nome_campo</span> <span class="o">=</span> <span class="n">campo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">tipo_campo</span> <span class="o">=</span> <span class="n">campo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">identificador</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\w[_\w\d]+$&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nome_campo</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> \
                 <span class="ow">not</span> <span class="n">identificador</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">campo</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">mensagem</span> <span class="o">=</span> <span class="s2">&quot;O nome_arquivo do campo deve ser &quot;</span> <span class="o">+</span> \
-                       <span class="sa">f</span><span class="s2">&quot;um identificador válido (&#39;</span><span class="si">{</span><span class="n">nome_campo</span><span class="si">}</span><span class="s2">&#39;).&quot;</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span>
-        <span class="c1"># if not isinstance(tipo_campo, str):</span>
-        <span class="c1">#     print(&quot;************&quot;, type(tipo_campo))</span>
-        <span class="c1">#     raise TypeError(&quot;Esperado um campo valido para o registro.&quot;)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;O nome_arquivo do campo deve ser &quot;</span> <span class="o">+</span> \
+                                 <span class="sa">f</span><span class="s2">&quot;um identificador válido (&#39;</span><span class="si">{</span><span class="n">nome_campo</span><span class="si">}</span><span class="s2">&#39;).&quot;</span><span class="p">)</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">,</span> <span class="n">tipo_campo</span><span class="o">.</span><span class="n">copia</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="p">[</span><span class="n">nome_campo</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_campo</span><span class="p">)</span>
 
@@ -144,9 +149,10 @@
 
 <div class="viewcode-block" id="RegistroBasico.de_bytes"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.de_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">de_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dados_registro</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Obtenção dos bytes de cada campo a partir dos bytes do registro inteiro</span>
+<span class="sd">        Varredura da sequência de bytes que formam um registros para a obtenção</span>
+<span class="sd">        dos dados de cada campo individual, atualizando cada um deles.</span>
 
-<span class="sd">        :param dados_registro: sequência de bytes do registro</span>
+<span class="sd">        :param bytes dados_registro: sequência de bytes do registro</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dados_restantes</span> <span class="o">=</span> <span class="n">dados_registro</span>
         <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
@@ -156,37 +162,38 @@
 <div class="viewcode-block" id="RegistroBasico.para_bytes"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.para_bytes">[documentos]</a>    <span class="k">def</span> <span class="nf">para_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Criação dos bytes do registro pela concatenação dos bytes dos campos,</span>
-<span class="sd">        sucessivamente</span>
+<span class="sd">        sucessivamente.</span>
 
-<span class="sd">        :return: sequência dos bytes dos campos</span>
+<span class="sd">        :return: sequência dos bytes do registro</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dado_campos</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
+        <span class="n">dado_do_registro</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">dado_campos</span> <span class="o">+=</span> <span class="n">campo</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">dado_campos</span></div>
+            <span class="n">dado_do_registro</span> <span class="o">+=</span> \
+                <span class="n">campo</span><span class="o">.</span><span class="n">adicione_formatacao</span><span class="p">(</span><span class="n">campo</span><span class="o">.</span><span class="n">valor_para_bytes</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">dado_do_registro</span></div>
 
-<div class="viewcode-block" id="RegistroBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.tem_comprimento_fixo"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.tem_comprimento_fixo">[documentos]</a>    <span class="k">def</span> <span class="nf">tem_comprimento_fixo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Verifica se o registro tem comprimento fixo.</span>
 
 <span class="sd">        O registro é considerado de tamanho fixo se qualquer uma das</span>
 <span class="sd">        propriedades foram verdadeiras:</span>
-<span class="sd">        # o registro tem é marcado com _comprimento_fixo == True</span>
-<span class="sd">        # todos os campos tiverem comprimento fixo</span>
+<span class="sd">        * o registro tem é marcado com _comprimento_fixo == True</span>
+<span class="sd">        * todos os campos tiverem comprimento fixo</span>
 
-<span class="sd">        :return: True se o comprimento for fixo</span>
-
+<span class="sd">        :return: `True` se o comprimento for fixo, `False` caso contrário</span>
+<span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span>
             <span class="n">campo</span><span class="o">.</span><span class="n">_comprimento_fixo</span> <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lista_campos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistroBasico.comprimento"><a class="viewcode-back" href="../../../registro.html#estrutarq.registro.registro_comum.RegistroBasico.comprimento">[documentos]</a>    <span class="k">def</span> <span class="nf">comprimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retorna o comprimento do registro em bytes caso ele tenha comprimento</span>
-<span class="sd">        total fixo</span>
+<span class="sd">        Retorna o comprimento atual do registro em bytes.</span>
 
-<span class="sd">        :return: o comprimento do registro em bytes ou None se tiver</span>
-<span class="sd">            comprimento variável</span>
+<span class="sd">        :return: o comprimento do registro em bytes</span>
+<span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento_fixo</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comprimento</span>
