@@ -209,26 +209,32 @@ class ArquivoSimples(ArquivoBasico):
         partir da posição corrente, a menos que seja especificada outra posição.
         As posições são relativas aos registros (e não ao deslocamento
         de bytes), sendo que o primeiro registro o de posição 0, o segundo de
-        posição 1 e assim sucessivamente. Neste caso, a 
+        posição 1 e assim sucessivamente.
+
+        A determinação da posição relativa é feita por busca sequencial a
+        partir do início do arquivo.
 
         Ao final, a posição corrente é a do próximo byte depois do último byte
         lido.
 
-        A determinação da posição relativa é feita por busca sequencial
-
         :param posicao_relativa: posição relativa do registro no arquivo,
             com o primeiro registro sendo o registro 0
         :return: o registro lido
+        :raise EOFError: se houver uma tentativa de leitura além do fim do
+            arquivo
         """
         registro = self.esquema_registro.copia()
-        if posicao_relativa is not None:
-            # busca sequencial a partir do início do arquivo
-            self.arquivo.seek(0)
-            for i in range(posicao_relativa + 1):
+        try:
+            if posicao_relativa is not None:
+                # busca sequencial a partir do início do arquivo
+                self.arquivo.seek(0)
+                for i in range(posicao_relativa + 1):
+                    registro.leia(self.arquivo)
+            else:
+                # leitura da posição atual
                 registro.leia(self.arquivo)
-        else:
-            # leitura do próximo
-            registro.leia(self.arquivo)
+        except EOFError as erro:
+            raise EOFError(f"Fim de arquivo encontrado na leitura. {erro}")
         return registro
 
     def escreva_variavel(self, registro: RegistroBasico,
