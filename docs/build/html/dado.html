@@ -75,7 +75,7 @@ padrão: <code class="docutils literal notranslate"><span class="pre">ESC</span>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes">
 <span class="sig-name descname"><span class="pre">enchimento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lista_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(em Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.enchimento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico.enchimento_de_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Operação de enchimento de bytes (<cite>byte stuffing</cite>). Antes de cada item
+<dd><p>Operação de enchimento de bytes (<em>byte stuffing</em>). Antes de cada item
 de <code class="docutils literal notranslate"><span class="pre">lista_bytes</span></code> é acrescentado o byte <code class="docutils literal notranslate"><span class="pre">byte_enchimento</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
@@ -96,8 +96,8 @@ de <code class="docutils literal notranslate"><span class="pre">lista_bytes</spa
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBasico.esvaziamento_de_bytes">
 <span class="sig-name descname"><span class="pre">esvaziamento_de_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequencia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBasico.esvaziamento_de_bytes"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBasico.esvaziamento_de_bytes" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Operação de esvaziamento de bytes (<cite>byte un-stuffing</cite>). Todos os
-enchimentos feitos com <code class="docutils literal notranslate"><span class="pre">byte_enchimento</span></code> são removidos.</p>
+<dd><p>Operação de esvaziamento de bytes (<a href="#id1"><span class="problematic" id="id2">*</span></a>byte un-stuffing). Todos os
+enchimentos feitos com o byte de escape são removidos.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>sequencia</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><em>bytes</em></a>) – a sequência de bytes a ser “esvaziada”</p>
@@ -226,8 +226,7 @@ didáticos.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto.leia_de_arquivo">
 <span class="sig-name descname"><span class="pre">leia_de_arquivo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arquivo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(em Python v3.10)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto.leia_de_arquivo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBruto.leia_de_arquivo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Recuperação de um dado lido de um arquivo (inviável para
-dado bruto).</p>
+<dd><p>Recuperação de um dado lido de um arquivo (inviável para dado bruto).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
@@ -322,7 +321,7 @@ enchidos são restaurados, mas não determinam o fim da busca. O
 enchimento de bytes é removido.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>arquivo</strong> – arquivo binário aberto com permissão de leitura</p>
+<dd class="field-odd"><p><strong>arquivo</strong> (<em>BinaryIO</em>) – arquivo binário aberto com permissão de leitura</p>
 </dd>
 <dt class="field-even">Retorna</dt>
 <dd class="field-even"><p>a sequência de bytes do dado sem o terminador</p>

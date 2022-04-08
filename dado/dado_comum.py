@@ -38,7 +38,7 @@ class DadoBasico(metaclass = ABCMeta):
     def enchimento_de_bytes(self, sequencia: bytes,
                             lista_bytes: list[bytes]) -> bytes:
         """
-        Operação de enchimento de bytes (`byte stuffing`). Antes de cada item
+        Operação de enchimento de bytes (*byte stuffing*). Antes de cada item
         de ``lista_bytes`` é acrescentado o byte ``byte_enchimento``.
 
         :param bytes sequencia: a sequência de bytes a ser "enchida"
@@ -57,8 +57,8 @@ class DadoBasico(metaclass = ABCMeta):
 
     def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
         """
-        Operação de esvaziamento de bytes (`byte un-stuffing`). Todos os
-        enchimentos feitos com ``byte_enchimento`` são removidos.
+        Operação de esvaziamento de bytes (*byte un-stuffing). Todos os
+        enchimentos feitos com o byte de escape são removidos.
 
         :param bytes sequencia: a sequência de bytes a ser "esvaziada"
         :return: a sequência sem os enchimentos
@@ -109,7 +109,8 @@ class DadoBasico(metaclass = ABCMeta):
         do dado e a forma de organização. A forma de organização usada é
         removida.
 
-        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        :type arquivo: BinaryIO
         :return: a sequência de bytes lida
         :rtype: bytes
         """
@@ -168,10 +169,10 @@ class DadoBruto(DadoBasico):
 
     def leia_de_arquivo(self, arquivo: BinaryIO):
         """
-        Recuperação de um dado lido de um arquivo (inviável para
-        dado bruto).
+        Recuperação de um dado lido de um arquivo (inviável para dado bruto).
 
-        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
+        :param arquivo: arquivo binário aberto com permissão de leitura
+        :type arquivo: BinaryIO
         :raise NotImplemented: se o método for acidentalmente chamado
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
@@ -253,7 +254,7 @@ class DadoTerminador(DadoBasico):
         enchidos são restaurados, mas não determinam o fim da busca. O
         enchimento de bytes é removido.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         :return: a sequência de bytes do dado sem o terminador
         :raise EOFError: se o fim do arquivo for atingido antes de o byte
             terminador ser encontrado
