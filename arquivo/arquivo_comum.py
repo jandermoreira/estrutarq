@@ -217,8 +217,8 @@ class ArquivoSimples(ArquivoBasico):
         Ao final, a posição corrente é a do próximo byte depois do último byte
         lido.
 
-        :param posicao_relativa: posição relativa do registro no arquivo,
-            com o primeiro registro sendo o registro 0
+        :param int, opcional posicao_relativa: posição relativa do registro
+            no arquivo, com o primeiro registro sendo o registro 0
         :return: o registro lido
         :raise EOFError: se houver uma tentativa de leitura além do fim do
             arquivo

@@ -1,0 +1,41 @@
+Pacote ``estrutarq.campo``
+==========================
+
+.. automodule:: estrutarq.campo
+
+
+Organização básica
+------------------
+
+.. automodule:: estrutarq.campo.campo_comum
+
+.. autodata:: estrutarq.campo.campo_comum.terminador_de_campo
+
+
+Campo básico
+++++++++++++
+
+Todas as demais classes do módulo são derivadas de uma classe básica.
+
+.. autoclass:: estrutarq.campo.CampoBasico
+   :members:
+
+
+Campo bruto
+++++++++++++
+
+.. autoclass:: estrutarq.campo.CampoBruto
+   :members:
+
+
+Campos com tipos específicos
+----------------------------
+Da classe básica são derivados campos para tipos específicos de dados:
+
+.. toctree::
+   :maxdepth: 1
+
+   campo_cadeia
+   campo_inteiro
+   campo_real
+   campo_tempo
