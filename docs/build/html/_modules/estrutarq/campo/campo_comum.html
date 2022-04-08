@@ -86,7 +86,7 @@
 <span class="sd">        é usado internamente com nenhum fim) e pode ser consultado externamente.</span>
 
 <span class="sd">        :return: Retorna o tipo do campo</span>
-<span class="sd">        :type: str</span>
+<span class="sd">        :tipo: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tipo</span>
 
@@ -182,9 +182,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CampoBasico.copy"><a class="viewcode-back" href="../../../campo.html#estrutarq.campo.CampoBasico.copy">[documentos]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CampoBasico.copia"><a class="viewcode-back" href="../../../campo.html#estrutarq.campo.CampoBasico.copia">[documentos]</a>    <span class="k">def</span> <span class="nf">copia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cópia &quot;rasa&quot; do objeto.</span>
+<span class="sd">        Retorna uma cópia &quot;rasa&quot; do objeto.</span>
 
 <span class="sd">        :return: uma instância copiada de ``self``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -211,8 +211,8 @@
 <span class="sd">        O valor armazenado no campo. Recebe e retorna uma cadeia de caracteres.</span>
 
 <span class="sd">        :Recebe: Recebe uma cadeia de caracteres</span>
-<span class="sd">        :return: Retorna uma cadeia de caracteres</span>
-<span class="sd">        :type: str</span>
+<span class="sd">        :return: Retorna o valor armazenado no campo</span>
+<span class="sd">        :tipo: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__valor</span>
 

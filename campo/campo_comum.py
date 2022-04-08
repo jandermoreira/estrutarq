@@ -47,7 +47,7 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         é usado internamente com nenhum fim) e pode ser consultado externamente.
 
         :return: Retorna o tipo do campo
-        :type: str
+        :tipo: str
         """
         return self.__tipo
 
@@ -143,9 +143,9 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
         """
         return str(self.valor)
 
-    def copy(self):
+    def copia(self):
         """
-        Cópia "rasa" do objeto.
+        Retorna uma cópia "rasa" do objeto.
 
         :return: uma instância copiada de ``self``
         """
@@ -172,8 +172,8 @@ class CampoBruto(DadoBruto, CampoBasico):
         O valor armazenado no campo. Recebe e retorna uma cadeia de caracteres.
 
         :Recebe: Recebe uma cadeia de caracteres
-        :return: Retorna uma cadeia de caracteres
-        :type: str
+        :return: Retorna o valor armazenado no campo
+        :tipo: str
         """
         return self.__valor
 

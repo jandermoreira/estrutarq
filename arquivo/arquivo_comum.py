@@ -132,7 +132,7 @@ class ArquivoSimples(ArquivoBasico):
             com o primeiro registro sendo o registro 0
         :return: o registro lido
         """
-        registro = self.esquema_registro.copy()
+        registro = self.esquema_registro.copia()
         if posicao_relativa is not None:
             # posicionamento por acesso direto
             self.arquivo.seek(posicao_relativa * self.comprimento_registro)
@@ -160,7 +160,7 @@ class ArquivoSimples(ArquivoBasico):
 
         A determinação da posição relativa é feita por busca sequencial
         """
-        registro = self.esquema_registro.copy()
+        registro = self.esquema_registro.copia()
         if posicao_relativa is not None:
             # busca sequencial a partir do início do arquivo
             self.arquivo.seek(0)

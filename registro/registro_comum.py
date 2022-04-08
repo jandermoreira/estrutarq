@@ -88,7 +88,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         # if not isinstance(tipo_campo, str):
         #     print("************", type(tipo_campo))
         #     raise TypeError("Esperado um campo valido para o registro.")
-        setattr(self, nome_campo, tipo_campo.copy())
+        setattr(self, nome_campo, tipo_campo.copia())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
 
     def adicione_campos(self, *lista_campos: tuple[str, CampoBasico]):

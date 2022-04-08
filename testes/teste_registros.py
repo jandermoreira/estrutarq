@@ -90,7 +90,7 @@ def main():
             stdout.flush()
 
         reg, reg_base = crie_registro()
-        dados.append(reg_base.copy())  # salva estrutura de cada registro
+        dados.append(reg_base.copia())  # salva estrutura de cada registro
 
         reg.rrn.valor = i
         # print("**************\n", reg)

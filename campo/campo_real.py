@@ -53,7 +53,7 @@ class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
 
         :Recebe: Recebe um valor para ser armazenado
         :return: Retorna o valor atual do campo
-        :type: float
+        :tipo: float
         """
         return self.__valor
 

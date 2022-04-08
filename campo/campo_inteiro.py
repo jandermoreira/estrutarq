@@ -50,7 +50,7 @@ class CampoIntBasico(CampoBasico, metaclass = ABCMeta):
 
         :Recebe: Recebe um valor para ser armazenado
         :return: Retorna o valor atual do campo
-        :type: int
+        :tipo: :class:`int`
         """
         return self.__valor
 

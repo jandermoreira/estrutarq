@@ -4,7 +4,7 @@ para uso de campos cujo conteúdo é uma cadeia de caracteres.
 Internamente, o tipo :class:`str` é usado para armazenamento e a
 transformação para sequência de bytes usa a codificação UTF-8.
 
-Uma classe básica :class:`~.estrutarq.campo.campo_comum.CampoCadeiaBasico`
+Uma classe básica :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
 são derivados campos:
 
@@ -43,7 +43,7 @@ class CampoCadeiaBasico(CampoBasico, metaclass = ABCMeta):
 
         :Recebe: Recebe um valor para ser armazenado
         :return: Retorna o valor atual do campo
-        :type: str
+        :tipo: str
         """
         return self.__valor
 

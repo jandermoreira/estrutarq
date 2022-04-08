@@ -148,8 +148,7 @@
 <span class="sd">        do dado e a forma de organização. A forma de organização usada é</span>
 <span class="sd">        removida.</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
-<span class="sd">        :type arquivo: BinaryIO</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        :return: a sequência de bytes lida</span>
 <span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -210,8 +209,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recuperação de um dado lido de um arquivo (inviável para dado bruto).</span>
 
-<span class="sd">        :param arquivo: arquivo binário aberto com permissão de leitura</span>
-<span class="sd">        :type arquivo: BinaryIO</span>
+<span class="sd">        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura</span>
 <span class="sd">        :raise NotImplemented: se o método for acidentalmente chamado</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">(</span><span class="s2">&quot;A leitura de dado bruto é inviável.&quot;</span><span class="p">)</span></div>
@@ -270,6 +268,10 @@
     <span class="k">def</span> <span class="nf">terminador</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Byte simples usado como terminador.</span>
+
+<span class="sd">        :Recebe: um byte único a ser acrescentado ao final do dado</span>
+<span class="sd">        :return: o valor do byte terminador</span>
+<span class="sd">        :type: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__terminador</span>
 
@@ -586,8 +588,12 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preenchimento</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Um único byte usado para o preenchimento do espaço não usado dentro</span>
-<span class="sd">        do comprimento final do campo. Valor padrão ``0xFF``.</span>
+<span class="sd">        Um único byte usado preencher o espaço que não corresponde a dado</span>
+<span class="sd">        válido. Valor padrão ``0xFF``.</span>
+
+<span class="sd">        :recebe: um byte único para preenchimento</span>
+<span class="sd">        :return: o valor do byte de preenchimento</span>
+<span class="sd">        :tipo: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__preenchimento</span>
 

@@ -109,8 +109,7 @@ class DadoBasico(metaclass = ABCMeta):
         do dado e a forma de organização. A forma de organização usada é
         removida.
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        :type arquivo: BinaryIO
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         :return: a sequência de bytes lida
         :rtype: bytes
         """
@@ -171,8 +170,7 @@ class DadoBruto(DadoBasico):
         """
         Recuperação de um dado lido de um arquivo (inviável para dado bruto).
 
-        :param arquivo: arquivo binário aberto com permissão de leitura
-        :type arquivo: BinaryIO
+        :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         :raise NotImplemented: se o método for acidentalmente chamado
         """
         raise NotImplemented("A leitura de dado bruto é inviável.")
@@ -231,6 +229,10 @@ class DadoTerminador(DadoBasico):
     def terminador(self) -> bytes:
         """
         Byte simples usado como terminador.
+
+        :Recebe: um byte único a ser acrescentado ao final do dado
+        :return: o valor do byte terminador
+        :type: bytes
         """
         return self.__terminador
 
@@ -547,8 +549,12 @@ class DadoFixo(DadoBasico):
     @property
     def preenchimento(self) -> bytes:
         """
-        Um único byte usado para o preenchimento do espaço não usado dentro
-        do comprimento final do campo. Valor padrão ``0xFF``.
+        Um único byte usado preencher o espaço que não corresponde a dado
+        válido. Valor padrão ``0xFF``.
+
+        :recebe: um byte único para preenchimento
+        :return: o valor do byte de preenchimento
+        :tipo: bytes
         """
         return self.__preenchimento
 

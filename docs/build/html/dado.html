@@ -310,6 +310,17 @@ de enchimento de bytes (implementada em
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador.terminador">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminador</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoTerminador.terminador" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Byte simples usado como terminador.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Recebe</dt>
+<dd class="field-odd"><p>um byte único a ser acrescentado ao final do dado</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o valor do byte terminador</p>
+</dd>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)">bytes</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -609,8 +620,19 @@ do espaço não usado para dado (valor padrão <code class="docutils literal not
 <dl class="py property">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo.preenchimento">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preenchimento</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoFixo.preenchimento" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Um único byte usado para o preenchimento do espaço não usado dentro
-do comprimento final do campo. Valor padrão <code class="docutils literal notranslate"><span class="pre">0xFF</span></code>.</p>
+<dd><p>Um único byte usado preencher o espaço que não corresponde a dado
+válido. Valor padrão <code class="docutils literal notranslate"><span class="pre">0xFF</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Recebe</dt>
+<dd class="field-odd"><p>um byte único para preenchimento</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o valor do byte de preenchimento</p>
+</dd>
+<dt class="field-odd">Tipo</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
