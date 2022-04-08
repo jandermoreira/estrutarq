@@ -142,8 +142,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :rtype: bool
         """
         return self._comprimento_fixo or all(
-            campo.tem_comprimento_fixo() for campo in
-            self.lista_campos.values())
+            campo._comprimento_fixo for campo in self.lista_campos.values())
 
     def comprimento(self) -> int:
         """
@@ -152,9 +151,13 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         :return: o comprimento do registro em bytes
         :rtype: int
         """
-        return sum(campo.comprimento() for campo in self.lista_campos.values())
-
+       if self._comprimento_fixo:
+            return self._comprimento
+        else:
+            return sum(
+                campo.comprimento() for campo in self.lista_campos.values())
     # code::start basico_leia
+
     def leia(self, arquivo: BinaryIO):
         """
         Obtenção de um registro a partir do arquivo, considerando a organização
@@ -162,6 +165,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
+
         bytes_arquivo = self.leia_de_arquivo(arquivo)
         self.de_bytes(bytes_arquivo)
 

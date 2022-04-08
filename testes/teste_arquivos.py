@@ -91,13 +91,13 @@ def teste(registro):
 
 def main():
     lista_testes = [
-        # RegistroFixo(
-        #     500,
-        #     ("numero", CampoIntBinario()),
-        #     ("nome", CampoCadeiaTerminador()),
-        #     ("sobrenome", CampoCadeiaPrefixado()),
-        #     ("endereco", CampoCadeiaTerminador()),
-        # ),
+        RegistroFixo(
+            500,
+            ("numero", CampoIntBinario()),
+            ("nome", CampoCadeiaTerminador()),
+            ("sobrenome", CampoCadeiaPrefixado()),
+            ("endereco", CampoCadeiaTerminador()),
+        ),
         # RegistroBruto(
         #     ("numero", CampoIntBinario()),
         #     ("nome", CampoCadeiaFixo(12)),
@@ -110,12 +110,12 @@ def main():
         #     ("sobrenome", CampoCadeiaPrefixado()),
         #     ("endereco", CampoCadeiaPrefixado()),
         # ),
-        RegistroPrefixado(
-            ("numero", CampoIntBinario()),
-            ("nome", CampoCadeiaFixo(12)),
-            ("sobrenome", CampoCadeiaTerminador()),
-            ("endereco", CampoCadeiaTerminador()),
-        ),
+        # RegistroPrefixado(
+        #     ("numero", CampoIntBinario()),
+        #     ("nome", CampoCadeiaFixo(12)),
+        #     ("sobrenome", CampoCadeiaTerminador()),
+        #     ("endereco", CampoCadeiaTerminador()),
+        # ),
     ]
     msg = ""
     for registro in lista_testes:
