@@ -39,7 +39,6 @@ Byte usado no preenchimento de registros de comprimento fixo. Deve diferir
 do preenchimento de campo. (valor padrão ``0xFE``)
 """
 
-
 class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     """
     Classe básica para registros, o qual é estruturado pela adiçõo de campos.
@@ -253,3 +252,12 @@ class RegistroFixo(DadoFixo, RegistroBasico):
         DadoFixo.__init__(self, comprimento,
                           preenchimento = preenchimento_de_registro)
         self._comprimento_fixo = True
+
+from typing import NewType
+
+UserId = NewType('UserId', int)
+
+def n(v: UserId):
+    return v
+
+some_id = n(654654)
