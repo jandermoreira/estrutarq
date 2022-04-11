@@ -23,7 +23,7 @@ from typing import BinaryIO
 from estrutarq.campo import CampoBasico
 from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
     DadoTerminador
-from estrutarq.utilitarios.geral import verifique_versao
+from estrutarq.utilitarios import verifique_versao
 
 # Verificação de versão necessária para uso de registros
 verifique_versao()
