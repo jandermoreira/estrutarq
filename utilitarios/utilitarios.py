@@ -3,7 +3,7 @@ Rotinas utilitárias para dispositivos de armazenamento secundário.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007
-    Jander Moreira, 2021-2022
+    Jander Moreira, 2021, 2022
 """
 
 from os import fstat, remove
