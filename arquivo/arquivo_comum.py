@@ -29,10 +29,10 @@ class ArquivoBasico(metaclass = ABCMeta):
     Se o arquivo não existir, ele é criado. Se já existir, ele é aberto para
     acesso.
 
-    :param str tipo: nome do tipo (passado pela subclasse)
-    :param str nome_arquivo: nome do arquivo binário
-    :param bool, opcional novo: se `True`, o arquivo é tornado vazio, mesmo
-        que já preexistente (valor padrão: `False`)
+    :param tipo: nome do tipo (passado pela subclasse)
+    :param nome_arquivo: nome do arquivo binário
+    :param novo: se `True`, o arquivo é tornado vazio, mesmo que já preexistente
+        (padrão: `False`)
     """
 
     def __init__(self, tipo: str, nome_arquivo: str, novo: bool = False):
@@ -89,7 +89,6 @@ class ArquivoBasico(metaclass = ABCMeta):
         escrito.
 
         :return: o registro lido
-        :rtype: RegistroBasico
         """
         pass
 
@@ -98,7 +97,7 @@ class ArquivoBasico(metaclass = ABCMeta):
         """
         Gravação de um registro no arquivo.
 
-        :param RegistroBasico registro: um registro para ser gravado
+        :param registro: um registro para ser gravado
         """
         pass
 
@@ -120,11 +119,9 @@ class ArquivoBasico(metaclass = ABCMeta):
             raise FileNotFoundError(f"Arquivo não encontrado: " +
                                     f"{self.nome_arquivo}.")
 
-    def posicao_atual(self):
+    def posicao_atual(self) -> int:
         """
         Posição atual do arquivo.
-
-        :return:
         """
         return self.arquivo.tell()
 
@@ -217,7 +214,7 @@ class ArquivoSimples(ArquivoBasico):
         Ao final, a posição corrente é a do próximo byte depois do último byte
         lido.
 
-        :param int, opcional posicao_relativa: posição relativa do registro
+        :param posicao_relativa: posição relativa do registro
             no arquivo, com o primeiro registro sendo o registro 0
         :return: o registro lido
         :raise EOFError: se houver uma tentativa de leitura além do fim do

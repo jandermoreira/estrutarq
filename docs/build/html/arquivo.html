@@ -68,10 +68,10 @@ acesso.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – nome do tipo (passado pela subclasse)</p></li>
-<li><p><strong>nome_arquivo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><em>str</em></a>) – nome do arquivo binário</p></li>
-<li><p><strong>novo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><em>bool</em></a><em>, </em><em>opcional</em>) – se <cite>True</cite>, o arquivo é tornado vazio, mesmo
-que já preexistente (valor padrão: <cite>False</cite>)</p></li>
+<li><p><strong>tipo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – nome do tipo (passado pela subclasse)</p></li>
+<li><p><strong>nome_arquivo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – nome do arquivo binário</p></li>
+<li><p><strong>novo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – se <cite>True</cite>, o arquivo é tornado vazio, mesmo que já preexistente
+(padrão: <cite>False</cite>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -82,11 +82,11 @@ que já preexistente (valor padrão: <cite>False</cite>)</p></li>
 final da leitura, a posição corrente é o próximo byte depois do último
 escrito.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p>o registro lido</p>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegistroBasico</span></code></a></p>
 </dd>
-<dt class="field-even">Tipo de retorno</dt>
-<dd class="field-even"><p><a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico">RegistroBasico</a></p>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>o registro lido</p>
 </dd>
 </dl>
 </dd></dl>
@@ -97,7 +97,7 @@ escrito.</p>
 <dd><p>Gravação de um registro no arquivo.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>registro</strong> (<a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><em>RegistroBasico</em></a>) – um registro para ser gravado</p>
+<dd class="field-odd"><p><strong>registro</strong> (<a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegistroBasico</span></code></a>) – um registro para ser gravado</p>
 </dd>
 </dl>
 </dd></dl>
@@ -124,8 +124,8 @@ escrito.</p>
 <span class="sig-name descname"><span class="pre">posicao_atual</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoBasico.posicao_atual"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoBasico.posicao_atual" title="Link permanente para esta definição">¶</a></dt>
 <dd><p>Posição atual do arquivo.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Retorna</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-odd">Tipo de retorno</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -194,7 +194,7 @@ partir do início do arquivo.</p>
 lido.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parâmetros</dt>
-<dd class="field-odd"><p><strong>posicao_relativa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><em>int</em></a><em>, </em><em>opcional</em>) – posição relativa do registro
+<dd class="field-odd"><p><strong>posicao_relativa</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(em Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – posição relativa do registro
 no arquivo, com o primeiro registro sendo o registro 0</p>
 </dd>
 <dt class="field-even">Tipo de retorno</dt>

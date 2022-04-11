@@ -34,7 +34,8 @@ release = '0.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    "sphinx_autodoc_typehints",
+    # 'sphinx_autodoc_napoleon_typehints',
+    'sphinx_autodoc_typehints',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
     'sphinxcontrib.restbuilder',
@@ -80,6 +81,7 @@ autodoc_default_options = {
     'autodoc_inherit_docstrings': False,
     'show-inheritance': True,
     'always_document_param_types': True,
+    'typehints_defaults': 'comma',
 }
 autodoc_typehints_format= "short"
 add_module_names = False
