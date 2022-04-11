@@ -85,7 +85,9 @@
     <span class="k">def</span> <span class="nf">_crie_arquivo_novo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Criação de um arquivo binário novo com permissão para leitura</span>
-<span class="sd">        e escrita</span>
+<span class="sd">        e escrita. A iniciação do arquivo também é feita.</span>
+
+<span class="sd">        :raise IOError: se houver problema com a abetura do arquivo</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="p">,</span> <span class="s2">&quot;wb+&quot;</span><span class="p">)</span>
@@ -97,7 +99,9 @@
     <span class="k">def</span> <span class="nf">_abra_arquivo_existente</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Abertura de um arquivo binário existente com permissão para leitura</span>
-<span class="sd">        e escrita</span>
+<span class="sd">        e escrita. A iniciação do arquivo também é feita.</span>
+
+<span class="sd">        :raise IOError: se houver problema com a abetura do arquivo</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="p">,</span> <span class="s2">&quot;rb+&quot;</span><span class="p">)</span>
@@ -168,7 +172,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Descrição textual do arquivo.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Nome do arquivo: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="si">}</span><span class="s2">&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Nome do arquivo: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nome_arquivo</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        O destrutor fecha o arquivo, se estiver aberto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arquivo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ArquivoSimples"><a class="viewcode-back" href="../../../arquivo.html#estrutarq.arquivo.arquivo_comum.ArquivoSimples">[documentos]</a><span class="k">class</span> <span class="nc">ArquivoSimples</span><span class="p">(</span><span class="n">ArquivoBasico</span><span class="p">):</span>
@@ -300,11 +311,9 @@
 <span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo` ou a</span>
 <span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel`.</span>
 
-<span class="sd">        self.leia_efetivo chama leia_fixo ou leia_variável, conforme</span>
-<span class="sd">        o registro tenha comprimento fixo ou variável</span>
-
+<span class="sd">        :param kwargs: lista de parâmetros opcionais para o método de leitura</span>
+<span class="sd">            real</span>
 <span class="sd">        :return: o registro lido</span>
-<span class="sd">        :rtype: RegistroBasico</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leia_efetivo</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -317,6 +326,8 @@
 <span class="sd">        ou a</span>
 <span class="sd">        :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel`.</span>
 
+<span class="sd">        :param kwargs: lista de parâmetros opcionais para o método de escrita</span>
+<span class="sd">            real</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">escreva_efetivo</span><span class="p">(</span><span class="n">registro</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 

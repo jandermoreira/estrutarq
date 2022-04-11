@@ -46,7 +46,9 @@ class ArquivoBasico(metaclass = ABCMeta):
     def _crie_arquivo_novo(self):
         """
         Criação de um arquivo binário novo com permissão para leitura
-        e escrita
+        e escrita. A iniciação do arquivo também é feita.
+
+        :raise IOError: se houver problema com a abetura do arquivo
         """
         try:
             self.arquivo = open(self.nome_arquivo, "wb+")
@@ -58,7 +60,9 @@ class ArquivoBasico(metaclass = ABCMeta):
     def _abra_arquivo_existente(self):
         """
         Abertura de um arquivo binário existente com permissão para leitura
-        e escrita
+        e escrita. A iniciação do arquivo também é feita.
+
+        :raise IOError: se houver problema com a abetura do arquivo
         """
         try:
             self.arquivo = open(self.nome_arquivo, "rb+")
@@ -178,36 +182,46 @@ class ArquivoSimples(ArquivoBasico):
 
     def leia_fixo(self, posicao_relativa: int = None) -> RegistroBasico:
         """
-        Leitura de um registro de comprimento, usando a posição corrente do
-        arquivo. Ao final da escrita, a posição corrente é o próximo byte
-        depois do último escrito.
+        Leitura de um registro de comprimento usando a posição corrente do
+        arquivo. A leitura é feita a partir da posição corrente, a menos que
+        especificada outra posição. Ao final da leitura, a posição corrente é o
+        próximo byte depois do último escrito.
 
-        :param posicao_relativa: posição relativa do registro no arquivo,
-            com o primeiro registro sendo o registro 0
+        As posições são relativas aos registros (e não ao deslocamento
+        de bytes), sendo que o primeiro registro o de posição 0, o segundo de
+        posição 1 e assim sucessivamente.
+
+        :param posicao_relativa: modifica a leitura para a posição relativa do
+            registro no arquivo
         :return: o registro lido
+        :raise EOFError: se houver uma tentativa de leitura além do fim do
+            arquivo
         """
         registro = self.esquema_registro.copia()
-        if posicao_relativa is not None:
-            # posicionamento por acesso direto
-            self.arquivo.seek(posicao_relativa * self.comprimento_registro)
-        registro.leia(self.arquivo)
-        return registro
+        try:
+            if posicao_relativa is not None:
+                # posicionamento por acesso direto
+                self.arquivo.seek(posicao_relativa * self.comprimento_registro)
+            registro.leia(self.arquivo)
+            return registro
+        except EOFError as erro:
+            raise EOFError(f"Fim de arquivo encontrado na leitura. {erro}")
 
     def escreva_fixo(self, registro: RegistroBasico,
                      posicao_relativa: int = None):
         """
         Gravação de um registro de comprimento fixo no arquivo. A gravação é
         feita a partir da posição corrente, a menos que especificada outra
-        posição. As posições são relativas aos registros (e não ao deslocamento
+        posição. Ao final da escrita, a posição corrente é a do próximo byte
+        depois do último byte escrito.
+
+        As posições são relativas aos registros (e não ao deslocamento
         de bytes), sendo que o primeiro registro o de posição 0, o segundo de
         posição 1 e assim sucessivamente.
 
-        Ao final, a posição corrente é a do próximo byte depois do último byte
-        lido.
-
         :param registro: o registro a ser escrito
-        :param posicao_relativa: posição relativa do registro no arquivo,
-            com o primeiro registro sendo o registro 0
+        :param posicao_relativa: modifica a escrita para a posição relativa do
+            registro no arquivo
         """
         if posicao_relativa is not None:
             self.arquivo.seek(posicao_relativa * self.comprimento_registro)
@@ -217,18 +231,17 @@ class ArquivoSimples(ArquivoBasico):
         """
         Leitura de um registro de comprimento variavel. A leitura é feita a
         partir da posição corrente, a menos que seja especificada outra posição.
-        As posições são relativas aos registros (e não ao deslocamento
-        de bytes), sendo que o primeiro registro o de posição 0, o segundo de
-        posição 1 e assim sucessivamente.
-
-        A determinação da posição relativa é feita por busca sequencial a
-        partir do início do arquivo.
-
         Ao final, a posição corrente é a do próximo byte depois do último byte
         lido.
 
+        As posições são relativas aos registros (e não ao deslocamento
+        de bytes), sendo que o primeiro registro o de posição 0, o segundo de
+        posição 1 e assim sucessivamente.
+        A determinação da posição relativa é feita por busca sequencial a
+        partir do início do arquivo.
+
         :param posicao_relativa: posição relativa do registro
-            no arquivo, com o primeiro registro sendo o registro 0
+            no arquivo
         :return: o registro lido
         :raise EOFError: se houver uma tentativa de leitura além do fim do
             arquivo
