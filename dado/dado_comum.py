@@ -57,7 +57,7 @@ class DadoBasico(metaclass = ABCMeta):
 
     def esvaziamento_de_bytes(self, sequencia: bytes) -> bytes:
         """
-        Operação de esvaziamento de bytes (*byte un-stuffing). Todos os
+        Operação de esvaziamento de bytes (*byte un-stuffing*). Todos os
         enchimentos feitos com o byte de escape são removidos.
 
         :param bytes sequencia: a sequência de bytes a ser "esvaziada"

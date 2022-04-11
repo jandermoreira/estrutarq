@@ -34,11 +34,11 @@ release = '0.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    "sphinx_autodoc_typehints",
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
     'sphinxcontrib.restbuilder',
     'sphinx_markdown_builder',
-    'recommonmark',
 ]
 
 source_suffix = ['.rst']
@@ -75,13 +75,11 @@ html_theme = 'sphinxdoc'
 html_static_path = ['_static']
 
 autodoc_default_options = {
-    # 'members': True,
     'member-order': 'bysource',
     'undoc-members': True,
     'autodoc_inherit_docstrings': False,
-    # 'inherited-members': True,
     'show-inheritance': True,
-    'autodoc_class_signature': "separated",
+    'always_document_param_types': True,
 }
 autodoc_typehints_format= "short"
 add_module_names = False
