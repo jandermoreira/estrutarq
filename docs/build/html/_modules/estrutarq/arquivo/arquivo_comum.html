@@ -176,6 +176,12 @@
 <span class="sd">    Gerenciador de arquivo simples (como fluxo de dados) com registros de</span>
 <span class="sd">    comprimento fixo ou variável. Nenhuma consideração sobre blocos ou</span>
 <span class="sd">    outro aspecto de acesso ao dispositivo de armazenamento secundário é feita.</span>
+
+<span class="sd">    :param nome_arquivo: nome do arquivo</span>
+<span class="sd">    :param esquema_registro: registro usado como referência para as leituras e</span>
+<span class="sd">        escritas</span>
+<span class="sd">    :param kwargs: lista de parâmetros opcionais passados para</span>
+<span class="sd">        :class:`~.estrutarq.arquivo.arquivo_comum.ArquivoBasico`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nome_arquivo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">esquema_registro</span><span class="p">:</span> <span class="n">RegistroBasico</span><span class="p">,</span>

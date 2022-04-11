@@ -139,6 +139,17 @@ escrito.</p>
 <p>Gerenciador de arquivo simples (como fluxo de dados) com registros de
 comprimento fixo ou variável. Nenhuma consideração sobre blocos ou
 outro aspecto de acesso ao dispositivo de armazenamento secundário é feita.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nome_arquivo</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – nome do arquivo</p></li>
+<li><p><strong>esquema_registro</strong> (<a class="reference internal" href="registro.html#estrutarq.registro.registro_comum.RegistroBasico" title="estrutarq.registro.registro_comum.RegistroBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegistroBasico</span></code></a>) – registro usado como referência para as leituras e
+escritas</p></li>
+<li><p><strong>kwargs</strong> – lista de parâmetros opcionais passados para
+<a class="reference internal" href="#estrutarq.arquivo.arquivo_comum.ArquivoBasico" title="estrutarq.arquivo.arquivo_comum.ArquivoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArquivoBasico</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo">
 <span class="sig-name descname"><span class="pre">leia_fixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">posicao_relativa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/arquivo/arquivo_comum.html#ArquivoSimples.leia_fixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo" title="Link permanente para esta definição">¶</a></dt>

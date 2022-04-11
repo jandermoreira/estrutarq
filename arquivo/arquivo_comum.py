@@ -131,12 +131,25 @@ class ArquivoBasico(metaclass = ABCMeta):
         """
         return f"Nome do arquivo: {self.nome_arquivo}"
 
+    def __del__(self):
+        """
+        O destrutor fecha o arquivo, se estiver aberto.
+        """
+        if not self.arquivo.closed:
+            self.arquivo.close()
+
 
 class ArquivoSimples(ArquivoBasico):
     """
     Gerenciador de arquivo simples (como fluxo de dados) com registros de
     comprimento fixo ou variável. Nenhuma consideração sobre blocos ou
     outro aspecto de acesso ao dispositivo de armazenamento secundário é feita.
+
+    :param nome_arquivo: nome do arquivo
+    :param esquema_registro: registro usado como referência para as leituras e
+        escritas
+    :param kwargs: lista de parâmetros opcionais passados para
+        :class:`~.estrutarq.arquivo.arquivo_comum.ArquivoBasico`
     """
 
     def __init__(self, nome_arquivo: str, esquema_registro: RegistroBasico,
@@ -255,11 +268,9 @@ class ArquivoSimples(ArquivoBasico):
         :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_fixo` ou a
         :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.leia_variavel`.
 
-        self.leia_efetivo chama leia_fixo ou leia_variável, conforme
-        o registro tenha comprimento fixo ou variável
-
+        :param kwargs: lista de parâmetros opcionais para o método de leitura
+            real
         :return: o registro lido
-        :rtype: RegistroBasico
         """
         return self.leia_efetivo(**kwargs)
 
@@ -272,6 +283,8 @@ class ArquivoSimples(ArquivoBasico):
         ou a
         :attr:`~.estrutarq.arquivo.arquivo_comum.ArquivoSimples.escreva_variavel`.
 
+        :param kwargs: lista de parâmetros opcionais para o método de escrita
+            real
         """
         self.escreva_efetivo(registro, **kwargs)
 

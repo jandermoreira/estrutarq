@@ -78,7 +78,7 @@ class CampoCadeiaTerminador(DadoTerminador, CampoCadeiaBasico):
     definido por :attr:`estrutarq.campo.terminador_de_campo`.
 
     :param dict, opcional kwargs: lista de parâmetros opcionais passados para
-        :attr:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
+        :class:`~.estrutarq.campo.campo_cadeia.CampoCadeiaBasico`
     """
 
     def __init__(self, **kwargs):
