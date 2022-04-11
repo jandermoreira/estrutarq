@@ -35,6 +35,11 @@ def comprimento_de_bloco(diretorio: str = None) -> int:
 
 
 class ErroVersao(Exception):
+    """
+    Exceção para o caso de versões do Python incompatíveis com esta
+    implementação.
+    Veja :func:`~.estrutarq.utilitarios.utilitarios.verifique_versao`.
+    """
     pass
 
 
