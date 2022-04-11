@@ -1,6 +1,5 @@
 Estruturas de arquivos
 **********************
-.. currentmodule:: estrutarq
 
 Introdução
 ==========

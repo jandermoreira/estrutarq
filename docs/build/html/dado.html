@@ -218,7 +218,7 @@ de bytes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBruto">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DadoBruto</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBruto"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBruto" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a></p>
 <p>Classe para dado em forma bruta, ou seja, sem acréscimo de qualquer forma
 de organização de dados.</p>
 <p>Campos brutos não possuem aplicação prática e são usados apenas para fins
@@ -293,7 +293,7 @@ repassada sem modificação.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoTerminador">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DadoTerminador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terminador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoTerminador"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoTerminador" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a></p>
 <p>Classe para implementação de dados com terminador. O dado é tratado como
 uma sequência de bytes à qual um byte predefinido
 (<code class="xref py py-attr docutils literal notranslate"><span class="pre">terminador</span></code>) é
@@ -410,7 +410,7 @@ esvaziada</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoPrefixado">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DadoPrefixado</span></span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoPrefixado"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoPrefixado" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a></p>
 <p>Classe para a implementação de dado prefixado pelo seu comprimento.
 O prefixo é um valor inteiro binário de 2 bytes, sem sinal e com
 ordenação de bytes <cite>big-endian</cite>.</p>
@@ -502,7 +502,7 @@ bytes diferente do comprimento especificado</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoBinario">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DadoBinario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoBinario"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoBinario" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a></p>
 <p>Classe para a implementação de dado como sequência de bytes (i.e., formato
 binário) com um determinado comprimento fixo em bytes.</p>
 <dl class="field-list simple">
@@ -599,7 +599,7 @@ sequência de bytes restante</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="estrutarq.dado.dado_comum.DadoFixo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DadoFixo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comprimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(em Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preenchimento</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(em Python v3.10)"><span class="pre">bytes</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\xff'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/estrutarq/dado/dado_comum.html#DadoFixo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#estrutarq.dado.dado_comum.DadoFixo" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">estrutarq.dado.dado_comum.DadoBasico</span></code></a></p>
+<dd><p>Base: <a class="reference internal" href="#estrutarq.dado.dado_comum.DadoBasico" title="estrutarq.dado.dado_comum.DadoBasico"><code class="xref py py-class docutils literal notranslate"><span class="pre">DadoBasico</span></code></a></p>
 <p>Classe para a implementação de dado de comprimento fixo em representação
 textual (i.e., sequência de caracteres). Caso o comprimento do dado seja
 inferior ao comprimento estabelecido para o campo, é feito o preenchimento
