@@ -53,8 +53,7 @@ def verifique_versao():
 
     versao = ".".join(str(x) for x in version_info[:3])
     mensagem = f"""
-    *** Importante:
-    A versão do Python em uso é a {versao}.
+    *** Importante: A versão do Python em uso é a {versao}.
 
     Versões anteriores à 3.6 não mantém a ordem das chaves em dicionários.
     Como os campos de registros são mantidos em dicionários, a recuperação
