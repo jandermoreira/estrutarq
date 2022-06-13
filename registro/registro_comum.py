@@ -18,7 +18,7 @@ são derivados registros:
 from abc import ABCMeta
 from copy import deepcopy
 from re import compile
-from typing import BinaryIO
+from typing import BinaryIO, Tuple
 
 from estrutarq.campo import CampoBasico
 from estrutarq.dado import DadoBasico, DadoBruto, DadoFixo, DadoPrefixado, \
@@ -53,7 +53,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         tuplas ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, tipo: str, *lista_campos: tuple[str, CampoBasico]):
+    def __init__(self, tipo: str, *lista_campos: Tuple):
         DadoBasico.__init__(self)
         self.__tipo = tipo
         self.lista_campos = {}
@@ -70,7 +70,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         """
         return self.__tipo
 
-    def __adicione_um_campo(self, campo: tuple[str, CampoBasico]):
+    def __adicione_um_campo(self, campo: Tuple):
         """
         Acréscimo de um campo a registro_teste, com criação de um atributo e
         inclusão na lista de campos.
@@ -91,7 +91,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         setattr(self, nome_campo, tipo_campo.copia())
         self.lista_campos[nome_campo] = getattr(self, nome_campo)
 
-    def adicione_campos(self, *lista_campos: tuple[str, CampoBasico]):
+    def adicione_campos(self, *lista_campos: Tuple):
         """
         Inclusão de uma sequência de campos ao registro_teste
 
@@ -206,7 +206,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
         tuplas ``("nome_campo", Campo())``.
     """
 
-    def __init__(self, *lista_campos: tuple[str, CampoBasico]):
+    def __init__(self, *lista_campos: Tuple):
         RegistroBasico.__init__(self, "bruto", *lista_campos)
         DadoBruto.__init__(self)
 

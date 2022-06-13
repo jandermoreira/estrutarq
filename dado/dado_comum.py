@@ -13,8 +13,8 @@ representações diversas:
     Jander Moreira, 2022
 """
 
-from re import sub as regex_sub
 from abc import ABCMeta, abstractmethod
+from re import sub as regex_sub
 from typing import BinaryIO, List, Tuple
 
 
