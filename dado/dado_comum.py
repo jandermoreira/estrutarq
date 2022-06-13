@@ -27,7 +27,7 @@ class DadoBasico(metaclass = ABCMeta):
 
     byte_enchimento: bytes = b"\x1b"  # ESC
     """
-    Contém o byte de escape usado para enchimento (`byte stuffing`). Valor
+    Contém o byte de escape usado para enchimento (`byte stuffing`).  Valor
     padrão: ``ESC`` (hexadecimal ``0x1B``).
     """
 
