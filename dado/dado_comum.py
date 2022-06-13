@@ -15,7 +15,7 @@ representações diversas:
 
 from re import sub as regex_sub
 from abc import ABCMeta, abstractmethod
-from typing import BinaryIO
+from typing import BinaryIO, List, Tuple
 
 
 class DadoBasico(metaclass = ABCMeta):
@@ -36,7 +36,7 @@ class DadoBasico(metaclass = ABCMeta):
 
     # code::start basico_enchimento_bytes
     def enchimento_de_bytes(self, sequencia: bytes,
-                            lista_bytes: list[bytes]) -> bytes:
+                            lista_bytes: List) -> bytes:
         """
         Operação de enchimento de bytes (*byte stuffing*). Antes de cada item
         de ``lista_bytes`` é acrescentado o byte ``byte_enchimento``.
@@ -71,7 +71,7 @@ class DadoBasico(metaclass = ABCMeta):
     # code::end
 
     def varredura_com_enchimento(self, sequencia: bytes,
-                                 referencia: bytes) -> tuple[bytes, bytes]:
+                                 referencia: bytes) -> Tuple:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado até um byte de referência (não "enchido") e o
@@ -81,7 +81,7 @@ class DadoBasico(metaclass = ABCMeta):
         :param bytes referencia: byte simples usado como sentinela (terminador)
         :return: uma tupla contendo a sequência de bytes até ``referencia``
             e o restante da sequência depois de ``referencia``
-        :rtype: tuple[bytes, bytes]
+        :rtype: Tuple
         :raise ValueError: se o byte de referência não estiver presente na
             sequência de bytes
         """
@@ -116,7 +116,7 @@ class DadoBasico(metaclass = ABCMeta):
         pass
 
     @abstractmethod
-    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
+    def leia_de_bytes(self, sequencia: bytes) -> Tuple:
         """
         Recuperação de um dado a partir de uma sequência de bytes, retornando
         os bytes do dado em si e o restante da sequência depois da extração
@@ -126,7 +126,7 @@ class DadoBasico(metaclass = ABCMeta):
         :param bytes sequencia: sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de organização
             de dados, e a sequência de bytes restante
-        :rtype: tuple[bytes, bytes]
+        :rtype: Tuple
         """
         pass
 
@@ -278,7 +278,7 @@ class DadoTerminador(DadoBasico):
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
+    def leia_de_bytes(self, sequencia: bytes) -> Tuple:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado até o terminador e o restante da sequência depois
@@ -287,7 +287,7 @@ class DadoTerminador(DadoBasico):
         :param bytes sequencia: uma sequência de bytes
         :return: uma tupla contendo os bytes dos dados e a sequência de bytes
             restante, excluindo-se de ambas o terminador
-        :rtype: tuple[bytes, bytes]
+        :rtype: Tuple
         """
         bytes_dados, sequencia_restante = \
             self.varredura_com_enchimento(sequencia, self.terminador)
@@ -362,7 +362,7 @@ class DadoPrefixado(DadoBasico):
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
+    def leia_de_bytes(self, sequencia: bytes) -> Tuple:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado sem o prefixo e o restante da sequência.
@@ -370,7 +370,7 @@ class DadoPrefixado(DadoBasico):
         :param bytes sequencia: uma sequência de bytes
         :return: uma tupla com a sequência de bytes de dados sem o prefixo e
             o restante da sequência de entrada
-        :rtype: tuple[bytes, bytes]
+        :rtype: Tuple
         :raise TypeError: se a sequência contiver menos bytes que o necessário
         """
         if len(sequencia) >= 2:
@@ -465,7 +465,7 @@ class DadoBinario(DadoBasico):
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
+    def leia_de_bytes(self, sequencia: bytes) -> Tuple:
         """
         Recuperação de um dado binário de comprimento definido a partir de
         uma sequência de bytes.
@@ -473,7 +473,7 @@ class DadoBinario(DadoBasico):
         :param bytes sequencia: sequência de bytes
         :return: tupla com os bytes do dado no comprimento esperado e a
             sequência de bytes restante
-        :rtype: tuple[bytes, bytes]
+        :rtype: Tuple
         :raise TypeError: se a sequência contiver menos bytes que o esperado
         """
         if len(sequencia) < self._comprimento:
@@ -591,7 +591,7 @@ class DadoFixo(DadoBasico):
 
     # code::end
 
-    def leia_de_bytes(self, sequencia: bytes) -> tuple[bytes, bytes]:
+    def leia_de_bytes(self, sequencia: bytes) -> Tuple:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado sem os bytes de preenchimento e o restante da
@@ -600,7 +600,7 @@ class DadoFixo(DadoBasico):
         :param sequencia: uma sequência de bytes
         :return: tupla com os bytes do dado, removidos os bytes de enchimento
             e preenchimento, e a sequência de bytes restante
-        :rtype: tuple[bytes, bytes]
+        :rtype: Tuple
         :raise TypeError: se o comprimento da sequência tem menos bytes
             que o definido para o comprimento do campo
         """
