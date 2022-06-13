@@ -36,13 +36,13 @@ class DadoBasico(metaclass = ABCMeta):
 
     # code::start basico_enchimento_bytes
     def enchimento_de_bytes(self, sequencia: bytes,
-                            lista_bytes: List) -> bytes:
+                            lista_bytes: List[bytes]) -> bytes:
         """
         Operação de enchimento de bytes (*byte stuffing*). Antes de cada item
         de ``lista_bytes`` é acrescentado o byte ``byte_enchimento``.
 
         :param bytes sequencia: a sequência de bytes a ser "enchida"
-        :param list[bytes] lista_bytes: os bytes especiais que serão "escapados"
+        :param List[bytes] lista_bytes: os bytes especiais que serão "escapados"
         :return: a sequência original enchida
         :rtype: bytes
         """
@@ -71,7 +71,7 @@ class DadoBasico(metaclass = ABCMeta):
     # code::end
 
     def varredura_com_enchimento(self, sequencia: bytes,
-                                 referencia: bytes) -> Tuple:
+                                 referencia: bytes) -> Tuple[bytes, bytes]:
         """
         Recuperação de um dado individual de uma sequência de bytes,
         retornando o dado até um byte de referência (não "enchido") e o
