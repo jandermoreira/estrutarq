@@ -68,7 +68,7 @@ def teste(tipo_campo):
     dado = campo.valor_para_bytes()
     imprima("valor armazenado", campo.valor)
     imprima("valor em bytes", dado)
-    dado_formatado = campo.adicione_formatacao(campo.valor_para_bytes())
+    dado_formatado = campo.dado_formatado
     imprima("valor em bytes formatado", dado_formatado)
     imprima("comprimento dos bytes formatados", len(dado_formatado))
     compare(len(dado_formatado), campo.comprimento())
