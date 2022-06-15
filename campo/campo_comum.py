@@ -133,6 +133,14 @@ class CampoBasico(DadoBasico, metaclass = ABCMeta):
 
     # code::end
 
+    @property
+    def dado_formatado(self) -> bytes:
+        """
+
+        :return: sequência de bytes com a formatação da organização do dado
+        """
+        return self.adicione_formatacao(self.valor_para_bytes())
+
     def __str__(self) -> str:
         """
         Retorno do valor textual do campo.
