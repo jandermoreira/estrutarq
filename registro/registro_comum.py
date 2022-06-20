@@ -129,7 +129,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
                 campo.adicione_formatacao(campo.valor_para_bytes())
         return dado_do_registro
 
-    @property
+    # todo: transformar isso em propriedade
     def dado_formatado(self) -> bytes:
         """
         Retorna o valor do registro em bytes com a formatação da organização
