@@ -129,6 +129,16 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
                 campo.adicione_formatacao(campo.valor_para_bytes())
         return dado_do_registro
 
+    @property
+    def dado_formatado(self) -> bytes:
+        """
+        Retorna o valor do registro em bytes com a formatação da organização
+        utilizada.
+
+        :return: os bytes do registro formatados
+        """
+        return self.adicione_formatacao(self.para_bytes())
+
     def tem_comprimento_fixo(self) -> bool:
         """
         Verifica se o registro_teste tem comprimento fixo.
