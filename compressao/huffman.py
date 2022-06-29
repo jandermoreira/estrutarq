@@ -10,21 +10,21 @@ Proceedings of the IRE, IEEE, 1952, 40, 1098-1101
     Jander Moreira, 2021, 2022
 """
 
-from typing import Any
-
-class Huffman:
-    def __init__(self):
-        pass
-
-
-class NoArvoreBinaria:
-    def __init__(self, valor: Any,
-                 esquerda: NoArvoreBinaria = None,
-                 direita: NoArvoreBinaria = None):
-        """
-
-        :param valor:
-        """
-        self.valor = valor
-        self.esquerda = esquerda
-        self.direita = direita
+# from typing import Any
+#
+# class Huffman:
+#     def __init__(self):
+#         pass
+#
+#
+# class NoArvoreBinaria:
+#     def __init__(self, valor: Any,
+#                  esquerda: NoArvoreBinaria = None,
+#                  direita: NoArvoreBinaria = None):
+#         """
+#
+#         :param valor:
+#         """
+#         self.valor = valor
+#         self.esquerda = esquerda
+#         self.direita = direita
