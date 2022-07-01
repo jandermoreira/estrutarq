@@ -6,4 +6,4 @@ Utilitários.
     Jander Moreira, 2021-2022
 """
 
-from .utilitarios import *
+from .sistema import *

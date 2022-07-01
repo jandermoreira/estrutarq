@@ -1,5 +1,6 @@
 """
-Rotinas utilitárias para dispositivos de armazenamento secundário.
+Rotinas utilitárias relativas ao sistema: informações sobre dispositivos de
+armazenamento secudário, versão do Python etc.
 
 ..
     Licença: GNU GENERAL PUBLIC LICENSE V.3, 2007

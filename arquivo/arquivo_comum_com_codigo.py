@@ -7,7 +7,7 @@ from time import localtime, mktime
 
 from campo import *
 from registro import RegistroFixo
-from utilitarios.utilitarios import comprimento_de_bloco
+from utilitarios.sistema import comprimento_de_bloco
 
 
 class Arquivo:
