@@ -10,6 +10,8 @@ Cengage Learning, 2016
     Jander Moreira, 2021, 2022
 """
 
+from estrutarq.utilitarios.fluxo import Fluxo
+
 
 class LZW:
     """
@@ -37,21 +39,21 @@ class LZW:
         n = 1
         for simbolo_corrente in sequencia[1:]:
             simbolo_corrente = bytes([simbolo_corrente])
-            # print(simbolo_corrente, end = " > ")
             if simbolo + simbolo_corrente in dicionario:
                 simbolo += simbolo_corrente
                 if len(simbolo) > comprimento_longo:
                     comprimento_longo = len(simbolo)
-                # print("* ", end = "")
             else:
                 self.lista_codigos.append(dicionario[simbolo])
-                print(f"[{simbolo.decode('latin'):30s}; {dicionario[simbolo]:>0{comprimento}b}] --- ", end = "")
+                print(
+                    f"[{simbolo.decode('latin'):30s}; {dicionario[simbolo]:>0{comprimento}b}] --- ",
+                    end = "")
                 print(f"{dicionario[simbolo]:7d}", ' ', end = '')
                 dicionario[simbolo + simbolo_corrente] = len(dicionario)
                 simbolo = simbolo_corrente
                 comprimento_codificacao += comprimento
                 print(f" ({n * 8}/{comprimento_codificacao}: " +
-                      f"{100*(n * 8 - comprimento_codificacao)/(n*8):.1f}%) ")
+                      f"{100 * (n * 8 - comprimento_codificacao) / (n * 8):.1f}%) ")
 
             if len(dicionario) >= 2 ** comprimento:
                 comprimento += 1
