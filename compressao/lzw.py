@@ -10,6 +10,8 @@ Cengage Learning, 2016
     Jander Moreira, 2021, 2022
 """
 
+# todo: considerar https://stackoverflow.com/questions/4730993/python-key-in-dict-keys-performance-for-large-dictionaries
+
 from estrutarq.utilitarios.fluxo import Fluxo
 
 
