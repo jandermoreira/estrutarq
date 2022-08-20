@@ -59,8 +59,8 @@ class Fluxo:
             sequencia_bytes = b""
         else:
             if comprimento is None:
-                comprimento = len(self.fluxo)//8
-            comprimento = min(comprimento, len(self.fluxo)//8)
+                comprimento = len(self.fluxo) // 8
+            comprimento = min(comprimento, len(self.fluxo) // 8)
             sequencia_bytes = self.fluxo[:comprimento * 8].tobytes()
             self.fluxo = self.fluxo[comprimento * 8:]
         return sequencia_bytes
@@ -89,3 +89,11 @@ class Fluxo:
         em_bits = "".join([str(b) for b
                            in self.fluxo[numero_bytes * 8:].tolist()])
         return f"[{em_bytes}.{em_bits}]"
+
+    def __eq__(self, outro_fluxo):
+        """
+        Determina se os fluxos de bits são iguais
+        :param Fluxo outro_fluxo: outro fluxo de bits
+        :return: `True` se os fluxos de bits são iguais; `False` caso contrário
+        """
+        return outro_fluxo.fluxo == self.fluxo
