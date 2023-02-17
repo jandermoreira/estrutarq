@@ -1,11 +1,11 @@
 """
 Registros como coleção de campos.
 
-Uma classe básica :class:`~.estrutarq.registro_teste.registro_comum.RegistroBasico`
+Uma classe básica :class:`~.estrutarq.registro.registro_comum.RegistroBasico`
 define uma classe abstrata (ABC) com as propriedades e métodos gerais. Dela
 são derivados registros:
 
-* Brutos (i.e., sem organização para o registro_teste)
+* Brutos (i.e., sem organização para o registro)
 * Com terminador
 * Prefixado pelo comprimento
 * De comprimento fixo predefinido
@@ -30,7 +30,7 @@ verifique_versao()
 
 terminador_de_registro = b"\x01"
 """
-Byte terminador de registro_teste. Deve diferir do terminador de campo.
+Byte terminador de registro. Deve diferir do terminador de campo.
 (valor padrão ``0x01``)
 """
 
@@ -63,16 +63,16 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
     @property
     def tipo(self) -> str:
         """
-        O nome do tipo do registro_teste, usado apenas para consulta. São exemplos
-        ``registro_teste fixo`` e ``registro_teste terminador``.
+        O nome do tipo do registro, usado apenas para consulta. São exemplos
+        ``registro fixo`` e ``registro terminador``.
 
-        :return: o nome do tipo do registro_teste
+        :return: o nome do tipo do registro
         """
         return self.__tipo
 
     def __adicione_um_campo(self, campo: Tuple):
         """
-        Acréscimo de um campo a registro_teste, com criação de um atributo e
+        Acréscimo de um campo a registro, com criação de um atributo e
         inclusão na lista de campos.
 
         :param tuple[str, CampoBasico] campo: uma tupla (nome_arquivo, campo),
@@ -93,7 +93,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def adicione_campos(self, *lista_campos: Tuple):
         """
-        Inclusão de uma sequência de campos ao registro_teste
+        Inclusão de uma sequência de campos ao registro
 
         :param list[tuple[str, CampoBasico] lista_campos: uma sequência de um ou
             mais campos, cada um especificado pela tupla (nome_do_campo, campo),
@@ -105,10 +105,10 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def de_bytes(self, dados_registro: bytes):
         """
-        Varredura da sequência de bytes que formam um registro_teste para a obtenção
+        Varredura da sequência de bytes que formam um registro para a obtenção
         dos dados de cada campo individual, atualizando cada um deles.
 
-        :param bytes dados_registro: sequência de bytes do registro_teste
+        :param bytes dados_registro: sequência de bytes do registro
         """
         dados_restantes = dados_registro
         for campo in self.lista_campos.values():
@@ -117,10 +117,10 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def para_bytes(self) -> bytes:
         """
-        Criação dos bytes do registro_teste pela concatenação dos bytes dos campos,
+        Criação dos bytes do registro pela concatenação dos bytes dos campos,
         sucessivamente.
 
-        :return: sequência dos bytes do registro_teste
+        :return: sequência dos bytes do registro
         :rtype: bytes
         """
         dado_do_registro = bytes()
@@ -141,11 +141,11 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def tem_comprimento_fixo(self) -> bool:
         """
-        Verifica se o registro_teste tem comprimento fixo.
+        Verifica se o registro tem comprimento fixo.
 
-        O registro_teste é considerado de tamanho fixo se qualquer uma das
+        O registro é considerado de tamanho fixo se qualquer uma das
         propriedades foram verdadeiras:
-        * o registro_teste tem é marcado com _comprimento_fixo == True
+        * o registro tem é marcado com _comprimento_fixo == True
         * todos os campos tiverem comprimento fixo
 
         :return: `True` se o comprimento for fixo, `False` caso contrário
@@ -157,9 +157,9 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def comprimento(self) -> int:
         """
-        Retorna o comprimento atual do registro_teste em bytes.
+        Retorna o comprimento atual do registro em bytes.
 
-        :return: o comprimento do registro_teste em bytes
+        :return: o comprimento do registro em bytes
         :rtype: int
         """
 
@@ -169,8 +169,8 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def leia(self, arquivo: BinaryIO):
         """
-        Obtenção de um registro_teste a partir do arquivo, considerando a organização
-        de registro_teste em uso.
+        Obtenção de um registro a partir do arquivo, considerando a organização
+        de registro em uso.
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
@@ -182,7 +182,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def escreva(self, arquivo: BinaryIO):
         """
-        Escrita dos bytes do registro_teste no arquivo, usando a organização
+        Escrita dos bytes do registro no arquivo, usando a organização
         definida.
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de escrita
@@ -200,7 +200,7 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
 
     def copia(self):
         """
-        Cópia "profunda" do registro_teste.
+        Cópia "profunda" do registro.
 
         :return: outra instância com os mesmos valores.
         """
@@ -223,7 +223,7 @@ class RegistroBruto(DadoBruto, RegistroBasico):
     # code::start bruto_leia_registro
     def leia(self, arquivo):
         """
-        Leitura de registro_teste bruto, feita campo a campo.
+        Leitura de registro bruto, feita campo a campo.
 
         :param BinaryIO arquivo: arquivo binário aberto com permissão de leitura
         """
@@ -278,9 +278,9 @@ class RegistroFixo(DadoFixo, RegistroBasico):
 
     def comprimento(self) -> int:
         """
-        Retorna o comprimento do registro_teste em bytes.
+        Retorna o comprimento do registro em bytes.
 
-        :return: o comprimento do registro_teste em bytes
+        :return: o comprimento do registro em bytes
         :rtype: int
         """
         return self._comprimento_registro
