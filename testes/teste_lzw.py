@@ -11,10 +11,10 @@ from estrutarq.compressao import LZWcompressor, LZWdescompressor
 if len(argv) > 1:
     arquivo = argv[1]
 else:
-    arquivo = "gone_with_the_wind.txt"
+    arquivo = "quincas_borba.txt"
 
 with open(arquivo, "rb") as f:
-    dados = f.read(1393)
+    dados = f.read()
 comprimento_original = 8 * len(dados)
 
 print(f"Comprimindo {comprimento_original} bits...", end = "")

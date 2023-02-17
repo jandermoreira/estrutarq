@@ -19,7 +19,7 @@ from bitarray.util import ba2int
 
 from estrutarq.utilitarios.fluxo import Fluxo
 
-comprimento_maximo_codigo = 10  # em bits
+comprimento_maximo_codigo = 12  # em bits
 
 
 class LZWcompressor:
@@ -41,6 +41,7 @@ class LZWcompressor:
         """
         Converte um inteiro para um bitarray com o comprimento atual em bits
         do código
+
         :param codigo: código do dicionário
         :return: a sequência de bits relativa ao código
         :rtype: bitarray
@@ -60,17 +61,18 @@ class LZWcompressor:
     def _atualize_dicionario_e_fluxo(self, codigo):
         self.fluxo.adicione_bits(self._int_to_bitarray(codigo))
 
-        self.dicionario[self.concatenacao_de_simbolos +
-                        self.simbolo_corrente] = len(self.dicionario)
-        if len(self.dicionario) == 2 ** self.comprimento_codigo:
-            self.comprimento_codigo += 1
-            print(f"(*{self.comprimento_codigo})")
+        if len(self.dicionario) < 2 ** comprimento_maximo_codigo:
+            self.dicionario[self.concatenacao_de_simbolos +
+                            self.simbolo_corrente] = len(self.dicionario)
+            if len(self.dicionario) == 2 ** self.comprimento_codigo:
+                self.comprimento_codigo += 1
+            # print(f"(*{self.comprimento_codigo})")
 
-        # print("Saída :",
-        #       f"{codigo:0{self.comprimento_codigo}b}",
-        #       self.dicionario[self.concatenacao_de_simbolos],
-        #       f"'{self.concatenacao_de_simbolos}'",
-        #       f"({len(self.dicionario)}) {self.comprimento_codigo} bits")
+        print("Saída :",
+              f"{codigo:0{self.comprimento_codigo}b}",
+              self.dicionario[self.concatenacao_de_simbolos],
+              f"'{self.concatenacao_de_simbolos}'",
+              f"({len(self.dicionario)}) {self.comprimento_codigo} bits")
 
     def processe_de_bytes(self, sequencia: Union[bytes, str]):
         """
@@ -86,6 +88,7 @@ class LZWcompressor:
             self._inicie_dicionario()
             self.fluxo = Fluxo()
             self.concatenacao_de_simbolos = bytes([sequencia[0]])
+
 
         # Processamento da sequência de dados
         posicao = 1
@@ -154,8 +157,10 @@ class LZWdescompressor:
                 fim_de_fluxo = True
             else:
                 codigo_corrente = ba2int(bits)
-                print(f"--<{codigo_base} {codigo_corrente}>")
-                print(f"[{codigo_corrente}] {len(bits)} ", end = "")
+                # print(f"--<{codigo_base} {codigo_corrente}>")
+                # print(f"[{codigo_corrente}] {len(bits)} ", end = "")
+                if len(self.dicionario):
+                    a = 1  ##########################################
                 if codigo_corrente in self.dicionario:
                     self.dicionario[len(self.dicionario)] = (
                             self.dicionario[codigo_base] +
@@ -176,9 +181,9 @@ class LZWdescompressor:
                 # print(f"[{codigo_base}]", end = "")
                 # print(f"({self.dicionario[codigo_base]})")
 
-            if len(self.dicionario) == 2 ** self.comprimento - 1:
+            if len(self.dicionario) == 2 ** self.comprimento - 1 and \
+                    len(self.dicionario) != 2 ** comprimento_maximo_codigo - 1:
                 self.comprimento += 1
                 print(f"(*{self.comprimento})")
-
 
         return self.sequencia
