@@ -16,7 +16,7 @@ def compare(valor1, valor2):
     if valor1 == valor2:
         print("  Sim")
     else:
-        print("  Não")
+        print("  \033[38:5:9mNão\033[39m")
         exit(1)
 
 

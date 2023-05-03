@@ -3,8 +3,8 @@
 Teste da compressão LZW
 """
 
-from sys import argv
 from os import system
+from sys import argv
 
 from estrutarq.compressao import LZWcompressor, LZWdescompressor
 
@@ -17,7 +17,7 @@ with open(arquivo, "rb") as f:
     dados = f.read()
 comprimento_original = 8 * len(dados)
 
-print(f"Comprimindo {comprimento_original} bits...", end = "")
+print(f"Comprimindo {comprimento_original} bits...", end="")
 compressor = LZWcompressor()
 compressor.processe_de_bytes(dados)
 compressor.feche()
@@ -25,13 +25,14 @@ comprimento_comprimido = len(compressor.fluxo)
 print(" Terminado")
 
 # Descompressão
-print(f"Descomprimindo {comprimento_comprimido} bits...", end = "",
-      flush = True)
+print(f"Descomprimindo {comprimento_comprimido} bits...", end="",
+      flush=True)
 descompressor = LZWdescompressor()
 texto_recuperado = descompressor.recupere_de_fluxo(compressor.fluxo)
 print(" Terminado")
 
-print("\nDeu certo?", "sim" if dados == texto_recuperado else "não")
+print("\nDeu certo?",
+      "sim" if dados == texto_recuperado else "\033[38:5:9mnão\033[39m")
 print(f"Original:   {comprimento_original:10d} bits")
 print(f"Comprimido: {comprimento_comprimido:10d} bits")
 taxa_compressao = (comprimento_original - comprimento_comprimido) / \
