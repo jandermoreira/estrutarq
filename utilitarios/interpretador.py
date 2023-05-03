@@ -159,49 +159,49 @@ for comando in [
         print()
 
 
-        $ rsync - -version
-        rsync
-        version
-        3.2
-        .3
-        protocol
-        version
-        31
-        Copyright(C)
-        1996 - 2020
-        by
-        Andrew
-        Tridgell, Wayne
-        Davison, and others.
-        Web
-        site: https: // rsync.samba.org /
-        Capabilities:
-        64 - bit
-        files, 64 - bit
-        inums, 64 - bit
-        timestamps, 64 - bit
-        long
-        ints,
-        socketpairs, hardlinks, hardlink - specials, symlinks, IPv6, atimes,
-        batchfiles, inplace, append, ACLs, xattrs, optional
-        protect - args, iconv,
-        symtimes, prealloc, stop - at, no
-        crtimes
-    Optimizations:
-    SIMD, no
-    asm, openssl - crypto
-Checksum
-list:
-xxh128
-xxh3
-xxh64(xxhash)
-md5
-md4
-none
-Compress
-list:
-zstd
-lz4
-zlibx
-zlib
-none
+#         $ rsync - -version
+#         rsync
+#         version
+#         3.2
+#         .3
+#         protocol
+#         version
+#         31
+#         Copyright(C)
+#         1996 - 2020
+#         by
+#         Andrew
+#         Tridgell, Wayne
+#         Davison, and others.
+#         Web
+#         site: https: // rsync.samba.org /
+#         Capabilities:
+#         64 - bit
+#         files, 64 - bit
+#         inums, 64 - bit
+#         timestamps, 64 - bit
+#         long
+#         ints,
+#         socketpairs, hardlinks, hardlink - specials, symlinks, IPv6, atimes,
+#         batchfiles, inplace, append, ACLs, xattrs, optional
+#         protect - args, iconv,
+#         symtimes, prealloc, stop - at, no
+#         crtimes
+#     Optimizations:
+#     SIMD, no
+#     asm, openssl - crypto
+# Checksum
+# list:
+# xxh128
+# xxh3
+# xxh64(xxhash)
+# md5
+# md4
+# none
+# Compress
+# list:
+# zstd
+# lz4
+# zlibx
+# zlib
+# none
