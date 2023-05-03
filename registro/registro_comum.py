@@ -41,7 +41,7 @@ do preenchimento de campo. (valor padrão ``0xFE``)
 """
 
 
-class RegistroBasico(DadoBasico, metaclass = ABCMeta):
+class RegistroBasico(DadoBasico, metaclass=ABCMeta):
     """
     Classe básica para registros, o qual é estruturado pela adiçõo de campos.
 
@@ -166,7 +166,6 @@ class RegistroBasico(DadoBasico, metaclass = ABCMeta):
         return sum(campo.comprimento() for campo in self.lista_campos.values())
 
     # code::start basico_leia
-
     def leia(self, arquivo: BinaryIO):
         """
         Obtenção de um registro a partir do arquivo, considerando a organização
@@ -272,7 +271,7 @@ class RegistroFixo(DadoFixo, RegistroBasico):
     def __init__(self, comprimento: int, *lista_campos):
         RegistroBasico.__init__(self, "fixo", *lista_campos)
         DadoFixo.__init__(self, comprimento,
-                          preenchimento = preenchimento_de_registro)
+                          preenchimento=preenchimento_de_registro)
         self._comprimento_fixo = True
         self._comprimento_registro = comprimento
 

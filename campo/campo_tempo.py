@@ -26,7 +26,7 @@ from estrutarq.dado import DadoBinario, DadoFixo
 from .campo_comum import CampoBasico
 
 
-class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
+class CampoTempoBasico(CampoBasico, metaclass=ABCMeta):
     """
     Classe básica para campo de tempo (data + horário, somente data e
     somente horário), armazenado internamente como o número de segundos
@@ -120,7 +120,7 @@ class CampoTempoBasico(CampoBasico, metaclass = ABCMeta):
         return type(self).__name__ + "\n" + texto
 
 
-class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
+class CampoTempoBasicoBinario(CampoTempoBasico, metaclass=ABCMeta):
     """
     Classe extensão de :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
     para incluir as rotinas de conversão de
@@ -148,7 +148,7 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
 
         :param bytes dado: bytes da representação do tempo em binário
         """
-        self.segundos = int.from_bytes(dado, "big", signed = True)
+        self.segundos = int.from_bytes(dado, "big", signed=True)
 
     def valor_para_bytes(self) -> bytes:
         """
@@ -158,10 +158,10 @@ class CampoTempoBasicoBinario(CampoTempoBasico, metaclass = ABCMeta):
         :return: a sequência de bytes do tempo em binário
         :rtype: bytes
         """
-        return self.segundos.to_bytes(self._comprimento, "big", signed = True)
+        return self.segundos.to_bytes(self._comprimento, "big", signed=True)
 
 
-class CampoTempoBasicoFixo(CampoTempoBasico, metaclass = ABCMeta):
+class CampoTempoBasicoFixo(CampoTempoBasico, metaclass=ABCMeta):
     """
     Classe extensão de :class:`~estrutarq.campo.campo_tempo.CampoTempoBasico`
     para suporte às conversões de representação interna para valor textual e
@@ -209,7 +209,7 @@ class CampoDataBinario(DadoBinario, CampoTempoBasicoBinario):
     def __init__(self, **kwargs):
         CampoTempoBasicoBinario.__init__(self, "data binário",
                                          self.formato_data,
-                                         apenas_data = True,
+                                         apenas_data=True,
                                          **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
@@ -225,7 +225,7 @@ class CampoDataFixo(DadoFixo, CampoTempoBasicoFixo):
 
     def __init__(self, **kwargs):
         CampoTempoBasicoFixo.__init__(self, "data fixo", self.formato_data,
-                                      apenas_data = True, **kwargs)
+                                      apenas_data=True, **kwargs)
         DadoFixo.__init__(self, len(self.valor))
 
 
@@ -239,7 +239,7 @@ class CampoHoraBinario(DadoBinario, CampoTempoBasicoBinario):
 
     def __init__(self, **kwargs):
         CampoTempoBasicoBinario.__init__(self, "hora binário",
-                                         self.formato_hora, apenas_data = False,
+                                         self.formato_hora, apenas_data=False,
                                          **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
@@ -255,7 +255,7 @@ class CampoHoraFixo(DadoFixo, CampoTempoBasicoFixo):
 
     def __init__(self, **kwargs):
         CampoTempoBasicoFixo.__init__(self, "hora fixo", self.formato_hora,
-                                      apenas_data = False, **kwargs)
+                                      apenas_data=False, **kwargs)
         DadoFixo.__init__(self, len(self.valor))
 
 
@@ -270,7 +270,7 @@ class CampoTempoBinario(DadoBinario, CampoTempoBasicoBinario):
     def __init__(self, **kwargs):
         CampoTempoBasicoBinario.__init__(self, "tempo binário",
                                          self.formato_tempo,
-                                         apenas_data = False, **kwargs)
+                                         apenas_data=False, **kwargs)
         DadoBinario.__init__(self, CampoTempoBasicoBinario._comprimento)
 
 
@@ -285,5 +285,5 @@ class CampoTempoFixo(DadoFixo, CampoTempoBasicoFixo):
 
     def __init__(self, **kwargs):
         CampoTempoBasicoFixo.__init__(self, "tempo fixo", self.formato_tempo,
-                                      apenas_data = False, **kwargs)
+                                      apenas_data=False, **kwargs)
         DadoFixo.__init__(self, len(self.valor))

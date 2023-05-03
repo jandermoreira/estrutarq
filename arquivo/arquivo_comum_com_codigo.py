@@ -37,7 +37,7 @@ class Arquivo:
             comprimento_do_bloco = comprimento_de_bloco(
                 dirname(self.nome_arquivo))
             comprimento_em_bytes = comprimento_do_bloco.to_bytes(
-                2, "big", signed = False)
+                2, "big", signed=False)
             self._arquivo.write(comprimento_em_bytes)
 
             # Restante do cabeçalho
@@ -58,7 +58,7 @@ class Arquivo:
         else:
             # Obtenção do cabeçalho
             comprimento_do_bloco = int.from_bytes(
-                self._arquivo.read(2), "big", signed = False)
+                self._arquivo.read(2), "big", signed=False)
             self.cabecalho = RegistroFixo(comprimento_do_bloco - 2,
                                           *self.lista_campos_cabecalho)
             self.cabecalho.leia(self._arquivo)

@@ -27,7 +27,7 @@ def comprimento_de_bloco(diretorio: str = None) -> int:
     :return: o comprimento do bloco de armazenamento em bytes
     """
     try:
-        descritor, nome_arquivo = mkstemp(dir = diretorio)
+        descritor, nome_arquivo = mkstemp(dir=diretorio)
         comprimento = fstat(descritor).st_blksize
         remove(nome_arquivo)
         return comprimento

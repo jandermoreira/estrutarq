@@ -18,7 +18,7 @@ from re import sub as regex_sub
 from typing import BinaryIO, List, Tuple
 
 
-class DadoBasico(metaclass = ABCMeta):
+class DadoBasico(metaclass=ABCMeta):
     """
     Classe básica para armazenamento e manipulação de dados.
 
@@ -351,7 +351,7 @@ class DadoPrefixado(DadoBasico):
             raise EOFError("Fim do arquivo encontrado ao ler comprimento.")
         else:
             comprimento = int.from_bytes(bytes_comprimento, "big",
-                                         signed = False)
+                                         signed=False)
             dado = arquivo.read(comprimento)
             if len(dado) != comprimento:
                 raise EOFError("Fim do arquivo encontrado ao ler dado" +
@@ -374,7 +374,7 @@ class DadoPrefixado(DadoBasico):
         :raise TypeError: se a sequência contiver menos bytes que o necessário
         """
         if len(sequencia) >= 2:
-            comprimento = int.from_bytes(sequencia[:2], "big", signed = False)
+            comprimento = int.from_bytes(sequencia[:2], "big", signed=False)
         else:
             raise TypeError("A sequência de bytes não contém bytes suficientes")
         dado = sequencia[2:comprimento + 2]
@@ -394,7 +394,7 @@ class DadoPrefixado(DadoBasico):
             comprimento
         :rtype: bytes
         """
-        bytes_comprimento = len(dado).to_bytes(2, "big", signed = False)
+        bytes_comprimento = len(dado).to_bytes(2, "big", signed=False)
         return bytes_comprimento + dado
 
     def remova_formatacao(self, sequencia: bytes) -> bytes:

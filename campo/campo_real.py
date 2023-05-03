@@ -27,7 +27,7 @@ from estrutarq.dado import DadoBinario, DadoFixo, DadoPrefixado, DadoTerminador
 from .campo_comum import CampoBasico, terminador_de_campo
 
 
-class CampoRealBasico(CampoBasico, metaclass = ABCMeta):
+class CampoRealBasico(CampoBasico, metaclass=ABCMeta):
     """
     Classe básica para campo com valor real. O armazenamento interno usa
     o tipo :class:`float`. A conversão para sequência de bytes assume, por

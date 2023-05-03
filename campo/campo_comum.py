@@ -26,7 +26,7 @@ fim do campo. O valor padrão é ``0x00``.
 """
 
 
-class CampoBasico(DadoBasico, metaclass = ABCMeta):
+class CampoBasico(DadoBasico, metaclass=ABCMeta):
     """
     Classe básica para campo, a menor unidade de informação.
 
@@ -168,7 +168,7 @@ class CampoBruto(DadoBruto, CampoBasico):
     :param str, opcional valor: valor do campo
     """
 
-    def __init__(self, valor = ""):
+    def __init__(self, valor=""):
         CampoBasico.__init__(self, "bruto")
         DadoBruto.__init__(self)
         self.valor = valor

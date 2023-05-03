@@ -22,7 +22,7 @@ from os.path import exists
 from estrutarq.registro import RegistroBasico
 
 
-class ArquivoBasico(metaclass = ABCMeta):
+class ArquivoBasico(metaclass=ABCMeta):
     """
     Classe básica para um gerenciador de dedicado a um único arquivo.
 

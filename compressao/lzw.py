@@ -89,7 +89,6 @@ class LZWcompressor:
             self.fluxo = Fluxo()
             self.concatenacao_de_simbolos = bytes([sequencia[0]])
 
-
         # Processamento da sequência de dados
         posicao = 1
         while posicao < len(sequencia):
