@@ -34,7 +34,7 @@ class DadoBasico(metaclass=ABCMeta):
     def __init__(self):
         self._comprimento_fixo = False
 
-    # code::start basico_enchimento_bytes
+    # code::start basico_enchimento_bytes :: Enchimento e esvaziamento de bytes (**byte stuffing**/**unstuffing**)
     def enchimento_de_bytes(self, sequencia: bytes,
                             lista_bytes: List[bytes]) -> bytes:
         """
@@ -248,7 +248,7 @@ class DadoTerminador(DadoBasico):
             raise AttributeError("O terminador deve ser um único byte")
         self.__terminador = terminador
 
-    # code::start terminador_leitura_de_arquivo
+    # code::start terminador_leitura_de_arquivo :: Leitura de dado de arquivo usando terminador
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Leitura de um único dado com terminador. A leitura é feita byte a
@@ -293,7 +293,7 @@ class DadoTerminador(DadoBasico):
             self.varredura_com_enchimento(sequencia, self.terminador)
         return self.remova_formatacao(bytes_dados), sequencia_restante
 
-    # code::start terminador_formatacoes
+    # code::start terminador_formatacoes :: Adição e remoção de terminador para sequências de bytes de dados.
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: uso de 'byte stuffing' para permitir o byte
@@ -335,7 +335,7 @@ class DadoPrefixado(DadoBasico):
     def __init__(self):
         DadoBasico.__init__(self)
 
-    # code::start prefixado_leitura_de_arquivo
+    # code::start prefixado_leitura_de_arquivo :: Leitura de dados de arquivo, usando prefixo com comprimento
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Leitura de um único dado prefixado pelo comprimento a partir de um
@@ -383,7 +383,7 @@ class DadoPrefixado(DadoBasico):
             raise TypeError("A sequência de bytes não contém bytes suficientes")
         return dado, sequencia_restante
 
-    # code::start prefixado_formatacoes
+    # code::start prefixado_formatacoes :: Adição e remoção do comprimento prefixado ao dado.
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: acréscimo do prefixo binário com comprimento
@@ -444,7 +444,7 @@ class DadoBinario(DadoBasico):
                 "O comprimento deve ser maior ou igual a um")
         self.__comprimento = valor
 
-    # code::start binario_leitura_de_arquivo
+    # code::start binario_leitura_de_arquivo :: Leitura de dado binário, cujo comprimento em bytes é conhecido, de um arquivo.
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Recuperação dos bytes do valor binário a partir de um arquivo dada a
@@ -482,7 +482,7 @@ class DadoBinario(DadoBasico):
         sequencia_restante = sequencia[self._comprimento:]
         return dado, sequencia_restante
 
-    # code::start binario_formatacoes
+    # code::start binario_formatacoes :: Adição ou remoção de formação em dados binários de comprimento conhecido é desnecessária.
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: apenas repassa o dado binário.
@@ -570,7 +570,7 @@ class DadoFixo(DadoBasico):
             raise AttributeError("O byte de preenchimento deve ter um byte")
         self.__preenchimento = preenchimento
 
-    # code::start fixo_leitura_de_arquivo
+    # code::start fixo_leitura_de_arquivo :: Leitura de dado com comprimento fixo de arquivo.
     def leia_de_arquivo(self, arquivo: BinaryIO) -> bytes:
         """
         Leitura de um único dado de comprimento fixo a partir do arquivo, com
@@ -614,7 +614,7 @@ class DadoFixo(DadoBasico):
                 sequencia, self.preenchimento)[0][:-1]
             return self.esvaziamento_de_bytes(dado_limpo), sequencia_restante
 
-    # code::start fixo_formatacoes
+    # code::start fixo_formatacoes :: Dados representados com comprimento fixo: adição de bytes de preenchimento ou truncamento; remoção de bytes de preenchimento.
     def adicione_formatacao(self, dado: bytes) -> bytes:
         """
         Formatação do dado: ajusta o dado para o comprimento definido, com
