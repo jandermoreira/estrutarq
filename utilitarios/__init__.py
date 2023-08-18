@@ -7,3 +7,4 @@ Utilitários.
 """
 
 from .sistema import *
+from .conversor import *
